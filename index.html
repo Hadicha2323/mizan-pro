@@ -70,7 +70,36 @@ body {
     animation: fadeUp 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* ============== BUTTONS ============== */
+/* Loading overlay */
+#loadingOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(238, 242, 251, 0.95);
+    backdrop-filter: blur(8px);
+    z-index: 3000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+}
+#loadingOverlay.show { display: flex; }
+#loadingOverlay .spinner {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 4px solid var(--border);
+    border-top-color: var(--primary);
+    animation: spin 0.8s linear infinite;
+}
+#loadingOverlay p {
+    font-weight: 700;
+    color: var(--primary);
+    font-size: 1rem;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Buttons */
 button {
     border: none;
     background: transparent;
@@ -90,7 +119,6 @@ button {
     position: relative;
     overflow: hidden;
 }
-
 button::after {
     content: '';
     position: absolute;
@@ -102,6 +130,7 @@ button::after {
 }
 button:hover::after { opacity: 1; }
 button:active { transform: scale(0.96); }
+button:disabled { opacity: 0.6; cursor: not-allowed; }
 
 .btn-primary { background: var(--primary-gradient); color: #fff; box-shadow: var(--shadow-glow); }
 .btn-primary:hover { box-shadow: 0 12px 28px rgba(30,60,114,0.4); transform: translateY(-2px); }
@@ -124,7 +153,7 @@ button:active { transform: scale(0.96); }
     transform: translateY(-2px) scale(1.05); box-shadow: var(--shadow-md);
 }
 
-/* ============== LOGIN SCREEN ============== */
+/* Login */
 .login-screen {
     position: fixed;
     inset: 0;
@@ -137,7 +166,6 @@ button:active { transform: scale(0.96); }
     animation: fadeUp 0.5s ease;
 }
 .login-screen.hidden { display: none; }
-
 .login-card {
     background: var(--surface-glass);
     backdrop-filter: blur(24px) saturate(180%);
@@ -154,20 +182,16 @@ button:active { transform: scale(0.96); }
 .login-card::before {
     content: '';
     position: absolute;
-    top: -40%;
-    right: -30%;
-    width: 280px;
-    height: 280px;
+    top: -40%; right: -30%;
+    width: 280px; height: 280px;
     background: radial-gradient(circle, rgba(30,60,114,0.08) 0%, transparent 70%);
     pointer-events: none;
 }
 .login-card::after {
     content: '';
     position: absolute;
-    bottom: -40%;
-    left: -30%;
-    width: 260px;
-    height: 260px;
+    bottom: -40%; left: -30%;
+    width: 260px; height: 260px;
     background: radial-gradient(circle, rgba(15,157,88,0.06) 0%, transparent 70%);
     pointer-events: none;
 }
@@ -178,8 +202,7 @@ button:active { transform: scale(0.96); }
     z-index: 1;
 }
 .login-logo .icon-box {
-    width: 76px;
-    height: 76px;
+    width: 76px; height: 76px;
     border-radius: 24px;
     background: var(--primary-gradient);
     color: #fff;
@@ -201,11 +224,7 @@ button:active { transform: scale(0.96); }
     background-clip: text;
     margin-bottom: 6px;
 }
-.login-logo p {
-    color: var(--text-muted);
-    font-size: 0.88rem;
-    font-weight: 500;
-}
+.login-logo p { color: var(--text-muted); font-size: 0.88rem; font-weight: 500; }
 .login-form-panel {
     display: flex;
     flex-direction: column;
@@ -213,13 +232,10 @@ button:active { transform: scale(0.96); }
     position: relative;
     z-index: 1;
 }
-.login-input-group {
-    position: relative;
-}
+.login-input-group { position: relative; }
 .login-input-group i.field-icon {
     position: absolute;
-    left: 18px;
-    top: 50%;
+    left: 18px; top: 50%;
     transform: translateY(-50%);
     color: var(--text-muted);
     font-size: 1rem;
@@ -244,20 +260,27 @@ button:active { transform: scale(0.96); }
     box-shadow: 0 0 0 4px rgba(30,60,114,0.1);
     transform: translateY(-1px);
 }
-.login-input-group input:focus + i.field-icon,
-.login-input-group input:focus ~ i.field-icon {
-    color: var(--primary);
-}
 .login-btn {
     padding: 15px 22px;
     font-size: 1rem;
     font-weight: 700;
     border-radius: var(--radius-sm);
     margin-top: 6px;
-    letter-spacing: -0.01em;
 }
+.login-error {
+    background: #fdecea;
+    color: var(--danger);
+    padding: 12px 16px;
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-align: center;
+    border: 1px solid rgba(239,68,68,0.2);
+    display: none;
+}
+.login-error.show { display: block; }
 
-/* ============== HEADER ============== */
+/* Header */
 .app-header {
     background: var(--surface-glass);
     backdrop-filter: blur(24px) saturate(180%);
@@ -277,14 +300,11 @@ button:active { transform: scale(0.96); }
 .app-header::before {
     content: '';
     position: absolute;
-    top: -50%;
-    right: -10%;
-    width: 300px;
-    height: 300px;
+    top: -50%; right: -10%;
+    width: 300px; height: 300px;
     background: radial-gradient(circle, rgba(30,60,114,0.06) 0%, transparent 70%);
     pointer-events: none;
 }
-
 .logo { display: flex; align-items: center; gap: 14px; z-index: 1; }
 .logo h1 {
     font-size: 1.75rem;
@@ -301,8 +321,7 @@ button:active { transform: scale(0.96); }
 .logo h1 i {
     background: var(--primary-gradient);
     color: #fff;
-    width: 46px;
-    height: 46px;
+    width: 46px; height: 46px;
     border-radius: 16px;
     display: inline-flex;
     align-items: center;
@@ -311,7 +330,6 @@ button:active { transform: scale(0.96); }
     -webkit-text-fill-color: #fff;
     box-shadow: var(--shadow-glow);
 }
-
 .user-area { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; z-index: 1; }
 .user-badge {
     display: flex;
@@ -330,8 +348,7 @@ button:active { transform: scale(0.96); }
     font-size: 1.5rem;
     color: var(--primary);
     background: var(--surface-2);
-    width: 38px;
-    height: 38px;
+    width: 38px; height: 38px;
     border-radius: 50%;
     display: inline-flex;
     align-items: center;
@@ -355,7 +372,7 @@ button:active { transform: scale(0.96); }
     box-shadow: 0 3px 10px rgba(245,158,11,0.3);
 }
 
-/* ============== TABS ============== */
+/* Tabs */
 .tabs {
     display: flex;
     gap: 6px;
@@ -376,7 +393,6 @@ button:active { transform: scale(0.96); }
     background: transparent;
     font-size: 0.9rem;
     transition: var(--transition);
-    letter-spacing: -0.01em;
 }
 .tab i { margin-right: 8px; font-size: 1rem; }
 .tab:hover { background: var(--surface); color: var(--primary); transform: translateY(-2px); }
@@ -387,10 +403,9 @@ button:active { transform: scale(0.96); }
     transform: translateY(-2px);
 }
 
-/* ============== VIEWS ============== */
+/* Views */
 .view { display: none; animation: fadeUp 0.4s cubic-bezier(0.22, 1, 0.36, 1); }
 .view.active { display: block; }
-
 @keyframes fadeUp {
     from { opacity: 0; transform: translateY(12px); }
     to { opacity: 1; transform: translateY(0); }
@@ -399,10 +414,8 @@ button:active { transform: scale(0.96); }
     0%, 100% { transform: scale(1); }
     50% { transform: scale(1.05); }
 }
-
 .main-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
 
-/* ============== PANEL ============== */
 .panel {
     background: var(--surface-glass);
     backdrop-filter: blur(24px) saturate(180%);
@@ -428,11 +441,9 @@ button:active { transform: scale(0.96); }
     display: flex;
     align-items: center;
     gap: 10px;
-    letter-spacing: -0.02em;
 }
 .panel-header h2 i {
-    width: 38px;
-    height: 38px;
+    width: 38px; height: 38px;
     border-radius: 12px;
     background: var(--primary-gradient);
     color: #fff;
@@ -443,7 +454,6 @@ button:active { transform: scale(0.96); }
     box-shadow: var(--shadow-glow);
 }
 
-/* ============== SECTION LIST ============== */
 .section-list {
     display: flex;
     flex-direction: column;
@@ -498,8 +508,7 @@ button:active { transform: scale(0.96); }
 .section-info { display: flex; align-items: center; gap: 14px; flex: 1; min-width: 0; }
 .section-info > i {
     font-size: 1.05rem;
-    width: 36px;
-    height: 36px;
+    width: 36px; height: 36px;
     border-radius: 10px;
     background: var(--surface-2);
     color: var(--primary);
@@ -527,7 +536,6 @@ button:active { transform: scale(0.96); }
 }
 .section-actions button:hover { background: var(--danger); color: #fff; transform: scale(1.1); }
 
-/* ============== FOLDER BAR ============== */
 .folder-bar {
     display: flex;
     flex-wrap: wrap;
@@ -564,7 +572,6 @@ button:active { transform: scale(0.96); }
     box-shadow: var(--shadow-glow);
 }
 
-/* ============== DATE FILTER ============== */
 .date-filter {
     background: var(--surface-2);
     border-radius: var(--radius-md);
@@ -613,7 +620,6 @@ button:active { transform: scale(0.96); }
     flex-shrink: 0;
 }
 
-/* ============== UPLOAD AREA ============== */
 .upload-area {
     background: linear-gradient(135deg, var(--surface-2) 0%, #e8eef9 100%);
     border: 2px dashed #c7d2e8;
@@ -648,7 +654,6 @@ button:active { transform: scale(0.96); }
 .upload-area:hover i { transform: translateY(-5px) scale(1.1); color: var(--primary); }
 .upload-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 18px; }
 
-/* ============== REPORT LIST ============== */
 .report-list {
     display: flex;
     flex-direction: column;
@@ -679,8 +684,7 @@ button:active { transform: scale(0.96); }
 .report-info { display: flex; align-items: center; gap: 14px; flex: 1; min-width: 0; }
 .report-info > i {
     font-size: 1.3rem;
-    width: 40px;
-    height: 40px;
+    width: 40px; height: 40px;
     border-radius: 12px;
     background: var(--surface-2);
     color: var(--primary);
@@ -711,7 +715,6 @@ button:active { transform: scale(0.96); }
 .report-actions button:hover { background: var(--primary); color: #fff; transform: scale(1.1); }
 .report-actions button.del:hover { background: var(--danger); }
 
-/* ============== EMPTY STATE ============== */
 .empty-state {
     text-align: center;
     padding: 40px 20px;
@@ -732,7 +735,6 @@ button:active { transform: scale(0.96); }
     background-clip: text;
 }
 
-/* ============== STATS ============== */
 .stat-row {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -757,8 +759,7 @@ button:active { transform: scale(0.96); }
 .stat-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
 .stat-card i {
     font-size: 1.3rem;
-    width: 42px;
-    height: 42px;
+    width: 42px; height: 42px;
     border-radius: 12px;
     background: var(--surface-2);
     color: var(--primary);
@@ -777,7 +778,6 @@ button:active { transform: scale(0.96); }
 .stat-card.warning i { background: #fef5e7; color: var(--warning); }
 .stat-card.warning .val { color: var(--warning); }
 
-/* ============== STAFF CARDS ============== */
 .staff-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -810,8 +810,7 @@ button:active { transform: scale(0.96); }
 .staff-card:hover::before { transform: scaleX(1); }
 .staff-head { display: flex; align-items: center; gap: 12px; }
 .staff-avatar {
-    width: 52px;
-    height: 52px;
+    width: 52px; height: 52px;
     border-radius: 16px;
     background: var(--primary-gradient);
     color: #fff;
@@ -839,7 +838,6 @@ button:active { transform: scale(0.96); }
 .staff-actions { display: flex; gap: 8px; margin-top: 6px; }
 .staff-actions button { flex: 1; padding: 9px 14px; font-size: 0.82rem; }
 
-/* ============== MASJID CARDS ============== */
 .masjid-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
@@ -870,8 +868,7 @@ button:active { transform: scale(0.96); }
     margin-bottom: 14px;
 }
 .masjid-icon {
-    width: 56px;
-    height: 56px;
+    width: 56px; height: 56px;
     border-radius: 18px;
     background: var(--primary-gradient);
     color: #fff;
@@ -909,7 +906,6 @@ button:active { transform: scale(0.96); }
     font-size: 0.75rem;
 }
 
-/* ============== MASJID DETAIL ============== */
 .masjid-detail-header {
     display: flex;
     align-items: center;
@@ -933,8 +929,7 @@ button:active { transform: scale(0.96); }
     pointer-events: none;
 }
 .masjid-detail-header .m-icon-lg {
-    width: 68px;
-    height: 68px;
+    width: 68px; height: 68px;
     border-radius: 20px;
     background: rgba(255,255,255,0.18);
     display: flex;
@@ -981,8 +976,7 @@ button:active { transform: scale(0.96); }
 .section-box:hover::before { transform: scaleX(1); }
 .section-box .sb-head { display: flex; align-items: center; gap: 12px; }
 .section-box .sb-icon {
-    width: 44px;
-    height: 44px;
+    width: 44px; height: 44px;
     border-radius: 12px;
     background: var(--primary-gradient);
     color: #fff;
@@ -1012,7 +1006,6 @@ button:active { transform: scale(0.96); }
     border-top: 1px dashed var(--border);
 }
 
-/* ============== MODAL ============== */
 .modal {
     position: fixed;
     top: 0; left: 0;
@@ -1073,8 +1066,7 @@ button:active { transform: scale(0.96); }
     text-overflow: ellipsis;
 }
 .modal-close-btn {
-    width: 42px;
-    height: 42px;
+    width: 42px; height: 42px;
     padding: 0;
     border-radius: 50%;
     background: var(--surface-2);
@@ -1094,7 +1086,6 @@ button:active { transform: scale(0.96); }
     transform: rotate(90deg) scale(1.05);
     border-color: var(--danger);
 }
-
 .modal-body img {
     max-width: 100%;
     border-radius: var(--radius-md);
@@ -1102,8 +1093,6 @@ button:active { transform: scale(0.96); }
     display: block;
     margin: 0 auto;
 }
-
-/* Preview in modal */
 .preview-container {
     width: 100%;
     height: 75vh;
@@ -1118,10 +1107,8 @@ button:active { transform: scale(0.96); }
 .preview-container iframe,
 .preview-container embed,
 .preview-container object {
-    width: 100%;
-    height: 100%;
-    border: none;
-    display: block;
+    width: 100%; height: 100%;
+    border: none; display: block;
 }
 .preview-container img {
     max-width: 100%;
@@ -1141,13 +1128,8 @@ button:active { transform: scale(0.96); }
     gap: 16px;
     font-size: 0.95rem;
 }
-.preview-fallback i {
-    font-size: 4rem;
-    color: var(--primary);
-    opacity: 0.4;
-}
+.preview-fallback i { font-size: 4rem; color: var(--primary); opacity: 0.4; }
 
-/* ============== FORM ============== */
 .form-group { margin-bottom: 16px; }
 .form-group label {
     display: block;
@@ -1179,7 +1161,6 @@ button:active { transform: scale(0.96); }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 .form-actions { display: flex; gap: 12px; justify-content: flex-end; margin-top: 24px; flex-wrap: wrap; }
 
-/* ============== BADGES ============== */
 .badge {
     display: inline-flex;
     align-items: center;
@@ -1197,7 +1178,6 @@ button:active { transform: scale(0.96); }
 .badge.danger { background: #fdecea; color: var(--danger); border-color: rgba(239,68,68,0.2); }
 .badge.warning { background: #fef5e7; color: var(--warning); border-color: rgba(245,158,11,0.2); }
 
-/* ============== RESPONSIVE ============== */
 @media (min-width: 768px) {
     body { padding: 24px; }
     .main-grid { grid-template-columns: 400px 1fr; }
@@ -1228,6 +1208,11 @@ button:active { transform: scale(0.96); }
 </head>
 <body>
 
+<div id="loadingOverlay">
+    <div class="spinner"></div>
+    <p id="loadingText">Yuklanmoqda...</p>
+</div>
+
 <!-- LOGIN SCREEN -->
 <div class="login-screen" id="loginScreen">
     <div class="login-card">
@@ -1237,6 +1222,7 @@ button:active { transform: scale(0.96); }
             <p>Masjid hujjatlari boshqaruv tizimi</p>
         </div>
         <div class="login-form-panel">
+            <div class="login-error" id="loginError"></div>
             <div class="login-input-group">
                 <input type="text" id="loginInput" placeholder="Login" autocomplete="username">
                 <i class="fas fa-user field-icon"></i>
@@ -1246,7 +1232,7 @@ button:active { transform: scale(0.96); }
                 <i class="fas fa-lock field-icon"></i>
             </div>
             <button class="btn-accent login-btn" id="loginBtn">
-                <i class="fas fa-sign-in-alt"></i> Tizimga kirish
+                <i class="fas fa-sign-in-alt"></i> <span>Tizimga kirish</span>
             </button>
         </div>
     </div>
@@ -1269,7 +1255,6 @@ button:active { transform: scale(0.96); }
         <button class="tab" data-view="admin" id="tabAdmin"><i class="fas fa-shield-alt"></i> Admin panel</button>
     </nav>
 
-    <!-- DASHBOARD -->
     <section class="view active" id="view-dashboard">
         <div class="stat-row" id="statRow"></div>
         <div class="panel">
@@ -1281,7 +1266,6 @@ button:active { transform: scale(0.96); }
         </div>
     </section>
 
-    <!-- SECTIONS -->
     <section class="view" id="view-sections">
         <div class="main-grid">
             <aside class="panel sticky">
@@ -1298,20 +1282,10 @@ button:active { transform: scale(0.96); }
                     <span id="sectionBadge" class="badge"></span>
                 </div>
 
-                <!-- Sana filtri -->
                 <div class="date-filter" id="dateFilter">
-                    <div class="df-group">
-                        <label>Yil</label>
-                        <select id="dfYear"></select>
-                    </div>
-                    <div class="df-group">
-                        <label>Oy</label>
-                        <select id="dfMonth"></select>
-                    </div>
-                    <div class="df-group">
-                        <label>Kun</label>
-                        <select id="dfDay"></select>
-                    </div>
+                    <div class="df-group"><label>Yil</label><select id="dfYear"></select></div>
+                    <div class="df-group"><label>Oy</label><select id="dfMonth"></select></div>
+                    <div class="df-group"><label>Kun</label><select id="dfDay"></select></div>
                     <div class="df-actions">
                         <button class="btn-primary btn-sm" id="dfApplyBtn"><i class="fas fa-filter"></i> Filtrlash</button>
                         <button class="btn-outline btn-sm" id="dfResetBtn"><i class="fas fa-redo"></i> Barchasi</button>
@@ -1341,7 +1315,6 @@ button:active { transform: scale(0.96); }
         </div>
     </section>
 
-    <!-- MASJIDLAR -->
     <section class="view" id="view-masjidlar">
         <div class="panel" id="masjidListView">
             <div class="panel-header">
@@ -1363,20 +1336,10 @@ button:active { transform: scale(0.96); }
                 </div>
             </div>
 
-            <!-- Sana filtri (masjid detail) -->
             <div class="date-filter" id="dateFilter2">
-                <div class="df-group">
-                    <label>Yil</label>
-                    <select id="dfYear2"></select>
-                </div>
-                <div class="df-group">
-                    <label>Oy</label>
-                    <select id="dfMonth2"></select>
-                </div>
-                <div class="df-group">
-                    <label>Kun</label>
-                    <select id="dfDay2"></select>
-                </div>
+                <div class="df-group"><label>Yil</label><select id="dfYear2"></select></div>
+                <div class="df-group"><label>Oy</label><select id="dfMonth2"></select></div>
+                <div class="df-group"><label>Kun</label><select id="dfDay2"></select></div>
                 <div class="df-actions">
                     <button class="btn-primary btn-sm" id="dfApplyBtn2"><i class="fas fa-filter"></i> Filtrlash</button>
                     <button class="btn-outline btn-sm" id="dfResetBtn2"><i class="fas fa-redo"></i> Barchasi</button>
@@ -1392,7 +1355,6 @@ button:active { transform: scale(0.96); }
         </div>
     </section>
 
-    <!-- STAFF -->
     <section class="view" id="view-staff">
         <div class="panel">
             <div class="panel-header">
@@ -1403,7 +1365,6 @@ button:active { transform: scale(0.96); }
         </div>
     </section>
 
-    <!-- ADMIN -->
     <section class="view" id="view-admin">
         <div class="panel">
             <div class="panel-header">
@@ -1424,35 +1385,26 @@ button:active { transform: scale(0.96); }
 
 </div>
 
-<!-- Modal: fayl ko'rish (rasm, pdf, excel, word) -->
 <div class="modal" id="fileViewerModal">
     <div class="modal-content modal-xl">
         <div class="modal-header">
             <h3 id="fvTitle"><i class="fas fa-file"></i> Fayl</h3>
-            <button class="modal-close-btn" onclick="closeFileViewer()" title="Yopish">
-                <i class="fas fa-times"></i>
-            </button>
+            <button class="modal-close-btn" onclick="closeFileViewer()" title="Yopish"><i class="fas fa-times"></i></button>
         </div>
-        <div class="modal-body">
-            <div id="fvBody"></div>
-        </div>
+        <div class="modal-body"><div id="fvBody"></div></div>
     </div>
 </div>
 
-<!-- Modal: masjid section -->
 <div class="modal" id="masjidSectionModal">
     <div class="modal-content modal-lg">
         <div class="modal-header">
             <h3 id="msmTitle"><i class="fas fa-folder"></i> Bo'lim</h3>
-            <button class="modal-close-btn" onclick="closeMasjidSectionModal()" title="Yopish">
-                <i class="fas fa-times"></i>
-            </button>
+            <button class="modal-close-btn" onclick="closeMasjidSectionModal()" title="Yopish"><i class="fas fa-times"></i></button>
         </div>
         <div id="msmBody"></div>
     </div>
 </div>
 
-<!-- Modal: staff -->
 <div class="modal" id="staffModal">
     <div class="modal-content">
         <div class="modal-header">
@@ -1462,32 +1414,14 @@ button:active { transform: scale(0.96); }
         <form id="staffForm" onsubmit="return false;">
             <input type="hidden" id="staffEditId">
             <div class="form-row">
-                <div class="form-group">
-                    <label>Ism</label>
-                    <input type="text" id="staffFirstName" required placeholder="Ism">
-                </div>
-                <div class="form-group">
-                    <label>Familiya</label>
-                    <input type="text" id="staffLastName" required placeholder="Familiya">
-                </div>
+                <div class="form-group"><label>Ism</label><input type="text" id="staffFirstName" required placeholder="Ism"></div>
+                <div class="form-group"><label>Familiya</label><input type="text" id="staffLastName" required placeholder="Familiya"></div>
             </div>
-            <div class="form-group">
-                <label>Telefon raqami</label>
-                <input type="tel" id="staffPhone" required placeholder="+998 90 123 45 67">
-            </div>
-            <div class="form-group">
-                <label>Masjid (biriktiriladi)</label>
-                <select id="staffMasjid" required></select>
-            </div>
+            <div class="form-group"><label>Telefon raqami</label><input type="tel" id="staffPhone" required placeholder="+998 90 123 45 67"></div>
+            <div class="form-group"><label>Masjid</label><select id="staffMasjid" required></select></div>
             <div class="form-row">
-                <div class="form-group">
-                    <label>Login</label>
-                    <input type="text" id="staffLogin" required placeholder="login">
-                </div>
-                <div class="form-group">
-                    <label>Parol</label>
-                    <input type="password" id="staffPassword" required placeholder="parol">
-                </div>
+                <div class="form-group"><label>Login</label><input type="text" id="staffLogin" required placeholder="login"></div>
+                <div class="form-group"><label>Parol</label><input type="password" id="staffPassword" required placeholder="parol"></div>
             </div>
             <div class="form-actions">
                 <button type="button" class="btn-outline" onclick="closeStaffModal()">Bekor qilish</button>
@@ -1497,7 +1431,6 @@ button:active { transform: scale(0.96); }
     </div>
 </div>
 
-<!-- Modal: masjid -->
 <div class="modal" id="masjidModal">
     <div class="modal-content">
         <div class="modal-header">
@@ -1506,14 +1439,8 @@ button:active { transform: scale(0.96); }
         </div>
         <form id="masjidForm" onsubmit="return false;">
             <input type="hidden" id="masjidEditId">
-            <div class="form-group">
-                <label>Masjid nomi</label>
-                <input type="text" id="masjidName" required placeholder="Masjid nomi">
-            </div>
-            <div class="form-group">
-                <label>Manzil (ixtiyoriy)</label>
-                <input type="text" id="masjidAddress" placeholder="Manzil">
-            </div>
+            <div class="form-group"><label>Masjid nomi</label><input type="text" id="masjidName" required placeholder="Masjid nomi"></div>
+            <div class="form-group"><label>Manzil (ixtiyoriy)</label><input type="text" id="masjidAddress" placeholder="Manzil"></div>
             <div class="form-actions">
                 <button type="button" class="btn-outline" onclick="closeMasjidModal()">Bekor qilish</button>
                 <button type="button" class="btn-accent" id="saveMasjidBtn"><i class="fas fa-save"></i> Saqlash</button>
@@ -1522,7 +1449,6 @@ button:active { transform: scale(0.96); }
     </div>
 </div>
 
-<!-- Modal: papka -->
 <div class="modal" id="folderModal">
     <div class="modal-content">
         <div class="modal-header">
@@ -1530,10 +1456,7 @@ button:active { transform: scale(0.96); }
             <button class="modal-close-btn" onclick="closeFolderModal()"><i class="fas fa-times"></i></button>
         </div>
         <form onsubmit="return false;">
-            <div class="form-group">
-                <label>Papka nomi</label>
-                <input type="text" id="folderNameInput" required placeholder="Papka nomi">
-            </div>
+            <div class="form-group"><label>Papka nomi</label><input type="text" id="folderNameInput" required placeholder="Papka nomi"></div>
             <div class="form-actions">
                 <button type="button" class="btn-outline" onclick="closeFolderModal()">Bekor qilish</button>
                 <button type="button" class="btn-accent" id="saveFolderBtn"><i class="fas fa-save"></i> Yaratish</button>
@@ -1542,11 +1465,20 @@ button:active { transform: scale(0.96); }
     </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 (function() {
     'use strict';
 
-    const STORAGE_KEY = 'mizan_pro_v8';
+    // ============== SUPABASE SOZLAMALARI ==============
+    const SUPABASE_URL = 'https://ctsalsacbxzluxaknvdh.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN0c2Fsc2FjYnh6bHV4YWtudmRoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA3ODQyNjgsImV4cCI6MjEwNjM2MDI2OH0.nSpZEhXaSpX3P67iNc9xCcvp4i-JMnvstL6lafpOxcI';
+    const STORAGE_BUCKET = 'reports';
+
+    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    // ============== KONSTANTALAR ==============
+    const MONTHS = ['Yanvar','Fevral','Mart','Aprel','May','Iyun','Iyul','Avgust','Sentabr','Oktabr','Noyabr','Dekabr'];
 
     const DEFAULT_SECTIONS = [
         { id:'s1',  name:'Иш режалари ва унинг бажарилиши ҳақида маълумотлар', icon:'fa-tasks' },
@@ -1568,26 +1500,13 @@ button:active { transform: scale(0.96); }
         { id:'s17', name:'Обуна маълумотлари', icon:'fa-newspaper' }
     ];
 
-    // FAQAT BITTA ADMIN — qolgan barcha demo ma'lumotlar tozalandi
-    const DEFAULT_ADMIN = {
-        id: 'admin1',
-        firstName: 'Abdulhakim',
-        lastName: '',
-        phone: '',
-        masjid: 'Bosh administrator',
-        login: 'Abdulhakim',
-        password: '1991_A',
-        role: 'admin'
-    };
-
-    const MONTHS = ['Yanvar','Fevral','Mart','Aprel','May','Iyun','Iyul','Avgust','Sentabr','Oktabr','Noyabr','Dekabr'];
-
+    // ============== STATE ==============
     let state = {
         sections: [],
         masjidlar: [],
         staff: [],
-        reports: {},
-        folders: {},
+        reports: [],
+        folders: [],
         currentUser: null,
         currentSectionId: null,
         currentFolder: 'all',
@@ -1599,6 +1518,7 @@ button:active { transform: scale(0.96); }
         masjidFilter: { year: '', month: '', day: '' }
     };
 
+    // ============== HELPERS ==============
     const $ = id => document.getElementById(id);
     const genId = () => Date.now().toString(36) + Math.random().toString(36).substr(2, 6);
     const todayStr = () => new Date().toISOString().slice(0,10);
@@ -1613,80 +1533,112 @@ button:active { transform: scale(0.96); }
         if (n.includes('image') || /\.(jpg|jpeg|png|gif)$/i.test(n)) return 'fa-file-image';
         return 'fa-file';
     }
-    const isImage = r => (r.fileType||'').startsWith('image/') || /\.(jpg|jpeg|png|gif)$/i.test(r.name);
-    const isPdf = r => (r.fileType||'').includes('pdf') || /\.pdf$/i.test(r.name);
+    const isImage = r => (r.file_type||'').startsWith('image/') || /\.(jpg|jpeg|png|gif)$/i.test(r.name);
+    const isPdf = r => (r.file_type||'').includes('pdf') || /\.pdf$/i.test(r.name);
     const isOffice = r => /\.(doc|docx|xls|xlsx)$/i.test(r.name) ||
-        (r.fileType||'').includes('word') ||
-        (r.fileType||'').includes('excel') ||
-        (r.fileType||'').includes('officedocument');
+        (r.file_type||'').includes('word') ||
+        (r.file_type||'').includes('excel') ||
+        (r.file_type||'').includes('officedocument');
     const isAdmin = () => state.currentUser && state.currentUser.role === 'admin';
 
-    function saveState() {
+    // Loading
+    function showLoading(text) {
+        $('loadingText').textContent = text || 'Yuklanmoqda...';
+        $('loadingOverlay').classList.add('show');
+    }
+    function hideLoading() {
+        $('loadingOverlay').classList.remove('show');
+    }
+
+    // ============== SUPABASE: BARCHA MA'LUMOTLARNI YUKLASH ==============
+    async function loadAllData() {
         try {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify({
-                sections: state.sections,
-                masjidlar: state.masjidlar,
-                staff: state.staff,
-                reports: state.reports,
-                folders: state.folders,
-                currentSectionId: state.currentSectionId
-            }));
-        } catch(e) { console.warn('Saqlashda xatolik', e); }
-    }
+            showLoading('Ma\'lumotlar yuklanmoqda...');
 
-    function loadState() {
-        const raw = localStorage.getItem(STORAGE_KEY);
-        if (raw) {
-            try {
-                const p = JSON.parse(raw);
-                state.sections = p.sections && p.sections.length ? p.sections : [...DEFAULT_SECTIONS];
-                state.masjidlar = p.masjidlar || [];
-                // Faqat admin hisobi — staff bo'sh
-                state.staff = p.staff && p.staff.length ? p.staff : [DEFAULT_ADMIN];
-                state.reports = p.reports || {};
-                state.folders = p.folders || {};
-                state.currentSectionId = p.currentSectionId || (state.sections[0]?.id || null);
-            } catch(e) { initDefault(); }
-        } else {
-            initDefault();
+            // Bo'limlar
+            const { data: sections } = await supabase.from('sections').select('*');
+            state.sections = sections && sections.length ? sections : [...DEFAULT_SECTIONS];
+
+            // Masjidlar
+            const { data: masjidlar } = await supabase.from('masjidlar').select('*').order('created_at', { ascending: false });
+            state.masjidlar = masjidlar || [];
+
+            // Hodimlar
+            const { data: staff } = await supabase.from('staff').select('*').order('created_at', { ascending: false });
+            state.staff = staff || [];
+
+            // Hisobotlar
+            const { data: reports } = await supabase.from('reports').select('*').order('uploaded_at', { ascending: false });
+            state.reports = reports || [];
+
+            // Papkalar
+            const { data: folders } = await supabase.from('folders').select('*');
+            state.folders = folders || [];
+
+            hideLoading();
+        } catch(e) {
+            console.error('Yuklashda xatolik:', e);
+            hideLoading();
+            alert('Ma\'lumotlarni yuklashda xatolik: ' + e.message);
         }
-        state.sections.forEach(s => { if (!state.reports[s.id]) state.reports[s.id] = []; });
-        if (!state.currentSectionId && state.sections.length) state.currentSectionId = state.sections[0].id;
     }
 
-    function initDefault() {
-        state.sections = [...DEFAULT_SECTIONS];
-        state.masjidlar = [];       // Bo'sh — siz o'zingiz kiritasiz
-        state.staff = [DEFAULT_ADMIN];
-        state.reports = {};
-        state.sections.forEach(s => state.reports[s.id] = []);
-        state.folders = {};
-        state.currentSectionId = state.sections[0].id;
-    }
-
-    // ============== LOGIN ==============
-    function doLogin() {
+    // ============== AUTH ==============
+    async function doLogin() {
         const login = $('loginInput').value.trim();
         const pass = $('passwordInput').value.trim();
-        if (!login || !pass) { alert('Login va parolni kiriting'); return; }
-        const user = state.staff.find(u => u.login === login && u.password === pass);
-        if (!user) { alert('Login yoki parol xato!'); return; }
-        state.currentUser = user;
-        state.activeView = 'dashboard';
-        state.currentFolder = 'all';
-        state.selectedMasjidId = null;
-        state.filter = { year:'', month:'', day:'' };
-        state.masjidFilter = { year:'', month:'', day:'' };
-        $('loginScreen').classList.add('hidden');
-        $('app').style.display = 'flex';
-        renderAll();
-        switchView('dashboard');
+        const err = $('loginError');
+        err.classList.remove('show');
+
+        if (!login || !pass) {
+            err.textContent = 'Login va parolni kiriting';
+            err.classList.add('show');
+            return;
+        }
+
+        showLoading('Kirish...');
+
+        try {
+            // staff jadvalidan login/parol tekshirish
+            const { data, error } = await supabase
+                .from('staff')
+                .select('*')
+                .eq('login', login)
+                .eq('password', pass)
+                .maybeSingle();
+
+            if (error) throw error;
+            if (!data) {
+                hideLoading();
+                err.textContent = 'Login yoki parol xato!';
+                err.classList.add('show');
+                return;
+            }
+
+            state.currentUser = data;
+            await loadAllData();
+
+            $('loginScreen').classList.add('hidden');
+            $('app').style.display = 'flex';
+            renderAll();
+            switchView('dashboard');
+            hideLoading();
+        } catch(e) {
+            hideLoading();
+            console.error(e);
+            err.textContent = 'Xatolik: ' + e.message;
+            err.classList.add('show');
+        }
     }
 
     function logout() {
         state.currentUser = null;
         state.activeView = 'dashboard';
         state.selectedMasjidId = null;
+        state.reports = [];
+        state.masjidlar = [];
+        state.staff = [];
+        state.folders = [];
         $('loginScreen').classList.remove('hidden');
         $('app').style.display = 'none';
         $('loginInput').value = '';
@@ -1699,7 +1651,7 @@ button:active { transform: scale(0.96); }
             const isAdm = state.currentUser.role === 'admin';
             const roleLabel = isAdm ? 'Admin' : 'Hodim';
             const roleClass = isAdm ? 'role admin' : 'role';
-            const displayName = state.currentUser.firstName + (state.currentUser.lastName ? ' ' + state.currentUser.lastName : '');
+            const displayName = state.currentUser.first_name + (state.currentUser.last_name ? ' ' + state.currentUser.last_name : '');
             $('userArea').innerHTML = `
                 <div class="user-badge">
                     <i class="fas fa-user-circle"></i>
@@ -1784,7 +1736,7 @@ button:active { transform: scale(0.96); }
     function renderDashboard() {
         if (!state.currentUser) return;
         if (!isAdmin()) {
-            const myReports = Object.values(state.reports).flat().filter(r => r.uploadedBy === state.currentUser.id);
+            const myReports = state.reports.filter(r => r.uploaded_by === state.currentUser.id);
             const today = todayStr();
             const todayCount = myReports.filter(r => r.date === today).length;
             $('statRow').innerHTML = `
@@ -1799,7 +1751,7 @@ button:active { transform: scale(0.96); }
             $('missingList').innerHTML = `
                 <div style="background: linear-gradient(135deg, var(--surface-2) 0%, #e8eef9 100%); border-radius: var(--radius-md); padding: 28px; text-align:center; border:1.5px solid var(--border-light);">
                     <i class="fas fa-info-circle" style="font-size:2.4rem; color:var(--primary); opacity:0.6; margin-bottom:12px; display:block;"></i>
-                    <h3 style="font-size:1.1rem; font-weight:700; margin-bottom:8px;">Xush kelibsiz, ${escapeHtml(state.currentUser.firstName)}!</h3>
+                    <h3 style="font-size:1.1rem; font-weight:700; margin-bottom:8px;">Xush kelibsiz, ${escapeHtml(state.currentUser.first_name)}!</h3>
                     <p style="color:var(--text-muted); font-size:0.9rem; max-width:500px; margin:0 auto;">
                         Siz <b>${escapeHtml(state.currentUser.masjid)}</b> masjidiga biriktirilgansiz.
                         Hisobot yuklash uchun <b>"Bo'limlar"</b> sahifasiga o'ting.
@@ -1814,12 +1766,8 @@ button:active { transform: scale(0.96); }
         const today = todayStr();
         let totalToday = 0;
         const setReport = new Set();
-        let totalAll = 0;
-        state.sections.forEach(sec => {
-            (state.reports[sec.id]||[]).forEach(r => {
-                totalAll++;
-                if (r.date === today) { totalToday++; setReport.add(r.uploadedBy); }
-            });
+        state.reports.forEach(r => {
+            if (r.date === today) { totalToday++; setReport.add(r.uploaded_by); }
         });
         const missing = allStaff.filter(s => !setReport.has(s.id));
 
@@ -1827,7 +1775,7 @@ button:active { transform: scale(0.96); }
             <div class="stat-card"><i class="fas fa-users"></i><span class="val">${allStaff.length}</span><span class="lbl">Jami hodimlar</span></div>
             <div class="stat-card success"><i class="fas fa-file-upload"></i><span class="val">${totalToday}</span><span class="lbl">Bugun yuklangan</span></div>
             <div class="stat-card danger"><i class="fas fa-user-clock"></i><span class="val">${missing.length}</span><span class="lbl">Bugun topshirmaganlar</span></div>
-            <div class="stat-card"><i class="fas fa-database"></i><span class="val">${totalAll}</span><span class="lbl">Umumiy hisobotlar</span></div>
+            <div class="stat-card"><i class="fas fa-database"></i><span class="val">${state.reports.length}</span><span class="lbl">Umumiy hisobotlar</span></div>
         `;
         $('missingCount').textContent = missing.length + ' ta';
         if (!allStaff.length) {
@@ -1838,14 +1786,14 @@ button:active { transform: scale(0.96); }
             $('missingList').innerHTML = `<div class="staff-grid">${missing.map(s => `
                 <div class="staff-card" style="border-left:4px solid var(--danger);">
                     <div class="staff-head">
-                        <div class="staff-avatar" style="background: var(--danger-gradient);">${escapeHtml((s.firstName[0]||'')+(s.lastName[0]||''))}</div>
+                        <div class="staff-avatar" style="background: var(--danger-gradient);">${escapeHtml((s.first_name[0]||'')+(s.last_name[0]||''))}</div>
                         <div>
-                            <div class="name">${escapeHtml(s.firstName + ' ' + s.lastName)}</div>
+                            <div class="name">${escapeHtml(s.first_name + ' ' + s.last_name)}</div>
                             <div class="masjid">${escapeHtml(s.masjid)}</div>
                         </div>
                     </div>
                     <div class="staff-meta">
-                        <span><i class="fas fa-phone"></i> ${escapeHtml(s.phone)}</span>
+                        <span><i class="fas fa-phone"></i> ${escapeHtml(s.phone||'')}</span>
                         <span><i class="fas fa-sign-in-alt"></i> ${escapeHtml(s.login)}</span>
                     </div>
                     <span class="badge danger">Hisobot topshirilmagan</span>
@@ -1883,21 +1831,20 @@ button:active { transform: scale(0.96); }
                 state.currentFolder = 'all';
                 state.filter = { year:'', month:'', day:'' };
                 initDateFilters();
-                saveState();
                 renderSections();
                 renderReports();
             });
         });
         document.querySelectorAll('.delete-section').forEach(btn => {
-            btn.addEventListener('click', e => {
+            btn.addEventListener('click', async e => {
                 e.stopPropagation();
                 if (!isAdmin()) return;
                 if (!confirm('Bu bo\'limni o\'chirmoqchimisiz?')) return;
                 const id = btn.dataset.id;
+                const { error } = await supabase.from('sections').delete().eq('id', id);
+                if (error) return alert('Xatolik: ' + error.message);
                 state.sections = state.sections.filter(s => s.id !== id);
-                delete state.reports[id];
                 if (state.currentSectionId === id) state.currentSectionId = state.sections[0]?.id || null;
-                saveState();
                 renderSections();
                 renderReports();
             });
@@ -1905,20 +1852,21 @@ button:active { transform: scale(0.96); }
     }
 
     function getVisibleReports(sectionId) {
-        const all = state.reports[sectionId] || [];
+        const all = state.reports.filter(r => r.section_id === sectionId);
         if (isAdmin()) return all;
         if (!state.currentUser) return [];
-        return all.filter(r => r.uploadedBy === state.currentUser.id);
+        return all.filter(r => r.uploaded_by === state.currentUser.id);
     }
 
     function getVisibleFolders(sectionId) {
         if (!state.currentUser) return [];
+        const folders = state.folders.filter(f => f.section_id === sectionId);
         if (isAdmin()) {
             const set = new Set();
-            Object.values(state.folders[sectionId] || {}).forEach(arr => arr.forEach(f => set.add(f)));
+            folders.forEach(f => set.add(f.name));
             return Array.from(set);
         }
-        return (state.folders[sectionId] && state.folders[sectionId][state.currentUser.id]) || [];
+        return folders.filter(f => f.user_id === state.currentUser.id).map(f => f.name);
     }
 
     function renderReports() {
@@ -1957,7 +1905,7 @@ button:active { transform: scale(0.96); }
         let reports = getVisibleReports(sec.id);
         if (state.currentFolder !== 'all') reports = reports.filter(r => r.folder === state.currentFolder);
         reports = reports.filter(r => matchDateFilter(r, state.filter));
-        reports.sort((a,b) => (b.uploadedAt||0) - (a.uploadedAt||0));
+        reports.sort((a,b) => new Date(b.uploaded_at||0) - new Date(a.uploaded_at||0));
 
         $('sectionBadge').textContent = reports.length + ' ta';
 
@@ -1967,13 +1915,13 @@ button:active { transform: scale(0.96); }
         }
 
         $('reportList').innerHTML = reports.map(rep => {
-            const icon = getFileIcon(rep.fileType || rep.name);
-            const uploader = state.staff.find(s => s.id === rep.uploadedBy);
-            const upName = uploader ? `${uploader.firstName} ${uploader.lastName||''}`.trim() : 'Noma\'lum';
-            const canDelete = isAdmin() || rep.uploadedBy === state.currentUser?.id;
+            const icon = getFileIcon(rep.file_type || rep.name);
+            const uploader = state.staff.find(s => s.id === rep.uploaded_by);
+            const upName = uploader ? `${uploader.first_name} ${uploader.last_name||''}`.trim() : 'Noma\'lum';
+            const canDelete = isAdmin() || rep.uploaded_by === state.currentUser?.id;
             return `
                 <div class="report-item" data-id="${rep.id}">
-                    <div class="report-info" onclick="openFileViewer('${rep.id}', '${sec.id}')">
+                    <div class="report-info" onclick="openFileViewer('${rep.id}')">
                         <i class="fas ${icon}"></i>
                         <div style="min-width:0;">
                             <div class="file-name">${escapeHtml(rep.name)}</div>
@@ -1984,7 +1932,7 @@ button:active { transform: scale(0.96); }
                         </div>
                     </div>
                     <div class="report-actions">
-                        <button class="view-file" data-id="${rep.id}" data-sec="${sec.id}" title="Ko'rish"><i class="fas fa-eye"></i></button>
+                        <button class="view-file" data-id="${rep.id}" title="Ko'rish"><i class="fas fa-eye"></i></button>
                         <button class="download-file" data-id="${rep.id}" title="Yuklab olish"><i class="fas fa-download"></i></button>
                         ${canDelete ? `<button class="delete-file del" data-id="${rep.id}" title="O'chirish"><i class="fas fa-trash-alt"></i></button>` : ''}
                     </div>
@@ -1995,26 +1943,27 @@ button:active { transform: scale(0.96); }
         document.querySelectorAll('.view-file').forEach(btn => {
             btn.addEventListener('click', e => {
                 e.stopPropagation();
-                openFileViewer(btn.dataset.id, btn.dataset.sec);
+                openFileViewer(btn.dataset.id);
             });
         });
         document.querySelectorAll('.download-file').forEach(btn => {
             btn.addEventListener('click', e => {
                 e.stopPropagation();
-                const rep = (state.reports[sec.id]||[]).find(r => r.id === btn.dataset.id);
-                if (rep?.dataUrl) {
-                    const a = document.createElement('a');
-                    a.href = rep.dataUrl; a.download = rep.name;
-                    document.body.appendChild(a); a.click(); document.body.removeChild(a);
-                }
+                downloadReport(btn.dataset.id);
             });
         });
         document.querySelectorAll('.delete-file').forEach(btn => {
-            btn.addEventListener('click', e => {
+            btn.addEventListener('click', async e => {
                 e.stopPropagation();
                 if (!confirm('Hisobotni o\'chirmoqchimisiz?')) return;
-                state.reports[sec.id] = (state.reports[sec.id]||[]).filter(r => r.id !== btn.dataset.id);
-                saveState();
+                const id = btn.dataset.id;
+                const rep = state.reports.find(r => r.id === id);
+                if (rep?.file_path) {
+                    await supabase.storage.from(STORAGE_BUCKET).remove([rep.file_path]);
+                }
+                const { error } = await supabase.from('reports').delete().eq('id', id);
+                if (error) return alert('Xatolik: ' + error.message);
+                state.reports = state.reports.filter(r => r.id !== id);
                 renderReports();
                 renderSections();
             });
@@ -2022,27 +1971,32 @@ button:active { transform: scale(0.96); }
     }
 
     // ============== FILE VIEWER ==============
-    window.openFileViewer = function(repId, sectionId) {
-        const rep = (state.reports[sectionId]||[]).find(r => r.id === repId);
+    window.openFileViewer = async function(repId) {
+        const rep = state.reports.find(r => r.id === repId);
         if (!rep) return;
-        $('fvTitle').innerHTML = `<i class="fas ${getFileIcon(rep.fileType||rep.name)}"></i> ${escapeHtml(rep.name)}`;
+        $('fvTitle').innerHTML = `<i class="fas ${getFileIcon(rep.file_type||rep.name)}"></i> ${escapeHtml(rep.name)}`;
         const body = $('fvBody');
 
-        if (!rep.dataUrl) {
-            body.innerHTML = `<div class="preview-fallback"><i class="fas fa-file-slash"></i><p>Fayl ma'lumotlari mavjud emas</p></div>`;
+        // Signed URL olish
+        let url = rep.data_url;
+        if (rep.file_path) {
+            const { data, error } = await supabase.storage.from(STORAGE_BUCKET).createSignedUrl(rep.file_path, 3600);
+            if (!error && data?.signedUrl) url = data.signedUrl;
+        }
+
+        if (!url) {
+            body.innerHTML = `<div class="preview-fallback"><i class="fas fa-file-slash"></i><p>Fayl mavjud emas</p></div>`;
         } else if (isImage(rep)) {
-            body.innerHTML = `<div class="preview-container"><img src="${rep.dataUrl}" alt="${escapeHtml(rep.name)}"></div>`;
+            body.innerHTML = `<div class="preview-container"><img src="${url}" alt="${escapeHtml(rep.name)}"></div>`;
         } else if (isPdf(rep)) {
-            body.innerHTML = `<div class="preview-container"><iframe src="${rep.dataUrl}" title="${escapeHtml(rep.name)}"></iframe></div>`;
+            body.innerHTML = `<div class="preview-container"><iframe src="${url}" title="${escapeHtml(rep.name)}"></iframe></div>`;
         } else if (isOffice(rep)) {
             body.innerHTML = `
                 <div class="preview-container">
-                    <iframe src="${rep.dataUrl}" title="${escapeHtml(rep.name)}"
-                        onerror="this.parentElement.innerHTML='<div class=\\'preview-fallback\\'><i class=\\'fas fa-file-word\\'></i><p>Bu faylni brauzerda to\\'liq ko\\'rsatib bo\\'lmaydi. Yuklab oling.</p></div>'">
-                    </iframe>
+                    <iframe src="${url}" title="${escapeHtml(rep.name)}"></iframe>
                 </div>
                 <div style="margin-top:14px; text-align:center;">
-                    <button class="btn-outline btn-sm" onclick="downloadReport('${rep.id}','${sectionId}')">
+                    <button class="btn-outline btn-sm" onclick="downloadReport('${rep.id}')">
                         <i class="fas fa-download"></i> Yuklab olish
                     </button>
                 </div>
@@ -2052,7 +2006,7 @@ button:active { transform: scale(0.96); }
                 <div class="preview-fallback">
                     <i class="fas fa-file"></i>
                     <p>Bu turdagi faylni ko'rsatib bo'lmaydi</p>
-                    <button class="btn-primary" onclick="downloadReport('${rep.id}','${sectionId}')">
+                    <button class="btn-primary" onclick="downloadReport('${rep.id}')">
                         <i class="fas fa-download"></i> Yuklab olish
                     </button>
                 </div>
@@ -2062,11 +2016,17 @@ button:active { transform: scale(0.96); }
         $('fileViewerModal').classList.add('show');
     };
 
-    window.downloadReport = function(repId, sectionId) {
-        const rep = (state.reports[sectionId]||[]).find(r => r.id === repId);
-        if (rep?.dataUrl) {
+    window.downloadReport = async function(repId) {
+        const rep = state.reports.find(r => r.id === repId);
+        if (!rep) return;
+        let url = rep.data_url;
+        if (rep.file_path) {
+            const { data, error } = await supabase.storage.from(STORAGE_BUCKET).createSignedUrl(rep.file_path, 3600);
+            if (!error && data?.signedUrl) url = data.signedUrl;
+        }
+        if (url) {
             const a = document.createElement('a');
-            a.href = rep.dataUrl; a.download = rep.name;
+            a.href = url; a.download = rep.name; a.target = '_blank';
             document.body.appendChild(a); a.click(); document.body.removeChild(a);
         }
     };
@@ -2089,7 +2049,7 @@ button:active { transform: scale(0.96); }
         $('masjidGrid').innerHTML = state.masjidlar.map(m => {
             const staff = state.staff.filter(s => s.role === 'staff' && s.masjid === m.name);
             const totalReports = staff.reduce((sum, s) =>
-                sum + Object.values(state.reports).flat().filter(r => r.uploadedBy === s.id).length, 0);
+                sum + state.reports.filter(r => r.uploaded_by === s.id).length, 0);
             return `
                 <div class="masjid-card" onclick="openMasjidDetail('${m.id}')">
                     <div class="masjid-head">
@@ -2106,12 +2066,12 @@ button:active { transform: scale(0.96); }
                     </div>
                     <div class="masjid-staff-list">
                         ${staff.length ? staff.map(s => {
-                            const cnt = Object.values(state.reports).flat().filter(r => r.uploadedBy === s.id).length;
+                            const cnt = state.reports.filter(r => r.uploaded_by === s.id).length;
                             return `
                                 <div class="masjid-staff-item">
                                     <div class="info">
-                                        <b>${escapeHtml(s.firstName + ' ' + s.lastName)}</b>
-                                        <span>${escapeHtml(s.phone)} · ${escapeHtml(s.login)}</span>
+                                        <b>${escapeHtml(s.first_name + ' ' + s.last_name)}</b>
+                                        <span>${escapeHtml(s.phone||'')} · ${escapeHtml(s.login)}</span>
                                     </div>
                                     <span class="reports-count">${cnt} ta</span>
                                 </div>
@@ -2144,18 +2104,16 @@ button:active { transform: scale(0.96); }
         if (!m) return;
         const staffIds = state.staff.filter(s => s.role === 'staff' && s.masjid === m.name).map(s => s.id);
         let totalReports = 0;
-        state.sections.forEach(sec => {
-            (state.reports[sec.id]||[]).forEach(r => {
-                if (!staffIds.includes(r.uploadedBy)) return;
-                if (!matchDateFilter(r, state.masjidFilter)) return;
-                totalReports++;
-            });
+        state.reports.forEach(r => {
+            if (!staffIds.includes(r.uploaded_by)) return;
+            if (!matchDateFilter(r, state.masjidFilter)) return;
+            totalReports++;
         });
         $('masjidDetailBadge').textContent = totalReports + ' ta hisobot';
 
         $('masjidSectionGrid').innerHTML = state.sections.map(sec => {
-            const count = (state.reports[sec.id]||[]).filter(r =>
-                staffIds.includes(r.uploadedBy) && matchDateFilter(r, state.masjidFilter)
+            const count = state.reports.filter(r =>
+                r.section_id === sec.id && staffIds.includes(r.uploaded_by) && matchDateFilter(r, state.masjidFilter)
             ).length;
             return `
                 <div class="section-box" onclick="openMasjidSection('${m.id}', '${sec.id}')">
@@ -2185,9 +2143,9 @@ button:active { transform: scale(0.96); }
         if (!m || !sec) return;
 
         const staffIds = state.staff.filter(s => s.role === 'staff' && s.masjid === m.name).map(s => s.id);
-        let reports = (state.reports[sectionId]||[]).filter(r => staffIds.includes(r.uploadedBy));
+        let reports = state.reports.filter(r => r.section_id === sectionId && staffIds.includes(r.uploaded_by));
         reports = reports.filter(r => matchDateFilter(r, state.masjidFilter));
-        reports.sort((a,b) => (b.uploadedAt||0) - (a.uploadedAt||0));
+        reports.sort((a,b) => new Date(b.uploaded_at||0) - new Date(a.uploaded_at||0));
 
         $('msmTitle').innerHTML = `<i class="fas ${sec.icon||'fa-folder'}"></i> ${escapeHtml(sec.name)} <span style="font-size:0.85rem; color:var(--text-muted); font-weight:500;">— ${escapeHtml(m.name)}</span>`;
 
@@ -2206,12 +2164,12 @@ button:active { transform: scale(0.96); }
                 </div>
                 <div style="display:flex; flex-direction:column; gap:10px; max-height:60vh; overflow-y:auto; padding-right:6px;">
                     ${reports.map(rep => {
-                        const icon = getFileIcon(rep.fileType || rep.name);
-                        const uploader = state.staff.find(s => s.id === rep.uploadedBy);
-                        const upName = uploader ? `${uploader.firstName} ${uploader.lastName||''}`.trim() : 'Noma\'lum';
+                        const icon = getFileIcon(rep.file_type || rep.name);
+                        const uploader = state.staff.find(s => s.id === rep.uploaded_by);
+                        const upName = uploader ? `${uploader.first_name} ${uploader.last_name||''}`.trim() : 'Noma\'lum';
                         return `
                             <div class="report-item" data-id="${rep.id}">
-                                <div class="report-info" onclick="openFileViewer('${rep.id}', '${sectionId}')">
+                                <div class="report-info" onclick="openFileViewer('${rep.id}')">
                                     <i class="fas ${icon}"></i>
                                     <div style="min-width:0;">
                                         <div class="file-name">${escapeHtml(rep.name)}</div>
@@ -2222,8 +2180,8 @@ button:active { transform: scale(0.96); }
                                     </div>
                                 </div>
                                 <div class="report-actions">
-                                    <button class="msm-view" data-id="${rep.id}" data-sec="${sectionId}" title="Ko'rish"><i class="fas fa-eye"></i></button>
-                                    <button class="msm-down" data-id="${rep.id}" data-sec="${sectionId}" title="Yuklab olish"><i class="fas fa-download"></i></button>
+                                    <button class="msm-view" data-id="${rep.id}" title="Ko'rish"><i class="fas fa-eye"></i></button>
+                                    <button class="msm-down" data-id="${rep.id}" title="Yuklab olish"><i class="fas fa-download"></i></button>
                                 </div>
                             </div>
                         `;
@@ -2234,13 +2192,13 @@ button:active { transform: scale(0.96); }
             $('msmBody').querySelectorAll('.msm-view').forEach(btn => {
                 btn.addEventListener('click', e => {
                     e.stopPropagation();
-                    openFileViewer(btn.dataset.id, btn.dataset.sec);
+                    openFileViewer(btn.dataset.id);
                 });
             });
             $('msmBody').querySelectorAll('.msm-down').forEach(btn => {
                 btn.addEventListener('click', e => {
                     e.stopPropagation();
-                    downloadReport(btn.dataset.id, btn.dataset.sec);
+                    downloadReport(btn.dataset.id);
                 });
             });
         }
@@ -2252,18 +2210,14 @@ button:active { transform: scale(0.96); }
         $('masjidSectionModal').classList.remove('show');
     };
 
-    window.deleteMasjid = function(id) {
+    window.deleteMasjid = async function(id) {
         if (!isAdmin()) return;
         const m = state.masjidlar.find(x => x.id === id);
         if (!m) return;
-        if (!confirm(`"${m.name}" masjidini o'chirmoqchimisiz? Unga bog'langan hodimlar ham o'chadi.`)) return;
+        if (!confirm(`"${m.name}" masjidini o'chirmoqchimisiz?`)) return;
+        const { error } = await supabase.from('masjidlar').delete().eq('id', id);
+        if (error) return alert('Xatolik: ' + error.message);
         state.masjidlar = state.masjidlar.filter(x => x.id !== id);
-        const staffIds = state.staff.filter(s => s.masjid === m.name).map(s => s.id);
-        state.staff = state.staff.filter(s => !staffIds.includes(s.id));
-        Object.keys(state.reports).forEach(secId => {
-            state.reports[secId] = state.reports[secId].filter(r => !staffIds.includes(r.uploadedBy));
-        });
-        saveState();
         if (state.selectedMasjidId === id) backToMasjidList();
         renderMasjidlar();
         renderStaff();
@@ -2283,20 +2237,21 @@ button:active { transform: scale(0.96); }
         }
         $('staffGrid').innerHTML = list.map(s => {
             const today = todayStr();
-            const todayCount = Object.values(state.reports).flat().filter(r => r.uploadedBy === s.id && r.date === today).length;
-            const totalCount = Object.values(state.reports).flat().filter(r => r.uploadedBy === s.id).length;
+            const todayCount = state.reports.filter(r => r.uploaded_by === s.id && r.date === today).length;
+            const totalCount = state.reports.filter(r => r.uploaded_by === s.id).length;
             return `
                 <div class="staff-card">
                     <div class="staff-head">
-                        <div class="staff-avatar">${escapeHtml((s.firstName[0]||'')+(s.lastName[0]||''))}</div>
+                        <div class="staff-avatar">${escapeHtml((s.first_name[0]||'')+(s.last_name[0]||''))}</div>
                         <div>
-                            <div class="name">${escapeHtml(s.firstName + ' ' + s.lastName)}</div>
+                            <div class="name">${escapeHtml(s.first_name + ' ' + s.last_name)}</div>
                             <div class="masjid">${escapeHtml(s.masjid)}</div>
                         </div>
                     </div>
                     <div class="staff-meta">
-                        <span><i class="fas fa-phone"></i> ${escapeHtml(s.phone)}</span>
+                        <span><i class="fas fa-phone"></i> ${escapeHtml(s.phone||'')}</span>
                         <span><i class="fas fa-user"></i> Login: ${escapeHtml(s.login)}</span>
+                        <span><i class="fas fa-key"></i> Parol: ${escapeHtml(s.password)}</span>
                         <span><i class="fas fa-calendar-day"></i> Bugun: ${todayCount} ta</span>
                         <span><i class="fas fa-database"></i> Jami: ${totalCount} ta</span>
                     </div>
@@ -2310,14 +2265,12 @@ button:active { transform: scale(0.96); }
     }
 
     window.editStaff = function(id) { openStaffModal(id); };
-    window.deleteStaff = function(id) {
+    window.deleteStaff = async function(id) {
         if (!isAdmin()) return;
         if (!confirm('Hodimni o\'chirmoqchimisiz?')) return;
+        const { error } = await supabase.from('staff').delete().eq('id', id);
+        if (error) return alert('Xatolik: ' + error.message);
         state.staff = state.staff.filter(s => s.id !== id);
-        Object.keys(state.reports).forEach(secId => {
-            state.reports[secId] = state.reports[secId].filter(r => r.uploadedBy !== id);
-        });
-        saveState();
         renderStaff();
         renderDashboard();
         renderAdmin();
@@ -2338,15 +2291,10 @@ button:active { transform: scale(0.96); }
         sectionSel.innerHTML = `<option value="all">Barcha bo'limlar</option>` +
             state.sections.map(s => `<option value="${s.id}" ${state.adminSectionFilter===s.id?'selected':''}>${escapeHtml(s.name)}</option>`).join('');
 
-        const all = [];
-        state.sections.forEach(sec => {
-            if (state.adminSectionFilter !== 'all' && sec.id !== state.adminSectionFilter) return;
-            (state.reports[sec.id]||[]).forEach(r => {
-                if (state.adminMasjidFilter !== 'all' && r.masjid !== state.adminMasjidFilter) return;
-                all.push({ ...r, sectionName: sec.name, sectionId: sec.id });
-            });
-        });
-        all.sort((a,b) => (b.uploadedAt||0) - (a.uploadedAt||0));
+        let all = [...state.reports];
+        if (state.adminSectionFilter !== 'all') all = all.filter(r => r.section_id === state.adminSectionFilter);
+        if (state.adminMasjidFilter !== 'all') all = all.filter(r => r.masjid === state.adminMasjidFilter);
+        all.sort((a,b) => new Date(b.uploaded_at||0) - new Date(a.uploaded_at||0));
         $('adminTotalBadge').textContent = all.length + ' ta';
 
         if (!all.length) {
@@ -2355,26 +2303,27 @@ button:active { transform: scale(0.96); }
         }
 
         $('adminReportList').innerHTML = all.map(rep => {
-            const icon = getFileIcon(rep.fileType || rep.name);
-            const uploader = state.staff.find(s => s.id === rep.uploadedBy);
-            const upName = uploader ? `${uploader.firstName} ${uploader.lastName||''}`.trim() : 'Noma\'lum';
+            const icon = getFileIcon(rep.file_type || rep.name);
+            const uploader = state.staff.find(s => s.id === rep.uploaded_by);
+            const upName = uploader ? `${uploader.first_name} ${uploader.last_name||''}`.trim() : 'Noma\'lum';
+            const sec = state.sections.find(s => s.id === rep.section_id);
             return `
                 <div class="report-item" style="margin-bottom:10px;">
-                    <div class="report-info" onclick="openFileViewer('${rep.id}', '${rep.sectionId}')">
+                    <div class="report-info" onclick="openFileViewer('${rep.id}')">
                         <i class="fas ${icon}"></i>
                         <div style="min-width:0;">
                             <div class="file-name">${escapeHtml(rep.name)}</div>
                             <div class="meta">
                                 <b>${escapeHtml(upName)}</b> · ${escapeHtml(rep.masjid||'')} ·
-                                ${escapeHtml(rep.sectionName)} · ${rep.date ? fmtDate(rep.date) : ''}
+                                ${escapeHtml(sec?.name||'')} · ${rep.date ? fmtDate(rep.date) : ''}
                                 ${rep.folder ? ' · 📁 ' + escapeHtml(rep.folder) : ''}
                             </div>
                         </div>
                     </div>
                     <div class="report-actions">
-                        <button class="admin-view" data-id="${rep.id}" data-sec="${rep.sectionId}" title="Ko'rish"><i class="fas fa-eye"></i></button>
-                        <button class="admin-down" data-id="${rep.id}" data-sec="${rep.sectionId}" title="Yuklab olish"><i class="fas fa-download"></i></button>
-                        <button class="admin-del del" data-id="${rep.id}" data-sec="${rep.sectionId}" title="O'chirish"><i class="fas fa-trash-alt"></i></button>
+                        <button class="admin-view" data-id="${rep.id}" title="Ko'rish"><i class="fas fa-eye"></i></button>
+                        <button class="admin-down" data-id="${rep.id}" title="Yuklab olish"><i class="fas fa-download"></i></button>
+                        <button class="admin-del del" data-id="${rep.id}" title="O'chirish"><i class="fas fa-trash-alt"></i></button>
                     </div>
                 </div>
             `;
@@ -2383,55 +2332,79 @@ button:active { transform: scale(0.96); }
         document.querySelectorAll('.admin-view').forEach(btn => {
             btn.addEventListener('click', e => {
                 e.stopPropagation();
-                openFileViewer(btn.dataset.id, btn.dataset.sec);
+                openFileViewer(btn.dataset.id);
             });
         });
         document.querySelectorAll('.admin-down').forEach(btn => {
             btn.addEventListener('click', e => {
                 e.stopPropagation();
-                downloadReport(btn.dataset.id, btn.dataset.sec);
+                downloadReport(btn.dataset.id);
             });
         });
         document.querySelectorAll('.admin-del').forEach(btn => {
-            btn.addEventListener('click', e => {
+            btn.addEventListener('click', async e => {
                 e.stopPropagation();
                 if (!confirm('O\'chirmoqchimisiz?')) return;
-                state.reports[btn.dataset.sec] = (state.reports[btn.dataset.sec]||[]).filter(r => r.id !== btn.dataset.id);
-                saveState();
+                const id = btn.dataset.id;
+                const rep = state.reports.find(r => r.id === id);
+                if (rep?.file_path) {
+                    await supabase.storage.from(STORAGE_BUCKET).remove([rep.file_path]);
+                }
+                const { error } = await supabase.from('reports').delete().eq('id', id);
+                if (error) return alert('Xatolik: ' + error.message);
+                state.reports = state.reports.filter(r => r.id !== id);
                 renderAdmin();
             });
         });
     }
 
     // ============== FILE UPLOAD ==============
-    function handleFiles(files) {
+    async function handleFiles(files) {
         if (!state.currentUser) return alert('Avval tizimga kiring');
         const sectionId = state.currentSectionId;
         if (!sectionId) return alert('Bo\'lim tanlanmagan');
         const folder = state.currentFolder !== 'all' ? state.currentFolder : null;
-        Array.from(files).forEach(file => {
-            const reader = new FileReader();
-            reader.onload = e => {
+
+        showLoading('Fayllar yuklanmoqda...');
+
+        for (const file of Array.from(files)) {
+            try {
+                const fileExt = file.name.split('.').pop();
+                const filePath = `${state.currentUser.id}/${genId()}.${fileExt}`;
+
+                const { error: uploadError } = await supabase.storage
+                    .from(STORAGE_BUCKET)
+                    .upload(filePath, file, { cacheControl: '3600', upsert: false });
+
+                if (uploadError) throw uploadError;
+
+                const { data: publicUrl } = supabase.storage.from(STORAGE_BUCKET).getPublicUrl(filePath);
+
                 const rep = {
-                    id: genId(),
                     name: file.name,
-                    fileType: file.type,
-                    dataUrl: e.target.result,
-                    uploadedBy: state.currentUser.id,
-                    uploadedAt: Date.now(),
+                    file_type: file.type,
+                    file_path: filePath,
+                    data_url: publicUrl?.publicUrl || '',
+                    uploaded_by: state.currentUser.id,
                     date: todayStr(),
                     masjid: state.currentUser.masjid,
-                    folder: folder
+                    folder: folder,
+                    section_id: sectionId
                 };
-                if (!state.reports[sectionId]) state.reports[sectionId] = [];
-                state.reports[sectionId].push(rep);
-                saveState();
-                renderReports();
-                renderSections();
-                renderDashboard();
-            };
-            reader.readAsDataURL(file);
-        });
+
+                const { data, error } = await supabase.from('reports').insert(rep).select().single();
+                if (error) throw error;
+                state.reports.unshift(data);
+            } catch(e) {
+                console.error('Yuklashda xatolik:', e);
+                alert('Xatolik: ' + e.message);
+            }
+        }
+
+        hideLoading();
+        renderReports();
+        renderSections();
+        renderDashboard();
     }
 
     // ============== MODALS ==============
@@ -2442,13 +2415,17 @@ button:active { transform: scale(0.96); }
     };
     window.closeMasjidModal = function() { $('masjidModal').classList.remove('show'); };
 
-    function saveMasjid() {
+    async function saveMasjid() {
         const name = $('masjidName').value.trim();
         const address = $('masjidAddress').value.trim();
         if (!name) return alert('Masjid nomini kiriting');
         if (state.masjidlar.some(m => m.name === name)) return alert('Bu masjid allaqachon mavjud');
-        state.masjidlar.push({ id: genId(), name, address, createdAt: Date.now() });
-        saveState();
+
+        showLoading('Saqlanmoqda...');
+        const { data, error } = await supabase.from('masjidlar').insert({ name, address }).select().single();
+        hideLoading();
+        if (error) return alert('Xatolik: ' + error.message);
+        state.masjidlar.unshift(data);
         closeMasjidModal();
         renderMasjidlar();
     }
@@ -2466,8 +2443,8 @@ button:active { transform: scale(0.96); }
             if (s) {
                 $('staffModalTitle').innerHTML = '<i class="fas fa-user-edit"></i> Hodimni tahrirlash';
                 $('staffEditId').value = s.id;
-                $('staffFirstName').value = s.firstName;
-                $('staffLastName').value = s.lastName;
+                $('staffFirstName').value = s.first_name;
+                $('staffLastName').value = s.last_name;
                 $('staffPhone').value = s.phone;
                 sel.value = s.masjid;
                 $('staffLogin').value = s.login;
@@ -2481,7 +2458,7 @@ button:active { transform: scale(0.96); }
     };
     window.closeStaffModal = function() { $('staffModal').classList.remove('show'); };
 
-    function saveStaff() {
+    async function saveStaff() {
         const editId = $('staffEditId').value;
         const firstName = $('staffFirstName').value.trim();
         const lastName = $('staffLastName').value.trim();
@@ -2492,13 +2469,32 @@ button:active { transform: scale(0.96); }
         if (!firstName||!lastName||!phone||!masjid||!login||!password) return alert('Barcha maydonlarni to\'ldiring');
         if (state.staff.some(s => s.login === login && s.id !== editId)) return alert('Bu login band');
 
+        showLoading('Saqlanmoqda...');
+        const payload = {
+            first_name: firstName,
+            last_name: lastName,
+            phone,
+            masjid,
+            login,
+            password,
+            role: 'staff'
+        };
+
+        let result;
         if (editId) {
-            const s = state.staff.find(x => x.id === editId);
-            if (s) Object.assign(s, { firstName, lastName, phone, masjid, login, password });
+            result = await supabase.from('staff').update(payload).eq('id', editId).select().single();
         } else {
-            state.staff.push({ id: genId(), firstName, lastName, phone, masjid, login, password, role: 'staff' });
+            result = await supabase.from('staff').insert(payload).select().single();
         }
-        saveState();
+        hideLoading();
+        if (result.error) return alert('Xatolik: ' + result.error.message);
+
+        if (editId) {
+            const idx = state.staff.findIndex(s => s.id === editId);
+            if (idx >= 0) state.staff[idx] = result.data;
+        } else {
+            state.staff.unshift(result.data);
+        }
         closeStaffModal();
         renderStaff();
         renderDashboard();
@@ -2512,21 +2508,27 @@ button:active { transform: scale(0.96); }
     };
     window.closeFolderModal = function() { $('folderModal').classList.remove('show'); };
 
-    function saveFolder() {
+    async function saveFolder() {
         const name = $('folderNameInput').value.trim();
         if (!name) return alert('Papka nomini kiriting');
         const secId = state.currentSectionId;
         const userId = state.currentUser.id;
-        if (!state.folders[secId]) state.folders[secId] = {};
-        if (!state.folders[secId][userId]) state.folders[secId][userId] = [];
-        if (state.folders[secId][userId].includes(name)) return alert('Bu papka mavjud');
-        state.folders[secId][userId].push(name);
-        saveState();
+
+        if (state.folders.some(f => f.section_id === secId && f.user_id === userId && f.name === name)) {
+            return alert('Bu papka mavjud');
+        }
+
+        const { data, error } = await supabase.from('folders').insert({
+            section_id: secId, user_id: userId, name
+        }).select().single();
+        if (error) return alert('Xatolik: ' + error.message);
+        state.folders.push(data);
         closeFolderModal();
         state.currentFolder = name;
         renderReports();
     }
 
+    // ============== RENDER ALL ==============
     function renderAll() {
         renderUserArea();
         renderDashboard();
@@ -2562,15 +2564,15 @@ button:active { transform: scale(0.96); }
             if (e.dataTransfer.files.length) handleFiles(e.dataTransfer.files);
         });
 
-        $('addSectionBtn').addEventListener('click', () => {
+        $('addSectionBtn').addEventListener('click', async () => {
             if (!isAdmin()) return alert('Faqat admin bo\'lim qo\'sha oladi');
             const name = prompt('Yangi bo\'lim nomini kiriting:');
             if (name && name.trim()) {
-                const newSec = { id: genId(), name: name.trim(), icon: 'fa-folder' };
-                state.sections.push(newSec);
-                state.reports[newSec.id] = [];
-                state.currentSectionId = newSec.id;
-                saveState();
+                const id = 's' + genId();
+                const { data, error } = await supabase.from('sections').insert({ id, name: name.trim(), icon: 'fa-folder' }).select().single();
+                if (error) return alert('Xatolik: ' + error.message);
+                state.sections.push(data);
+                state.currentSectionId = data.id;
                 renderSections();
                 renderReports();
             }
@@ -2589,13 +2591,8 @@ button:active { transform: scale(0.96); }
         });
         $('saveFolderBtn').addEventListener('click', saveFolder);
 
-        // Sana filtrlari (bo'limlar)
         $('dfApplyBtn').addEventListener('click', () => {
-            state.filter = {
-                year: $('dfYear').value,
-                month: $('dfMonth').value,
-                day: $('dfDay').value
-            };
+            state.filter = { year: $('dfYear').value, month: $('dfMonth').value, day: $('dfDay').value };
             renderReports();
         });
         $('dfResetBtn').addEventListener('click', () => {
@@ -2604,13 +2601,8 @@ button:active { transform: scale(0.96); }
             renderReports();
         });
 
-        // Sana filtrlari (masjid detail)
         $('dfApplyBtn2').addEventListener('click', () => {
-            state.masjidFilter = {
-                year: $('dfYear2').value,
-                month: $('dfMonth2').value,
-                day: $('dfDay2').value
-            };
+            state.masjidFilter = { year: $('dfYear2').value, month: $('dfMonth2').value, day: $('dfDay2').value };
             renderMasjidSections();
         });
         $('dfResetBtn2').addEventListener('click', () => {
@@ -2619,23 +2611,15 @@ button:active { transform: scale(0.96); }
             renderMasjidSections();
         });
 
-        $('adminMasjidFilter').addEventListener('change', e => {
-            state.adminMasjidFilter = e.target.value;
-            renderAdmin();
-        });
-        $('adminSectionFilter').addEventListener('change', e => {
-            state.adminSectionFilter = e.target.value;
-            renderAdmin();
-        });
+        $('adminMasjidFilter').addEventListener('change', e => { state.adminMasjidFilter = e.target.value; renderAdmin(); });
+        $('adminSectionFilter').addEventListener('change', e => { state.adminSectionFilter = e.target.value; renderAdmin(); });
 
-        // Modal yopish (tashqi hudud bosilganda)
         $('fileViewerModal').addEventListener('click', e => { if (e.target === $('fileViewerModal')) closeFileViewer(); });
         $('staffModal').addEventListener('click', e => { if (e.target === $('staffModal')) closeStaffModal(); });
         $('masjidModal').addEventListener('click', e => { if (e.target === $('masjidModal')) closeMasjidModal(); });
         $('folderModal').addEventListener('click', e => { if (e.target === $('folderModal')) closeFolderModal(); });
         $('masjidSectionModal').addEventListener('click', e => { if (e.target === $('masjidSectionModal')) closeMasjidSectionModal(); });
 
-        // ESC tugmasi bilan yopish
         document.addEventListener('keydown', e => {
             if (e.key === 'Escape') {
                 closeFileViewer();
@@ -2647,10 +2631,10 @@ button:active { transform: scale(0.96); }
         });
     }
 
-    function init() {
-        loadState();
+    async function init() {
         bindEvents();
-        initDateFilters();
+        showLoading('Tizimga ulanmoqda...');
+        hideLoading();
         $('loginScreen').classList.remove('hidden');
         $('app').style.display = 'none';
     }
