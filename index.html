@@ -4,6 +4,24 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
 <title>Mizan Pro — Masjid hujjatlari boshqaruvi</title>
+
+<!-- PWA Meta Tags -->
+<meta name="theme-color" content="#1e3c72">
+<meta name="description" content="Mizan Pro — Masjid hujjatlari boshqaruv tizimi">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Mizan Pro">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="application-name" content="Mizan Pro">
+
+<!-- Icons -->
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+
+<!-- Manifest -->
+<link rel="manifest" href="manifest.json">
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
 <style>
@@ -40,7 +58,6 @@
     --radius-lg:24px;
     --radius-xl:32px;
     --transition: all 0.28s cubic-bezier(0.22, 1, 0.36, 1);
-    --transition-fast: all 0.15s ease;
 }
 
 html, body {
@@ -120,6 +137,30 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
 .btn-icon:hover {
     background: var(--surface-2); color: var(--primary);
     transform: translateY(-2px) scale(1.05); box-shadow: var(--shadow-md);
+}
+
+/* Install button */
+.install-btn {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: var(--radius-sm);
+    font-weight: 700;
+    box-shadow: 0 6px 20px rgba(16,185,129,0.35);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    animation: pulseInstall 2s ease-in-out infinite;
+}
+.install-btn:hover {
+    box-shadow: 0 12px 28px rgba(16,185,129,0.5);
+    transform: translateY(-2px);
+    animation: none;
+}
+@keyframes pulseInstall {
+    0%, 100% { box-shadow: 0 6px 20px rgba(16,185,129,0.35); }
+    50% { box-shadow: 0 6px 28px rgba(16,185,129,0.6); }
 }
 
 /* LOGIN */
@@ -711,11 +752,15 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
             <button class="btn-accent login-btn" id="loginBtn">
                 <i class="fas fa-sign-in-alt"></i> <span>Tizimga kirish</span>
             </button>
+            <button class="install-btn" id="installBtnLogin" style="display:none; margin-top:10px; justify-content:center;">
+                <i class="fas fa-download"></i> Ilovani o'rnatish
+            </button>
         </div>
     </div>
 </div>
 
 <div id="app" style="display:none;">
+
     <header class="app-header">
         <div class="logo">
             <h1><i class="fas fa-mosque"></i> Mizan Pro</h1>
@@ -941,23 +986,59 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
     </div>
 </div>
 
-<!-- Supabase (faqat database) -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<!-- aws4fetch (Cloudflare R2 uchun UMD formatda) -->
 <script src="https://cdn.jsdelivr.net/npm/aws4fetch@1.0.19/dist/aws4fetch.umd.js"></script>
 
 <script>
 (function() {
     'use strict';
 
+    // ===== PWA Service Worker =====
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('./sw.js')
+                .then(reg => console.log('Service Worker ro\'yxatdan o\'tdi:', reg.scope))
+                .catch(err => console.log('Service Worker xato:', err));
+        });
+    }
+
+    // ===== PWA Install Prompt =====
+    let deferredPrompt = null;
+    const installBtnLogin = document.getElementById('installBtnLogin');
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        if (installBtnLogin) installBtnLogin.style.display = 'inline-flex';
+    });
+
+    window.installPWA = async function() {
+        if (!deferredPrompt) {
+            alert('Ilovani o\'rnatish uchun brauzer menyusidan "O\'rnatish" yoki "Add to Home Screen" tanlang.');
+            return;
+        }
+        deferredPrompt.prompt();
+        const result = await deferredPrompt.userChoice;
+        console.log('O\'rnatish natijasi:', result.outcome);
+        deferredPrompt = null;
+        if (installBtnLogin) installBtnLogin.style.display = 'none';
+    };
+
+    if (installBtnLogin) installBtnLogin.addEventListener('click', window.installPWA);
+
+    window.addEventListener('appinstalled', () => {
+        console.log('Mizan Pro o\'rnatildi!');
+        if (installBtnLogin) installBtnLogin.style.display = 'none';
+    });
+
     // ============================================================
-    // ⚙️ SUPABASE (faqat ma'lumotlar bazasi)
+    // ⚙️ SUPABASE
     // ============================================================
     const SUPABASE_URL = 'https://ctsalsacbxzluxaknvdh.supabase.co';
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN0c2Fsc2FjYnh6bHV4YWtudmRoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA3ODQyNjgsImV4cCI6MjEwNjM2MDI2OH0.nSpZEhXaSpX3P67iNc9xCcvp4i-JMnvstL6lafpOxcI';
 
     // ============================================================
-    // ☁️ CLOUDFLARE R2 (aws4fetch bilan)
+    // ☁️ CLOUDFLARE R2
     // ============================================================
     const R2_CONFIG = {
         endpoint: 'https://bba4354431f6c41a7e679ff1b92f3c63.r2.cloudflarestorage.com',
@@ -968,19 +1049,11 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         publicUrl: 'https://pub-e7c2fa3e4e9c4dcaa8deb0263f3a833d.r2.dev'
     };
 
-    // ============================================================
-    // ⛔ BUNDAN PASTINI O'ZGARTIRMANG
-    // ============================================================
-
     const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-    // aws4fetch yuklanganligini tekshirish
     if (!window.aws4fetch || !window.aws4fetch.AwsClient) {
-        console.error('aws4fetch yuklanmagan! CDN manzilini tekshiring.');
-        alert('Xatolik: aws4fetch kutubxonasi yuklanmadi. Sahifani yangilang.');
-        return;
+        console.error('aws4fetch yuklanmagan!');
     }
-
     const { AwsClient } = window.aws4fetch;
 
     const r2Client = new AwsClient({
@@ -990,16 +1063,13 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         region: 'auto'
     });
 
-    // R2'ga fayl yuklash
     async function r2Upload(file, filePath) {
         const url = `${R2_CONFIG.endpoint}/${R2_CONFIG.bucket}/${filePath}`;
-
         const response = await r2Client.fetch(url, {
             method: 'PUT',
             body: file,
             headers: { 'Content-Type': file.type }
         });
-
         if (!response.ok) {
             const errText = await response.text();
             throw new Error('R2 yuklashda xato: ' + response.status + ' ' + errText);
@@ -1007,15 +1077,12 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         return `${R2_CONFIG.publicUrl}/${filePath}`;
     }
 
-    // R2'dan faylni o'chirish
     async function r2Delete(filePath) {
         try {
             const url = `${R2_CONFIG.endpoint}/${R2_CONFIG.bucket}/${filePath}`;
             const response = await r2Client.fetch(url, { method: 'DELETE' });
             if (!response.ok) console.warn('R2 delete xato:', response.status);
-        } catch(e) {
-            console.warn('R2 delete xato:', e);
-        }
+        } catch(e) { console.warn('R2 delete xato:', e); }
     }
 
     const MONTHS = ['Yanvar','Fevral','Mart','Aprel','May','Iyun','Iyul','Avgust','Sentabr','Oktabr','Noyabr','Dekabr'];
@@ -1143,9 +1210,16 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
                     </div>
                     <span class="${roleClass}">${roleLabel}</span>
                 </div>
+                <button class="install-btn" onclick="installPWA()" style="display:none;" id="installBtnHeader">
+                    <i class="fas fa-download"></i> Ilovani o'rnatish
+                </button>
                 <button class="btn-outline" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Chiqish</button>
             `;
             $('logoutBtn').addEventListener('click', logout);
+            const installBtnHeader = $('installBtnHeader');
+            if (installBtnHeader && deferredPrompt) installBtnHeader.style.display = 'inline-flex';
+            if (installBtnHeader) installBtnHeader.addEventListener('click', window.installPWA);
+
             $('tabsNav').style.display = 'flex';
             $('tabStaff').style.display = isAdmin() ? 'inline-flex' : 'none';
             $('tabAdmin').style.display = isAdmin() ? 'inline-flex' : 'none';
