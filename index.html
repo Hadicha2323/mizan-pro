@@ -716,7 +716,6 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
 </div>
 
 <div id="app" style="display:none;">
-
     <header class="app-header">
         <div class="logo">
             <h1><i class="fas fa-mosque"></i> Mizan Pro</h1>
@@ -944,8 +943,8 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
 
 <!-- Supabase (faqat database) -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<!-- aws4fetch (Cloudflare R2 uchun brauzerda ishlaydi) -->
-<script src="https://cdn.jsdelivr.net/npm/aws4fetch@1.0.19/dist/aws4fetch.min.js"></script>
+<!-- aws4fetch (Cloudflare R2 uchun UMD formatda) -->
+<script src="https://cdn.jsdelivr.net/npm/aws4fetch@1.0.19/dist/aws4fetch.umd.js"></script>
 
 <script>
 (function() {
@@ -975,7 +974,13 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
 
     const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-    // aws4fetch — brauzer uchun to‘g‘ri R2 kutubxonasi
+    // aws4fetch yuklanganligini tekshirish
+    if (!window.aws4fetch || !window.aws4fetch.AwsClient) {
+        console.error('aws4fetch yuklanmagan! CDN manzilini tekshiring.');
+        alert('Xatolik: aws4fetch kutubxonasi yuklanmadi. Sahifani yangilang.');
+        return;
+    }
+
     const { AwsClient } = window.aws4fetch;
 
     const r2Client = new AwsClient({
@@ -987,17 +992,9 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
 
     // R2'ga fayl yuklash
     async function r2Upload(file, filePath) {
-        const url = new URL(`${R2_CONFIG.endpoint}/${R2_CONFIG.bucket}/${filePath}`);
+        const url = `${R2_CONFIG.endpoint}/${R2_CONFIG.bucket}/${filePath}`;
 
-        const signed = await r2Client.sign(
-            new Request(url, {
-                method: 'PUT',
-                headers: { 'Content-Type': file.type }
-            }),
-            { aws: { signQuery: true } }
-        );
-
-        const response = await fetch(signed.url, {
+        const response = await r2Client.fetch(url, {
             method: 'PUT',
             body: file,
             headers: { 'Content-Type': file.type }
@@ -1010,15 +1007,12 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         return `${R2_CONFIG.publicUrl}/${filePath}`;
     }
 
-    // R2'dan faylni o‘chirish
+    // R2'dan faylni o'chirish
     async function r2Delete(filePath) {
         try {
-            const url = new URL(`${R2_CONFIG.endpoint}/${R2_CONFIG.bucket}/${filePath}`);
-            const signed = await r2Client.sign(
-                new Request(url, { method: 'DELETE' }),
-                { aws: { signQuery: true } }
-            );
-            await fetch(signed.url, { method: 'DELETE' });
+            const url = `${R2_CONFIG.endpoint}/${R2_CONFIG.bucket}/${filePath}`;
+            const response = await r2Client.fetch(url, { method: 'DELETE' });
+            if (!response.ok) console.warn('R2 delete xato:', response.status);
         } catch(e) {
             console.warn('R2 delete xato:', e);
         }
