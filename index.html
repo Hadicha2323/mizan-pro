@@ -53,12 +53,7 @@ html, body {
     -webkit-font-smoothing: antialiased;
 }
 
-body {
-    padding: 14px;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-}
+body { padding: 14px; display: flex; justify-content: center; align-items: flex-start; }
 
 #app {
     width: 100%;
@@ -70,63 +65,39 @@ body {
     animation: fadeUp 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* Loading overlay */
 #loadingOverlay {
-    position: fixed;
-    inset: 0;
+    position: fixed; inset: 0;
     background: rgba(238, 242, 251, 0.95);
     backdrop-filter: blur(8px);
     z-index: 3000;
     display: none;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 20px;
+    align-items: center; justify-content: center;
+    flex-direction: column; gap: 20px;
 }
 #loadingOverlay.show { display: flex; }
 #loadingOverlay .spinner {
-    width: 60px;
-    height: 60px;
+    width: 60px; height: 60px;
     border-radius: 50%;
     border: 4px solid var(--border);
     border-top-color: var(--primary);
     animation: spin 0.8s linear infinite;
 }
-#loadingOverlay p {
-    font-weight: 700;
-    color: var(--primary);
-    font-size: 1rem;
-}
+#loadingOverlay p { font-weight: 700; color: var(--primary); font-size: 1rem; }
 @keyframes spin { to { transform: rotate(360deg); } }
 
-/* Buttons */
 button {
-    border: none;
-    background: transparent;
-    cursor: pointer;
-    font-weight: 600;
-    transition: var(--transition);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    border-radius: var(--radius-sm);
-    padding: 12px 22px;
-    font-size: 0.95rem;
-    color: var(--text);
-    font-family: inherit;
-    letter-spacing: -0.01em;
-    position: relative;
-    overflow: hidden;
+    border: none; background: transparent; cursor: pointer;
+    font-weight: 600; transition: var(--transition);
+    display: inline-flex; align-items: center; justify-content: center;
+    gap: 8px; border-radius: var(--radius-sm);
+    padding: 12px 22px; font-size: 0.95rem; color: var(--text);
+    font-family: inherit; letter-spacing: -0.01em;
+    position: relative; overflow: hidden;
 }
 button::after {
-    content: '';
-    position: absolute;
-    inset: 0;
+    content: ''; position: absolute; inset: 0;
     background: radial-gradient(circle at center, rgba(255,255,255,0.3) 0%, transparent 70%);
-    opacity: 0;
-    transition: opacity 0.3s;
-    pointer-events: none;
+    opacity: 0; transition: opacity 0.3s; pointer-events: none;
 }
 button:hover::after { opacity: 1; }
 button:active { transform: scale(0.96); }
@@ -140,8 +111,6 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
 .btn-danger:hover { box-shadow: 0 10px 24px rgba(239,68,68,0.4); transform: translateY(-1px); }
 .btn-outline { background: var(--surface); border: 1.5px solid var(--border); color: var(--text); }
 .btn-outline:hover { background: var(--surface-2); border-color: var(--primary-light); color: var(--primary); transform: translateY(-1px); }
-.btn-ghost { background: transparent; color: var(--text-muted); }
-.btn-ghost:hover { background: var(--surface-2); color: var(--primary); }
 .btn-sm { padding: 8px 14px; font-size: 0.82rem; border-radius: 12px; }
 .btn-icon {
     width: 46px; height: 46px; padding: 0; border-radius: 50%;
@@ -153,17 +122,12 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
     transform: translateY(-2px) scale(1.05); box-shadow: var(--shadow-md);
 }
 
-/* Login */
+/* LOGIN */
 .login-screen {
-    position: fixed;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 500;
-    padding: 20px;
+    position: fixed; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    z-index: 500; padding: 20px;
     background: var(--bg-gradient);
-    animation: fadeUp 0.5s ease;
 }
 .login-screen.hidden { display: none; }
 .login-card {
@@ -174,85 +138,42 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
     padding: 40px 36px;
     box-shadow: var(--shadow-lg);
     border: 1px solid rgba(255,255,255,0.9);
-    max-width: 440px;
-    width: 100%;
-    position: relative;
-    overflow: hidden;
+    max-width: 440px; width: 100%;
 }
-.login-card::before {
-    content: '';
-    position: absolute;
-    top: -40%; right: -30%;
-    width: 280px; height: 280px;
-    background: radial-gradient(circle, rgba(30,60,114,0.08) 0%, transparent 70%);
-    pointer-events: none;
-}
-.login-card::after {
-    content: '';
-    position: absolute;
-    bottom: -40%; left: -30%;
-    width: 260px; height: 260px;
-    background: radial-gradient(circle, rgba(15,157,88,0.06) 0%, transparent 70%);
-    pointer-events: none;
-}
-.login-logo {
-    text-align: center;
-    margin-bottom: 28px;
-    position: relative;
-    z-index: 1;
-}
+.login-logo { text-align: center; margin-bottom: 28px; }
 .login-logo .icon-box {
-    width: 76px; height: 76px;
-    border-radius: 24px;
-    background: var(--primary-gradient);
-    color: #fff;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2rem;
-    box-shadow: var(--shadow-glow);
+    width: 76px; height: 76px; border-radius: 24px;
+    background: var(--primary-gradient); color: #fff;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 2rem; box-shadow: var(--shadow-glow);
     margin-bottom: 16px;
     animation: pulseIcon 3s ease-in-out infinite;
 }
 .login-logo h1 {
-    font-size: 1.9rem;
-    font-weight: 800;
-    letter-spacing: -0.03em;
+    font-size: 1.9rem; font-weight: 800;
     background: var(--primary-gradient);
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
     background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
     margin-bottom: 6px;
 }
 .login-logo p { color: var(--text-muted); font-size: 0.88rem; font-weight: 500; }
-.login-form-panel {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    position: relative;
-    z-index: 1;
-}
+.login-form-panel { display: flex; flex-direction: column; gap: 16px; }
 .login-input-group { position: relative; }
 .login-input-group i.field-icon {
-    position: absolute;
-    left: 18px; top: 50%;
+    position: absolute; left: 18px; top: 50%;
     transform: translateY(-50%);
-    color: var(--text-muted);
-    font-size: 1rem;
+    color: var(--text-muted); font-size: 1rem;
     pointer-events: none;
-    transition: var(--transition);
 }
 .login-input-group input {
-    width: 100%;
-    padding: 15px 18px 15px 48px;
+    width: 100%; padding: 15px 18px 15px 48px;
     border-radius: var(--radius-sm);
     border: 1.5px solid var(--border);
-    background: var(--surface);
-    font-size: 0.95rem;
-    font-family: inherit;
-    font-weight: 500;
-    outline: none;
-    transition: var(--transition);
+    background: var(--surface); font-size: 0.95rem;
+    font-family: inherit; font-weight: 500;
+    outline: none; transition: var(--transition);
     color: var(--text);
 }
 .login-input-group input:focus {
@@ -260,150 +181,89 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
     box-shadow: 0 0 0 4px rgba(30,60,114,0.1);
     transform: translateY(-1px);
 }
-.login-btn {
-    padding: 15px 22px;
-    font-size: 1rem;
-    font-weight: 700;
-    border-radius: var(--radius-sm);
-    margin-top: 6px;
-}
+.login-btn { padding: 15px 22px; font-size: 1rem; font-weight: 700; border-radius: var(--radius-sm); margin-top: 6px; }
 .login-error {
-    background: #fdecea;
-    color: var(--danger);
-    padding: 12px 16px;
-    border-radius: var(--radius-sm);
-    font-size: 0.85rem;
-    font-weight: 600;
-    text-align: center;
-    border: 1px solid rgba(239,68,68,0.2);
-    display: none;
+    background: #fdecea; color: var(--danger);
+    padding: 12px 16px; border-radius: var(--radius-sm);
+    font-size: 0.85rem; font-weight: 600; text-align: center;
+    border: 1px solid rgba(239,68,68,0.2); display: none;
 }
 .login-error.show { display: block; }
 
-/* Header */
+/* HEADER */
 .app-header {
     background: var(--surface-glass);
     backdrop-filter: blur(24px) saturate(180%);
     -webkit-backdrop-filter: blur(24px) saturate(180%);
-    padding: 20px 26px;
-    border-radius: var(--radius-xl);
+    padding: 20px 26px; border-radius: var(--radius-xl);
     box-shadow: var(--shadow-md);
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    border: 1px solid rgba(255, 255, 255, 0.9);
-    position: relative;
-    overflow: hidden;
+    display: flex; flex-wrap: wrap;
+    align-items: center; justify-content: space-between;
+    gap: 16px; border: 1px solid rgba(255, 255, 255, 0.9);
 }
-.app-header::before {
-    content: '';
-    position: absolute;
-    top: -50%; right: -10%;
-    width: 300px; height: 300px;
-    background: radial-gradient(circle, rgba(30,60,114,0.06) 0%, transparent 70%);
-    pointer-events: none;
-}
-.logo { display: flex; align-items: center; gap: 14px; z-index: 1; }
 .logo h1 {
-    font-size: 1.75rem;
-    font-weight: 800;
+    font-size: 1.75rem; font-weight: 800;
     letter-spacing: -0.03em;
     background: var(--primary-gradient);
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
     background-clip: text;
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    display: inline-flex; align-items: center; gap: 12px;
 }
 .logo h1 i {
-    background: var(--primary-gradient);
-    color: #fff;
-    width: 46px; height: 46px;
-    border-radius: 16px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.4rem;
-    -webkit-text-fill-color: #fff;
+    background: var(--primary-gradient); color: #fff;
+    width: 46px; height: 46px; border-radius: 16px;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 1.4rem; -webkit-text-fill-color: #fff;
     box-shadow: var(--shadow-glow);
 }
-.user-area { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; z-index: 1; }
+.user-area { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
 .user-badge {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    background: var(--surface);
-    padding: 8px 18px 8px 10px;
-    border-radius: 40px;
-    font-weight: 600;
+    display: flex; align-items: center; gap: 12px;
+    background: var(--surface); padding: 8px 18px 8px 10px;
+    border-radius: 40px; font-weight: 600;
     box-shadow: var(--shadow-sm);
     border: 1px solid var(--border-light);
-    transition: var(--transition);
 }
-.user-badge:hover { box-shadow: var(--shadow-md); transform: translateY(-1px); }
 .user-badge i {
-    font-size: 1.5rem;
-    color: var(--primary);
-    background: var(--surface-2);
-    width: 38px; height: 38px;
-    border-radius: 50%;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+    font-size: 1.5rem; color: var(--primary);
+    background: var(--surface-2); width: 38px; height: 38px;
+    border-radius: 50%; display: inline-flex;
+    align-items: center; justify-content: center;
 }
 .user-badge .user-info { display: flex; flex-direction: column; line-height: 1.2; }
 .user-badge .user-info .uname { font-size: 0.9rem; color: var(--text); font-weight: 700; }
 .user-badge .user-info .umasjid { font-size: 0.72rem; color: var(--text-muted); font-weight: 500; }
 .user-badge .role {
-    background: var(--primary-gradient);
-    color: #fff;
-    font-size: 0.65rem;
-    padding: 3px 9px;
-    border-radius: 40px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    font-weight: 700;
+    background: var(--primary-gradient); color: #fff;
+    font-size: 0.65rem; padding: 3px 9px; border-radius: 40px;
+    text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700;
 }
-.user-badge .role.admin {
-    background: var(--gold-gradient);
-    box-shadow: 0 3px 10px rgba(245,158,11,0.3);
-}
+.user-badge .role.admin { background: var(--gold-gradient); }
 
-/* Tabs */
+/* TABS */
 .tabs {
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
+    display: flex; gap: 6px; flex-wrap: wrap;
     background: var(--surface-glass);
     backdrop-filter: blur(24px) saturate(180%);
-    -webkit-backdrop-filter: blur(24px) saturate(180%);
-    padding: 8px;
-    border-radius: var(--radius-xl);
+    padding: 8px; border-radius: var(--radius-xl);
     box-shadow: var(--shadow-md);
     border: 1px solid rgba(255, 255, 255, 0.9);
 }
 .tab {
-    padding: 13px 24px;
-    border-radius: var(--radius-md);
-    font-weight: 700;
-    color: var(--text-muted);
-    background: transparent;
-    font-size: 0.9rem;
+    padding: 13px 24px; border-radius: var(--radius-md);
+    font-weight: 700; color: var(--text-muted);
+    background: transparent; font-size: 0.9rem;
     transition: var(--transition);
 }
 .tab i { margin-right: 8px; font-size: 1rem; }
 .tab:hover { background: var(--surface); color: var(--primary); transform: translateY(-2px); }
 .tab.active {
-    background: var(--primary-gradient);
-    color: #fff;
-    box-shadow: var(--shadow-glow);
-    transform: translateY(-2px);
+    background: var(--primary-gradient); color: #fff;
+    box-shadow: var(--shadow-glow); transform: translateY(-2px);
 }
 
-/* Views */
 .view { display: none; animation: fadeUp 0.4s cubic-bezier(0.22, 1, 0.36, 1); }
 .view.active { display: block; }
 @keyframes fadeUp {
@@ -419,116 +279,45 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
 .panel {
     background: var(--surface-glass);
     backdrop-filter: blur(24px) saturate(180%);
-    -webkit-backdrop-filter: blur(24px) saturate(180%);
     border-radius: var(--radius-xl);
     box-shadow: var(--shadow-md);
-    padding: 24px;
-    border: 1px solid rgba(255, 255, 255, 0.9);
-    position: relative;
-    overflow: hidden;
+    padding: 24px; border: 1px solid rgba(255, 255, 255, 0.9);
 }
 .panel-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
-    gap: 12px;
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 20px; flex-wrap: wrap; gap: 12px;
 }
 .panel-header h2 {
-    font-size: 1.25rem;
-    font-weight: 800;
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    font-size: 1.25rem; font-weight: 800;
+    display: flex; align-items: center; gap: 10px;
 }
 .panel-header h2 i {
-    width: 38px; height: 38px;
-    border-radius: 12px;
-    background: var(--primary-gradient);
-    color: #fff;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1rem;
-    box-shadow: var(--shadow-glow);
+    width: 38px; height: 38px; border-radius: 12px;
+    background: var(--primary-gradient); color: #fff;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 1rem; box-shadow: var(--shadow-glow);
 }
 
-.section-list {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    max-height: 580px;
-    overflow-y: auto;
-    padding-right: 6px;
-}
+.section-list { display: flex; flex-direction: column; gap: 10px; max-height: 580px; overflow-y: auto; padding-right: 6px; }
 .section-item {
-    background: var(--surface);
-    border-radius: var(--radius-md);
-    padding: 15px 18px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    transition: var(--transition);
-    border: 1.5px solid var(--border-light);
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
+    background: var(--surface); border-radius: var(--radius-md);
+    padding: 15px 18px; display: flex; align-items: center;
+    justify-content: space-between; transition: var(--transition);
+    border: 1.5px solid var(--border-light); cursor: pointer;
 }
-.section-item::before {
-    content: '';
-    position: absolute;
-    left: 0; top: 0; bottom: 0;
-    width: 4px;
-    background: var(--primary-gradient);
-    transform: scaleY(0);
-    transition: transform 0.3s;
-    border-radius: 0 4px 4px 0;
-}
-.section-item:hover {
-    background: var(--surface-2);
-    border-color: var(--primary-light);
-    transform: translateX(6px);
-    box-shadow: var(--shadow-sm);
-}
-.section-item:hover::before { transform: scaleY(1); }
-.section-item.active {
-    background: var(--primary-gradient);
-    color: #fff;
-    border-color: transparent;
-    box-shadow: var(--shadow-glow);
-}
-.section-item.active::before { transform: scaleY(0); }
+.section-item:hover { background: var(--surface-2); border-color: var(--primary-light); transform: translateX(6px); box-shadow: var(--shadow-sm); }
+.section-item.active { background: var(--primary-gradient); color: #fff; border-color: transparent; box-shadow: var(--shadow-glow); }
 .section-item.active .section-actions i { color: rgba(255,255,255,0.9); }
-.section-item.active .badge {
-    background: rgba(255,255,255,0.25);
-    color: #fff;
-    border-color: rgba(255,255,255,0.3);
-}
+.section-item.active .badge { background: rgba(255,255,255,0.25); color: #fff; border-color: rgba(255,255,255,0.3); }
 .section-info { display: flex; align-items: center; gap: 14px; flex: 1; min-width: 0; }
 .section-info > i {
-    font-size: 1.05rem;
-    width: 36px; height: 36px;
-    border-radius: 10px;
-    background: var(--surface-2);
-    color: var(--primary);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    transition: var(--transition);
+    font-size: 1.05rem; width: 36px; height: 36px;
+    border-radius: 10px; background: var(--surface-2);
+    color: var(--primary); display: inline-flex;
+    align-items: center; justify-content: center; flex-shrink: 0;
 }
-.section-item.active .section-info > i {
-    background: rgba(255,255,255,0.2);
-    color: #fff;
-}
-.section-info span {
-    font-weight: 600;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    font-size: 0.9rem;
-}
+.section-item.active .section-info > i { background: rgba(255,255,255,0.2); color: #fff; }
+.section-info span { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 0.9rem; }
 .section-actions { display: flex; gap: 6px; align-items: center; flex-shrink: 0; }
 .section-actions button {
     width: 34px; height: 34px; border-radius: 10px;
@@ -537,240 +326,138 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
 .section-actions button:hover { background: var(--danger); color: #fff; transform: scale(1.1); }
 
 .folder-bar {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    align-items: center;
-    background: var(--surface-2);
-    padding: 12px 16px;
-    border-radius: var(--radius-md);
-    margin-bottom: 16px;
+    display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+    background: var(--surface-2); padding: 12px 16px;
+    border-radius: var(--radius-md); margin-bottom: 16px;
     border: 1px solid var(--border-light);
 }
 .folder-chip {
-    background: var(--surface);
-    padding: 8px 14px;
-    border-radius: 40px;
-    font-size: 0.82rem;
-    font-weight: 600;
-    cursor: pointer;
-    border: 1.5px solid var(--border-light);
-    transition: var(--transition);
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    color: var(--text-muted);
+    background: var(--surface); padding: 8px 14px;
+    border-radius: 40px; font-size: 0.82rem; font-weight: 600;
+    cursor: pointer; border: 1.5px solid var(--border-light);
+    transition: var(--transition); display: inline-flex;
+    align-items: center; gap: 6px; color: var(--text-muted);
 }
-.folder-chip:hover {
-    border-color: var(--primary); color: var(--primary);
-    transform: translateY(-2px); box-shadow: var(--shadow-sm);
-}
-.folder-chip.active {
-    background: var(--primary-gradient);
-    color: #fff;
-    border-color: transparent;
-    box-shadow: var(--shadow-glow);
-}
+.folder-chip:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); }
+.folder-chip.active { background: var(--primary-gradient); color: #fff; border-color: transparent; box-shadow: var(--shadow-glow); }
 
 .date-filter {
-    background: var(--surface-2);
-    border-radius: var(--radius-md);
-    padding: 16px;
-    margin-bottom: 18px;
+    background: var(--surface-2); border-radius: var(--radius-md);
+    padding: 16px; margin-bottom: 18px;
     border: 1.5px solid var(--border-light);
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    align-items: flex-end;
+    display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-end;
 }
-.date-filter .df-group {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    min-width: 100px;
-    flex: 1;
-}
+.date-filter .df-group { display: flex; flex-direction: column; gap: 6px; min-width: 100px; flex: 1; }
 .date-filter label {
-    font-size: 0.72rem;
-    font-weight: 700;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    font-size: 0.72rem; font-weight: 700;
+    color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
 }
 .date-filter select, .date-filter input {
-    padding: 11px 14px;
-    border-radius: 12px;
-    border: 1.5px solid var(--border);
-    background: var(--surface);
-    font-size: 0.9rem;
-    font-family: inherit;
-    font-weight: 600;
-    outline: none;
-    transition: var(--transition);
-    color: var(--text);
-    cursor: pointer;
+    padding: 11px 14px; border-radius: 12px;
+    border: 1.5px solid var(--border); background: var(--surface);
+    font-size: 0.9rem; font-family: inherit;
+    font-weight: 600; outline: none; transition: var(--transition);
+    color: var(--text); cursor: pointer;
 }
 .date-filter select:focus, .date-filter input:focus {
     border-color: var(--primary);
     box-shadow: 0 0 0 4px rgba(30,60,114,0.1);
 }
-.date-filter .df-actions {
-    display: flex;
-    gap: 8px;
-    flex-shrink: 0;
-}
+.date-filter .df-actions { display: flex; gap: 8px; flex-shrink: 0; }
 
 .upload-area {
-    background: linear-gradient(135deg, var(--surface-2) 0%, #e8eef9 100%);
-    border: 2px dashed #c7d2e8;
-    border-radius: var(--radius-md);
-    padding: 28px 18px;
-    text-align: center;
+    background: linear-gradient(135deg, #e8f0fe 0%, #dce6f7 100%);
+    border: 2.5px dashed #8aa8d9;
+    border-radius: var(--radius-lg);
+    padding: 32px 20px; text-align: center;
     transition: var(--transition);
-    margin-bottom: 20px;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    position: relative;
-    overflow: hidden;
+    margin-bottom: 18px; cursor: pointer;
+    display: flex; flex-direction: column;
+    align-items: center; gap: 12px;
 }
-.upload-area i {
-    font-size: 2.6rem;
-    color: var(--primary-light);
-    opacity: 0.8;
-    transition: var(--transition);
-    z-index: 1;
+.upload-area i.upload-icon {
+    font-size: 3.2rem; color: var(--primary);
+    opacity: 0.85; transition: var(--transition); z-index: 1;
 }
-.upload-area p { font-weight: 700; color: var(--text); z-index: 1; font-size: 0.95rem; }
-.upload-area small { color: var(--text-muted); font-size: 0.82rem; z-index: 1; }
+.upload-area h3 {
+    font-weight: 800; color: var(--primary);
+    font-size: 1.15rem; letter-spacing: -0.02em; z-index: 1;
+}
+.upload-area p { font-weight: 600; color: var(--text-muted); font-size: 0.9rem; z-index: 1; }
+.upload-area small { color: var(--text-muted); font-size: 0.8rem; z-index: 1; }
 .upload-area:hover {
     border-color: var(--primary);
-    background: linear-gradient(135deg, #e8eef9 0%, #dce6f7 100%);
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-md);
+    background: linear-gradient(135deg, #dce6f7 0%, #c7d8ee 100%);
+    transform: translateY(-3px); box-shadow: var(--shadow-md);
 }
-.upload-area:hover i { transform: translateY(-5px) scale(1.1); color: var(--primary); }
-.upload-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 18px; }
+.upload-area:hover i.upload-icon { transform: translateY(-6px) scale(1.12); }
 
-.report-list {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    flex: 1;
-    overflow-y: auto;
-    max-height: 420px;
-    padding-right: 6px;
-}
+.upload-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 22px; }
+.upload-actions button { padding: 16px 18px; font-size: 0.95rem; font-weight: 700; border-radius: var(--radius-md); }
+.upload-actions .btn-outline { border: 2px solid var(--primary); color: var(--primary); }
+.upload-actions .btn-outline:hover { background: var(--primary); color: #fff; }
+
+.report-list { display: flex; flex-direction: column; gap: 10px; overflow-y: auto; max-height: 480px; padding-right: 6px; }
 .report-item {
-    background: var(--surface);
-    border-radius: var(--radius-md);
-    padding: 14px 18px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    animation: fadeUp 0.3s ease;
+    background: var(--surface); border-radius: var(--radius-md);
+    padding: 14px 18px; display: flex; align-items: center;
+    justify-content: space-between; animation: fadeUp 0.3s ease;
     border: 1.5px solid var(--border-light);
-    transition: var(--transition);
-    gap: 10px;
-    cursor: pointer;
+    transition: var(--transition); gap: 10px; cursor: pointer;
 }
-.report-item:hover {
-    border-color: var(--primary-light);
-    box-shadow: var(--shadow-sm);
-    transform: translateY(-2px);
-}
+.report-item:hover { border-color: var(--primary-light); box-shadow: var(--shadow-sm); transform: translateY(-2px); }
 .report-info { display: flex; align-items: center; gap: 14px; flex: 1; min-width: 0; }
 .report-info > i {
-    font-size: 1.3rem;
-    width: 40px; height: 40px;
-    border-radius: 12px;
-    background: var(--surface-2);
-    color: var(--primary);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
+    font-size: 1.3rem; width: 40px; height: 40px;
+    border-radius: 12px; background: var(--surface-2);
+    color: var(--primary); display: inline-flex;
+    align-items: center; justify-content: center; flex-shrink: 0;
 }
-.report-info .file-name {
-    font-weight: 700;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    font-size: 0.92rem;
-}
-.report-info .meta {
-    font-size: 0.75rem;
-    color: var(--text-muted);
-    margin-top: 2px;
-    font-weight: 500;
-}
+.report-info .file-name { font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 0.92rem; }
+.report-info .meta { font-size: 0.75rem; color: var(--text-muted); margin-top: 2px; font-weight: 500; }
 .report-actions { display: flex; gap: 6px; flex-shrink: 0; }
 .report-actions button {
     width: 36px; height: 36px; border-radius: 10px;
     background: var(--surface-2); color: var(--text-muted);
-    font-size: 0.85rem; transition: var(--transition-fast);
+    font-size: 0.85rem;
 }
 .report-actions button:hover { background: var(--primary); color: #fff; transform: scale(1.1); }
 .report-actions button.del:hover { background: var(--danger); }
 
 .empty-state {
-    text-align: center;
-    padding: 40px 20px;
-    color: var(--text-muted);
-    font-size: 0.95rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 14px;
-    font-weight: 500;
+    text-align: center; padding: 40px 20px;
+    color: var(--text-muted); font-size: 0.95rem;
+    display: flex; flex-direction: column; align-items: center;
+    gap: 14px; font-weight: 500;
 }
 .empty-state i {
-    font-size: 3.4rem;
-    opacity: 0.25;
+    font-size: 3.4rem; opacity: 0.25;
     background: var(--primary-gradient);
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
     background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
 }
 
-.stat-row {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 16px;
-    margin-bottom: 20px;
-}
+.stat-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 20px; }
 .stat-card {
     background: var(--surface-glass);
     backdrop-filter: blur(24px) saturate(180%);
-    -webkit-backdrop-filter: blur(24px) saturate(180%);
     border-radius: var(--radius-lg);
-    padding: 22px;
-    box-shadow: var(--shadow-sm);
+    padding: 22px; box-shadow: var(--shadow-sm);
     border: 1px solid rgba(255, 255, 255, 0.9);
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+    display: flex; flex-direction: column; gap: 8px;
     transition: var(--transition);
-    position: relative;
-    overflow: hidden;
 }
 .stat-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
 .stat-card i {
-    font-size: 1.3rem;
-    width: 42px; height: 42px;
-    border-radius: 12px;
-    background: var(--surface-2);
-    color: var(--primary);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 6px;
-    z-index: 1;
+    font-size: 1.3rem; width: 42px; height: 42px;
+    border-radius: 12px; background: var(--surface-2);
+    color: var(--primary); display: inline-flex;
+    align-items: center; justify-content: center; margin-bottom: 6px;
 }
-.stat-card .val { font-size: 2rem; font-weight: 800; letter-spacing: -0.03em; line-height: 1; z-index: 1; }
-.stat-card .lbl { font-size: 0.82rem; color: var(--text-muted); font-weight: 600; z-index: 1; }
+.stat-card .val { font-size: 2rem; font-weight: 800; letter-spacing: -0.03em; line-height: 1; }
+.stat-card .lbl { font-size: 0.82rem; color: var(--text-muted); font-weight: 600; }
 .stat-card.success i { background: var(--accent-soft); color: var(--accent); }
 .stat-card.success .val { color: var(--accent); }
 .stat-card.danger i { background: #fdecea; color: var(--danger); }
@@ -778,401 +465,200 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
 .stat-card.warning i { background: #fef5e7; color: var(--warning); }
 .stat-card.warning .val { color: var(--warning); }
 
-.staff-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 16px;
-}
+.staff-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
 .staff-card {
-    background: var(--surface);
-    border-radius: var(--radius-md);
-    padding: 18px;
-    border: 1.5px solid var(--border-light);
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+    background: var(--surface); border-radius: var(--radius-md);
+    padding: 18px; border: 1.5px solid var(--border-light);
+    display: flex; flex-direction: column; gap: 12px;
     transition: var(--transition);
-    animation: fadeUp 0.3s ease;
-    position: relative;
-    overflow: hidden;
-}
-.staff-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 4px;
-    background: var(--primary-gradient);
-    transform: scaleX(0);
-    transition: transform 0.3s;
-    transform-origin: left;
 }
 .staff-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--primary-light); }
-.staff-card:hover::before { transform: scaleX(1); }
 .staff-head { display: flex; align-items: center; gap: 12px; }
 .staff-avatar {
-    width: 52px; height: 52px;
-    border-radius: 16px;
-    background: var(--primary-gradient);
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 800;
-    font-size: 1.15rem;
-    box-shadow: var(--shadow-glow);
-    flex-shrink: 0;
+    width: 52px; height: 52px; border-radius: 16px;
+    background: var(--primary-gradient); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 1.15rem;
+    box-shadow: var(--shadow-glow); flex-shrink: 0;
 }
 .staff-head .name { font-weight: 700; font-size: 1rem; }
 .staff-head .masjid { font-size: 0.78rem; color: var(--text-muted); font-weight: 500; }
 .staff-meta {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    font-size: 0.83rem;
-    color: var(--text-muted);
-    border-top: 1px dashed var(--border);
-    padding-top: 12px;
-    font-weight: 500;
+    display: flex; flex-direction: column; gap: 6px;
+    font-size: 0.83rem; color: var(--text-muted);
+    border-top: 1px dashed var(--border); padding-top: 12px; font-weight: 500;
 }
-.staff-meta span i { width: 20px; color: var(--primary); margin-right: 6px; text-align: center; }
+.staff-meta span i { width: 20px; color: var(--primary); margin-right: 6px; }
 .staff-actions { display: flex; gap: 8px; margin-top: 6px; }
 .staff-actions button { flex: 1; padding: 9px 14px; font-size: 0.82rem; }
 
-.masjid-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-    gap: 18px;
-}
+.masjid-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 18px; }
 .masjid-card {
-    background: var(--surface);
-    border-radius: var(--radius-lg);
-    padding: 20px;
-    border: 1.5px solid var(--border-light);
-    transition: var(--transition);
-    animation: fadeUp 0.3s ease;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
+    background: var(--surface); border-radius: var(--radius-lg);
+    padding: 20px; border: 1.5px solid var(--border-light);
+    transition: var(--transition); cursor: pointer;
 }
-.masjid-card:hover {
-    box-shadow: var(--shadow-lg);
-    border-color: var(--primary-light);
-    transform: translateY(-5px);
-}
+.masjid-card:hover { box-shadow: var(--shadow-lg); border-color: var(--primary-light); transform: translateY(-5px); }
 .masjid-head {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding-bottom: 14px;
-    border-bottom: 1px solid var(--border-light);
+    display: flex; align-items: center; gap: 14px;
+    padding-bottom: 14px; border-bottom: 1px solid var(--border-light);
     margin-bottom: 14px;
 }
 .masjid-icon {
-    width: 56px; height: 56px;
-    border-radius: 18px;
-    background: var(--primary-gradient);
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-    box-shadow: var(--shadow-glow);
-    flex-shrink: 0;
+    width: 56px; height: 56px; border-radius: 18px;
+    background: var(--primary-gradient); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem; box-shadow: var(--shadow-glow); flex-shrink: 0;
 }
-.masjid-head .m-name { font-weight: 800; font-size: 1.1rem; letter-spacing: -0.02em; }
+.masjid-head .m-name { font-weight: 800; font-size: 1.1rem; }
 .masjid-head .m-addr { font-size: 0.8rem; color: var(--text-muted); font-weight: 500; }
 .masjid-staff-list { display: flex; flex-direction: column; gap: 8px; }
 .masjid-staff-item {
-    background: var(--surface-2);
-    padding: 11px 14px;
-    border-radius: 12px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 0.85rem;
+    background: var(--surface-2); padding: 11px 14px;
+    border-radius: 12px; display: flex; justify-content: space-between;
+    align-items: center; font-size: 0.85rem;
     border: 1px solid var(--border-light);
-    transition: var(--transition-fast);
 }
-.masjid-staff-item:hover { background: var(--surface); border-color: var(--primary-light); }
 .masjid-staff-item .info { display: flex; flex-direction: column; }
 .masjid-staff-item .info b { font-size: 0.9rem; font-weight: 700; }
 .masjid-staff-item .info span { color: var(--text-muted); font-size: 0.75rem; font-weight: 500; }
 .masjid-staff-item .reports-count {
-    background: var(--accent-soft);
-    color: var(--accent);
-    padding: 4px 11px;
-    border-radius: 40px;
-    font-weight: 700;
-    font-size: 0.75rem;
+    background: var(--accent-soft); color: var(--accent);
+    padding: 4px 11px; border-radius: 40px; font-weight: 700; font-size: 0.75rem;
 }
 
 .masjid-detail-header {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    padding: 22px 24px;
-    background: var(--primary-gradient);
-    color: #fff;
-    border-radius: var(--radius-lg);
-    margin-bottom: 22px;
-    box-shadow: var(--shadow-glow);
+    display: flex; align-items: center; gap: 16px;
+    padding: 22px 24px; background: var(--primary-gradient);
+    color: #fff; border-radius: var(--radius-lg);
+    margin-bottom: 22px; box-shadow: var(--shadow-glow);
     flex-wrap: wrap;
-    position: relative;
-    overflow: hidden;
-}
-.masjid-detail-header::before {
-    content: '';
-    position: absolute;
-    top: -50%; right: -10%;
-    width: 300px; height: 300px;
-    background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
-    pointer-events: none;
 }
 .masjid-detail-header .m-icon-lg {
-    width: 68px; height: 68px;
-    border-radius: 20px;
+    width: 68px; height: 68px; border-radius: 20px;
     background: rgba(255,255,255,0.18);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2rem;
-    backdrop-filter: blur(10px);
-    flex-shrink: 0;
-    z-index: 1;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2rem; backdrop-filter: blur(10px); flex-shrink: 0;
 }
-.masjid-detail-header h2 { font-size: 1.5rem; font-weight: 800; letter-spacing: -0.02em; z-index: 1; }
-.masjid-detail-header .sub { font-size: 0.85rem; opacity: 0.9; z-index: 1; font-weight: 500; }
+.masjid-detail-header h2 { font-size: 1.5rem; font-weight: 800; }
+.masjid-detail-header .sub { font-size: 0.85rem; opacity: 0.9; font-weight: 500; }
 
-.section-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
-    gap: 14px;
-}
+.section-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 14px; }
 .section-box {
-    background: var(--surface);
-    border-radius: var(--radius-md);
-    padding: 18px;
-    border: 1.5px solid var(--border-light);
-    transition: var(--transition);
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    animation: fadeUp 0.3s ease;
-    position: relative;
-    overflow: hidden;
-}
-.section-box::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
-    background: var(--primary-gradient);
-    transform: scaleX(0);
-    transition: transform 0.3s;
-    transform-origin: left;
+    background: var(--surface); border-radius: var(--radius-md);
+    padding: 18px; border: 1.5px solid var(--border-light);
+    transition: var(--transition); cursor: pointer;
+    display: flex; flex-direction: column; gap: 12px;
 }
 .section-box:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--primary-light); }
-.section-box:hover::before { transform: scaleX(1); }
 .section-box .sb-head { display: flex; align-items: center; gap: 12px; }
 .section-box .sb-icon {
-    width: 44px; height: 44px;
-    border-radius: 12px;
-    background: var(--primary-gradient);
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.1rem;
-    flex-shrink: 0;
-    box-shadow: var(--shadow-glow);
+    width: 44px; height: 44px; border-radius: 12px;
+    background: var(--primary-gradient); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem; flex-shrink: 0; box-shadow: var(--shadow-glow);
 }
 .section-box .sb-title {
-    font-weight: 700;
-    font-size: 0.88rem;
-    line-height: 1.3;
+    font-weight: 700; font-size: 0.88rem; line-height: 1.3;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+    -webkit-box-orient: vertical; overflow: hidden;
 }
 .section-box .sb-stats {
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-    margin-top: auto;
-    padding-top: 10px;
-    border-top: 1px dashed var(--border);
+    display: flex; gap: 6px; flex-wrap: wrap;
+    margin-top: auto; padding-top: 10px; border-top: 1px dashed var(--border);
 }
 
 .modal {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background: rgba(15, 23, 42, 0.6);
     backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 2000;
-    padding: 20px;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s ease;
+    display: flex; align-items: center; justify-content: center;
+    z-index: 2000; padding: 20px;
+    opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
 }
 .modal.show { opacity: 1; pointer-events: auto; }
 .modal-content {
-    background: var(--surface);
-    border-radius: var(--radius-lg);
-    max-width: 580px;
-    width: 100%;
-    max-height: 92vh;
-    overflow: auto;
-    padding: 28px;
-    box-shadow: var(--shadow-lg);
+    background: var(--surface); border-radius: var(--radius-lg);
+    max-width: 580px; width: 100%; max-height: 92vh; overflow: auto;
+    padding: 28px; box-shadow: var(--shadow-lg);
     transform: scale(0.92) translateY(20px);
     transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
     border: 1px solid rgba(255,255,255,0.9);
-    position: relative;
 }
 .modal-content.modal-lg { max-width: 1100px; width: 95%; }
 .modal-content.modal-xl { max-width: 1400px; width: 96%; }
 .modal.show .modal-content { transform: scale(1) translateY(0); }
 .modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    gap: 12px;
-    position: sticky;
-    top: 0;
-    background: var(--surface);
-    padding-bottom: 14px;
-    border-bottom: 1px solid var(--border-light);
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 20px; gap: 12px;
+    position: sticky; top: 0; background: var(--surface);
+    padding-bottom: 14px; border-bottom: 1px solid var(--border-light);
     z-index: 10;
 }
-.modal-header h3 {
-    font-size: 1.2rem;
-    font-weight: 800;
-    letter-spacing: -0.02em;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    flex: 1;
-    min-width: 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
+.modal-header h3 { font-size: 1.2rem; font-weight: 800; display: flex; align-items: center; gap: 10px; flex: 1; }
 .modal-close-btn {
-    width: 42px; height: 42px;
-    padding: 0;
-    border-radius: 50%;
-    background: var(--surface-2);
-    color: var(--text-muted);
-    font-size: 1.1rem;
-    flex-shrink: 0;
-    transition: var(--transition);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    border: 1px solid var(--border-light);
+    width: 42px; height: 42px; padding: 0;
+    border-radius: 50%; background: var(--surface-2);
+    color: var(--text-muted); font-size: 1.1rem;
+    flex-shrink: 0; transition: var(--transition);
+    display: inline-flex; align-items: center; justify-content: center;
+    cursor: pointer; border: 1px solid var(--border-light);
 }
 .modal-close-btn:hover {
-    background: var(--danger);
-    color: #fff;
+    background: var(--danger); color: #fff;
     transform: rotate(90deg) scale(1.05);
     border-color: var(--danger);
 }
-.modal-body img {
-    max-width: 100%;
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-md);
-    display: block;
-    margin: 0 auto;
-}
 .preview-container {
-    width: 100%;
-    height: 75vh;
-    background: var(--surface-2);
-    border-radius: var(--radius-md);
-    overflow: hidden;
+    width: 100%; height: 75vh; background: var(--surface-2);
+    border-radius: var(--radius-md); overflow: hidden;
     border: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: flex; align-items: center; justify-content: center;
 }
-.preview-container iframe,
-.preview-container embed,
-.preview-container object {
-    width: 100%; height: 100%;
-    border: none; display: block;
+.preview-container iframe, .preview-container embed, .preview-container object {
+    width: 100%; height: 100%; border: none; display: block;
 }
 .preview-container img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-    border-radius: 0;
-    box-shadow: none;
-    margin: 0;
+    max-width: 100%; max-height: 100%;
+    object-fit: contain; border-radius: 0;
 }
 .preview-fallback {
-    text-align: center;
-    padding: 40px 20px;
+    text-align: center; padding: 40px 20px;
     color: var(--text-muted);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
-    font-size: 0.95rem;
+    display: flex; flex-direction: column;
+    align-items: center; gap: 16px; font-size: 0.95rem;
 }
 .preview-fallback i { font-size: 4rem; color: var(--primary); opacity: 0.4; }
 
 .form-group { margin-bottom: 16px; }
 .form-group label {
-    display: block;
-    font-weight: 700;
-    font-size: 0.82rem;
-    color: var(--text-muted);
-    margin-bottom: 8px;
-    text-transform: uppercase;
-    letter-spacing: 0.4px;
+    display: block; font-weight: 700; font-size: 0.82rem;
+    color: var(--text-muted); margin-bottom: 8px;
+    text-transform: uppercase; letter-spacing: 0.4px;
 }
 .form-group input, .form-group select {
-    width: 100%;
-    padding: 14px 18px;
+    width: 100%; padding: 14px 18px;
     border-radius: var(--radius-sm);
     border: 1.5px solid var(--border);
-    background: var(--surface);
-    font-size: 0.95rem;
-    outline: none;
-    transition: var(--transition);
-    font-family: inherit;
-    font-weight: 500;
-    color: var(--text);
+    background: var(--surface); font-size: 0.95rem;
+    outline: none; transition: var(--transition);
+    font-family: inherit; font-weight: 500; color: var(--text);
 }
 .form-group input:focus, .form-group select:focus {
     border-color: var(--primary);
     box-shadow: 0 0 0 4px rgba(30,60,114,0.1);
-    transform: translateY(-1px);
 }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 .form-actions { display: flex; gap: 12px; justify-content: flex-end; margin-top: 24px; flex-wrap: wrap; }
 
 .badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    padding: 5px 12px;
-    border-radius: 40px;
-    font-size: 0.72rem;
-    font-weight: 700;
-    background: var(--surface-2);
-    color: var(--text-muted);
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 5px 12px; border-radius: 40px;
+    font-size: 0.72rem; font-weight: 700;
+    background: var(--surface-2); color: var(--text-muted);
     border: 1px solid var(--border-light);
-    letter-spacing: 0.2px;
 }
 .badge.success { background: var(--accent-soft); color: var(--accent); border-color: rgba(15,157,88,0.2); }
 .badge.danger { background: #fdecea; color: var(--danger); border-color: rgba(239,68,68,0.2); }
@@ -1191,19 +677,11 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
     .tabs { overflow-x: auto; flex-wrap: nowrap; padding: 6px; }
     .tab { white-space: nowrap; padding: 11px 16px; font-size: 0.85rem; }
     .panel { padding: 18px; border-radius: var(--radius-lg); }
-    .user-badge { padding: 6px 14px 6px 8px; }
-    .user-badge i { width: 34px; height: 34px; font-size: 1.3rem; }
-    .user-badge .user-info .uname { font-size: 0.82rem; }
+    .upload-actions { grid-template-columns: 1fr; }
     .login-card { padding: 32px 22px; }
     .date-filter .df-group { min-width: 80px; }
-    .modal-content.modal-lg, .modal-content.modal-xl { width: 100%; padding: 18px; }
     .preview-container { height: 60vh; }
 }
-
-::-webkit-scrollbar { width: 8px; height: 8px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: #c7d2e8; border-radius: 10px; }
-::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
 </style>
 </head>
 <body>
@@ -1213,7 +691,6 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
     <p id="loadingText">Yuklanmoqda...</p>
 </div>
 
-<!-- LOGIN SCREEN -->
 <div class="login-screen" id="loginScreen">
     <div class="login-card">
         <div class="login-logo">
@@ -1282,6 +759,19 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
                     <span id="sectionBadge" class="badge"></span>
                 </div>
 
+                <div class="upload-area" id="uploadArea">
+                    <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                    <h3>Hisobot yuklash</h3>
+                    <p>Faylni bu yerga tashlang yoki bosing</p>
+                    <small>PDF, Word, Excel, Rasm — fayldan yoki kameradan</small>
+                </div>
+                <div class="upload-actions">
+                    <button class="btn-primary" id="uploadBtn"><i class="fas fa-folder-open"></i> Fayldan yuklash</button>
+                    <button class="btn-outline" id="cameraBtn"><i class="fas fa-camera"></i> Kameradan olish</button>
+                </div>
+                <input type="file" id="fileInput" multiple accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png,.gif,.webp" style="display:none;">
+                <input type="file" id="cameraInput" accept="image/*" capture="environment" style="display:none;">
+
                 <div class="date-filter" id="dateFilter">
                     <div class="df-group"><label>Yil</label><select id="dfYear"></select></div>
                     <div class="df-group"><label>Oy</label><select id="dfMonth"></select></div>
@@ -1297,18 +787,6 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
                     <button class="folder-chip" data-folder="new"><i class="fas fa-folder-plus"></i> Yangi papka</button>
                     <span id="folderList" style="display:flex; gap:6px; flex-wrap:wrap;"></span>
                 </div>
-
-                <div class="upload-area" id="uploadArea">
-                    <i class="fas fa-cloud-upload-alt"></i>
-                    <p>Hisobot yuklash uchun bosing yoki faylni tashlang</p>
-                    <small>PDF, Excel, Word, rasm (kamera orqali ham)</small>
-                </div>
-                <div class="upload-actions">
-                    <button class="btn-primary" id="uploadBtn"><i class="fas fa-upload"></i> Fayl yuklash</button>
-                    <button class="btn-outline" id="cameraBtn"><i class="fas fa-camera"></i> Kamera</button>
-                </div>
-                <input type="file" id="fileInput" multiple accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png,.gif" style="display:none;">
-                <input type="file" id="cameraInput" accept="image/*" capture="environment" style="display:none;">
 
                 <div class="report-list" id="reportList"></div>
             </main>
@@ -1330,7 +808,7 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
                     <i class="fas fa-arrow-left"></i>
                 </button>
                 <div class="m-icon-lg"><i class="fas fa-mosque"></i></div>
-                <div style="flex:1; min-width:0; z-index:1;">
+                <div style="flex:1; min-width:0;">
                     <h2 id="masjidDetailName">Masjid nomi</h2>
                     <div class="sub" id="masjidDetailSub">Manzil</div>
                 </div>
@@ -1389,7 +867,7 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
     <div class="modal-content modal-xl">
         <div class="modal-header">
             <h3 id="fvTitle"><i class="fas fa-file"></i> Fayl</h3>
-            <button class="modal-close-btn" onclick="closeFileViewer()" title="Yopish"><i class="fas fa-times"></i></button>
+            <button class="modal-close-btn" onclick="closeFileViewer()"><i class="fas fa-times"></i></button>
         </div>
         <div class="modal-body"><div id="fvBody"></div></div>
     </div>
@@ -1399,7 +877,7 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
     <div class="modal-content modal-lg">
         <div class="modal-header">
             <h3 id="msmTitle"><i class="fas fa-folder"></i> Bo'lim</h3>
-            <button class="modal-close-btn" onclick="closeMasjidSectionModal()" title="Yopish"><i class="fas fa-times"></i></button>
+            <button class="modal-close-btn" onclick="closeMasjidSectionModal()"><i class="fas fa-times"></i></button>
         </div>
         <div id="msmBody"></div>
     </div>
@@ -1438,7 +916,6 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
             <button class="modal-close-btn" onclick="closeMasjidModal()"><i class="fas fa-times"></i></button>
         </div>
         <form id="masjidForm" onsubmit="return false;">
-            <input type="hidden" id="masjidEditId">
             <div class="form-group"><label>Masjid nomi</label><input type="text" id="masjidName" required placeholder="Masjid nomi"></div>
             <div class="form-group"><label>Manzil (ixtiyoriy)</label><input type="text" id="masjidAddress" placeholder="Manzil"></div>
             <div class="form-actions">
@@ -1466,18 +943,72 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@aws-sdk/client-s3@3.489.0/dist-cjs/index.js"></script>
+
 <script>
 (function() {
     'use strict';
 
-    // ============== SUPABASE SOZLAMALARI ==============
+    // ============================================================
+    // ⚙️ SUPABASE (faqat ma'lumotlar bazasi)
+    // ============================================================
     const SUPABASE_URL = 'https://ctsalsacbxzluxaknvdh.supabase.co';
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN0c2Fsc2FjYnh6bHV4YWtudmRoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA3ODQyNjgsImV4cCI6MjEwNjM2MDI2OH0.nSpZEhXaSpX3P67iNc9xCcvp4i-JMnvstL6lafpOxcI';
-    const STORAGE_BUCKET = 'reports';
+
+    // ============================================================
+    // ☁️ CLOUDFLARE R2 (fayllar uchun — 10 GB bepul)
+    // ============================================================
+    const R2_CONFIG = {
+        endpoint: 'https://bba4354431f6c41a7e679ff1b92f3c63.r2.cloudflarestorage.com',
+        accessKeyId: 'ba2776e790ced3036de9a712f8e50bb5',
+        secretAccessKey: '8f5156f507b78ac9218cd35f34fdf3ed32160862670fe82f3a919265e39fe4bc',
+        bucket: 'mizan-pro-files',
+        region: 'auto',
+        publicUrl: 'https://pub-e7c2fa3e4e9c4dcaa8deb0263f3a833d.r2.dev'
+    };
+
+    // ============================================================
+    // ⛔ BUNDAN PASTINI O'ZGARTIRMANG
+    // ============================================================
 
     const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-    // ============== KONSTANTALAR ==============
+    const s3 = window.AWS_SDK_S3 || {};
+    const S3Client = s3.S3Client;
+    const PutObjectCommand = s3.PutObjectCommand;
+    const DeleteObjectCommand = s3.DeleteObjectCommand;
+
+    const s3Client = new S3Client({
+        region: R2_CONFIG.region,
+        endpoint: R2_CONFIG.endpoint,
+        credentials: {
+            accessKeyId: R2_CONFIG.accessKeyId,
+            secretAccessKey: R2_CONFIG.secretAccessKey,
+        },
+        forcePathStyle: false
+    });
+
+    async function r2Upload(file, filePath) {
+        const command = new PutObjectCommand({
+            Bucket: R2_CONFIG.bucket,
+            Key: filePath,
+            Body: file,
+            ContentType: file.type
+        });
+        await s3Client.send(command);
+        return `${R2_CONFIG.publicUrl}/${filePath}`;
+    }
+
+    async function r2Delete(filePath) {
+        try {
+            const command = new DeleteObjectCommand({
+                Bucket: R2_CONFIG.bucket,
+                Key: filePath
+            });
+            await s3Client.send(command);
+        } catch(e) { console.warn('R2 delete xato:', e); }
+    }
+
     const MONTHS = ['Yanvar','Fevral','Mart','Aprel','May','Iyun','Iyul','Avgust','Sentabr','Oktabr','Noyabr','Dekabr'];
 
     const DEFAULT_SECTIONS = [
@@ -1500,25 +1031,15 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         { id:'s17', name:'Обуна маълумотлари', icon:'fa-newspaper' }
     ];
 
-    // ============== STATE ==============
     let state = {
-        sections: [],
-        masjidlar: [],
-        staff: [],
-        reports: [],
-        folders: [],
-        currentUser: null,
-        currentSectionId: null,
-        currentFolder: 'all',
-        activeView: 'dashboard',
-        adminMasjidFilter: 'all',
-        adminSectionFilter: 'all',
+        sections: [], masjidlar: [], staff: [], reports: [], folders: [],
+        currentUser: null, currentSectionId: null, currentFolder: 'all',
+        activeView: 'dashboard', adminMasjidFilter: 'all', adminSectionFilter: 'all',
         selectedMasjidId: null,
         filter: { year: '', month: '', day: '' },
         masjidFilter: { year: '', month: '', day: '' }
     };
 
-    // ============== HELPERS ==============
     const $ = id => document.getElementById(id);
     const genId = () => Date.now().toString(36) + Math.random().toString(36).substr(2, 6);
     const todayStr = () => new Date().toISOString().slice(0,10);
@@ -1530,94 +1051,52 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         if (n.includes('pdf')) return 'fa-file-pdf';
         if (n.includes('word') || n.endsWith('.doc') || n.endsWith('.docx')) return 'fa-file-word';
         if (n.includes('excel') || n.endsWith('.xls') || n.endsWith('.xlsx')) return 'fa-file-excel';
-        if (n.includes('image') || /\.(jpg|jpeg|png|gif)$/i.test(n)) return 'fa-file-image';
+        if (n.includes('image') || /\.(jpg|jpeg|png|gif|webp)$/i.test(n)) return 'fa-file-image';
         return 'fa-file';
     }
-    const isImage = r => (r.file_type||'').startsWith('image/') || /\.(jpg|jpeg|png|gif)$/i.test(r.name);
+    const isImage = r => (r.file_type||'').startsWith('image/') || /\.(jpg|jpeg|png|gif|webp)$/i.test(r.name);
     const isPdf = r => (r.file_type||'').includes('pdf') || /\.pdf$/i.test(r.name);
     const isOffice = r => /\.(doc|docx|xls|xlsx)$/i.test(r.name) ||
-        (r.file_type||'').includes('word') ||
-        (r.file_type||'').includes('excel') ||
+        (r.file_type||'').includes('word') || (r.file_type||'').includes('excel') ||
         (r.file_type||'').includes('officedocument');
     const isAdmin = () => state.currentUser && state.currentUser.role === 'admin';
 
-    // Loading
-    function showLoading(text) {
-        $('loadingText').textContent = text || 'Yuklanmoqda...';
-        $('loadingOverlay').classList.add('show');
-    }
-    function hideLoading() {
-        $('loadingOverlay').classList.remove('show');
-    }
+    function showLoading(text) { $('loadingText').textContent = text || 'Yuklanmoqda...'; $('loadingOverlay').classList.add('show'); }
+    function hideLoading() { $('loadingOverlay').classList.remove('show'); }
 
-    // ============== SUPABASE: BARCHA MA'LUMOTLARNI YUKLASH ==============
     async function loadAllData() {
         try {
             showLoading('Ma\'lumotlar yuklanmoqda...');
-
-            // Bo'limlar
-            const { data: sections } = await supabase.from('sections').select('*');
-            state.sections = sections && sections.length ? sections : [...DEFAULT_SECTIONS];
-
-            // Masjidlar
-            const { data: masjidlar } = await supabase.from('masjidlar').select('*').order('created_at', { ascending: false });
-            state.masjidlar = masjidlar || [];
-
-            // Hodimlar
-            const { data: staff } = await supabase.from('staff').select('*').order('created_at', { ascending: false });
-            state.staff = staff || [];
-
-            // Hisobotlar
-            const { data: reports } = await supabase.from('reports').select('*').order('uploaded_at', { ascending: false });
-            state.reports = reports || [];
-
-            // Papkalar
-            const { data: folders } = await supabase.from('folders').select('*');
-            state.folders = folders || [];
-
+            const [sections, masjidlar, staff, reports, folders] = await Promise.all([
+                supabase.from('sections').select('*'),
+                supabase.from('masjidlar').select('*').order('created_at', { ascending: false }),
+                supabase.from('staff').select('*').order('created_at', { ascending: false }),
+                supabase.from('reports').select('*').order('uploaded_at', { ascending: false }),
+                supabase.from('folders').select('*')
+            ]);
+            state.sections = sections.data?.length ? sections.data : [...DEFAULT_SECTIONS];
+            state.masjidlar = masjidlar.data || [];
+            state.staff = staff.data || [];
+            state.reports = reports.data || [];
+            state.folders = folders.data || [];
             hideLoading();
-        } catch(e) {
-            console.error('Yuklashda xatolik:', e);
-            hideLoading();
-            alert('Ma\'lumotlarni yuklashda xatolik: ' + e.message);
-        }
+        } catch(e) { hideLoading(); alert('Ma\'lumotlarni yuklashda xatolik: ' + e.message); }
     }
 
-    // ============== AUTH ==============
     async function doLogin() {
         const login = $('loginInput').value.trim();
         const pass = $('passwordInput').value.trim();
         const err = $('loginError');
         err.classList.remove('show');
-
-        if (!login || !pass) {
-            err.textContent = 'Login va parolni kiriting';
-            err.classList.add('show');
-            return;
-        }
-
+        if (!login || !pass) { err.textContent = 'Login va parolni kiriting'; err.classList.add('show'); return; }
         showLoading('Kirish...');
-
         try {
-            // staff jadvalidan login/parol tekshirish
-            const { data, error } = await supabase
-                .from('staff')
-                .select('*')
-                .eq('login', login)
-                .eq('password', pass)
-                .maybeSingle();
-
+            const { data, error } = await supabase.from('staff').select('*')
+                .eq('login', login).eq('password', pass).maybeSingle();
             if (error) throw error;
-            if (!data) {
-                hideLoading();
-                err.textContent = 'Login yoki parol xato!';
-                err.classList.add('show');
-                return;
-            }
-
+            if (!data) { hideLoading(); err.textContent = 'Login yoki parol xato!'; err.classList.add('show'); return; }
             state.currentUser = data;
             await loadAllData();
-
             $('loginScreen').classList.add('hidden');
             $('app').style.display = 'flex';
             renderAll();
@@ -1625,7 +1104,6 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
             hideLoading();
         } catch(e) {
             hideLoading();
-            console.error(e);
             err.textContent = 'Xatolik: ' + e.message;
             err.classList.add('show');
         }
@@ -1635,17 +1113,12 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         state.currentUser = null;
         state.activeView = 'dashboard';
         state.selectedMasjidId = null;
-        state.reports = [];
-        state.masjidlar = [];
-        state.staff = [];
-        state.folders = [];
+        state.reports = []; state.masjidlar = []; state.staff = []; state.folders = [];
         $('loginScreen').classList.remove('hidden');
         $('app').style.display = 'none';
-        $('loginInput').value = '';
-        $('passwordInput').value = '';
+        $('loginInput').value = ''; $('passwordInput').value = '';
     }
 
-    // ============== USER AREA ==============
     function renderUserArea() {
         if (state.currentUser) {
             const isAdm = state.currentUser.role === 'admin';
@@ -1690,36 +1163,33 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         else if (view === 'admin') renderAdmin();
     }
 
-    // ============== DATE FILTERS ==============
     function initDateFilters() {
         const now = new Date();
-        const currentYear = now.getFullYear();
+        const cy = now.getFullYear();
         const years = [];
-        for (let y = currentYear; y >= currentYear - 5; y--) years.push(y);
+        for (let y = cy; y >= cy - 5; y--) years.push(y);
 
-        const buildYearOpts = (sel, val) => {
+        const buildYear = (sel, val) => {
             if (!sel) return;
             sel.innerHTML = `<option value="">Barcha yillar</option>` +
                 years.map(y => `<option value="${y}" ${val==y?'selected':''}>${y}</option>`).join('');
         };
-        const buildMonthOpts = (sel, val) => {
+        const buildMonth = (sel, val) => {
             if (!sel) return;
             sel.innerHTML = `<option value="">Barcha oylar</option>` +
                 MONTHS.map((m, i) => `<option value="${i+1}" ${val==i+1?'selected':''}>${m}</option>`).join('');
         };
-        const buildDayOpts = (sel, val) => {
+        const buildDay = (sel, val) => {
             if (!sel) return;
             sel.innerHTML = `<option value="">Barcha kunlar</option>` +
                 Array.from({length:31}, (_, i) => i+1).map(d => `<option value="${d}" ${val==d?'selected':''}>${d}</option>`).join('');
         };
-
-        buildYearOpts($('dfYear'), state.filter.year);
-        buildMonthOpts($('dfMonth'), state.filter.month);
-        buildDayOpts($('dfDay'), state.filter.day);
-
-        buildYearOpts($('dfYear2'), state.masjidFilter.year);
-        buildMonthOpts($('dfMonth2'), state.masjidFilter.month);
-        buildDayOpts($('dfDay2'), state.masjidFilter.day);
+        buildYear($('dfYear'), state.filter.year);
+        buildMonth($('dfMonth'), state.filter.month);
+        buildDay($('dfDay'), state.filter.day);
+        buildYear($('dfYear2'), state.masjidFilter.year);
+        buildMonth($('dfMonth2'), state.masjidFilter.month);
+        buildDay($('dfDay2'), state.masjidFilter.day);
     }
 
     function matchDateFilter(rep, filter) {
@@ -1732,7 +1202,6 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         return true;
     }
 
-    // ============== DASHBOARD ==============
     function renderDashboard() {
         if (!state.currentUser) return;
         if (!isAdmin()) {
@@ -1740,9 +1209,9 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
             const today = todayStr();
             const todayCount = myReports.filter(r => r.date === today).length;
             $('statRow').innerHTML = `
-                <div class="stat-card"><i class="fas fa-file-upload"></i><span class="val">${todayCount}</span><span class="lbl">Bugun yuklagan hisobotlarim</span></div>
+                <div class="stat-card"><i class="fas fa-file-upload"></i><span class="val">${todayCount}</span><span class="lbl">Bugun yuklagan</span></div>
                 <div class="stat-card success"><i class="fas fa-database"></i><span class="val">${myReports.length}</span><span class="lbl">Jami hisobotlarim</span></div>
-                <div class="stat-card warning"><i class="fas fa-mosque"></i><span class="val" style="font-size:1.1rem; line-height:1.4; padding-top:4px;">${escapeHtml(state.currentUser.masjid)}</span><span class="lbl">Biriktirilgan masjid</span></div>
+                <div class="stat-card warning"><i class="fas fa-mosque"></i><span class="val" style="font-size:1.1rem; line-height:1.4; padding-top:4px;">${escapeHtml(state.currentUser.masjid)}</span><span class="lbl">Masjid</span></div>
                 <div class="stat-card"><i class="fas fa-folder-tree"></i><span class="val">${state.sections.length}</span><span class="lbl">Bo'limlar</span></div>
             `;
             $('missingCount').textContent = '';
@@ -1766,11 +1235,8 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         const today = todayStr();
         let totalToday = 0;
         const setReport = new Set();
-        state.reports.forEach(r => {
-            if (r.date === today) { totalToday++; setReport.add(r.uploaded_by); }
-        });
+        state.reports.forEach(r => { if (r.date === today) { totalToday++; setReport.add(r.uploaded_by); } });
         const missing = allStaff.filter(s => !setReport.has(s.id));
-
         $('statRow').innerHTML = `
             <div class="stat-card"><i class="fas fa-users"></i><span class="val">${allStaff.length}</span><span class="lbl">Jami hodimlar</span></div>
             <div class="stat-card success"><i class="fas fa-file-upload"></i><span class="val">${totalToday}</span><span class="lbl">Bugun yuklangan</span></div>
@@ -1779,7 +1245,7 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         `;
         $('missingCount').textContent = missing.length + ' ta';
         if (!allStaff.length) {
-            $('missingList').innerHTML = `<div class="empty-state"><i class="fas fa-users"></i> Hozircha hodimlar yo'q. "Hodimlar" bo'limidan qo'shing.</div>`;
+            $('missingList').innerHTML = `<div class="empty-state"><i class="fas fa-users"></i> Hozircha hodimlar yo'q.</div>`;
         } else if (!missing.length) {
             $('missingList').innerHTML = `<div class="empty-state"><i class="fas fa-check-circle" style="color:var(--accent); -webkit-text-fill-color:var(--accent);"></i> Barcha hodimlar bugun hisobot topshirgan ✅</div>`;
         } else {
@@ -1801,7 +1267,6 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         }
     }
 
-    // ============== SECTIONS ==============
     function renderSections() {
         if (!state.sections.length) {
             $('sectionList').innerHTML = `<div class="empty-state"><i class="fas fa-folder-open"></i> Bo'limlar yo'q</div>`;
@@ -1823,7 +1288,6 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
                 </div>
             `;
         }).join('');
-
         document.querySelectorAll('.section-item').forEach(el => {
             el.addEventListener('click', e => {
                 if (e.target.closest('.delete-section')) return;
@@ -1841,8 +1305,7 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
                 if (!isAdmin()) return;
                 if (!confirm('Bu bo\'limni o\'chirmoqchimisiz?')) return;
                 const id = btn.dataset.id;
-                const { error } = await supabase.from('sections').delete().eq('id', id);
-                if (error) return alert('Xatolik: ' + error.message);
+                await supabase.from('sections').delete().eq('id', id);
                 state.sections = state.sections.filter(s => s.id !== id);
                 if (state.currentSectionId === id) state.currentSectionId = state.sections[0]?.id || null;
                 renderSections();
@@ -1879,10 +1342,9 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
             return;
         }
         $('currentSectionTitle').innerHTML = `<i class="fas ${sec.icon||'fa-file-alt'}"></i> ${escapeHtml(sec.name)}`;
-
         const canUpload = !!state.currentUser && !isAdmin();
         $('uploadArea').style.display = canUpload ? 'flex' : 'none';
-        document.querySelector('.upload-actions').style.display = canUpload ? 'flex' : 'none';
+        document.querySelector('.upload-actions').style.display = canUpload ? 'grid' : 'none';
         $('folderBar').style.display = state.currentUser ? 'flex' : 'none';
         $('dateFilter').style.display = state.currentUser ? 'flex' : 'none';
 
@@ -1906,11 +1368,10 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         if (state.currentFolder !== 'all') reports = reports.filter(r => r.folder === state.currentFolder);
         reports = reports.filter(r => matchDateFilter(r, state.filter));
         reports.sort((a,b) => new Date(b.uploaded_at||0) - new Date(a.uploaded_at||0));
-
         $('sectionBadge').textContent = reports.length + ' ta';
 
         if (!reports.length) {
-            $('reportList').innerHTML = `<div class="empty-state"><i class="fas fa-file-upload"></i> ${state.currentFolder !== 'all' ? 'Bu papkada hisobotlar yo\'q' : 'Tanlangan sanada hisobotlar yo\'q'}</div>`;
+            $('reportList').innerHTML = `<div class="empty-state"><i class="fas fa-file-upload"></i> ${state.currentFolder !== 'all' ? 'Bu papkada hisobotlar yo\'q' : 'Hozircha hisobotlar yo\'q'}</div>`;
             return;
         }
 
@@ -1920,7 +1381,7 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
             const upName = uploader ? `${uploader.first_name} ${uploader.last_name||''}`.trim() : 'Noma\'lum';
             const canDelete = isAdmin() || rep.uploaded_by === state.currentUser?.id;
             return `
-                <div class="report-item" data-id="${rep.id}">
+                <div class="report-item">
                     <div class="report-info" onclick="openFileViewer('${rep.id}')">
                         <i class="fas ${icon}"></i>
                         <div style="min-width:0;">
@@ -1941,16 +1402,10 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         }).join('');
 
         document.querySelectorAll('.view-file').forEach(btn => {
-            btn.addEventListener('click', e => {
-                e.stopPropagation();
-                openFileViewer(btn.dataset.id);
-            });
+            btn.addEventListener('click', e => { e.stopPropagation(); openFileViewer(btn.dataset.id); });
         });
         document.querySelectorAll('.download-file').forEach(btn => {
-            btn.addEventListener('click', e => {
-                e.stopPropagation();
-                downloadReport(btn.dataset.id);
-            });
+            btn.addEventListener('click', e => { e.stopPropagation(); downloadReport(btn.dataset.id); });
         });
         document.querySelectorAll('.delete-file').forEach(btn => {
             btn.addEventListener('click', async e => {
@@ -1958,11 +1413,8 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
                 if (!confirm('Hisobotni o\'chirmoqchimisiz?')) return;
                 const id = btn.dataset.id;
                 const rep = state.reports.find(r => r.id === id);
-                if (rep?.file_path) {
-                    await supabase.storage.from(STORAGE_BUCKET).remove([rep.file_path]);
-                }
-                const { error } = await supabase.from('reports').delete().eq('id', id);
-                if (error) return alert('Xatolik: ' + error.message);
+                if (rep?.file_path) await r2Delete(rep.file_path);
+                await supabase.from('reports').delete().eq('id', id);
                 state.reports = state.reports.filter(r => r.id !== id);
                 renderReports();
                 renderSections();
@@ -1970,37 +1422,26 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         });
     }
 
-    // ============== FILE VIEWER ==============
-    window.openFileViewer = async function(repId) {
+    window.openFileViewer = function(repId) {
         const rep = state.reports.find(r => r.id === repId);
         if (!rep) return;
         $('fvTitle').innerHTML = `<i class="fas ${getFileIcon(rep.file_type||rep.name)}"></i> ${escapeHtml(rep.name)}`;
         const body = $('fvBody');
-
-        // Signed URL olish
-        let url = rep.data_url;
-        if (rep.file_path) {
-            const { data, error } = await supabase.storage.from(STORAGE_BUCKET).createSignedUrl(rep.file_path, 3600);
-            if (!error && data?.signedUrl) url = data.signedUrl;
-        }
-
+        const url = rep.data_url;
         if (!url) {
             body.innerHTML = `<div class="preview-fallback"><i class="fas fa-file-slash"></i><p>Fayl mavjud emas</p></div>`;
         } else if (isImage(rep)) {
             body.innerHTML = `<div class="preview-container"><img src="${url}" alt="${escapeHtml(rep.name)}"></div>`;
         } else if (isPdf(rep)) {
-            body.innerHTML = `<div class="preview-container"><iframe src="${url}" title="${escapeHtml(rep.name)}"></iframe></div>`;
+            body.innerHTML = `<div class="preview-container"><iframe src="${url}"></iframe></div>`;
         } else if (isOffice(rep)) {
             body.innerHTML = `
-                <div class="preview-container">
-                    <iframe src="${url}" title="${escapeHtml(rep.name)}"></iframe>
-                </div>
+                <div class="preview-container"><iframe src="${url}"></iframe></div>
                 <div style="margin-top:14px; text-align:center;">
                     <button class="btn-outline btn-sm" onclick="downloadReport('${rep.id}')">
                         <i class="fas fa-download"></i> Yuklab olish
                     </button>
-                </div>
-            `;
+                </div>`;
         } else {
             body.innerHTML = `
                 <div class="preview-fallback">
@@ -2009,26 +1450,17 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
                     <button class="btn-primary" onclick="downloadReport('${rep.id}')">
                         <i class="fas fa-download"></i> Yuklab olish
                     </button>
-                </div>
-            `;
+                </div>`;
         }
-
         $('fileViewerModal').classList.add('show');
     };
 
-    window.downloadReport = async function(repId) {
+    window.downloadReport = function(repId) {
         const rep = state.reports.find(r => r.id === repId);
-        if (!rep) return;
-        let url = rep.data_url;
-        if (rep.file_path) {
-            const { data, error } = await supabase.storage.from(STORAGE_BUCKET).createSignedUrl(rep.file_path, 3600);
-            if (!error && data?.signedUrl) url = data.signedUrl;
-        }
-        if (url) {
-            const a = document.createElement('a');
-            a.href = url; a.download = rep.name; a.target = '_blank';
-            document.body.appendChild(a); a.click(); document.body.removeChild(a);
-        }
+        if (!rep || !rep.data_url) return;
+        const a = document.createElement('a');
+        a.href = rep.data_url; a.download = rep.name; a.target = '_blank';
+        document.body.appendChild(a); a.click(); document.body.removeChild(a);
     };
 
     window.closeFileViewer = function() {
@@ -2036,14 +1468,13 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         $('fvBody').innerHTML = '';
     };
 
-    // ============== MASJIDLAR ==============
     function renderMasjidlar() {
         if (!isAdmin()) {
             $('masjidGrid').innerHTML = `<div class="empty-state"><i class="fas fa-lock"></i> Faqat admin uchun</div>`;
             return;
         }
         if (!state.masjidlar.length) {
-            $('masjidGrid').innerHTML = `<div class="empty-state"><i class="fas fa-mosque"></i> Masjidlar yo'q. "Masjid qo'shish" tugmasini bosing.</div>`;
+            $('masjidGrid').innerHTML = `<div class="empty-state"><i class="fas fa-mosque"></i> Masjidlar yo'q.</div>`;
             return;
         }
         $('masjidGrid').innerHTML = state.masjidlar.map(m => {
@@ -2076,10 +1507,10 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
                                     <span class="reports-count">${cnt} ta</span>
                                 </div>
                             `;
-                        }).join('') : `<div style="color:var(--text-muted); font-size:0.85rem; text-align:center; padding:8px; font-weight:500;">Hodimlar yo'q</div>`}
+                        }).join('') : `<div style="color:var(--text-muted); font-size:0.85rem; text-align:center; padding:8px;">Hodimlar yo'q</div>`}
                     </div>
                     <div style="text-align:center; margin-top:14px; color:var(--primary); font-weight:700; font-size:0.85rem;">
-                        <i class="fas fa-folder-open"></i> Bo'limlarni ko'rish uchun bosing
+                        <i class="fas fa-folder-open"></i> Bo'limlarni ko'rish
                     </div>
                 </div>
             `;
@@ -2110,7 +1541,6 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
             totalReports++;
         });
         $('masjidDetailBadge').textContent = totalReports + ' ta hisobot';
-
         $('masjidSectionGrid').innerHTML = state.sections.map(sec => {
             const count = state.reports.filter(r =>
                 r.section_id === sec.id && staffIds.includes(r.uploaded_by) && matchDateFilter(r, state.masjidFilter)
@@ -2168,7 +1598,7 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
                         const uploader = state.staff.find(s => s.id === rep.uploaded_by);
                         const upName = uploader ? `${uploader.first_name} ${uploader.last_name||''}`.trim() : 'Noma\'lum';
                         return `
-                            <div class="report-item" data-id="${rep.id}">
+                            <div class="report-item">
                                 <div class="report-info" onclick="openFileViewer('${rep.id}')">
                                     <i class="fas ${icon}"></i>
                                     <div style="min-width:0;">
@@ -2180,43 +1610,32 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
                                     </div>
                                 </div>
                                 <div class="report-actions">
-                                    <button class="msm-view" data-id="${rep.id}" title="Ko'rish"><i class="fas fa-eye"></i></button>
-                                    <button class="msm-down" data-id="${rep.id}" title="Yuklab olish"><i class="fas fa-download"></i></button>
+                                    <button class="msm-view" data-id="${rep.id}"><i class="fas fa-eye"></i></button>
+                                    <button class="msm-down" data-id="${rep.id}"><i class="fas fa-download"></i></button>
                                 </div>
                             </div>
                         `;
                     }).join('')}
                 </div>
             `;
-
             $('msmBody').querySelectorAll('.msm-view').forEach(btn => {
-                btn.addEventListener('click', e => {
-                    e.stopPropagation();
-                    openFileViewer(btn.dataset.id);
-                });
+                btn.addEventListener('click', e => { e.stopPropagation(); openFileViewer(btn.dataset.id); });
             });
             $('msmBody').querySelectorAll('.msm-down').forEach(btn => {
-                btn.addEventListener('click', e => {
-                    e.stopPropagation();
-                    downloadReport(btn.dataset.id);
-                });
+                btn.addEventListener('click', e => { e.stopPropagation(); downloadReport(btn.dataset.id); });
             });
         }
-
         $('masjidSectionModal').classList.add('show');
     };
 
-    window.closeMasjidSectionModal = function() {
-        $('masjidSectionModal').classList.remove('show');
-    };
+    window.closeMasjidSectionModal = function() { $('masjidSectionModal').classList.remove('show'); };
 
     window.deleteMasjid = async function(id) {
         if (!isAdmin()) return;
         const m = state.masjidlar.find(x => x.id === id);
         if (!m) return;
         if (!confirm(`"${m.name}" masjidini o'chirmoqchimisiz?`)) return;
-        const { error } = await supabase.from('masjidlar').delete().eq('id', id);
-        if (error) return alert('Xatolik: ' + error.message);
+        await supabase.from('masjidlar').delete().eq('id', id);
         state.masjidlar = state.masjidlar.filter(x => x.id !== id);
         if (state.selectedMasjidId === id) backToMasjidList();
         renderMasjidlar();
@@ -2224,7 +1643,6 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         renderDashboard();
     };
 
-    // ============== STAFF ==============
     function renderStaff() {
         if (!isAdmin()) {
             $('staffGrid').innerHTML = `<div class="empty-state"><i class="fas fa-lock"></i> Faqat admin uchun</div>`;
@@ -2232,7 +1650,7 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         }
         const list = state.staff.filter(u => u.role === 'staff');
         if (!list.length) {
-            $('staffGrid').innerHTML = `<div class="empty-state"><i class="fas fa-users"></i> Hodimlar yo'q. "Hodim qo'shish" tugmasini bosing.</div>`;
+            $('staffGrid').innerHTML = `<div class="empty-state"><i class="fas fa-users"></i> Hodimlar yo'q.</div>`;
             return;
         }
         $('staffGrid').innerHTML = list.map(s => {
@@ -2268,8 +1686,7 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
     window.deleteStaff = async function(id) {
         if (!isAdmin()) return;
         if (!confirm('Hodimni o\'chirmoqchimisiz?')) return;
-        const { error } = await supabase.from('staff').delete().eq('id', id);
-        if (error) return alert('Xatolik: ' + error.message);
+        await supabase.from('staff').delete().eq('id', id);
         state.staff = state.staff.filter(s => s.id !== id);
         renderStaff();
         renderDashboard();
@@ -2277,18 +1694,14 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         renderMasjidlar();
     };
 
-    // ============== ADMIN ==============
     function renderAdmin() {
         if (!isAdmin()) {
             $('adminReportList').innerHTML = `<div class="empty-state"><i class="fas fa-lock"></i> Faqat admin uchun</div>`;
             return;
         }
-        const filterSel = $('adminMasjidFilter');
-        filterSel.innerHTML = `<option value="all">Barcha masjidlar</option>` +
+        $('adminMasjidFilter').innerHTML = `<option value="all">Barcha masjidlar</option>` +
             state.masjidlar.map(m => `<option value="${escapeHtml(m.name)}" ${state.adminMasjidFilter===m.name?'selected':''}>${escapeHtml(m.name)}</option>`).join('');
-
-        const sectionSel = $('adminSectionFilter');
-        sectionSel.innerHTML = `<option value="all">Barcha bo'limlar</option>` +
+        $('adminSectionFilter').innerHTML = `<option value="all">Barcha bo'limlar</option>` +
             state.sections.map(s => `<option value="${s.id}" ${state.adminSectionFilter===s.id?'selected':''}>${escapeHtml(s.name)}</option>`).join('');
 
         let all = [...state.reports];
@@ -2321,25 +1734,18 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
                         </div>
                     </div>
                     <div class="report-actions">
-                        <button class="admin-view" data-id="${rep.id}" title="Ko'rish"><i class="fas fa-eye"></i></button>
-                        <button class="admin-down" data-id="${rep.id}" title="Yuklab olish"><i class="fas fa-download"></i></button>
-                        <button class="admin-del del" data-id="${rep.id}" title="O'chirish"><i class="fas fa-trash-alt"></i></button>
+                        <button class="admin-view" data-id="${rep.id}"><i class="fas fa-eye"></i></button>
+                        <button class="admin-down" data-id="${rep.id}"><i class="fas fa-download"></i></button>
+                        <button class="admin-del del" data-id="${rep.id}"><i class="fas fa-trash-alt"></i></button>
                     </div>
                 </div>
             `;
         }).join('');
-
         document.querySelectorAll('.admin-view').forEach(btn => {
-            btn.addEventListener('click', e => {
-                e.stopPropagation();
-                openFileViewer(btn.dataset.id);
-            });
+            btn.addEventListener('click', e => { e.stopPropagation(); openFileViewer(btn.dataset.id); });
         });
         document.querySelectorAll('.admin-down').forEach(btn => {
-            btn.addEventListener('click', e => {
-                e.stopPropagation();
-                downloadReport(btn.dataset.id);
-            });
+            btn.addEventListener('click', e => { e.stopPropagation(); downloadReport(btn.dataset.id); });
         });
         document.querySelectorAll('.admin-del').forEach(btn => {
             btn.addEventListener('click', async e => {
@@ -2347,69 +1753,50 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
                 if (!confirm('O\'chirmoqchimisiz?')) return;
                 const id = btn.dataset.id;
                 const rep = state.reports.find(r => r.id === id);
-                if (rep?.file_path) {
-                    await supabase.storage.from(STORAGE_BUCKET).remove([rep.file_path]);
-                }
-                const { error } = await supabase.from('reports').delete().eq('id', id);
-                if (error) return alert('Xatolik: ' + error.message);
+                if (rep?.file_path) await r2Delete(rep.file_path);
+                await supabase.from('reports').delete().eq('id', id);
                 state.reports = state.reports.filter(r => r.id !== id);
                 renderAdmin();
             });
         });
     }
 
-    // ============== FILE UPLOAD ==============
     async function handleFiles(files) {
         if (!state.currentUser) return alert('Avval tizimga kiring');
         const sectionId = state.currentSectionId;
         if (!sectionId) return alert('Bo\'lim tanlanmagan');
         const folder = state.currentFolder !== 'all' ? state.currentFolder : null;
-
         showLoading('Fayllar yuklanmoqda...');
-
         for (const file of Array.from(files)) {
             try {
+                if (file.size > 50 * 1024 * 1024) {
+                    alert(`"${file.name}" juda katta (50 MB dan oshmasin)`);
+                    continue;
+                }
                 const fileExt = file.name.split('.').pop();
                 const filePath = `${state.currentUser.id}/${genId()}.${fileExt}`;
-
-                const { error: uploadError } = await supabase.storage
-                    .from(STORAGE_BUCKET)
-                    .upload(filePath, file, { cacheControl: '3600', upsert: false });
-
-                if (uploadError) throw uploadError;
-
-                const { data: publicUrl } = supabase.storage.from(STORAGE_BUCKET).getPublicUrl(filePath);
-
+                const publicUrl = await r2Upload(file, filePath);
                 const rep = {
-                    name: file.name,
-                    file_type: file.type,
-                    file_path: filePath,
-                    data_url: publicUrl?.publicUrl || '',
-                    uploaded_by: state.currentUser.id,
-                    date: todayStr(),
-                    masjid: state.currentUser.masjid,
-                    folder: folder,
-                    section_id: sectionId
+                    name: file.name, file_type: file.type, file_path: filePath,
+                    data_url: publicUrl, uploaded_by: state.currentUser.id,
+                    date: todayStr(), masjid: state.currentUser.masjid,
+                    folder: folder, section_id: sectionId
                 };
-
                 const { data, error } = await supabase.from('reports').insert(rep).select().single();
                 if (error) throw error;
                 state.reports.unshift(data);
             } catch(e) {
                 console.error('Yuklashda xatolik:', e);
-                alert('Xatolik: ' + e.message);
+                alert('Xatolik: ' + (e.message || 'Noma\'lum xato'));
             }
         }
-
         hideLoading();
         renderReports();
         renderSections();
         renderDashboard();
     }
 
-    // ============== MODALS ==============
     window.openMasjidModal = function() {
-        $('masjidEditId').value = '';
         $('masjidForm').reset();
         $('masjidModal').classList.add('show');
     };
@@ -2420,7 +1807,6 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         const address = $('masjidAddress').value.trim();
         if (!name) return alert('Masjid nomini kiriting');
         if (state.masjidlar.some(m => m.name === name)) return alert('Bu masjid allaqachon mavjud');
-
         showLoading('Saqlanmoqda...');
         const { data, error } = await supabase.from('masjidlar').insert({ name, address }).select().single();
         hideLoading();
@@ -2433,11 +1819,8 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
     window.openStaffModal = function(editId) {
         if (!isAdmin()) return alert('Faqat admin');
         if (!state.masjidlar.length) return alert('Avval masjid qo\'shing!');
-        const form = $('staffForm');
-        form.reset();
-        const sel = $('staffMasjid');
-        sel.innerHTML = state.masjidlar.map(m => `<option value="${escapeHtml(m.name)}">${escapeHtml(m.name)}</option>`).join('');
-
+        $('staffForm').reset();
+        $('staffMasjid').innerHTML = state.masjidlar.map(m => `<option value="${escapeHtml(m.name)}">${escapeHtml(m.name)}</option>`).join('');
         if (editId) {
             const s = state.staff.find(x => x.id === editId);
             if (s) {
@@ -2446,7 +1829,7 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
                 $('staffFirstName').value = s.first_name;
                 $('staffLastName').value = s.last_name;
                 $('staffPhone').value = s.phone;
-                sel.value = s.masjid;
+                $('staffMasjid').value = s.masjid;
                 $('staffLogin').value = s.login;
                 $('staffPassword').value = s.password;
             }
@@ -2468,18 +1851,8 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         const password = $('staffPassword').value.trim();
         if (!firstName||!lastName||!phone||!masjid||!login||!password) return alert('Barcha maydonlarni to\'ldiring');
         if (state.staff.some(s => s.login === login && s.id !== editId)) return alert('Bu login band');
-
         showLoading('Saqlanmoqda...');
-        const payload = {
-            first_name: firstName,
-            last_name: lastName,
-            phone,
-            masjid,
-            login,
-            password,
-            role: 'staff'
-        };
-
+        const payload = { first_name: firstName, last_name: lastName, phone, masjid, login, password, role: 'staff' };
         let result;
         if (editId) {
             result = await supabase.from('staff').update(payload).eq('id', editId).select().single();
@@ -2488,7 +1861,6 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         }
         hideLoading();
         if (result.error) return alert('Xatolik: ' + result.error.message);
-
         if (editId) {
             const idx = state.staff.findIndex(s => s.id === editId);
             if (idx >= 0) state.staff[idx] = result.data;
@@ -2513,14 +1885,10 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         if (!name) return alert('Papka nomini kiriting');
         const secId = state.currentSectionId;
         const userId = state.currentUser.id;
-
         if (state.folders.some(f => f.section_id === secId && f.user_id === userId && f.name === name)) {
             return alert('Bu papka mavjud');
         }
-
-        const { data, error } = await supabase.from('folders').insert({
-            section_id: secId, user_id: userId, name
-        }).select().single();
+        const { data, error } = await supabase.from('folders').insert({ section_id: secId, user_id: userId, name }).select().single();
         if (error) return alert('Xatolik: ' + error.message);
         state.folders.push(data);
         closeFolderModal();
@@ -2528,7 +1896,6 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         renderReports();
     }
 
-    // ============== RENDER ALL ==============
     function renderAll() {
         renderUserArea();
         renderDashboard();
@@ -2538,7 +1905,6 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         if (isAdmin()) { renderMasjidlar(); renderStaff(); renderAdmin(); }
     }
 
-    // ============== EVENTS ==============
     function bindEvents() {
         $('loginBtn').addEventListener('click', doLogin);
         $('loginInput').addEventListener('keydown', e => { if(e.key==='Enter') $('passwordInput').focus(); });
@@ -2547,20 +1913,23 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         document.querySelectorAll('.tab').forEach(tab => {
             tab.addEventListener('click', () => switchView(tab.dataset.view));
         });
+
         $('uploadArea').addEventListener('click', () => $('fileInput').click());
+        $('uploadBtn').addEventListener('click', () => $('fileInput').click());
         $('fileInput').addEventListener('change', e => {
             if (e.target.files.length) { handleFiles(e.target.files); e.target.value=''; }
         });
-        $('uploadBtn').addEventListener('click', () => $('fileInput').click());
+
         $('cameraBtn').addEventListener('click', () => $('cameraInput').click());
         $('cameraInput').addEventListener('change', e => {
             if (e.target.files.length) { handleFiles(e.target.files); e.target.value=''; }
         });
+
         $('uploadArea').addEventListener('dragover', e => { e.preventDefault(); $('uploadArea').style.borderColor='var(--primary)'; });
-        $('uploadArea').addEventListener('dragleave', () => { $('uploadArea').style.borderColor='#c7d2e8'; });
+        $('uploadArea').addEventListener('dragleave', () => { $('uploadArea').style.borderColor='#8aa8d9'; });
         $('uploadArea').addEventListener('drop', e => {
             e.preventDefault();
-            $('uploadArea').style.borderColor='#c7d2e8';
+            $('uploadArea').style.borderColor='#8aa8d9';
             if (e.dataTransfer.files.length) handleFiles(e.dataTransfer.files);
         });
 
@@ -2631,10 +2000,8 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         });
     }
 
-    async function init() {
+    function init() {
         bindEvents();
-        showLoading('Tizimga ulanmoqda...');
-        hideLoading();
         $('loginScreen').classList.remove('hidden');
         $('app').style.display = 'none';
     }
