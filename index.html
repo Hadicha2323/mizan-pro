@@ -942,8 +942,10 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
     </div>
 </div>
 
+<!-- Supabase (faqat database) -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="https://cdn.jsdelivr.net/npm/@aws-sdk/client-s3@3.489.0/dist-cjs/index.js"></script>
+<!-- aws4fetch (Cloudflare R2 uchun brauzerda ishlaydi) -->
+<script src="https://cdn.jsdelivr.net/npm/aws4fetch@1.0.19/dist/aws4fetch.min.js"></script>
 
 <script>
 (function() {
@@ -956,7 +958,7 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN0c2Fsc2FjYnh6bHV4YWtudmRoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA3ODQyNjgsImV4cCI6MjEwNjM2MDI2OH0.nSpZEhXaSpX3P67iNc9xCcvp4i-JMnvstL6lafpOxcI';
 
     // ============================================================
-    // ☁️ CLOUDFLARE R2 (fayllar uchun — 10 GB bepul)
+    // ☁️ CLOUDFLARE R2 (aws4fetch bilan)
     // ============================================================
     const R2_CONFIG = {
         endpoint: 'https://bba4354431f6c41a7e679ff1b92f3c63.r2.cloudflarestorage.com',
@@ -973,40 +975,53 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
 
     const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-    const s3 = window.AWS_SDK_S3 || {};
-    const S3Client = s3.S3Client;
-    const PutObjectCommand = s3.PutObjectCommand;
-    const DeleteObjectCommand = s3.DeleteObjectCommand;
+    // aws4fetch — brauzer uchun to‘g‘ri R2 kutubxonasi
+    const { AwsClient } = window.aws4fetch;
 
-    const s3Client = new S3Client({
-        region: R2_CONFIG.region,
-        endpoint: R2_CONFIG.endpoint,
-        credentials: {
-            accessKeyId: R2_CONFIG.accessKeyId,
-            secretAccessKey: R2_CONFIG.secretAccessKey,
-        },
-        forcePathStyle: false
+    const r2Client = new AwsClient({
+        accessKeyId: R2_CONFIG.accessKeyId,
+        secretAccessKey: R2_CONFIG.secretAccessKey,
+        service: 's3',
+        region: 'auto'
     });
 
+    // R2'ga fayl yuklash
     async function r2Upload(file, filePath) {
-        const command = new PutObjectCommand({
-            Bucket: R2_CONFIG.bucket,
-            Key: filePath,
-            Body: file,
-            ContentType: file.type
+        const url = new URL(`${R2_CONFIG.endpoint}/${R2_CONFIG.bucket}/${filePath}`);
+
+        const signed = await r2Client.sign(
+            new Request(url, {
+                method: 'PUT',
+                headers: { 'Content-Type': file.type }
+            }),
+            { aws: { signQuery: true } }
+        );
+
+        const response = await fetch(signed.url, {
+            method: 'PUT',
+            body: file,
+            headers: { 'Content-Type': file.type }
         });
-        await s3Client.send(command);
+
+        if (!response.ok) {
+            const errText = await response.text();
+            throw new Error('R2 yuklashda xato: ' + response.status + ' ' + errText);
+        }
         return `${R2_CONFIG.publicUrl}/${filePath}`;
     }
 
+    // R2'dan faylni o‘chirish
     async function r2Delete(filePath) {
         try {
-            const command = new DeleteObjectCommand({
-                Bucket: R2_CONFIG.bucket,
-                Key: filePath
-            });
-            await s3Client.send(command);
-        } catch(e) { console.warn('R2 delete xato:', e); }
+            const url = new URL(`${R2_CONFIG.endpoint}/${R2_CONFIG.bucket}/${filePath}`);
+            const signed = await r2Client.sign(
+                new Request(url, { method: 'DELETE' }),
+                { aws: { signQuery: true } }
+            );
+            await fetch(signed.url, { method: 'DELETE' });
+        } catch(e) {
+            console.warn('R2 delete xato:', e);
+        }
     }
 
     const MONTHS = ['Yanvar','Fevral','Mart','Aprel','May','Iyun','Iyul','Avgust','Sentabr','Oktabr','Noyabr','Dekabr'];
