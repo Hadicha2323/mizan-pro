@@ -149,9 +149,7 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
 }
 
 /* Update banner */
-#updateBanner {
-    animation: slideDown 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-}
+#updateBanner { animation: slideDown 0.4s cubic-bezier(0.22, 1, 0.36, 1); }
 @keyframes slideDown {
     from { opacity: 0; transform: translate(-50%, -30px); }
     to { opacity: 1; transform: translate(-50%, 0); }
@@ -409,6 +407,19 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
     display: inline-flex;
     align-items: center;
     gap: 6px;
+    cursor: pointer;
+    transition: var(--transition);
+    border: 1.5px solid transparent;
+}
+.folder-path .folder-name-display:hover {
+    background: #1e3c72;
+    color: #fff;
+    border-color: #1e3c72;
+}
+.folder-path .folder-name-display.current {
+    background: #1e3c72;
+    color: #fff;
+    cursor: default;
 }
 
 .date-filter {
@@ -874,18 +885,17 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
                     <span id="sectionBadge" class="badge"></span>
                 </div>
 
-                <!-- Papka breadcrumb -->
+                <!-- Papka breadcrumb (nested folders) -->
                 <div class="folder-path" id="folderPath" style="display:none;">
                     <i class="fas fa-folder-open"></i>
                     <span>Bo'lim:</span>
-                    <span id="breadcrumbSection" style="color:#1e3c72;"></span>
-                    <i class="fas fa-chevron-right" style="opacity:0.4;"></i>
-                    <span class="folder-name-display">
-                        <i class="fas fa-folder"></i>
-                        <span id="breadcrumbFolder"></span>
+                    <span class="folder-name-display" onclick="navigateToFolderDepth(-1)" title="Bo'lim ildiziga qaytish">
+                        <i class="fas fa-home"></i>
+                        <span id="breadcrumbSection"></span>
                     </span>
-                    <button class="btn-outline btn-sm" onclick="goBackToAllFolders()" style="margin-left:auto;">
-                        <i class="fas fa-arrow-left"></i> Papkalarga qaytish
+                    <span id="breadcrumbChain"></span>
+                    <button class="btn-outline btn-sm" onclick="navigateToFolderDepth(-1)" style="margin-left:auto;">
+                        <i class="fas fa-arrow-left"></i> Bo'lim ildiziga
                     </button>
                 </div>
 
@@ -919,7 +929,7 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
                 </div>
 
                 <div class="folder-bar" id="folderBar">
-                    <button class="folder-chip active" data-folder="all"><i class="fas fa-folder-open"></i> Barchasi</button>
+                    <button class="folder-chip active" data-folder="all"><i class="fas fa-folder-open"></i> Joriy papkadagi fayllar</button>
                     <button class="folder-chip" data-folder="new"><i class="fas fa-folder-plus"></i> Yangi papka</button>
                     <span id="folderList" style="display:flex; gap:6px; flex-wrap:wrap;"></span>
                 </div>
@@ -1069,7 +1079,16 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
             <button class="modal-close-btn" onclick="closeFolderModal()"><i class="fas fa-times"></i></button>
         </div>
         <form onsubmit="return false;">
-            <div class="form-group"><label>Papka nomi</label><input type="text" id="folderNameInput" required placeholder="Papka nomi"></div>
+            <div class="form-group">
+                <label>Papka nomi</label>
+                <input type="text" id="folderNameInput" required placeholder="Papka nomi">
+            </div>
+            <div class="form-group">
+                <label>Joylashuvi</label>
+                <div id="folderLocationDisplay" style="padding:12px 16px; background:var(--surface-2); border-radius:12px; font-size:0.88rem; font-weight:600; color:var(--text-muted); border:1.5px solid var(--border-light);">
+                    <i class="fas fa-home"></i> Bo'lim ildizi
+                </div>
+            </div>
             <div class="form-actions">
                 <button type="button" class="btn-outline" onclick="closeFolderModal()">Bekor qilish</button>
                 <button type="button" class="btn-accent" id="saveFolderBtn"><i class="fas fa-save"></i> Yaratish</button>
@@ -1096,12 +1115,9 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
             navigator.serviceWorker.register('./sw.js', { scope: './' })
                 .then(reg => {
                     console.log('✅ SW ro\'yxatdan o\'tdi:', reg.scope);
-
-                    // Yangilanish borligini tekshirish
                     reg.addEventListener('updatefound', () => {
                         const newWorker = reg.installing;
                         console.log('🔄 Yangi SW topildi');
-
                         newWorker.addEventListener('statechange', () => {
                             if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
                                 console.log('✨ Yangi versiya mavjud!');
@@ -1112,7 +1128,6 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
                 })
                 .catch(err => console.log('❌ SW xato:', err));
 
-            // Boshqaruvchi o'zgarganda sahifani yangilash
             let refreshing = false;
             navigator.serviceWorker.addEventListener('controllerchange', () => {
                 if (refreshing) return;
@@ -1122,7 +1137,6 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
             });
         });
 
-        // Har 60 sekundda yangilanishni tekshirish
         setInterval(() => {
             navigator.serviceWorker.getRegistration().then(reg => {
                 if (reg) reg.update();
@@ -1130,29 +1144,17 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         }, 60000);
     }
 
-    // Yangilanish bildirishnomasi (yashil banner)
     function showUpdateNotification() {
         if (document.getElementById('updateBanner')) return;
-
         const banner = document.createElement('div');
         banner.id = 'updateBanner';
         banner.style.cssText = `
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
+            position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
             background: linear-gradient(135deg, #0f9d58 0%, #0c8048 100%);
-            color: white;
-            padding: 16px 24px;
-            border-radius: 16px;
-            box-shadow: 0 8px 24px rgba(15,157,88,0.4);
-            z-index: 10000;
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            max-width: 90%;
+            color: white; padding: 16px 24px; border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(15,157,88,0.4); z-index: 10000;
+            display: flex; align-items: center; gap: 14px;
+            font-weight: 600; font-size: 0.95rem; max-width: 90%;
         `;
         banner.innerHTML = `
             <i class="fas fa-sync-alt" style="font-size:1.3rem;"></i>
@@ -1167,7 +1169,6 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         document.body.appendChild(banner);
     }
 
-    // Yangilanishni qo'llash
     window.applyUpdate = function() {
         if (navigator.serviceWorker.controller) {
             navigator.serviceWorker.controller.postMessage({ type: 'SKIP_WAITING' });
@@ -1268,7 +1269,8 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
 
     let state = {
         sections: [], masjidlar: [], staff: [], reports: [], folders: [],
-        currentUser: null, currentSectionId: null, currentFolder: 'all',
+        currentUser: null, currentSectionId: null,
+        folderStack: [],  // ← NESTED: papka yo'li (masalan: ['2024', 'Yanvar', 'Haftalik'])
         activeView: 'dashboard', adminMasjidFilter: 'all', adminSectionFilter: 'all',
         selectedMasjidId: null,
         filter: { year: '', month: '', day: '' },
@@ -1280,6 +1282,10 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
     const todayStr = () => new Date().toISOString().slice(0,10);
     const fmtDate = d => new Date(d).toLocaleDateString('uz-UZ', { year:'numeric', month:'2-digit', day:'2-digit' });
     const escapeHtml = s => String(s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+    // Papka path helperlari
+    const getCurrentPath = () => state.folderStack.join('/');
+    const getParentPath = () => state.folderStack.length ? state.folderStack.join('/') : null;
 
     function getFileIcon(ft) {
         const n = (ft||'').toLowerCase();
@@ -1348,6 +1354,7 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         state.currentUser = null;
         state.activeView = 'dashboard';
         state.selectedMasjidId = null;
+        state.folderStack = [];
         state.reports = []; state.masjidlar = []; state.staff = []; state.folders = [];
         $('loginScreen').classList.remove('hidden');
         $('app').style.display = 'none';
@@ -1533,7 +1540,7 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
             el.addEventListener('click', e => {
                 if (e.target.closest('.delete-section')) return;
                 state.currentSectionId = el.dataset.id;
-                state.currentFolder = 'all';
+                state.folderStack = [];  // Bo'lim o'zgarganda papka yo'lini tozalash
                 state.filter = { year:'', month:'', day:'' };
                 initDateFilters();
                 renderSections();
@@ -1548,7 +1555,10 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
                 const id = btn.dataset.id;
                 await supabase.from('sections').delete().eq('id', id);
                 state.sections = state.sections.filter(s => s.id !== id);
-                if (state.currentSectionId === id) state.currentSectionId = state.sections[0]?.id || null;
+                if (state.currentSectionId === id) {
+                    state.currentSectionId = state.sections[0]?.id || null;
+                    state.folderStack = [];
+                }
                 renderSections();
                 renderReports();
             });
@@ -1562,15 +1572,27 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         return all.filter(r => r.uploaded_by === state.currentUser.id && !r.admin_only);
     }
 
+    // Joriy papkadagi papkalar (nested)
     function getVisibleFolders(sectionId) {
         if (!state.currentUser) return [];
-        const folders = state.folders.filter(f => f.section_id === sectionId);
+        const parentPath = state.folderStack.join('/') || null;
+        const folders = state.folders.filter(f =>
+            f.section_id === sectionId &&
+            (f.parent_path || null) === parentPath
+        );
         if (isAdmin()) {
             const set = new Set();
             folders.forEach(f => set.add(f.name));
             return Array.from(set);
         }
         return folders.filter(f => f.user_id === state.currentUser.id).map(f => f.name);
+    }
+
+    // Joriy papkadagi hisobotlar
+    function getReportsInCurrentFolder(sectionId) {
+        const currentPath = state.folderStack.join('/');
+        let reports = getVisibleReports(sectionId);
+        return reports.filter(r => (r.folder || '') === currentPath);
     }
 
     function renderReports() {
@@ -1597,70 +1619,78 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
             $('adminUploadBanner').style.display = 'none';
         }
 
-        if (state.currentFolder !== 'all') {
+        // ===== BREADCRUMB (papka yo'li) =====
+        if (state.folderStack.length > 0) {
             $('folderPath').style.display = 'flex';
             $('breadcrumbSection').textContent = sec.name.length > 40 ? sec.name.substring(0, 40) + '...' : sec.name;
-            $('breadcrumbFolder').textContent = state.currentFolder;
-            $('uploadAreaTitle').textContent = `"${state.currentFolder}" papkasiga hisobot yuklash`;
+
+            // Har bir papkani bosib shu chuqurlikka o'tish
+            let chain = '';
+            state.folderStack.forEach((folderName, idx) => {
+                const isLast = idx === state.folderStack.length - 1;
+                const cls = isLast ? 'folder-name-display current' : 'folder-name-display';
+                const onclick = isLast ? '' : `onclick="navigateToFolderDepth(${idx})"`;
+                chain += `
+                    <i class="fas fa-chevron-right" style="opacity:0.4;"></i>
+                    <span class="${cls}" ${onclick} title="${escapeHtml(folderName)}">
+                        <i class="fas fa-folder"></i>
+                        <span>${escapeHtml(folderName)}</span>
+                    </span>
+                `;
+            });
+            $('breadcrumbChain').innerHTML = chain;
+            $('uploadAreaTitle').textContent = `"${state.folderStack.join(' / ')}" papkasiga hisobot yuklash`;
         } else {
             $('folderPath').style.display = 'none';
+            $('breadcrumbChain').innerHTML = '';
             $('uploadAreaTitle').textContent = 'Hisobot yuklash';
         }
 
+        // ===== PAPKALAR RO'YXATI =====
         const folders = getVisibleFolders(sec.id);
         $('folderList').innerHTML = folders.map(f => `
-            <button class="folder-chip ${state.currentFolder===f?'active':''}" data-folder="${escapeHtml(f)}">
+            <button class="folder-chip ${false?'active':''}" data-folder="${escapeHtml(f)}" title="Ochish: ${escapeHtml(f)}">
                 <i class="fas fa-folder"></i> ${escapeHtml(f)}
-                ${isAdmin() || true ? `<span class="folder-delete" data-folder="${escapeHtml(f)}" title="Papkani o'chirish"><i class="fas fa-times"></i></span>` : ''}
+                <span class="folder-delete" data-folder="${escapeHtml(f)}" title="Papkani o'chirish"><i class="fas fa-times"></i></span>
             </button>
         `).join('');
+
+        // Papkani ochish (nested)
         document.querySelectorAll('#folderList .folder-chip').forEach(chip => {
             chip.addEventListener('click', (e) => {
                 if (e.target.closest('.folder-delete')) return;
-                state.currentFolder = chip.dataset.folder;
+                state.folderStack.push(chip.dataset.folder);
                 renderReports();
             });
         });
+
+        // Papkani o'chirish (rekursiv - ichidagi hamma narsa o'chadi)
         document.querySelectorAll('#folderList .folder-delete').forEach(del => {
             del.addEventListener('click', async (e) => {
                 e.stopPropagation();
                 const folderName = del.dataset.folder;
-                if (!confirm(`"${folderName}" papkasini o'chirmoqchimisiz? Undagi hisobotlar ham o'chadi.`)) return;
-                const reportsInFolder = state.reports.filter(r => 
-                    r.section_id === sec.id && r.folder === folderName && 
-                    (isAdmin() || r.uploaded_by === state.currentUser.id)
-                );
-                for (const rep of reportsInFolder) {
-                    if (rep.file_path) await r2Delete(rep.file_path);
-                    await supabase.from('reports').delete().eq('id', rep.id);
-                    state.reports = state.reports.filter(r => r.id !== rep.id);
-                }
-                const folderRecord = state.folders.find(f => 
-                    f.section_id === sec.id && f.name === folderName &&
-                    (isAdmin() || f.user_id === state.currentUser.id)
-                );
-                if (folderRecord) {
-                    await supabase.from('folders').delete().eq('id', folderRecord.id);
-                    state.folders = state.folders.filter(f => f.id !== folderRecord.id);
-                }
-                if (state.currentFolder === folderName) state.currentFolder = 'all';
+                if (!confirm(`"${folderName}" papkasini o'chirmoqchimisiz?\nIchidagi barcha papkalar va hisobotlar ham o'chadi!`)) return;
+                await deleteFolderRecursive(sec.id, folderName);
                 renderReports();
                 renderSections();
             });
         });
-        document.querySelectorAll('#folderBar > .folder-chip').forEach(chip => {
-            chip.classList.toggle('active', chip.dataset.folder === state.currentFolder);
-        });
 
-        let reports = getVisibleReports(sec.id);
-        if (state.currentFolder !== 'all') reports = reports.filter(r => r.folder === state.currentFolder);
+        // ===== HISOBOTLAR (faqat joriy papkadagi) =====
+        let reports = getReportsInCurrentFolder(sec.id);
         reports = reports.filter(r => matchDateFilter(r, state.filter));
         reports.sort((a,b) => new Date(b.uploaded_at||0) - new Date(a.uploaded_at||0));
         $('sectionBadge').textContent = reports.length + ' ta';
 
-        if (!reports.length) {
-            const folderText = state.currentFolder !== 'all' ? `"${state.currentFolder}" papkasida` : 'bu bo\'limda';
+        // Papka bo'sh bo'lsa, lekin ichida papkalar bo'lsa
+        if (!reports.length && !folders.length) {
+            const folderText = state.folderStack.length ? `"${state.folderStack.join(' / ')}" papkasida` : 'bu bo\'limda';
             $('reportList').innerHTML = `<div class="empty-state"><i class="fas fa-file-upload"></i> ${folderText} hisobotlar yo\'q</div>`;
+            return;
+        }
+
+        if (!reports.length) {
+            $('reportList').innerHTML = `<div class="empty-state" style="padding:20px;"><i class="fas fa-file" style="font-size:2.4rem;"></i> Bu papkada hisobotlar yo'q</div>`;
             return;
         }
 
@@ -1678,7 +1708,7 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
                             <div class="file-name">${escapeHtml(rep.name)}</div>
                             <div class="meta">
                                 ${isAdminItem ? '👑 Admin · ' : ''}${escapeHtml(upName)} · ${rep.date ? fmtDate(rep.date) : ''}
-                                ${rep.folder ? ' · 📁 ' + escapeHtml(rep.folder) : ''}
+                                ${rep.folder ? ' · 📁 ' + escapeHtml(rep.folder.split('/').pop()) : ''}
                             </div>
                         </div>
                     </div>
@@ -1720,8 +1750,46 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         });
     }
 
-    window.goBackToAllFolders = function() {
-        state.currentFolder = 'all';
+    // ===== NESTED FOLDER: papkani rekursiv o'chirish =====
+    async function deleteFolderRecursive(sectionId, folderName) {
+        const fullPath = [...state.folderStack, folderName].join('/');
+        const fullPathSlash = fullPath + '/';
+
+        // 1. Ichidagi barcha hisobotlarni topish (o'zi + ichidagi papkalar)
+        const reportsToDelete = state.reports.filter(r =>
+            r.section_id === sectionId &&
+            (r.folder === fullPath || (r.folder || '').startsWith(fullPathSlash)) &&
+            (isAdmin() || r.uploaded_by === state.currentUser.id)
+        );
+
+        for (const rep of reportsToDelete) {
+            if (rep.file_path) await r2Delete(rep.file_path);
+            await supabase.from('reports').delete().eq('id', rep.id);
+            state.reports = state.reports.filter(r => r.id !== rep.id);
+        }
+
+        // 2. Ichidagi barcha papkalarni topish (o'zi + ichidagi)
+        const foldersToDelete = state.folders.filter(f =>
+            f.section_id === sectionId &&
+            ((f.parent_path || '') === (state.folderStack.join('/') || '') && f.name === folderName ||
+             (f.parent_path || '').startsWith(fullPath) ||
+             (f.parent_path || '') === fullPath) &&
+            (isAdmin() || f.user_id === state.currentUser.id)
+        );
+
+        for (const f of foldersToDelete) {
+            await supabase.from('folders').delete().eq('id', f.id);
+            state.folders = state.folders.filter(x => x.id !== f.id);
+        }
+    }
+
+    // ===== NESTED FOLDER: chuqurlikka o'tish =====
+    window.navigateToFolderDepth = function(depth) {
+        if (depth < 0) {
+            state.folderStack = [];
+        } else {
+            state.folderStack = state.folderStack.slice(0, depth + 1);
+        }
         renderReports();
     };
 
@@ -2114,7 +2182,7 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         if (!state.currentUser) return alert('Avval tizimga kiring');
         const sectionId = state.currentSectionId;
         if (!sectionId) return alert('Bo\'lim tanlanmagan');
-        const folder = state.currentFolder !== 'all' ? state.currentFolder : null;
+        const folder = state.folderStack.length ? state.folderStack.join('/') : null;
         const isAdminUpload = isAdmin();
         showLoading('Fayllar yuklanmoqda...');
         for (const file of Array.from(files)) {
@@ -2227,6 +2295,11 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
     window.openFolderModal = function() {
         if (!state.currentUser) return;
         $('folderNameInput').value = '';
+        // Joriy joylashuvni ko'rsatish
+        const locationText = state.folderStack.length
+            ? state.folderStack.join(' / ')
+            : 'Bo\'lim ildizi';
+        $('folderLocationDisplay').innerHTML = `<i class="fas ${state.folderStack.length ? 'fa-folder' : 'fa-home'}"></i> ${escapeHtml(locationText)}`;
         $('folderModal').classList.add('show');
     };
     window.closeFolderModal = function() { $('folderModal').classList.remove('show'); };
@@ -2236,14 +2309,36 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         if (!name) return alert('Papka nomini kiriting');
         const secId = state.currentSectionId;
         const userId = state.currentUser.id;
-        if (state.folders.some(f => f.section_id === secId && f.user_id === userId && f.name === name)) {
-            return alert('Bu papka mavjud');
+        const parentPath = state.folderStack.length ? state.folderStack.join('/') : null;
+
+        // Tekshirish: shu joyda shu nomli papka bormi
+        if (state.folders.some(f =>
+            f.section_id === secId &&
+            (f.parent_path || null) === parentPath &&
+            f.name === name &&
+            (isAdmin() || f.user_id === userId)
+        )) {
+            return alert('Bu joyda bunday papka allaqachon mavjud');
         }
-        const { data, error } = await supabase.from('folders').insert({ section_id: secId, user_id: userId, name }).select().single();
-        if (error) return alert('Xatolik: ' + error.message);
+
+        const folderPayload = {
+            section_id: secId,
+            user_id: userId,
+            name: name,
+            parent_path: parentPath
+        };
+
+        const { data, error } = await supabase.from('folders').insert(folderPayload).select().single();
+        if (error) {
+            // Agar parent_path ustuni yo'q bo'lsa, eski usulda saqlash
+            if (error.message && error.message.includes('parent_path')) {
+                alert('Ma\'lumotlar bazasida "parent_path" ustuni yo\'q.\n\nSupabase\'da quyidagi SQL ni ishga tushiring:\n\nALTER TABLE folders ADD COLUMN parent_path text;');
+                return;
+            }
+            return alert('Xatolik: ' + error.message);
+        }
         state.folders.push(data);
         closeFolderModal();
-        state.currentFolder = name;
         renderReports();
     }
 
@@ -2293,6 +2388,7 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
                 if (error) return alert('Xatolik: ' + error.message);
                 state.sections.push(data);
                 state.currentSectionId = data.id;
+                state.folderStack = [];
                 renderSections();
                 renderReports();
             }
@@ -2306,7 +2402,10 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         document.querySelectorAll('#folderBar > .folder-chip').forEach(chip => {
             chip.addEventListener('click', () => {
                 if (chip.dataset.folder === 'new') window.openFolderModal();
-                else { state.currentFolder = 'all'; renderReports(); }
+                else {
+                    // "Joriy papkadagi fayllar" — nested bo'lsa, shu papkadagi fayllar
+                    renderReports();
+                }
             });
         });
         $('saveFolderBtn').addEventListener('click', saveFolder);
