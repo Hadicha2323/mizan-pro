@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
 <title>Mizan Pro — Masjid hujjatlari boshqaruvi</title>
 
-<!-- PWA Meta Tags -->
+<!-- PWA -->
 <meta name="theme-color" content="#1e3c72">
 <meta name="description" content="Mizan Pro — Masjid hujjatlari boshqaruv tizimi">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -14,12 +14,9 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="application-name" content="Mizan Pro">
 
-<!-- Icons -->
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
 <link rel="apple-touch-icon" href="icon-192.png">
-
-<!-- Manifest -->
 <link rel="manifest" href="manifest.json">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -69,16 +66,11 @@ html, body {
     -webkit-tap-highlight-color: transparent;
     -webkit-font-smoothing: antialiased;
 }
-
 body { padding: 14px; display: flex; justify-content: center; align-items: flex-start; }
 
 #app {
-    width: 100%;
-    max-width: 1500px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
+    width: 100%; max-width: 1500px; margin: 0 auto;
+    display: flex; flex-direction: column; gap: 18px;
     animation: fadeUp 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -86,17 +78,14 @@ body { padding: 14px; display: flex; justify-content: center; align-items: flex-
     position: fixed; inset: 0;
     background: rgba(238, 242, 251, 0.95);
     backdrop-filter: blur(8px);
-    z-index: 3000;
-    display: none;
+    z-index: 3000; display: none;
     align-items: center; justify-content: center;
     flex-direction: column; gap: 20px;
 }
 #loadingOverlay.show { display: flex; }
 #loadingOverlay .spinner {
-    width: 60px; height: 60px;
-    border-radius: 50%;
-    border: 4px solid var(--border);
-    border-top-color: var(--primary);
+    width: 60px; height: 60px; border-radius: 50%;
+    border: 4px solid var(--border); border-top-color: var(--primary);
     animation: spin 0.8s linear infinite;
 }
 #loadingOverlay p { font-weight: 700; color: var(--primary); font-size: 1rem; }
@@ -142,21 +131,17 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
 /* Install button */
 .install-btn {
     background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-    color: #fff;
-    padding: 12px 20px;
+    color: #fff; padding: 12px 20px;
     border-radius: var(--radius-sm);
     font-weight: 700;
     box-shadow: 0 6px 20px rgba(16,185,129,0.35);
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
+    display: inline-flex; align-items: center; gap: 8px;
     font-size: 0.9rem;
     animation: pulseInstall 2s ease-in-out infinite;
 }
 .install-btn:hover {
     box-shadow: 0 12px 28px rgba(16,185,129,0.5);
-    transform: translateY(-2px);
-    animation: none;
+    transform: translateY(-2px); animation: none;
 }
 @keyframes pulseInstall {
     0%, 100% { box-shadow: 0 6px 20px rgba(16,185,129,0.35); }
@@ -167,8 +152,7 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
 .login-screen {
     position: fixed; inset: 0;
     display: flex; align-items: center; justify-content: center;
-    z-index: 500; padding: 20px;
-    background: var(--bg-gradient);
+    z-index: 500; padding: 20px; background: var(--bg-gradient);
 }
 .login-screen.hidden { display: none; }
 .login-card {
@@ -176,8 +160,7 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
     backdrop-filter: blur(24px) saturate(180%);
     -webkit-backdrop-filter: blur(24px) saturate(180%);
     border-radius: var(--radius-xl);
-    padding: 40px 36px;
-    box-shadow: var(--shadow-lg);
+    padding: 40px 36px; box-shadow: var(--shadow-lg);
     border: 1px solid rgba(255,255,255,0.9);
     max-width: 440px; width: 100%;
 }
@@ -187,16 +170,13 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
     background: var(--primary-gradient); color: #fff;
     display: inline-flex; align-items: center; justify-content: center;
     font-size: 2rem; box-shadow: var(--shadow-glow);
-    margin-bottom: 16px;
-    animation: pulseIcon 3s ease-in-out infinite;
+    margin-bottom: 16px; animation: pulseIcon 3s ease-in-out infinite;
 }
 .login-logo h1 {
     font-size: 1.9rem; font-weight: 800;
     background: var(--primary-gradient);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: transparent;
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent;
     margin-bottom: 6px;
 }
 .login-logo p { color: var(--text-muted); font-size: 0.88rem; font-weight: 500; }
@@ -205,8 +185,7 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
 .login-input-group i.field-icon {
     position: absolute; left: 18px; top: 50%;
     transform: translateY(-50%);
-    color: var(--text-muted); font-size: 1rem;
-    pointer-events: none;
+    color: var(--text-muted); font-size: 1rem; pointer-events: none;
 }
 .login-input-group input {
     width: 100%; padding: 15px 18px 15px 48px;
@@ -214,8 +193,7 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
     border: 1.5px solid var(--border);
     background: var(--surface); font-size: 0.95rem;
     font-family: inherit; font-weight: 500;
-    outline: none; transition: var(--transition);
-    color: var(--text);
+    outline: none; transition: var(--transition); color: var(--text);
 }
 .login-input-group input:focus {
     border-color: var(--primary);
@@ -246,10 +224,8 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
     font-size: 1.75rem; font-weight: 800;
     letter-spacing: -0.03em;
     background: var(--primary-gradient);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: transparent;
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent;
     display: inline-flex; align-items: center; gap: 12px;
 }
 .logo h1 i {
@@ -264,8 +240,7 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
     display: flex; align-items: center; gap: 12px;
     background: var(--surface); padding: 8px 18px 8px 10px;
     border-radius: 40px; font-weight: 600;
-    box-shadow: var(--shadow-sm);
-    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow-sm); border: 1px solid var(--border-light);
 }
 .user-badge i {
     font-size: 1.5rem; color: var(--primary);
@@ -406,6 +381,25 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
 }
 .date-filter .df-actions { display: flex; gap: 8px; flex-shrink: 0; }
 
+/* ADMIN upload banner */
+.admin-upload-banner {
+    background: linear-gradient(135deg, #fef5e7 0%, #fdebd0 100%);
+    border: 2px solid #f5b942;
+    border-radius: var(--radius-md);
+    padding: 14px 18px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: #92400e;
+}
+.admin-upload-banner i {
+    font-size: 1.4rem;
+    color: #d97706;
+}
+
 .upload-area {
     background: linear-gradient(135deg, #e8f0fe 0%, #dce6f7 100%);
     border: 2.5px dashed #8aa8d9;
@@ -447,6 +441,7 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
     transition: var(--transition); gap: 10px; cursor: pointer;
 }
 .report-item:hover { border-color: var(--primary-light); box-shadow: var(--shadow-sm); transform: translateY(-2px); }
+.report-item.admin-item { border-left: 4px solid #f5b942; }
 .report-info { display: flex; align-items: center; gap: 14px; flex: 1; min-width: 0; }
 .report-info > i {
     font-size: 1.3rem; width: 40px; height: 40px;
@@ -474,10 +469,8 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
 .empty-state i {
     font-size: 3.4rem; opacity: 0.25;
     background: var(--primary-gradient);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: transparent;
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent;
 }
 
 .stat-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 20px; }
@@ -572,8 +565,7 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
     display: flex; align-items: center; gap: 16px;
     padding: 22px 24px; background: var(--primary-gradient);
     color: #fff; border-radius: var(--radius-lg);
-    margin-bottom: 22px; box-shadow: var(--shadow-glow);
-    flex-wrap: wrap;
+    margin-bottom: 22px; box-shadow: var(--shadow-glow); flex-wrap: wrap;
 }
 .masjid-detail-header .m-icon-lg {
     width: 68px; height: 68px; border-radius: 20px;
@@ -673,6 +665,30 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
 }
 .preview-fallback i { font-size: 4rem; color: var(--primary); opacity: 0.4; }
 
+/* Admin download dropdown */
+.download-menu {
+    position: absolute;
+    background: var(--surface);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--border-light);
+    padding: 8px;
+    min-width: 180px;
+    z-index: 2500;
+    display: none;
+}
+.download-menu.show { display: block; }
+.download-menu button {
+    width: 100%;
+    justify-content: flex-start;
+    padding: 10px 14px;
+    font-size: 0.85rem;
+    border-radius: 8px;
+    color: var(--text);
+}
+.download-menu button:hover { background: var(--surface-2); }
+.download-menu button i { width: 20px; }
+
 .form-group { margin-bottom: 16px; }
 .form-group label {
     display: block; font-weight: 700; font-size: 0.82rem;
@@ -704,6 +720,7 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
 .badge.success { background: var(--accent-soft); color: var(--accent); border-color: rgba(15,157,88,0.2); }
 .badge.danger { background: #fdecea; color: var(--danger); border-color: rgba(239,68,68,0.2); }
 .badge.warning { background: #fef5e7; color: var(--warning); border-color: rgba(245,158,11,0.2); }
+.badge.gold { background: linear-gradient(135deg, #fef5e7 0%, #fdebd0 100%); color: #92400e; border-color: #f5b942; }
 
 @media (min-width: 768px) {
     body { padding: 24px; }
@@ -801,6 +818,12 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
                 <div class="panel-header">
                     <h2 id="currentSectionTitle"><i class="fas fa-file-alt"></i> Hisobotlar</h2>
                     <span id="sectionBadge" class="badge"></span>
+                </div>
+
+                <!-- Admin uchun banner -->
+                <div class="admin-upload-banner" id="adminUploadBanner" style="display:none;">
+                    <i class="fas fa-crown"></i>
+                    <span>Siz admin sifatida hisobot yuklayapsiz — bu hisobot faqat sizga ko'rinadi.</span>
                 </div>
 
                 <div class="upload-area" id="uploadArea">
@@ -986,23 +1009,26 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
     </div>
 </div>
 
+<!-- Download menu (dropdown) -->
+<div class="download-menu" id="downloadMenu"></div>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://cdn.jsdelivr.net/npm/aws4fetch@1.0.19/dist/aws4fetch.umd.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <script>
 (function() {
     'use strict';
 
-    // ===== PWA Service Worker =====
+    // ===== PWA =====
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
             navigator.serviceWorker.register('./sw.js')
-                .then(reg => console.log('Service Worker ro\'yxatdan o\'tdi:', reg.scope))
-                .catch(err => console.log('Service Worker xato:', err));
+                .then(reg => console.log('SW OK:', reg.scope))
+                .catch(err => console.log('SW xato:', err));
         });
     }
 
-    // ===== PWA Install Prompt =====
     let deferredPrompt = null;
     const installBtnLogin = document.getElementById('installBtnLogin');
 
@@ -1014,32 +1040,22 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
 
     window.installPWA = async function() {
         if (!deferredPrompt) {
-            alert('Ilovani o\'rnatish uchun brauzer menyusidan "O\'rnatish" yoki "Add to Home Screen" tanlang.');
+            alert('Ilovani o\'rnatish uchun brauzer menyusidan "O\'rnatish" tanlang.');
             return;
         }
         deferredPrompt.prompt();
-        const result = await deferredPrompt.userChoice;
-        console.log('O\'rnatish natijasi:', result.outcome);
+        await deferredPrompt.userChoice;
         deferredPrompt = null;
         if (installBtnLogin) installBtnLogin.style.display = 'none';
     };
 
     if (installBtnLogin) installBtnLogin.addEventListener('click', window.installPWA);
 
-    window.addEventListener('appinstalled', () => {
-        console.log('Mizan Pro o\'rnatildi!');
-        if (installBtnLogin) installBtnLogin.style.display = 'none';
-    });
-
-    // ============================================================
-    // ⚙️ SUPABASE
-    // ============================================================
+    // ===== SUPABASE =====
     const SUPABASE_URL = 'https://ctsalsacbxzluxaknvdh.supabase.co';
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN0c2Fsc2FjYnh6bHV4YWtudmRoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA3ODQyNjgsImV4cCI6MjEwNjM2MDI2OH0.nSpZEhXaSpX3P67iNc9xCcvp4i-JMnvstL6lafpOxcI';
 
-    // ============================================================
-    // ☁️ CLOUDFLARE R2
-    // ============================================================
+    // ===== R2 =====
     const R2_CONFIG = {
         endpoint: 'https://bba4354431f6c41a7e679ff1b92f3c63.r2.cloudflarestorage.com',
         accessKeyId: 'ba2776e790ced3036de9a712f8e50bb5',
@@ -1051,11 +1067,7 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
 
     const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-    if (!window.aws4fetch || !window.aws4fetch.AwsClient) {
-        console.error('aws4fetch yuklanmagan!');
-    }
     const { AwsClient } = window.aws4fetch;
-
     const r2Client = new AwsClient({
         accessKeyId: R2_CONFIG.accessKeyId,
         secretAccessKey: R2_CONFIG.secretAccessKey,
@@ -1072,7 +1084,7 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         });
         if (!response.ok) {
             const errText = await response.text();
-            throw new Error('R2 yuklashda xato: ' + response.status + ' ' + errText);
+            throw new Error('R2 xato: ' + response.status + ' ' + errText);
         }
         return `${R2_CONFIG.publicUrl}/${filePath}`;
     }
@@ -1081,8 +1093,8 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         try {
             const url = `${R2_CONFIG.endpoint}/${R2_CONFIG.bucket}/${filePath}`;
             const response = await r2Client.fetch(url, { method: 'DELETE' });
-            if (!response.ok) console.warn('R2 delete xato:', response.status);
-        } catch(e) { console.warn('R2 delete xato:', e); }
+            if (!response.ok) console.warn('R2 delete:', response.status);
+        } catch(e) { console.warn('R2 delete:', e); }
     }
 
     const MONTHS = ['Yanvar','Fevral','Mart','Aprel','May','Iyun','Iyul','Avgust','Sentabr','Oktabr','Noyabr','Dekabr'];
@@ -1156,7 +1168,7 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
             state.reports = reports.data || [];
             state.folders = folders.data || [];
             hideLoading();
-        } catch(e) { hideLoading(); alert('Ma\'lumotlarni yuklashda xatolik: ' + e.message); }
+        } catch(e) { hideLoading(); alert('Yuklashda xatolik: ' + e.message); }
     }
 
     async function doLogin() {
@@ -1306,7 +1318,6 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
                     <h3 style="font-size:1.1rem; font-weight:700; margin-bottom:8px;">Xush kelibsiz, ${escapeHtml(state.currentUser.first_name)}!</h3>
                     <p style="color:var(--text-muted); font-size:0.9rem; max-width:500px; margin:0 auto;">
                         Siz <b>${escapeHtml(state.currentUser.masjid)}</b> masjidiga biriktirilgansiz.
-                        Hisobot yuklash uchun <b>"Bo'limlar"</b> sahifasiga o'ting.
                     </p>
                 </div>
             `;
@@ -1318,7 +1329,7 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         const today = todayStr();
         let totalToday = 0;
         const setReport = new Set();
-        state.reports.forEach(r => { if (r.date === today) { totalToday++; setReport.add(r.uploaded_by); } });
+        state.reports.forEach(r => { if (r.date === today && !r.admin_only) { totalToday++; setReport.add(r.uploaded_by); } });
         const missing = allStaff.filter(s => !setReport.has(s.id));
         $('statRow').innerHTML = `
             <div class="stat-card"><i class="fas fa-users"></i><span class="val">${allStaff.length}</span><span class="lbl">Jami hodimlar</span></div>
@@ -1399,9 +1410,11 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
 
     function getVisibleReports(sectionId) {
         const all = state.reports.filter(r => r.section_id === sectionId);
+        // Admin hamma narsani ko'radi
         if (isAdmin()) return all;
+        // Hodim faqat o'z hisobotlarini ko'radi (admin_only emas)
         if (!state.currentUser) return [];
-        return all.filter(r => r.uploaded_by === state.currentUser.id);
+        return all.filter(r => r.uploaded_by === state.currentUser.id && !r.admin_only);
     }
 
     function getVisibleFolders(sectionId) {
@@ -1425,11 +1438,20 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
             return;
         }
         $('currentSectionTitle').innerHTML = `<i class="fas ${sec.icon||'fa-file-alt'}"></i> ${escapeHtml(sec.name)}`;
-        const canUpload = !!state.currentUser && !isAdmin();
+
+        // Admin ham yuklay oladi
+        const canUpload = !!state.currentUser;
         $('uploadArea').style.display = canUpload ? 'flex' : 'none';
         document.querySelector('.upload-actions').style.display = canUpload ? 'grid' : 'none';
         $('folderBar').style.display = state.currentUser ? 'flex' : 'none';
         $('dateFilter').style.display = state.currentUser ? 'flex' : 'none';
+
+        // Admin banner
+        if (isAdmin()) {
+            $('adminUploadBanner').style.display = 'flex';
+        } else {
+            $('adminUploadBanner').style.display = 'none';
+        }
 
         const folders = getVisibleFolders(sec.id);
         $('folderList').innerHTML = folders.map(f => `
@@ -1463,14 +1485,15 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
             const uploader = state.staff.find(s => s.id === rep.uploaded_by);
             const upName = uploader ? `${uploader.first_name} ${uploader.last_name||''}`.trim() : 'Noma\'lum';
             const canDelete = isAdmin() || rep.uploaded_by === state.currentUser?.id;
+            const isAdminItem = rep.admin_only;
             return `
-                <div class="report-item">
+                <div class="report-item ${isAdminItem ? 'admin-item' : ''}">
                     <div class="report-info" onclick="openFileViewer('${rep.id}')">
                         <i class="fas ${icon}"></i>
                         <div style="min-width:0;">
                             <div class="file-name">${escapeHtml(rep.name)}</div>
                             <div class="meta">
-                                ${escapeHtml(upName)} · ${rep.date ? fmtDate(rep.date) : ''}
+                                ${isAdminItem ? '👑 Admin · ' : ''}${escapeHtml(upName)} · ${rep.date ? fmtDate(rep.date) : ''}
                                 ${rep.folder ? ' · 📁 ' + escapeHtml(rep.folder) : ''}
                             </div>
                         </div>
@@ -1488,7 +1511,15 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
             btn.addEventListener('click', e => { e.stopPropagation(); openFileViewer(btn.dataset.id); });
         });
         document.querySelectorAll('.download-file').forEach(btn => {
-            btn.addEventListener('click', e => { e.stopPropagation(); downloadReport(btn.dataset.id); });
+            btn.addEventListener('click', e => {
+                e.stopPropagation();
+                const id = btn.dataset.id;
+                if (isAdmin()) {
+                    showDownloadMenu(e, id);
+                } else {
+                    downloadReport(id);
+                }
+            });
         });
         document.querySelectorAll('.delete-file').forEach(btn => {
             btn.addEventListener('click', async e => {
@@ -1505,7 +1536,59 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         });
     }
 
+    // ===== DOWNLOAD MENU (admin uchun) =====
+    function showDownloadMenu(event, repId) {
+        const menu = $('downloadMenu');
+        const rect = event.target.getBoundingClientRect();
+        menu.style.top = (rect.bottom + 4) + 'px';
+        menu.style.left = (rect.left - 140) + 'px';
+        menu.innerHTML = `
+            <button onclick="downloadAs('${repId}', 'original')"><i class="fas fa-download"></i> Asl formatda yuklash</button>
+            <button onclick="downloadAs('${repId}', 'pdf')"><i class="fas fa-file-pdf"></i> PDF sifatida yuklash</button>
+            <button onclick="openFileViewer('${repId}')"><i class="fas fa-eye"></i> Dastur ichida ko'rish</button>
+        `;
+        menu.classList.add('show');
+        setTimeout(() => {
+            document.addEventListener('click', closeDownloadMenu, { once: true });
+        }, 100);
+    }
+
+    function closeDownloadMenu() {
+        $('downloadMenu').classList.remove('show');
+    }
+
+    window.downloadAs = function(repId, format) {
+        closeDownloadMenu();
+        const rep = state.reports.find(r => r.id === repId);
+        if (!rep || !rep.data_url) return;
+
+        if (format === 'pdf') {
+            // PDF sifatida yuklash (jsPDF orqali)
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            doc.setFontSize(16);
+            doc.text('Mizan Pro', 105, 20, { align: 'center' });
+            doc.setFontSize(12);
+            doc.text('Hisobot: ' + rep.name, 20, 40);
+            doc.text('Sana: ' + (rep.date || ''), 20, 50);
+            doc.text('Yuklovchi: ' + (state.staff.find(s => s.id === rep.uploaded_by)?.first_name || ''), 20, 60);
+            doc.text('Fayl havolasi: ' + rep.data_url, 20, 70);
+            doc.save(rep.name.replace(/\.[^/.]+$/, '') + '.pdf');
+            return;
+        }
+
+        // Asl formatda yuklash
+        const a = document.createElement('a');
+        a.href = rep.data_url;
+        a.download = rep.name;
+        a.target = '_blank';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+    };
+
     window.openFileViewer = function(repId) {
+        closeDownloadMenu();
         const rep = state.reports.find(r => r.id === repId);
         if (!rep) return;
         $('fvTitle').innerHTML = `<i class="fas ${getFileIcon(rep.file_type||rep.name)}"></i> ${escapeHtml(rep.name)}`;
@@ -1620,13 +1703,14 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         let totalReports = 0;
         state.reports.forEach(r => {
             if (!staffIds.includes(r.uploaded_by)) return;
+            if (r.admin_only) return;
             if (!matchDateFilter(r, state.masjidFilter)) return;
             totalReports++;
         });
         $('masjidDetailBadge').textContent = totalReports + ' ta hisobot';
         $('masjidSectionGrid').innerHTML = state.sections.map(sec => {
             const count = state.reports.filter(r =>
-                r.section_id === sec.id && staffIds.includes(r.uploaded_by) && matchDateFilter(r, state.masjidFilter)
+                r.section_id === sec.id && staffIds.includes(r.uploaded_by) && !r.admin_only && matchDateFilter(r, state.masjidFilter)
             ).length;
             return `
                 <div class="section-box" onclick="openMasjidSection('${m.id}', '${sec.id}')">
@@ -1656,24 +1740,19 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         if (!m || !sec) return;
 
         const staffIds = state.staff.filter(s => s.role === 'staff' && s.masjid === m.name).map(s => s.id);
-        let reports = state.reports.filter(r => r.section_id === sectionId && staffIds.includes(r.uploaded_by));
+        let reports = state.reports.filter(r => r.section_id === sectionId && staffIds.includes(r.uploadedBy || r.uploaded_by));
+        reports = reports.filter(r => !r.admin_only);
         reports = reports.filter(r => matchDateFilter(r, state.masjidFilter));
         reports.sort((a,b) => new Date(b.uploaded_at||0) - new Date(a.uploaded_at||0));
 
         $('msmTitle').innerHTML = `<i class="fas ${sec.icon||'fa-folder'}"></i> ${escapeHtml(sec.name)} <span style="font-size:0.85rem; color:var(--text-muted); font-weight:500;">— ${escapeHtml(m.name)}</span>`;
 
-        const filterInfo = [];
-        if (state.masjidFilter.year) filterInfo.push(`Yil: ${state.masjidFilter.year}`);
-        if (state.masjidFilter.month) filterInfo.push(`Oy: ${MONTHS[state.masjidFilter.month-1]}`);
-        if (state.masjidFilter.day) filterInfo.push(`Kun: ${state.masjidFilter.day}`);
-        const filterText = filterInfo.length ? ` · ${filterInfo.join(', ')}` : '';
-
         if (!reports.length) {
-            $('msmBody').innerHTML = `<div class="empty-state"><i class="fas fa-folder-open"></i> Bu bo'limda${filterText ? ' tanlangan sanada' : ''} hisobotlar yo'q</div>`;
+            $('msmBody').innerHTML = `<div class="empty-state"><i class="fas fa-folder-open"></i> Bu bo'limda hisobotlar yo'q</div>`;
         } else {
             $('msmBody').innerHTML = `
                 <div style="margin-bottom:14px; padding:12px 16px; background:var(--surface-2); border-radius:12px; color:var(--text-muted); font-size:0.85rem; font-weight:600; border:1px solid var(--border-light);">
-                    <i class="fas fa-info-circle" style="color:var(--primary);"></i> Jami: <b style="color:var(--text);">${reports.length}</b> ta hisobot — <b style="color:var(--text);">${escapeHtml(m.name)}</b>${filterText}
+                    <i class="fas fa-info-circle" style="color:var(--primary);"></i> Jami: <b style="color:var(--text);">${reports.length}</b> ta hisobot
                 </div>
                 <div style="display:flex; flex-direction:column; gap:10px; max-height:60vh; overflow-y:auto; padding-right:6px;">
                     ${reports.map(rep => {
@@ -1688,7 +1767,6 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
                                         <div class="file-name">${escapeHtml(rep.name)}</div>
                                         <div class="meta">
                                             👤 <b>${escapeHtml(upName)}</b> · 📅 ${rep.date ? fmtDate(rep.date) : ''}
-                                            ${rep.folder ? ' · 📁 ' + escapeHtml(rep.folder) : ''}
                                         </div>
                                     </div>
                                 </div>
@@ -1738,8 +1816,8 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         }
         $('staffGrid').innerHTML = list.map(s => {
             const today = todayStr();
-            const todayCount = state.reports.filter(r => r.uploaded_by === s.id && r.date === today).length;
-            const totalCount = state.reports.filter(r => r.uploaded_by === s.id).length;
+            const todayCount = state.reports.filter(r => r.uploaded_by === s.id && r.date === today && !r.admin_only).length;
+            const totalCount = state.reports.filter(r => r.uploaded_by === s.id && !r.admin_only).length;
             return `
                 <div class="staff-card">
                     <div class="staff-head">
@@ -1804,13 +1882,13 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
             const upName = uploader ? `${uploader.first_name} ${uploader.last_name||''}`.trim() : 'Noma\'lum';
             const sec = state.sections.find(s => s.id === rep.section_id);
             return `
-                <div class="report-item" style="margin-bottom:10px;">
+                <div class="report-item ${rep.admin_only ? 'admin-item' : ''}" style="margin-bottom:10px;">
                     <div class="report-info" onclick="openFileViewer('${rep.id}')">
                         <i class="fas ${icon}"></i>
                         <div style="min-width:0;">
                             <div class="file-name">${escapeHtml(rep.name)}</div>
                             <div class="meta">
-                                <b>${escapeHtml(upName)}</b> · ${escapeHtml(rep.masjid||'')} ·
+                                ${rep.admin_only ? '👑 Admin · ' : ''}<b>${escapeHtml(upName)}</b> · ${escapeHtml(rep.masjid||'')} ·
                                 ${escapeHtml(sec?.name||'')} · ${rep.date ? fmtDate(rep.date) : ''}
                                 ${rep.folder ? ' · 📁 ' + escapeHtml(rep.folder) : ''}
                             </div>
@@ -1828,7 +1906,7 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
             btn.addEventListener('click', e => { e.stopPropagation(); openFileViewer(btn.dataset.id); });
         });
         document.querySelectorAll('.admin-down').forEach(btn => {
-            btn.addEventListener('click', e => { e.stopPropagation(); downloadReport(btn.dataset.id); });
+            btn.addEventListener('click', e => { e.stopPropagation(); showDownloadMenu(e, btn.dataset.id); });
         });
         document.querySelectorAll('.admin-del').forEach(btn => {
             btn.addEventListener('click', async e => {
@@ -1849,6 +1927,7 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         const sectionId = state.currentSectionId;
         if (!sectionId) return alert('Bo\'lim tanlanmagan');
         const folder = state.currentFolder !== 'all' ? state.currentFolder : null;
+        const isAdminUpload = isAdmin();
         showLoading('Fayllar yuklanmoqda...');
         for (const file of Array.from(files)) {
             try {
@@ -1863,7 +1942,8 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
                     name: file.name, file_type: file.type, file_path: filePath,
                     data_url: publicUrl, uploaded_by: state.currentUser.id,
                     date: todayStr(), masjid: state.currentUser.masjid,
-                    folder: folder, section_id: sectionId
+                    folder: folder, section_id: sectionId,
+                    admin_only: isAdminUpload  // Admin yuklagan bo'lsa - faqat adminga ko'rinadi
                 };
                 const { data, error } = await supabase.from('reports').insert(rep).select().single();
                 if (error) throw error;
@@ -2079,6 +2159,7 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
                 closeMasjidModal();
                 closeFolderModal();
                 closeMasjidSectionModal();
+                closeDownloadMenu();
             }
         });
     }
