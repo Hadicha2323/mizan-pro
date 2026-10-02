@@ -128,7 +128,6 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
     transform: translateY(-2px) scale(1.05); box-shadow: var(--shadow-md);
 }
 
-/* Install button */
 .install-btn {
     background: linear-gradient(135deg, #10b981 0%, #059669 100%);
     color: #fff; padding: 12px 20px;
@@ -148,14 +147,12 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
     50% { box-shadow: 0 6px 28px rgba(16,185,129,0.6); }
 }
 
-/* Update banner */
 #updateBanner { animation: slideDown 0.4s cubic-bezier(0.22, 1, 0.36, 1); }
 @keyframes slideDown {
     from { opacity: 0; transform: translate(-50%, -30px); }
     to { opacity: 1; transform: translate(-50%, 0); }
 }
 
-/* LOGIN */
 .login-screen {
     position: fixed; inset: 0;
     display: flex; align-items: center; justify-content: center;
@@ -216,7 +213,6 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
 }
 .login-error.show { display: block; }
 
-/* HEADER */
 .app-header {
     background: var(--surface-glass);
     backdrop-filter: blur(24px) saturate(180%);
@@ -265,7 +261,6 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
 }
 .user-badge .role.admin { background: var(--gold-gradient); }
 
-/* TABS */
 .tabs {
     display: flex; gap: 6px; flex-wrap: wrap;
     background: var(--surface-glass);
@@ -348,7 +343,6 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
 }
 .section-actions button:hover { background: var(--danger); color: #fff; transform: scale(1.1); }
 
-/* FOLDER BAR */
 .folder-bar {
     display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
     background: var(--surface-2); padding: 12px 16px;
@@ -382,7 +376,6 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
 .folder-chip:hover .folder-delete { opacity: 1; }
 .folder-chip .folder-delete:hover { background: var(--danger); color: #fff; }
 
-/* Folder path breadcrumb */
 .folder-path {
     display: flex;
     align-items: center;
@@ -446,7 +439,6 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
 }
 .date-filter .df-actions { display: flex; gap: 8px; flex-shrink: 0; }
 
-/* ADMIN upload banner */
 .admin-upload-banner {
     background: linear-gradient(135deg, #fef5e7 0%, #fdebd0 100%);
     border: 2px solid #f5b942;
@@ -730,7 +722,6 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
 }
 .preview-fallback i { font-size: 4rem; color: var(--primary); opacity: 0.4; }
 
-/* Admin download dropdown */
 .download-menu {
     position: absolute;
     background: var(--surface);
@@ -885,7 +876,6 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
                     <span id="sectionBadge" class="badge"></span>
                 </div>
 
-                <!-- Papka breadcrumb (nested folders) -->
                 <div class="folder-path" id="folderPath" style="display:none;">
                     <i class="fas fa-folder-open"></i>
                     <span>Bo'lim:</span>
@@ -899,7 +889,6 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
                     </button>
                 </div>
 
-                <!-- Admin uchun banner -->
                 <div class="admin-upload-banner" id="adminUploadBanner" style="display:none;">
                     <i class="fas fa-crown"></i>
                     <span>Siz admin sifatida hisobot yuklayapsiz — bu hisobot faqat sizga ko'rinadi.</span>
@@ -1108,7 +1097,7 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
     'use strict';
 
     // ============================================
-    // PWA — AVTOMATIK YANGILANADIGAN SERVICE WORKER
+    // PWA
     // ============================================
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
@@ -1270,7 +1259,7 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
     let state = {
         sections: [], masjidlar: [], staff: [], reports: [], folders: [],
         currentUser: null, currentSectionId: null,
-        folderStack: [],  // ← NESTED: papka yo'li (masalan: ['2024', 'Yanvar', 'Haftalik'])
+        folderStack: [],
         activeView: 'dashboard', adminMasjidFilter: 'all', adminSectionFilter: 'all',
         selectedMasjidId: null,
         filter: { year: '', month: '', day: '' },
@@ -1282,10 +1271,6 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
     const todayStr = () => new Date().toISOString().slice(0,10);
     const fmtDate = d => new Date(d).toLocaleDateString('uz-UZ', { year:'numeric', month:'2-digit', day:'2-digit' });
     const escapeHtml = s => String(s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-
-    // Papka path helperlari
-    const getCurrentPath = () => state.folderStack.join('/');
-    const getParentPath = () => state.folderStack.length ? state.folderStack.join('/') : null;
 
     function getFileIcon(ft) {
         const n = (ft||'').toLowerCase();
@@ -1540,7 +1525,7 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
             el.addEventListener('click', e => {
                 if (e.target.closest('.delete-section')) return;
                 state.currentSectionId = el.dataset.id;
-                state.folderStack = [];  // Bo'lim o'zgarganda papka yo'lini tozalash
+                state.folderStack = [];
                 state.filter = { year:'', month:'', day:'' };
                 initDateFilters();
                 renderSections();
@@ -1565,6 +1550,9 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         });
     }
 
+    // ====== HISOBOT KO'RINISHI ======
+    // Admin — hammasini ko'radi
+    // Hodim — faqat o'zi yuklaganlarini va admin_only bo'lmaganlarini
     function getVisibleReports(sectionId) {
         const all = state.reports.filter(r => r.section_id === sectionId);
         if (isAdmin()) return all;
@@ -1572,7 +1560,9 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         return all.filter(r => r.uploaded_by === state.currentUser.id && !r.admin_only);
     }
 
-    // Joriy papkadagi papkalar (nested)
+    // ====== PAPKALAR KO'RINISHI ======
+    // BARCHA xodimlar va admin barcha papkalarni ko'radi (struktura umumiy)
+    // Admin qaysi xodim nomidan yaratgan bo'lsa ham — hammaga ko'rinadi
     function getVisibleFolders(sectionId) {
         if (!state.currentUser) return [];
         const parentPath = state.folderStack.join('/') || null;
@@ -1580,12 +1570,16 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
             f.section_id === sectionId &&
             (f.parent_path || null) === parentPath
         );
-        if (isAdmin()) {
-            const set = new Set();
-            folders.forEach(f => set.add(f.name));
-            return Array.from(set);
-        }
-        return folders.filter(f => f.user_id === state.currentUser.id).map(f => f.name);
+        // Nom bo'yicha unique qilish
+        const seen = new Set();
+        const result = [];
+        folders.forEach(f => {
+            if (!seen.has(f.name)) {
+                seen.add(f.name);
+                result.push(f.name);
+            }
+        });
+        return result;
     }
 
     // Joriy papkadagi hisobotlar
@@ -1619,21 +1613,24 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
             $('adminUploadBanner').style.display = 'none';
         }
 
-        // ===== BREADCRUMB (papka yo'li) =====
+        // ===== BREADCRUMB (har bir papka + orqaga tugma) =====
         if (state.folderStack.length > 0) {
             $('folderPath').style.display = 'flex';
             $('breadcrumbSection').textContent = sec.name.length > 40 ? sec.name.substring(0, 40) + '...' : sec.name;
 
-            // Har bir papkani bosib shu chuqurlikka o'tish
             let chain = '';
             state.folderStack.forEach((folderName, idx) => {
                 const isLast = idx === state.folderStack.length - 1;
-                const cls = isLast ? 'folder-name-display current' : 'folder-name-display';
+                // Har bir papkani bosib shu chuqurlikka o'tish
                 const onclick = isLast ? '' : `onclick="navigateToFolderDepth(${idx})"`;
+                const cls = isLast ? 'folder-name-display current' : 'folder-name-display';
+
+                // Har bir papka oldiga orqaga tugmasi (agar oxirgi bo'lmasa)
+                // va oxirgi papka uchun ham orqaga tugmasi
                 chain += `
                     <i class="fas fa-chevron-right" style="opacity:0.4;"></i>
                     <span class="${cls}" ${onclick} title="${escapeHtml(folderName)}">
-                        <i class="fas fa-folder"></i>
+                        ${!isLast ? '<i class="fas fa-arrow-left" style="font-size:0.7rem; margin-right:2px;"></i>' : '<i class="fas fa-folder-open"></i>'}
                         <span>${escapeHtml(folderName)}</span>
                     </span>
                 `;
@@ -1646,16 +1643,15 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
             $('uploadAreaTitle').textContent = 'Hisobot yuklash';
         }
 
-        // ===== PAPKALAR RO'YXATI =====
+        // ===== PAPKALAR =====
         const folders = getVisibleFolders(sec.id);
         $('folderList').innerHTML = folders.map(f => `
-            <button class="folder-chip ${false?'active':''}" data-folder="${escapeHtml(f)}" title="Ochish: ${escapeHtml(f)}">
+            <button class="folder-chip" data-folder="${escapeHtml(f)}" title="Ochish: ${escapeHtml(f)}">
                 <i class="fas fa-folder"></i> ${escapeHtml(f)}
-                <span class="folder-delete" data-folder="${escapeHtml(f)}" title="Papkani o'chirish"><i class="fas fa-times"></i></span>
+                ${isAdmin() ? `<span class="folder-delete" data-folder="${escapeHtml(f)}" title="Papkani o'chirish"><i class="fas fa-times"></i></span>` : ''}
             </button>
         `).join('');
 
-        // Papkani ochish (nested)
         document.querySelectorAll('#folderList .folder-chip').forEach(chip => {
             chip.addEventListener('click', (e) => {
                 if (e.target.closest('.folder-delete')) return;
@@ -1664,10 +1660,10 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
             });
         });
 
-        // Papkani o'chirish (rekursiv - ichidagi hamma narsa o'chadi)
         document.querySelectorAll('#folderList .folder-delete').forEach(del => {
             del.addEventListener('click', async (e) => {
                 e.stopPropagation();
+                if (!isAdmin()) return;
                 const folderName = del.dataset.folder;
                 if (!confirm(`"${folderName}" papkasini o'chirmoqchimisiz?\nIchidagi barcha papkalar va hisobotlar ham o'chadi!`)) return;
                 await deleteFolderRecursive(sec.id, folderName);
@@ -1676,13 +1672,13 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
             });
         });
 
-        // ===== HISOBOTLAR (faqat joriy papkadagi) =====
+        // ===== HISOBOTLAR =====
         let reports = getReportsInCurrentFolder(sec.id);
         reports = reports.filter(r => matchDateFilter(r, state.filter));
         reports.sort((a,b) => new Date(b.uploaded_at||0) - new Date(a.uploaded_at||0));
         $('sectionBadge').textContent = reports.length + ' ta';
 
-        // Papka bo'sh bo'lsa, lekin ichida papkalar bo'lsa
+        // Xodim uchun: papka ichida hisobotlar ko'rinmasa, lekin papkalar bo'lsa
         if (!reports.length && !folders.length) {
             const folderText = state.folderStack.length ? `"${state.folderStack.join(' / ')}" papkasida` : 'bu bo\'limda';
             $('reportList').innerHTML = `<div class="empty-state"><i class="fas fa-file-upload"></i> ${folderText} hisobotlar yo\'q</div>`;
@@ -1690,7 +1686,12 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         }
 
         if (!reports.length) {
-            $('reportList').innerHTML = `<div class="empty-state" style="padding:20px;"><i class="fas fa-file" style="font-size:2.4rem;"></i> Bu papkada hisobotlar yo'q</div>`;
+            // Xodimlarga maxsus xabar
+            if (!isAdmin() && state.folderStack.length > 0) {
+                $('reportList').innerHTML = `<div class="empty-state" style="padding:20px;"><i class="fas fa-lock" style="font-size:2.4rem; opacity:0.4;"></i><p style="margin-top:8px;">Bu papkada sizning hisobotlaringiz yo'q</p></div>`;
+            } else {
+                $('reportList').innerHTML = `<div class="empty-state" style="padding:20px;"><i class="fas fa-file" style="font-size:2.4rem;"></i> Bu papkada hisobotlar yo'q</div>`;
+            }
             return;
         }
 
@@ -1750,16 +1751,14 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         });
     }
 
-    // ===== NESTED FOLDER: papkani rekursiv o'chirish =====
+    // ===== NESTED: papkani rekursiv o'chirish =====
     async function deleteFolderRecursive(sectionId, folderName) {
         const fullPath = [...state.folderStack, folderName].join('/');
         const fullPathSlash = fullPath + '/';
 
-        // 1. Ichidagi barcha hisobotlarni topish (o'zi + ichidagi papkalar)
         const reportsToDelete = state.reports.filter(r =>
             r.section_id === sectionId &&
-            (r.folder === fullPath || (r.folder || '').startsWith(fullPathSlash)) &&
-            (isAdmin() || r.uploaded_by === state.currentUser.id)
+            (r.folder === fullPath || (r.folder || '').startsWith(fullPathSlash))
         );
 
         for (const rep of reportsToDelete) {
@@ -1768,13 +1767,11 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
             state.reports = state.reports.filter(r => r.id !== rep.id);
         }
 
-        // 2. Ichidagi barcha papkalarni topish (o'zi + ichidagi)
         const foldersToDelete = state.folders.filter(f =>
             f.section_id === sectionId &&
             ((f.parent_path || '') === (state.folderStack.join('/') || '') && f.name === folderName ||
              (f.parent_path || '').startsWith(fullPath) ||
-             (f.parent_path || '') === fullPath) &&
-            (isAdmin() || f.user_id === state.currentUser.id)
+             (f.parent_path || '') === fullPath)
         );
 
         for (const f of foldersToDelete) {
@@ -1783,7 +1780,7 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         }
     }
 
-    // ===== NESTED FOLDER: chuqurlikka o'tish =====
+    // ===== ORQAGA QAYTISH: bitta-bitta =====
     window.navigateToFolderDepth = function(depth) {
         if (depth < 0) {
             state.folderStack = [];
@@ -1793,7 +1790,14 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         renderReports();
     };
 
-    // ===== DOWNLOAD MENU =====
+    // Bir qadam orqaga (bitta papkadan chiqish)
+    window.goBackOneFolder = function() {
+        if (state.folderStack.length > 0) {
+            state.folderStack.pop();
+            renderReports();
+        }
+    };
+
     function showDownloadMenu(event, repId) {
         const menu = $('downloadMenu');
         const rect = event.target.getBoundingClientRect();
@@ -2295,7 +2299,6 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
     window.openFolderModal = function() {
         if (!state.currentUser) return;
         $('folderNameInput').value = '';
-        // Joriy joylashuvni ko'rsatish
         const locationText = state.folderStack.length
             ? state.folderStack.join(' / ')
             : 'Bo\'lim ildizi';
@@ -2311,12 +2314,11 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         const userId = state.currentUser.id;
         const parentPath = state.folderStack.length ? state.folderStack.join('/') : null;
 
-        // Tekshirish: shu joyda shu nomli papka bormi
+        // Tekshirish: shu joyda shu nomli papka bormi (barcha xodimlar uchun umumiy)
         if (state.folders.some(f =>
             f.section_id === secId &&
             (f.parent_path || null) === parentPath &&
-            f.name === name &&
-            (isAdmin() || f.user_id === userId)
+            f.name === name
         )) {
             return alert('Bu joyda bunday papka allaqachon mavjud');
         }
@@ -2330,7 +2332,6 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
 
         const { data, error } = await supabase.from('folders').insert(folderPayload).select().single();
         if (error) {
-            // Agar parent_path ustuni yo'q bo'lsa, eski usulda saqlash
             if (error.message && error.message.includes('parent_path')) {
                 alert('Ma\'lumotlar bazasida "parent_path" ustuni yo\'q.\n\nSupabase\'da quyidagi SQL ni ishga tushiring:\n\nALTER TABLE folders ADD COLUMN parent_path text;');
                 return;
@@ -2402,10 +2403,7 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         document.querySelectorAll('#folderBar > .folder-chip').forEach(chip => {
             chip.addEventListener('click', () => {
                 if (chip.dataset.folder === 'new') window.openFolderModal();
-                else {
-                    // "Joriy papkadagi fayllar" — nested bo'lsa, shu papkadagi fayllar
-                    renderReports();
-                }
+                else renderReports();
             });
         });
         $('saveFolderBtn').addEventListener('click', saveFolder);
@@ -2447,6 +2445,14 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
                 closeFolderModal();
                 closeMasjidSectionModal();
                 closeDownloadMenu();
+            }
+            // Backspace — bitta papkadan orqaga
+            if (e.key === 'Backspace' && state.folderStack.length > 0 && state.activeView === 'sections') {
+                const tag = (e.target.tagName || '').toLowerCase();
+                if (tag !== 'input' && tag !== 'textarea' && tag !== 'select') {
+                    e.preventDefault();
+                    goBackOneFolder();
+                }
             }
         });
     }
