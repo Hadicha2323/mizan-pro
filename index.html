@@ -148,6 +148,15 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
     50% { box-shadow: 0 6px 28px rgba(16,185,129,0.6); }
 }
 
+/* Update banner */
+#updateBanner {
+    animation: slideDown 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+@keyframes slideDown {
+    from { opacity: 0; transform: translate(-50%, -30px); }
+    to { opacity: 1; transform: translate(-50%, 0); }
+}
+
 /* LOGIN */
 .login-screen {
     position: fixed; inset: 0;
@@ -1079,15 +1088,94 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
 (function() {
     'use strict';
 
-    // ===== PWA =====
+    // ============================================
+    // PWA — AVTOMATIK YANGILANADIGAN SERVICE WORKER
+    // ============================================
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-            navigator.serviceWorker.register('./sw.js')
-                .then(reg => console.log('SW OK:', reg.scope))
-                .catch(err => console.log('SW xato:', err));
+            navigator.serviceWorker.register('./sw.js', { scope: './' })
+                .then(reg => {
+                    console.log('✅ SW ro\'yxatdan o\'tdi:', reg.scope);
+
+                    // Yangilanish borligini tekshirish
+                    reg.addEventListener('updatefound', () => {
+                        const newWorker = reg.installing;
+                        console.log('🔄 Yangi SW topildi');
+
+                        newWorker.addEventListener('statechange', () => {
+                            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                console.log('✨ Yangi versiya mavjud!');
+                                showUpdateNotification();
+                            }
+                        });
+                    });
+                })
+                .catch(err => console.log('❌ SW xato:', err));
+
+            // Boshqaruvchi o'zgarganda sahifani yangilash
+            let refreshing = false;
+            navigator.serviceWorker.addEventListener('controllerchange', () => {
+                if (refreshing) return;
+                refreshing = true;
+                console.log('🔄 Sahifa yangilanmoqda...');
+                window.location.reload();
+            });
         });
+
+        // Har 60 sekundda yangilanishni tekshirish
+        setInterval(() => {
+            navigator.serviceWorker.getRegistration().then(reg => {
+                if (reg) reg.update();
+            });
+        }, 60000);
     }
 
+    // Yangilanish bildirishnomasi (yashil banner)
+    function showUpdateNotification() {
+        if (document.getElementById('updateBanner')) return;
+
+        const banner = document.createElement('div');
+        banner.id = 'updateBanner';
+        banner.style.cssText = `
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #0f9d58 0%, #0c8048 100%);
+            color: white;
+            padding: 16px 24px;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(15,157,88,0.4);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            max-width: 90%;
+        `;
+        banner.innerHTML = `
+            <i class="fas fa-sync-alt" style="font-size:1.3rem;"></i>
+            <span>Yangi versiya mavjud!</span>
+            <button onclick="applyUpdate()" style="background:white; color:#0f9d58; padding:8px 16px; border-radius:10px; font-weight:700; border:none; cursor:pointer;">
+                Yangilash
+            </button>
+            <button onclick="this.parentElement.remove()" style="background:rgba(255,255,255,0.2); color:white; padding:8px 12px; border-radius:10px; border:none; cursor:pointer;">
+                <i class="fas fa-times"></i>
+            </button>
+        `;
+        document.body.appendChild(banner);
+    }
+
+    // Yangilanishni qo'llash
+    window.applyUpdate = function() {
+        if (navigator.serviceWorker.controller) {
+            navigator.serviceWorker.controller.postMessage({ type: 'SKIP_WAITING' });
+        }
+        setTimeout(() => window.location.reload(), 300);
+    };
+
+    // ===== INSTALL PWA =====
     let deferredPrompt = null;
     const installBtnLogin = document.getElementById('installBtnLogin');
 
@@ -1509,7 +1597,6 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
             $('adminUploadBanner').style.display = 'none';
         }
 
-        // Papka holatini ko'rsatish
         if (state.currentFolder !== 'all') {
             $('folderPath').style.display = 'flex';
             $('breadcrumbSection').textContent = sec.name.length > 40 ? sec.name.substring(0, 40) + '...' : sec.name;
@@ -1539,7 +1626,6 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
                 e.stopPropagation();
                 const folderName = del.dataset.folder;
                 if (!confirm(`"${folderName}" papkasini o'chirmoqchimisiz? Undagi hisobotlar ham o'chadi.`)) return;
-                // Papkadagi hisobotlarni o'chirish
                 const reportsInFolder = state.reports.filter(r => 
                     r.section_id === sec.id && r.folder === folderName && 
                     (isAdmin() || r.uploaded_by === state.currentUser.id)
@@ -1549,7 +1635,6 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
                     await supabase.from('reports').delete().eq('id', rep.id);
                     state.reports = state.reports.filter(r => r.id !== rep.id);
                 }
-                // Papkani o'chirish
                 const folderRecord = state.folders.find(f => 
                     f.section_id === sec.id && f.name === folderName &&
                     (isAdmin() || f.user_id === state.currentUser.id)
