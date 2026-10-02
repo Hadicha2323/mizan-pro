@@ -341,6 +341,7 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
 }
 .section-actions button:hover { background: var(--danger); color: #fff; transform: scale(1.1); }
 
+/* FOLDER BAR */
 .folder-bar {
     display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
     background: var(--surface-2); padding: 12px 16px;
@@ -353,9 +354,53 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
     cursor: pointer; border: 1.5px solid var(--border-light);
     transition: var(--transition); display: inline-flex;
     align-items: center; gap: 6px; color: var(--text-muted);
+    position: relative;
 }
 .folder-chip:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); }
 .folder-chip.active { background: var(--primary-gradient); color: #fff; border-color: transparent; box-shadow: var(--shadow-glow); }
+.folder-chip .folder-delete {
+    margin-left: 4px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.65rem;
+    background: rgba(0,0,0,0.1);
+    color: inherit;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+.folder-chip:hover .folder-delete { opacity: 1; }
+.folder-chip .folder-delete:hover { background: var(--danger); color: #fff; }
+
+/* Folder path breadcrumb */
+.folder-path {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 14px;
+    background: linear-gradient(135deg, #fef5e7 0%, #fdebd0 100%);
+    border-radius: var(--radius-sm);
+    margin-bottom: 12px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: #92400e;
+    border: 1px solid #f5b942;
+    flex-wrap: wrap;
+}
+.folder-path i { color: #d97706; }
+.folder-path .folder-name-display {
+    background: white;
+    padding: 4px 12px;
+    border-radius: 40px;
+    color: #1e3c72;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
 
 .date-filter {
     background: var(--surface-2); border-radius: var(--radius-md);
@@ -820,6 +865,21 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
                     <span id="sectionBadge" class="badge"></span>
                 </div>
 
+                <!-- Papka breadcrumb -->
+                <div class="folder-path" id="folderPath" style="display:none;">
+                    <i class="fas fa-folder-open"></i>
+                    <span>Bo'lim:</span>
+                    <span id="breadcrumbSection" style="color:#1e3c72;"></span>
+                    <i class="fas fa-chevron-right" style="opacity:0.4;"></i>
+                    <span class="folder-name-display">
+                        <i class="fas fa-folder"></i>
+                        <span id="breadcrumbFolder"></span>
+                    </span>
+                    <button class="btn-outline btn-sm" onclick="goBackToAllFolders()" style="margin-left:auto;">
+                        <i class="fas fa-arrow-left"></i> Papkalarga qaytish
+                    </button>
+                </div>
+
                 <!-- Admin uchun banner -->
                 <div class="admin-upload-banner" id="adminUploadBanner" style="display:none;">
                     <i class="fas fa-crown"></i>
@@ -828,7 +888,7 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
 
                 <div class="upload-area" id="uploadArea">
                     <i class="fas fa-cloud-upload-alt upload-icon"></i>
-                    <h3>Hisobot yuklash</h3>
+                    <h3 id="uploadAreaTitle">Hisobot yuklash</h3>
                     <p>Faylni bu yerga tashlang yoki bosing</p>
                     <small>PDF, Word, Excel, Rasm — fayldan yoki kameradan</small>
                 </div>
@@ -1009,7 +1069,6 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
     </div>
 </div>
 
-<!-- Download menu (dropdown) -->
 <div class="download-menu" id="downloadMenu"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -1410,9 +1469,7 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
 
     function getVisibleReports(sectionId) {
         const all = state.reports.filter(r => r.section_id === sectionId);
-        // Admin hamma narsani ko'radi
         if (isAdmin()) return all;
-        // Hodim faqat o'z hisobotlarini ko'radi (admin_only emas)
         if (!state.currentUser) return [];
         return all.filter(r => r.uploaded_by === state.currentUser.id && !r.admin_only);
     }
@@ -1435,34 +1492,75 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
             $('sectionBadge').textContent = '';
             $('reportList').innerHTML = `<div class="empty-state"><i class="fas fa-folder-open"></i> Bo'lim tanlanmagan</div>`;
             $('folderBar').style.display = 'none';
+            $('folderPath').style.display = 'none';
             return;
         }
         $('currentSectionTitle').innerHTML = `<i class="fas ${sec.icon||'fa-file-alt'}"></i> ${escapeHtml(sec.name)}`;
 
-        // Admin ham yuklay oladi
         const canUpload = !!state.currentUser;
         $('uploadArea').style.display = canUpload ? 'flex' : 'none';
         document.querySelector('.upload-actions').style.display = canUpload ? 'grid' : 'none';
         $('folderBar').style.display = state.currentUser ? 'flex' : 'none';
         $('dateFilter').style.display = state.currentUser ? 'flex' : 'none';
 
-        // Admin banner
         if (isAdmin()) {
             $('adminUploadBanner').style.display = 'flex';
         } else {
             $('adminUploadBanner').style.display = 'none';
         }
 
+        // Papka holatini ko'rsatish
+        if (state.currentFolder !== 'all') {
+            $('folderPath').style.display = 'flex';
+            $('breadcrumbSection').textContent = sec.name.length > 40 ? sec.name.substring(0, 40) + '...' : sec.name;
+            $('breadcrumbFolder').textContent = state.currentFolder;
+            $('uploadAreaTitle').textContent = `"${state.currentFolder}" papkasiga hisobot yuklash`;
+        } else {
+            $('folderPath').style.display = 'none';
+            $('uploadAreaTitle').textContent = 'Hisobot yuklash';
+        }
+
         const folders = getVisibleFolders(sec.id);
         $('folderList').innerHTML = folders.map(f => `
             <button class="folder-chip ${state.currentFolder===f?'active':''}" data-folder="${escapeHtml(f)}">
                 <i class="fas fa-folder"></i> ${escapeHtml(f)}
+                ${isAdmin() || true ? `<span class="folder-delete" data-folder="${escapeHtml(f)}" title="Papkani o'chirish"><i class="fas fa-times"></i></span>` : ''}
             </button>
         `).join('');
         document.querySelectorAll('#folderList .folder-chip').forEach(chip => {
-            chip.addEventListener('click', () => {
+            chip.addEventListener('click', (e) => {
+                if (e.target.closest('.folder-delete')) return;
                 state.currentFolder = chip.dataset.folder;
                 renderReports();
+            });
+        });
+        document.querySelectorAll('#folderList .folder-delete').forEach(del => {
+            del.addEventListener('click', async (e) => {
+                e.stopPropagation();
+                const folderName = del.dataset.folder;
+                if (!confirm(`"${folderName}" papkasini o'chirmoqchimisiz? Undagi hisobotlar ham o'chadi.`)) return;
+                // Papkadagi hisobotlarni o'chirish
+                const reportsInFolder = state.reports.filter(r => 
+                    r.section_id === sec.id && r.folder === folderName && 
+                    (isAdmin() || r.uploaded_by === state.currentUser.id)
+                );
+                for (const rep of reportsInFolder) {
+                    if (rep.file_path) await r2Delete(rep.file_path);
+                    await supabase.from('reports').delete().eq('id', rep.id);
+                    state.reports = state.reports.filter(r => r.id !== rep.id);
+                }
+                // Papkani o'chirish
+                const folderRecord = state.folders.find(f => 
+                    f.section_id === sec.id && f.name === folderName &&
+                    (isAdmin() || f.user_id === state.currentUser.id)
+                );
+                if (folderRecord) {
+                    await supabase.from('folders').delete().eq('id', folderRecord.id);
+                    state.folders = state.folders.filter(f => f.id !== folderRecord.id);
+                }
+                if (state.currentFolder === folderName) state.currentFolder = 'all';
+                renderReports();
+                renderSections();
             });
         });
         document.querySelectorAll('#folderBar > .folder-chip').forEach(chip => {
@@ -1476,7 +1574,8 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         $('sectionBadge').textContent = reports.length + ' ta';
 
         if (!reports.length) {
-            $('reportList').innerHTML = `<div class="empty-state"><i class="fas fa-file-upload"></i> ${state.currentFolder !== 'all' ? 'Bu papkada hisobotlar yo\'q' : 'Hozircha hisobotlar yo\'q'}</div>`;
+            const folderText = state.currentFolder !== 'all' ? `"${state.currentFolder}" papkasida` : 'bu bo\'limda';
+            $('reportList').innerHTML = `<div class="empty-state"><i class="fas fa-file-upload"></i> ${folderText} hisobotlar yo\'q</div>`;
             return;
         }
 
@@ -1536,7 +1635,12 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         });
     }
 
-    // ===== DOWNLOAD MENU (admin uchun) =====
+    window.goBackToAllFolders = function() {
+        state.currentFolder = 'all';
+        renderReports();
+    };
+
+    // ===== DOWNLOAD MENU =====
     function showDownloadMenu(event, repId) {
         const menu = $('downloadMenu');
         const rect = event.target.getBoundingClientRect();
@@ -1563,7 +1667,6 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         if (!rep || !rep.data_url) return;
 
         if (format === 'pdf') {
-            // PDF sifatida yuklash (jsPDF orqali)
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
             doc.setFontSize(16);
@@ -1577,7 +1680,6 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
             return;
         }
 
-        // Asl formatda yuklash
         const a = document.createElement('a');
         a.href = rep.data_url;
         a.download = rep.name;
@@ -1740,7 +1842,7 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         if (!m || !sec) return;
 
         const staffIds = state.staff.filter(s => s.role === 'staff' && s.masjid === m.name).map(s => s.id);
-        let reports = state.reports.filter(r => r.section_id === sectionId && staffIds.includes(r.uploadedBy || r.uploaded_by));
+        let reports = state.reports.filter(r => r.section_id === sectionId && staffIds.includes(r.uploaded_by));
         reports = reports.filter(r => !r.admin_only);
         reports = reports.filter(r => matchDateFilter(r, state.masjidFilter));
         reports.sort((a,b) => new Date(b.uploaded_at||0) - new Date(a.uploaded_at||0));
@@ -1767,6 +1869,7 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
                                         <div class="file-name">${escapeHtml(rep.name)}</div>
                                         <div class="meta">
                                             👤 <b>${escapeHtml(upName)}</b> · 📅 ${rep.date ? fmtDate(rep.date) : ''}
+                                            ${rep.folder ? ' · 📁 ' + escapeHtml(rep.folder) : ''}
                                         </div>
                                     </div>
                                 </div>
@@ -1943,7 +2046,7 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
                     data_url: publicUrl, uploaded_by: state.currentUser.id,
                     date: todayStr(), masjid: state.currentUser.masjid,
                     folder: folder, section_id: sectionId,
-                    admin_only: isAdminUpload  // Admin yuklagan bo'lsa - faqat adminga ko'rinadi
+                    admin_only: isAdminUpload
                 };
                 const { data, error } = await supabase.from('reports').insert(rep).select().single();
                 if (error) throw error;
