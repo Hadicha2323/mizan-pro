@@ -4,8 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
 <title>Mizan Pro — Masjid hujjatlari boshqaruvi</title>
-
-<!-- PWA -->
 <meta name="theme-color" content="#1e3c72">
 <meta name="description" content="Mizan Pro — Masjid hujjatlari boshqaruv tizimi">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,17 +11,14 @@
 <meta name="apple-mobile-web-app-title" content="Mizan Pro">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="application-name" content="Mizan Pro">
-
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
 <link rel="apple-touch-icon" href="icon-192.png">
 <link rel="manifest" href="manifest.json">
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
 <style>
 * { margin:0; padding:0; box-sizing:border-box; font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif; }
-
 :root {
     --bg:#eef2fb;
     --bg-gradient: linear-gradient(135deg, #eef2fb 0%, #e6ecfa 100%);
@@ -56,7 +51,6 @@
     --radius-xl:32px;
     --transition: all 0.28s cubic-bezier(0.22, 1, 0.36, 1);
 }
-
 html, body {
     background: var(--bg-gradient);
     background-attachment: fixed;
@@ -66,14 +60,18 @@ html, body {
     -webkit-tap-highlight-color: transparent;
     -webkit-font-smoothing: antialiased;
 }
-body { padding: 14px; display: flex; justify-content: center; align-items: flex-start; }
-
+body {
+    padding: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+}
 #app {
     width: 100%; max-width: 1500px; margin: 0 auto;
     display: flex; flex-direction: column; gap: 18px;
     animation: fadeUp 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
-
 #loadingOverlay {
     position: fixed; inset: 0;
     background: rgba(238, 242, 251, 0.95);
@@ -90,7 +88,6 @@ body { padding: 14px; display: flex; justify-content: center; align-items: flex-
 }
 #loadingOverlay p { font-weight: 700; color: var(--primary); font-size: 1rem; }
 @keyframes spin { to { transform: rotate(360deg); } }
-
 button {
     border: none; background: transparent; cursor: pointer;
     font-weight: 600; transition: var(--transition);
@@ -108,7 +105,6 @@ button::after {
 button:hover::after { opacity: 1; }
 button:active { transform: scale(0.96); }
 button:disabled { opacity: 0.6; cursor: not-allowed; }
-
 .btn-primary { background: var(--primary-gradient); color: #fff; box-shadow: var(--shadow-glow); }
 .btn-primary:hover { box-shadow: 0 12px 28px rgba(30,60,114,0.4); transform: translateY(-2px); }
 .btn-accent { background: var(--accent-gradient); color: #fff; box-shadow: 0 6px 20px rgba(15,157,88,0.3); }
@@ -127,7 +123,6 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
     background: var(--surface-2); color: var(--primary);
     transform: translateY(-2px) scale(1.05); box-shadow: var(--shadow-md);
 }
-
 .install-btn {
     background: linear-gradient(135deg, #10b981 0%, #059669 100%);
     color: #fff; padding: 12px 20px;
@@ -146,13 +141,11 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
     0%, 100% { box-shadow: 0 6px 20px rgba(16,185,129,0.35); }
     50% { box-shadow: 0 6px 28px rgba(16,185,129,0.6); }
 }
-
 #updateBanner { animation: slideDown 0.4s cubic-bezier(0.22, 1, 0.36, 1); }
 @keyframes slideDown {
     from { opacity: 0; transform: translate(-50%, -30px); }
     to { opacity: 1; transform: translate(-50%, 0); }
 }
-
 .login-screen {
     position: fixed; inset: 0;
     display: flex; align-items: center; justify-content: center;
@@ -212,7 +205,6 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
     border: 1px solid rgba(239,68,68,0.2); display: none;
 }
 .login-error.show { display: block; }
-
 .app-header {
     background: var(--surface-glass);
     backdrop-filter: blur(24px) saturate(180%);
@@ -260,7 +252,6 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
     text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700;
 }
 .user-badge .role.admin { background: var(--gold-gradient); }
-
 .tabs {
     display: flex; gap: 6px; flex-wrap: wrap;
     background: var(--surface-glass);
@@ -281,7 +272,6 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
     background: var(--primary-gradient); color: #fff;
     box-shadow: var(--shadow-glow); transform: translateY(-2px);
 }
-
 .view { display: none; animation: fadeUp 0.4s cubic-bezier(0.22, 1, 0.36, 1); }
 .view.active { display: block; }
 @keyframes fadeUp {
@@ -292,14 +282,18 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
     0%, 100% { transform: scale(1); }
     50% { transform: scale(1.05); }
 }
-.main-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
-
+.main-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+}
 .panel {
     background: var(--surface-glass);
     backdrop-filter: blur(24px) saturate(180%);
     border-radius: var(--radius-xl);
     box-shadow: var(--shadow-md);
-    padding: 24px; border: 1px solid rgba(255, 255, 255, 0.9);
+    padding: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.9);
 }
 .panel-header {
     display: flex; align-items: center; justify-content: space-between;
@@ -315,106 +309,286 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
     display: inline-flex; align-items: center; justify-content: center;
     font-size: 1rem; box-shadow: var(--shadow-glow);
 }
-
-.section-list { display: flex; flex-direction: column; gap: 10px; max-height: 580px; overflow-y: auto; padding-right: 6px; }
+.section-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-right: 4px;
+}
 .section-item {
     background: var(--surface); border-radius: var(--radius-md);
-    padding: 15px 18px; display: flex; align-items: center;
+    padding: 13px 16px; display: flex; align-items: center;
     justify-content: space-between; transition: var(--transition);
     border: 1.5px solid var(--border-light); cursor: pointer;
+    flex-shrink: 0;
 }
-.section-item:hover { background: var(--surface-2); border-color: var(--primary-light); transform: translateX(6px); box-shadow: var(--shadow-sm); }
+.section-item:hover { background: var(--surface-2); border-color: var(--primary-light); transform: translateX(4px); box-shadow: var(--shadow-sm); }
 .section-item.active { background: var(--primary-gradient); color: #fff; border-color: transparent; box-shadow: var(--shadow-glow); }
 .section-item.active .section-actions i { color: rgba(255,255,255,0.9); }
 .section-item.active .badge { background: rgba(255,255,255,0.25); color: #fff; border-color: rgba(255,255,255,0.3); }
-.section-info { display: flex; align-items: center; gap: 14px; flex: 1; min-width: 0; }
+.section-info { display: flex; align-items: center; gap: 12px; flex: 1; min-width: 0; }
 .section-info > i {
-    font-size: 1.05rem; width: 36px; height: 36px;
+    font-size: 0.95rem; width: 32px; height: 32px;
     border-radius: 10px; background: var(--surface-2);
     color: var(--primary); display: inline-flex;
     align-items: center; justify-content: center; flex-shrink: 0;
 }
 .section-item.active .section-info > i { background: rgba(255,255,255,0.2); color: #fff; }
-.section-info span { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 0.9rem; }
-.section-actions { display: flex; gap: 6px; align-items: center; flex-shrink: 0; }
+.section-info span { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 0.85rem; }
+.section-actions { display: flex; gap: 4px; align-items: center; flex-shrink: 0; }
 .section-actions button {
-    width: 34px; height: 34px; border-radius: 10px;
-    background: rgba(0, 0, 0, 0.04); color: var(--text-muted); font-size: 0.85rem;
+    width: 30px; height: 30px; border-radius: 9px;
+    background: rgba(0, 0, 0, 0.04); color: var(--text-muted); font-size: 0.8rem;
 }
 .section-actions button:hover { background: var(--danger); color: #fff; transform: scale(1.1); }
-
-.folder-bar {
-    display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
-    background: var(--surface-2); padding: 12px 16px;
-    border-radius: var(--radius-md); margin-bottom: 16px;
-    border: 1px solid var(--border-light);
+.folder-tree-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
 }
-.folder-chip {
-    background: var(--surface); padding: 8px 14px;
-    border-radius: 40px; font-size: 0.82rem; font-weight: 600;
-    cursor: pointer; border: 1.5px solid var(--border-light);
-    transition: var(--transition); display: inline-flex;
-    align-items: center; gap: 6px; color: var(--text-muted);
-    position: relative;
+.folder-tree-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 14px;
+    padding-bottom: 14px;
+    border-bottom: 1.5px solid var(--border-light);
 }
-.folder-chip:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); }
-.folder-chip.active { background: var(--primary-gradient); color: #fff; border-color: transparent; box-shadow: var(--shadow-glow); }
-.folder-chip .folder-delete {
-    margin-left: 4px;
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
+.folder-tree-header .sec-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+    min-width: 0;
+}
+.folder-tree-header .sec-info i {
+    width: 38px; height: 38px;
+    border-radius: 12px;
+    background: var(--primary-gradient);
+    color: #fff;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.65rem;
-    background: rgba(0,0,0,0.1);
-    color: inherit;
-    opacity: 0;
-    transition: opacity 0.2s;
+    font-size: 1rem;
+    flex-shrink: 0;
+    box-shadow: var(--shadow-glow);
 }
-.folder-chip:hover .folder-delete { opacity: 1; }
-.folder-chip .folder-delete:hover { background: var(--danger); color: #fff; }
-
-.folder-path {
+.folder-tree-header .sec-info .sec-name {
+    font-weight: 800;
+    font-size: 0.92rem;
+    line-height: 1.25;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+.folder-tree-header .close-sec-btn {
+    width: 38px; height: 38px;
+    padding: 0;
+    border-radius: 12px;
+    background: var(--surface-2);
+    color: var(--text-muted);
+    border: 1.5px solid var(--border-light);
+    flex-shrink: 0;
+}
+.folder-tree-header .close-sec-btn:hover {
+    background: var(--danger);
+    color: #fff;
+    border-color: var(--danger);
+    transform: scale(1.05);
+}
+.folder-tree-title {
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
     display: flex;
     align-items: center;
-    gap: 6px;
-    padding: 10px 14px;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    padding: 0 4px;
+}
+.folder-tree-title span { display: flex; align-items: center; gap: 6px; }
+.folder-tree-title button {
+    width: 28px; height: 28px; padding: 0; border-radius: 8px;
+    background: var(--primary-gradient); color: #fff;
+    font-size: 0.72rem; box-shadow: var(--shadow-glow);
+}
+.folder-tree-title button:hover { transform: scale(1.1); }
+.folder-tree-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding-right: 4px;
+}
+.folder-tree-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 12px;
+    border-radius: 12px;
+    background: var(--surface);
+    border: 1.5px solid var(--border-light);
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 0.84rem;
+    font-weight: 600;
+    color: var(--text);
+    position: relative;
+    user-select: none;
+}
+.folder-tree-item:hover {
+    background: var(--surface-2);
+    border-color: var(--primary-light);
+    transform: translateX(3px);
+}
+.folder-tree-item.active {
+    background: var(--primary-gradient);
+    color: #fff;
+    border-color: transparent;
+    box-shadow: var(--shadow-glow);
+}
+.folder-tree-item .folder-ico {
+    width: 26px; height: 26px;
+    border-radius: 8px;
+    background: rgba(30,60,114,0.08);
+    color: var(--primary);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    flex-shrink: 0;
+}
+.folder-tree-item.active .folder-ico {
+    background: rgba(255,255,255,0.22);
+    color: #fff;
+}
+.folder-tree-item .folder-name {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.folder-tree-item .folder-cnt {
+    background: rgba(15,23,42,0.07);
+    color: var(--text-muted);
+    font-size: 0.68rem;
+    padding: 2px 8px;
+    border-radius: 40px;
+    font-weight: 700;
+}
+.folder-tree-item.active .folder-cnt {
+    background: rgba(255,255,255,0.25);
+    color: #fff;
+}
+.folder-tree-item .folder-actions {
+    display: none;
+    gap: 2px;
+}
+.folder-tree-item:hover .folder-actions { display: flex; }
+.folder-tree-item.active .folder-actions { display: flex; }
+.folder-tree-item .folder-actions button {
+    width: 22px; height: 22px; padding: 0;
+    border-radius: 6px;
+    background: rgba(0,0,0,0.08);
+    color: inherit;
+    font-size: 0.65rem;
+}
+.folder-tree-item .folder-actions button:hover {
+    background: var(--danger); color: #fff;
+}
+.folder-tree-item .folder-actions button.edit-btn:hover {
+    background: var(--warning); color: #fff;
+}
+.folder-tree-root {
     background: linear-gradient(135deg, #fef5e7 0%, #fdebd0 100%);
-    border-radius: var(--radius-sm);
-    margin-bottom: 12px;
+    border-color: #f5b942;
+    color: #92400e;
+}
+.folder-tree-root.active {
+    background: var(--primary-gradient);
+    color: #fff;
+    border-color: transparent;
+}
+.folder-tree-root .folder-ico {
+    background: rgba(245,185,66,0.25);
+    color: #d97706;
+}
+.folder-tree-root.active .folder-ico {
+    background: rgba(255,255,255,0.22);
+    color: #fff;
+}
+.folder-tree-empty {
+    text-align: center;
+    padding: 20px 12px;
+    color: var(--text-muted);
+    font-size: 0.82rem;
+    font-weight: 500;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+.folder-tree-empty i {
+    font-size: 1.8rem;
+    opacity: 0.35;
+}
+.folder-path-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px;
+    background: linear-gradient(135deg, #fef5e7 0%, #fdebd0 100%);
+    border-radius: var(--radius-md);
+    margin-bottom: 16px;
     font-size: 0.88rem;
     font-weight: 600;
     color: #92400e;
-    border: 1px solid #f5b942;
+    border: 1.5px solid #f5b942;
     flex-wrap: wrap;
 }
-.folder-path i { color: #d97706; }
-.folder-path .folder-name-display {
+.folder-path-bar .back-btn {
+    background: #1e3c72;
+    color: #fff;
+    padding: 7px 14px;
+    border-radius: 10px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 4px 12px rgba(30,60,114,0.3);
+}
+.folder-path-bar .back-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(30,60,114,0.45);
+}
+.folder-path-bar .crumb {
     background: white;
     padding: 4px 12px;
     border-radius: 40px;
     color: #1e3c72;
     font-weight: 700;
+    font-size: 0.82rem;
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    gap: 5px;
     cursor: pointer;
-    transition: var(--transition);
     border: 1.5px solid transparent;
+    transition: var(--transition);
 }
-.folder-path .folder-name-display:hover {
-    background: #1e3c72;
-    color: #fff;
-    border-color: #1e3c72;
+.folder-path-bar .crumb:hover {
+    background: #1e3c72; color: #fff;
 }
-.folder-path .folder-name-display.current {
-    background: #1e3c72;
-    color: #fff;
-    cursor: default;
+.folder-path-bar .crumb.current {
+    background: #1e3c72; color: #fff; cursor: default;
 }
-
+.folder-path-bar .sep {
+    color: #d97706; opacity: 0.6; font-size: 0.7rem;
+}
 .date-filter {
     background: var(--surface-2); border-radius: var(--radius-md);
     padding: 16px; margin-bottom: 18px;
@@ -438,7 +612,6 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
     box-shadow: 0 0 0 4px rgba(30,60,114,0.1);
 }
 .date-filter .df-actions { display: flex; gap: 8px; flex-shrink: 0; }
-
 .admin-upload-banner {
     background: linear-gradient(135deg, #fef5e7 0%, #fdebd0 100%);
     border: 2px solid #f5b942;
@@ -456,40 +629,37 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
     font-size: 1.4rem;
     color: #d97706;
 }
-
 .upload-area {
     background: linear-gradient(135deg, #e8f0fe 0%, #dce6f7 100%);
     border: 2.5px dashed #8aa8d9;
     border-radius: var(--radius-lg);
-    padding: 32px 20px; text-align: center;
+    padding: 28px 20px; text-align: center;
     transition: var(--transition);
     margin-bottom: 18px; cursor: pointer;
     display: flex; flex-direction: column;
-    align-items: center; gap: 12px;
+    align-items: center; gap: 10px;
 }
 .upload-area i.upload-icon {
-    font-size: 3.2rem; color: var(--primary);
+    font-size: 3rem; color: var(--primary);
     opacity: 0.85; transition: var(--transition); z-index: 1;
 }
 .upload-area h3 {
     font-weight: 800; color: var(--primary);
-    font-size: 1.15rem; letter-spacing: -0.02em; z-index: 1;
+    font-size: 1.1rem; letter-spacing: -0.02em; z-index: 1;
 }
-.upload-area p { font-weight: 600; color: var(--text-muted); font-size: 0.9rem; z-index: 1; }
-.upload-area small { color: var(--text-muted); font-size: 0.8rem; z-index: 1; }
+.upload-area p { font-weight: 600; color: var(--text-muted); font-size: 0.88rem; z-index: 1; }
+.upload-area small { color: var(--text-muted); font-size: 0.78rem; z-index: 1; }
 .upload-area:hover {
     border-color: var(--primary);
     background: linear-gradient(135deg, #dce6f7 0%, #c7d8ee 100%);
     transform: translateY(-3px); box-shadow: var(--shadow-md);
 }
 .upload-area:hover i.upload-icon { transform: translateY(-6px) scale(1.12); }
-
 .upload-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 22px; }
-.upload-actions button { padding: 16px 18px; font-size: 0.95rem; font-weight: 700; border-radius: var(--radius-md); }
+.upload-actions button { padding: 14px 18px; font-size: 0.92rem; font-weight: 700; border-radius: var(--radius-md); }
 .upload-actions .btn-outline { border: 2px solid var(--primary); color: var(--primary); }
 .upload-actions .btn-outline:hover { background: var(--primary); color: #fff; }
-
-.report-list { display: flex; flex-direction: column; gap: 10px; overflow-y: auto; max-height: 480px; padding-right: 6px; }
+.report-list { display: flex; flex-direction: column; gap: 10px; padding-right: 6px; }
 .report-item {
     background: var(--surface); border-radius: var(--radius-md);
     padding: 14px 18px; display: flex; align-items: center;
@@ -516,7 +686,6 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
 }
 .report-actions button:hover { background: var(--primary); color: #fff; transform: scale(1.1); }
 .report-actions button.del:hover { background: var(--danger); }
-
 .empty-state {
     text-align: center; padding: 40px 20px;
     color: var(--text-muted); font-size: 0.95rem;
@@ -529,7 +698,6 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
     -webkit-background-clip: text; background-clip: text;
     -webkit-text-fill-color: transparent; color: transparent;
 }
-
 .stat-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 20px; }
 .stat-card {
     background: var(--surface-glass);
@@ -555,7 +723,6 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
 .stat-card.danger .val { color: var(--danger); }
 .stat-card.warning i { background: #fef5e7; color: var(--warning); }
 .stat-card.warning .val { color: var(--warning); }
-
 .staff-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
 .staff-card {
     background: var(--surface); border-radius: var(--radius-md);
@@ -582,7 +749,6 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
 .staff-meta span i { width: 20px; color: var(--primary); margin-right: 6px; }
 .staff-actions { display: flex; gap: 8px; margin-top: 6px; }
 .staff-actions button { flex: 1; padding: 9px 14px; font-size: 0.82rem; }
-
 .masjid-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 18px; }
 .masjid-card {
     background: var(--surface); border-radius: var(--radius-lg);
@@ -617,7 +783,6 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
     background: var(--accent-soft); color: var(--accent);
     padding: 4px 11px; border-radius: 40px; font-weight: 700; font-size: 0.75rem;
 }
-
 .masjid-detail-header {
     display: flex; align-items: center; gap: 16px;
     padding: 22px 24px; background: var(--primary-gradient);
@@ -632,7 +797,6 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
 }
 .masjid-detail-header h2 { font-size: 1.5rem; font-weight: 800; }
 .masjid-detail-header .sub { font-size: 0.85rem; opacity: 0.9; font-weight: 500; }
-
 .section-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 14px; }
 .section-box {
     background: var(--surface); border-radius: var(--radius-md);
@@ -659,7 +823,6 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
     display: flex; gap: 6px; flex-wrap: wrap;
     margin-top: auto; padding-top: 10px; border-top: 1px dashed var(--border);
 }
-
 .modal {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background: rgba(15, 23, 42, 0.6);
@@ -721,7 +884,6 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
     align-items: center; gap: 16px; font-size: 0.95rem;
 }
 .preview-fallback i { font-size: 4rem; color: var(--primary); opacity: 0.4; }
-
 .download-menu {
     position: absolute;
     background: var(--surface);
@@ -744,7 +906,6 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
 }
 .download-menu button:hover { background: var(--surface-2); }
 .download-menu button i { width: 20px; }
-
 .form-group { margin-bottom: 16px; }
 .form-group label {
     display: block; font-weight: 700; font-size: 0.82rem;
@@ -765,7 +926,6 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
 }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 .form-actions { display: flex; gap: 12px; justify-content: flex-end; margin-top: 24px; flex-wrap: wrap; }
-
 .badge {
     display: inline-flex; align-items: center; gap: 4px;
     padding: 5px 12px; border-radius: 40px;
@@ -779,22 +939,349 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
 .badge.gold { background: linear-gradient(135deg, #fef5e7 0%, #fdebd0 100%); color: #92400e; border-color: #f5b942; }
 
 @media (min-width: 768px) {
-    body { padding: 24px; }
-    .main-grid { grid-template-columns: 400px 1fr; }
-    .panel.sticky { position: sticky; top: 24px; align-self: start; }
+    body { padding: 20px; align-items: flex-start; }
+    #app { max-width: 100%; gap: 20px; }
+    .main-grid { grid-template-columns: 380px 1fr; align-items: start; }
+    .panel.sticky {
+        position: sticky;
+        top: 20px;
+        max-height: calc(100vh - 40px);
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+    }
+    .panel.sticky .section-list { max-height: none; overflow: visible; flex-shrink: 0; }
+    .panel.sticky .folder-tree-panel { flex-shrink: 0; }
+    .panel.sticky .folder-tree-list { max-height: none; overflow: visible; }
+    #sectionContentMain {
+        max-height: calc(100vh - 40px);
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+    }
+    .report-list { max-height: 520px; overflow-y: auto; }
 }
-@media (max-width: 480px) {
+@media (min-width: 1100px) {
+    .main-grid { grid-template-columns: 420px 1fr; }
+}
+@media (max-width: 767px) {
     body { padding: 10px; }
     #app { gap: 14px; }
     .app-header { flex-direction: column; align-items: stretch; padding: 16px; }
-    .form-row { grid-template-columns: 1fr; }
-    .tabs { overflow-x: auto; flex-wrap: nowrap; padding: 6px; }
-    .tab { white-space: nowrap; padding: 11px 16px; font-size: 0.85rem; }
-    .panel { padding: 18px; border-radius: var(--radius-lg); }
+    .logo h1 { font-size: 1.4rem; }
+    .logo h1 i { width: 40px; height: 40px; font-size: 1.2rem; }
+    .user-area { justify-content: space-between; }
+    .user-badge { padding: 6px 14px 6px 8px; }
+    .user-badge i { width: 34px; height: 34px; font-size: 1.3rem; }
+    .user-badge .user-info .uname { font-size: 0.82rem; }
+    .user-badge .user-info .umasjid { font-size: 0.68rem; }
+    .tabs {
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        padding: 6px;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+    .tabs::-webkit-scrollbar { display: none; }
+    .tab { white-space: nowrap; padding: 10px 16px; font-size: 0.82rem; flex-shrink: 0; }
+    .tab i { margin-right: 6px; font-size: 0.9rem; }
+    .panel { padding: 16px; border-radius: var(--radius-lg); }
+    .panel-header h2 { font-size: 1.05rem; }
+    .panel-header h2 i { width: 34px; height: 34px; font-size: 0.9rem; }
     .upload-actions { grid-template-columns: 1fr; }
-    .login-card { padding: 32px 22px; }
-    .date-filter .df-group { min-width: 80px; }
+    .upload-area { padding: 22px 16px; }
+    .upload-area i.upload-icon { font-size: 2.4rem; }
+    .upload-area h3 { font-size: 1rem; }
+    .login-card { padding: 28px 20px; }
+    .login-logo h1 { font-size: 1.6rem; }
+    .login-logo .icon-box { width: 64px; height: 64px; font-size: 1.7rem; }
+    .date-filter .df-group { min-width: 70px; }
+    .date-filter .df-actions { width: 100%; justify-content: stretch; }
+    .date-filter .df-actions button { flex: 1; }
+    .report-item { padding: 12px 14px; gap: 8px; }
+    .report-info > i { width: 36px; height: 36px; font-size: 1.1rem; }
+    .report-info .file-name { font-size: 0.85rem; }
+    .report-info .meta { font-size: 0.7rem; }
+    .report-actions button { width: 32px; height: 32px; font-size: 0.78rem; }
+    .stat-row { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .stat-card { padding: 16px; }
+    .stat-card i { width: 36px; height: 36px; font-size: 1.1rem; }
+    .stat-card .val { font-size: 1.5rem; }
+    .stat-card .lbl { font-size: 0.72rem; }
+    .staff-grid { grid-template-columns: 1fr; }
+    .masjid-grid { grid-template-columns: 1fr; }
+    .section-grid { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    .modal-content { padding: 20px; }
+    .modal-content.modal-lg, .modal-content.modal-xl { width: 100%; }
     .preview-container { height: 60vh; }
+    .folder-tree-item { padding: 8px 10px; font-size: 0.8rem; }
+    .folder-tree-item .folder-ico { width: 24px; height: 24px; font-size: 0.72rem; }
+    .folder-tree-header .sec-info .sec-name { font-size: 0.85rem; }
+    .folder-tree-header .sec-info i { width: 34px; height: 34px; font-size: 0.9rem; }
+    .folder-tree-header .close-sec-btn { width: 34px; height: 34px; }
+    .folder-path-bar { padding: 10px 12px; gap: 6px; font-size: 0.8rem; }
+    .folder-path-bar .back-btn { padding: 6px 10px; font-size: 0.75rem; }
+    .folder-path-bar .crumb { padding: 3px 9px; font-size: 0.75rem; }
+}
+@media (max-width: 380px) {
+    .stat-row { grid-template-columns: 1fr; }
+    .user-badge .user-info { display: none; }
+    .user-badge { padding: 6px; }
+}
+
+/* ============================================
+   ISH REJALARI JADVALI (s1 bo'limi uchun)
+   ============================================ */
+.reja-table-wrapper {
+    background: #fff;
+    border-radius: var(--radius-md);
+    padding: 20px 14px;
+    margin-bottom: 18px;
+    border: 1.5px solid var(--border-light);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+.reja-doc {
+    min-width: 720px;
+    background: #fff;
+    padding: 8px;
+    color: #000;
+    font-family: 'Times New Roman', 'Inter', serif;
+}
+.reja-tasdiq {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 14px;
+    page-break-inside: avoid;
+}
+.reja-tasdiq-box {
+    width: 260px;
+    text-align: center;
+    border: 1px solid #000;
+    padding: 8px 10px;
+    background: #fff;
+}
+.reja-tasdiq-box .t-title {
+    font-weight: 800;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+    font-family: 'Times New Roman', serif;
+}
+.reja-tasdiq-box .t-input {
+    width: 100%;
+    border: none;
+    border-bottom: 1.5px solid #000;
+    background: transparent;
+    font-family: inherit;
+    font-size: 0.88rem;
+    text-align: center;
+    padding: 4px 2px;
+    outline: none;
+    color: #000;
+}
+.reja-tasdiq-box .t-date-label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    margin-top: 6px;
+    text-align: right;
+    font-family: 'Times New Roman', serif;
+}
+.reja-tasdiq-box .t-date-input {
+    width: 100%;
+    border: none;
+    border-bottom: 1.5px solid #000;
+    background: transparent;
+    font-family: inherit;
+    font-size: 0.85rem;
+    text-align: center;
+    padding: 3px 2px;
+    outline: none;
+    color: #000;
+    margin-top: 2px;
+}
+.reja-main-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    font-size: 0.85rem;
+    font-family: 'Times New Roman', serif;
+    background: #fff;
+}
+.reja-main-table th,
+.reja-main-table td {
+    border: 1.2px solid #000;
+    padding: 6px 5px;
+    vertical-align: top;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
+}
+.reja-main-table thead th {
+    background: #d9ead3;
+    color: #000;
+    font-weight: 800;
+    text-align: center;
+    font-size: 0.84rem;
+    line-height: 1.25;
+    vertical-align: middle;
+}
+.reja-main-table thead th.red-line {
+    text-decoration: underline;
+    text-decoration-color: #c00000;
+    text-decoration-thickness: 2px;
+}
+.reja-main-table tbody td {
+    min-height: 42px;
+    font-size: 0.84rem;
+    line-height: 1.4;
+}
+.reja-main-table .col-num { width: 42px; text-align: center; font-weight: 700; vertical-align: middle; }
+.reja-main-table .col-tadbir { width: 30%; }
+.reja-main-table .col-mexanizm { width: 20%; }
+.reja-main-table .col-muddat { width: 12%; text-align: center; }
+.reja-main-table .col-masul { width: 18%; }
+.reja-main-table .col-hisobot { width: 20%; }
+.reja-cell {
+    width: 100%;
+    min-height: 38px;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-family: inherit;
+    font-size: 0.84rem;
+    line-height: 1.4;
+    color: #000;
+    padding: 3px 2px;
+    resize: vertical;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
+    box-sizing: border-box;
+}
+.reja-cell:focus {
+    background: #fffbe6;
+    box-shadow: inset 0 0 0 2px #f5b942;
+    border-radius: 4px;
+}
+.reja-cell::placeholder {
+    color: #999;
+    font-style: italic;
+    font-size: 0.78rem;
+}
+.reja-date-input {
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-family: inherit;
+    font-size: 0.82rem;
+    text-align: center;
+    color: #000;
+    padding: 3px 2px;
+    cursor: pointer;
+}
+.reja-date-input:focus {
+    background: #fffbe6;
+    box-shadow: inset 0 0 0 2px #f5b942;
+    border-radius: 4px;
+}
+.reja-row-del {
+    width: 26px; height: 26px;
+    border-radius: 6px;
+    background: #fdecea;
+    color: #dc2626;
+    border: none;
+    font-size: 0.7rem;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+.reja-main-table tbody tr:hover .reja-row-del { display: inline-flex; }
+.reja-row-del:hover { background: #dc2626; color: #fff; }
+.reja-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 16px;
+    padding: 12px 14px;
+    background: var(--surface-2);
+    border-radius: var(--radius-md);
+    border: 1.5px solid var(--border-light);
+    align-items: center;
+}
+.reja-toolbar .rt-info {
+    flex: 1;
+    min-width: 180px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.reja-toolbar .rt-info i { color: var(--primary); }
+.reja-toolbar button {
+    padding: 10px 16px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+.reja-open-card {
+    background: linear-gradient(135deg, #e8f5e9 0%, #d9ead3 100%);
+    border: 2px solid #0f9d58;
+    border-radius: var(--radius-lg);
+    padding: 22px 20px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+.reja-open-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+    border-color: #0c8048;
+}
+.reja-open-card .roc-icon {
+    width: 56px; height: 56px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #0f9d58 0%, #0c8048 100%);
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.6rem;
+    box-shadow: 0 8px 24px rgba(15,157,88,0.3);
+    flex-shrink: 0;
+}
+.reja-open-card .roc-text { flex: 1; min-width: 0; }
+.reja-open-card .roc-text h3 {
+    font-size: 1.05rem; font-weight: 800;
+    color: #0c8048; margin-bottom: 4px;
+}
+.reja-open-card .roc-text p {
+    font-size: 0.82rem; color: #4b5563; font-weight: 500;
+}
+.reja-open-card .roc-arrow {
+    font-size: 1.4rem; color: #0f9d58;
+    transition: var(--transition);
+}
+.reja-open-card:hover .roc-arrow { transform: translateX(4px); }
+.reja-viewer { animation: fadeUp 0.3s ease; }
+@media (max-width: 767px) {
+    .reja-doc { min-width: 640px; }
+    .reja-main-table { font-size: 0.78rem; }
+    .reja-main-table thead th { font-size: 0.76rem; padding: 5px 3px; }
+    .reja-cell { font-size: 0.78rem; }
+    .reja-tasdiq-box { width: 220px; }
+    .reja-toolbar button { padding: 8px 12px; font-size: 0.78rem; }
+    .reja-open-card { padding: 16px 14px; gap: 12px; }
+    .reja-open-card .roc-icon { width: 46px; height: 46px; font-size: 1.3rem; }
+    .reja-open-card .roc-text h3 { font-size: 0.95rem; }
+    .reja-open-card .roc-text p { font-size: 0.75rem; }
 }
 </style>
 </head>
@@ -862,69 +1349,34 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
 
     <section class="view" id="view-sections">
         <div class="main-grid">
-            <aside class="panel sticky">
-                <div class="panel-header">
-                    <h2><i class="fas fa-layer-group"></i> Bo'limlar</h2>
-                    <button class="btn-icon" id="addSectionBtn" title="Yangi bo'lim"><i class="fas fa-plus"></i></button>
+            <aside class="panel sticky" id="sectionsSidePanel">
+                <div id="sectionsListView">
+                    <div class="panel-header" style="margin-bottom:14px;">
+                        <h2 style="font-size:1.05rem;"><i class="fas fa-layer-group"></i> Bo'limlar</h2>
+                        <button class="btn-icon" id="addSectionBtn" title="Yangi bo'lim" style="width:38px;height:38px;"><i class="fas fa-plus" style="font-size:0.85rem;"></i></button>
+                    </div>
+                    <div class="section-list" id="sectionList"></div>
                 </div>
-                <div class="section-list" id="sectionList"></div>
+
+                <div id="folderTreeView" class="folder-tree-panel" style="display:none;">
+                    <div class="folder-tree-header">
+                        <div class="sec-info">
+                            <i class="fas fa-folder-tree" id="folderTreeSecIcon"></i>
+                            <span class="sec-name" id="folderTreeSecName">Bo'lim nomi</span>
+                        </div>
+                        <button class="close-sec-btn" id="closeSectionBtn" title="Yopish va bo'limlarga qaytish">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="folder-tree-title">
+                        <span><i class="fas fa-folder"></i> Papkalar</span>
+                        <button id="addFolderBtn" title="Yangi papka"><i class="fas fa-plus"></i></button>
+                    </div>
+                    <div class="folder-tree-list" id="folderTreeList"></div>
+                </div>
             </aside>
 
-            <main class="panel">
-                <div class="panel-header">
-                    <h2 id="currentSectionTitle"><i class="fas fa-file-alt"></i> Hisobotlar</h2>
-                    <span id="sectionBadge" class="badge"></span>
-                </div>
-
-                <div class="folder-path" id="folderPath" style="display:none;">
-                    <i class="fas fa-folder-open"></i>
-                    <span>Bo'lim:</span>
-                    <span class="folder-name-display" onclick="navigateToFolderDepth(-1)" title="Bo'lim ildiziga qaytish">
-                        <i class="fas fa-home"></i>
-                        <span id="breadcrumbSection"></span>
-                    </span>
-                    <span id="breadcrumbChain"></span>
-                    <button class="btn-outline btn-sm" onclick="navigateToFolderDepth(-1)" style="margin-left:auto;">
-                        <i class="fas fa-arrow-left"></i> Bo'lim ildiziga
-                    </button>
-                </div>
-
-                <div class="admin-upload-banner" id="adminUploadBanner" style="display:none;">
-                    <i class="fas fa-crown"></i>
-                    <span>Siz admin sifatida hisobot yuklayapsiz — bu hisobot faqat sizga ko'rinadi.</span>
-                </div>
-
-                <div class="upload-area" id="uploadArea">
-                    <i class="fas fa-cloud-upload-alt upload-icon"></i>
-                    <h3 id="uploadAreaTitle">Hisobot yuklash</h3>
-                    <p>Faylni bu yerga tashlang yoki bosing</p>
-                    <small>PDF, Word, Excel, Rasm — fayldan yoki kameradan</small>
-                </div>
-                <div class="upload-actions">
-                    <button class="btn-primary" id="uploadBtn"><i class="fas fa-folder-open"></i> Fayldan yuklash</button>
-                    <button class="btn-outline" id="cameraBtn"><i class="fas fa-camera"></i> Kameradan olish</button>
-                </div>
-                <input type="file" id="fileInput" multiple accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png,.gif,.webp" style="display:none;">
-                <input type="file" id="cameraInput" accept="image/*" capture="environment" style="display:none;">
-
-                <div class="date-filter" id="dateFilter">
-                    <div class="df-group"><label>Yil</label><select id="dfYear"></select></div>
-                    <div class="df-group"><label>Oy</label><select id="dfMonth"></select></div>
-                    <div class="df-group"><label>Kun</label><select id="dfDay"></select></div>
-                    <div class="df-actions">
-                        <button class="btn-primary btn-sm" id="dfApplyBtn"><i class="fas fa-filter"></i> Filtrlash</button>
-                        <button class="btn-outline btn-sm" id="dfResetBtn"><i class="fas fa-redo"></i> Barchasi</button>
-                    </div>
-                </div>
-
-                <div class="folder-bar" id="folderBar">
-                    <button class="folder-chip active" data-folder="all"><i class="fas fa-folder-open"></i> Joriy papkadagi fayllar</button>
-                    <button class="folder-chip" data-folder="new"><i class="fas fa-folder-plus"></i> Yangi papka</button>
-                    <span id="folderList" style="display:flex; gap:6px; flex-wrap:wrap;"></span>
-                </div>
-
-                <div class="report-list" id="reportList"></div>
-            </main>
+            <main class="panel" id="sectionContentMain"></main>
         </div>
     </section>
 
@@ -1064,7 +1516,7 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
 <div class="modal" id="folderModal">
     <div class="modal-content">
         <div class="modal-header">
-            <h3><i class="fas fa-folder-plus"></i> Yangi papka</h3>
+            <h3 id="folderModalTitle"><i class="fas fa-folder-plus"></i> Yangi papka</h3>
             <button class="modal-close-btn" onclick="closeFolderModal()"><i class="fas fa-times"></i></button>
         </div>
         <form onsubmit="return false;">
@@ -1088,11 +1540,75 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
 
 <div class="download-menu" id="downloadMenu"></div>
 
+<!-- ============================================ -->
+<!-- ISH REJALARI MODALI (faqat s1 uchun) -->
+<!-- ============================================ -->
+<div class="modal" id="rejaViewerModal">
+    <div class="modal-content modal-xl">
+        <div class="modal-header">
+            <h3 id="rejaViewerTitle">
+                <i class="fas fa-table"></i>
+                Иш режалари ва унинг бажарилиши ҳақида маълумотлар
+            </h3>
+            <button class="modal-close-btn" onclick="closeRejaViewer()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="reja-toolbar">
+                <div class="rt-info">
+                    <i class="fas fa-info-circle"></i>
+                    <span id="rejaRowCount">0 qator</span>
+                </div>
+                <button class="btn-outline" onclick="rejaAddRow()">
+                    <i class="fas fa-plus"></i> Qator qo'shish
+                </button>
+                <button class="btn-primary" onclick="rejaSave()">
+                    <i class="fas fa-save"></i> Saqlash
+                </button>
+                <button class="btn-accent" onclick="rejaPrint()">
+                    <i class="fas fa-print"></i> Chop etish
+                </button>
+                <button class="btn-danger" onclick="rejaClearAll()">
+                    <i class="fas fa-trash-alt"></i> Tozalash
+                </button>
+            </div>
+
+            <div class="reja-table-wrapper">
+                <div class="reja-doc" id="rejaDoc">
+                    <div class="reja-tasdiq">
+                        <div class="reja-tasdiq-box">
+                            <div class="t-title">"TASDIQLAYMAN"</div>
+                            <input type="text" class="t-input" id="rejaTasdiqName"
+                                   placeholder="_________________"
+                                   value="">
+                            <div class="t-date-label">Sana qo'yish</div>
+                            <input type="date" class="t-date-input" id="rejaTasdiqDate" value="">
+                        </div>
+                    </div>
+
+                    <table class="reja-main-table" id="rejaMainTable">
+                        <thead>
+                            <tr>
+                                <th class="col-num">№</th>
+                                <th class="col-tadbir">Тадбир номи</th>
+                                <th class="col-mexanizm">Ижро механизми</th>
+                                <th class="col-muddat red-line">Муддати</th>
+                                <th class="col-masul">Ижро учун<br>масъуллар</th>
+                                <th class="col-hisobot">Ижро ҳисоботи</th>
+                            </tr>
+                        </thead>
+                        <tbody id="rejaTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://cdn.jsdelivr.net/npm/aws4fetch@1.0.19/dist/aws4fetch.umd.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
-<script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script><script>
 (function() {
     'use strict';
 
@@ -1106,10 +1622,8 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
                     console.log('✅ SW ro\'yxatdan o\'tdi:', reg.scope);
                     reg.addEventListener('updatefound', () => {
                         const newWorker = reg.installing;
-                        console.log('🔄 Yangi SW topildi');
                         newWorker.addEventListener('statechange', () => {
                             if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                                console.log('✨ Yangi versiya mavjud!');
                                 showUpdateNotification();
                             }
                         });
@@ -1121,7 +1635,6 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
             navigator.serviceWorker.addEventListener('controllerchange', () => {
                 if (refreshing) return;
                 refreshing = true;
-                console.log('🔄 Sahifa yangilanmoqda...');
                 window.location.reload();
             });
         });
@@ -1165,7 +1678,6 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         setTimeout(() => window.location.reload(), 300);
     };
 
-    // ===== INSTALL PWA =====
     let deferredPrompt = null;
     const installBtnLogin = document.getElementById('installBtnLogin');
 
@@ -1263,7 +1775,8 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         activeView: 'dashboard', adminMasjidFilter: 'all', adminSectionFilter: 'all',
         selectedMasjidId: null,
         filter: { year: '', month: '', day: '' },
-        masjidFilter: { year: '', month: '', day: '' }
+        masjidFilter: { year: '', month: '', day: '' },
+        sectionFolderStack: {}
     };
 
     const $ = id => document.getElementById(id);
@@ -1340,6 +1853,7 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         state.activeView = 'dashboard';
         state.selectedMasjidId = null;
         state.folderStack = [];
+        state.currentSectionId = null;
         state.reports = []; state.masjidlar = []; state.staff = []; state.folders = [];
         $('loginScreen').classList.remove('hidden');
         $('app').style.display = 'none';
@@ -1385,7 +1899,11 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         $('view-' + view)?.classList.add('active');
         document.querySelector(`.tab[data-view="${view}"]`)?.classList.add('active');
         if (view === 'dashboard') renderDashboard();
-        else if (view === 'sections') { initDateFilters(); renderSections(); renderReports(); }
+        else if (view === 'sections') {
+            initDateFilters();
+            renderSectionsPanel();
+            renderSectionContent();
+        }
         else if (view === 'masjidlar') {
             state.selectedMasjidId = null;
             state.masjidFilter = { year:'', month:'', day:'' };
@@ -1500,22 +2018,33 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         }
     }
 
-    function renderSections() {
+    function renderSectionsPanel() {
+        if (state.currentSectionId) {
+            $('sectionsListView').style.display = 'none';
+            $('folderTreeView').style.display = 'flex';
+            renderFolderTree();
+        } else {
+            $('sectionsListView').style.display = 'block';
+            $('folderTreeView').style.display = 'none';
+            renderSectionList();
+        }
+    }
+
+    function renderSectionList() {
         if (!state.sections.length) {
-            $('sectionList').innerHTML = `<div class="empty-state"><i class="fas fa-folder-open"></i> Bo'limlar yo'q</div>`;
+            $('sectionList').innerHTML = `<div class="empty-state" style="padding:20px;"><i class="fas fa-folder-open"></i> Bo'limlar yo'q</div>`;
             return;
         }
         $('sectionList').innerHTML = state.sections.map(sec => {
-            const isActive = sec.id === state.currentSectionId;
             const cnt = getVisibleReports(sec.id).length;
             return `
-                <div class="section-item ${isActive?'active':''}" data-id="${sec.id}">
+                <div class="section-item" data-id="${sec.id}">
                     <div class="section-info">
                         <i class="fas ${sec.icon||'fa-folder'}"></i>
                         <span>${escapeHtml(sec.name)}</span>
                     </div>
                     <div class="section-actions">
-                        <span class="badge" style="margin-right:4px;">${cnt}</span>
+                        <span class="badge" style="margin-right:2px;">${cnt}</span>
                         ${isAdmin() ? `<button class="delete-section" data-id="${sec.id}" title="O'chirish"><i class="fas fa-trash-alt"></i></button>` : ''}
                     </div>
                 </div>
@@ -1524,12 +2053,13 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         document.querySelectorAll('.section-item').forEach(el => {
             el.addEventListener('click', e => {
                 if (e.target.closest('.delete-section')) return;
-                state.currentSectionId = el.dataset.id;
-                state.folderStack = [];
+                const secId = el.dataset.id;
+                state.currentSectionId = secId;
+                state.folderStack = state.sectionFolderStack[secId] || [];
                 state.filter = { year:'', month:'', day:'' };
                 initDateFilters();
-                renderSections();
-                renderReports();
+                renderSectionsPanel();
+                renderSectionContent();
             });
         });
         document.querySelectorAll('.delete-section').forEach(btn => {
@@ -1541,18 +2071,154 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
                 await supabase.from('sections').delete().eq('id', id);
                 state.sections = state.sections.filter(s => s.id !== id);
                 if (state.currentSectionId === id) {
-                    state.currentSectionId = state.sections[0]?.id || null;
+                    state.currentSectionId = null;
                     state.folderStack = [];
                 }
-                renderSections();
-                renderReports();
+                renderSectionsPanel();
+                renderSectionContent();
             });
         });
     }
 
-    // ====== HISOBOT KO'RINISHI ======
-    // Admin — hammasini ko'radi
-    // Hodim — faqat o'zi yuklaganlarini va admin_only bo'lmaganlarini
+    function renderFolderTree() {
+        if (!state.currentSectionId) return;
+        const sec = state.sections.find(s => s.id === state.currentSectionId);
+        if (!sec) return;
+
+        $('folderTreeSecName').textContent = sec.name;
+        $('folderTreeSecIcon').className = `fas ${sec.icon||'fa-folder-tree'}`;
+
+        const secId = state.currentSectionId;
+        const currentPath = state.folderStack.length > 0 ? state.folderStack.join('/') : null;
+        const isRoot = currentPath === null;
+
+        const rootFolders = getRootFolders(secId);
+        let html = '';
+
+        const rootReportCount = getVisibleReports(secId).filter(r => !r.folder).length;
+        html += `
+            <div class="folder-tree-item folder-tree-root ${isRoot ? 'active' : ''}" data-folder-path="">
+                <span class="folder-ico"><i class="fas fa-home"></i></span>
+                <span class="folder-name">Bo'lim ildizi</span>
+                <span class="folder-cnt">${rootReportCount}</span>
+            </div>
+        `;
+
+        if (rootFolders.length === 0) {
+            html += `<div class="folder-tree-empty"><i class="fas fa-folder-open"></i><span>Hozircha papkalar yo'q</span></div>`;
+        } else {
+            rootFolders.forEach(folder => {
+                html += renderFolderTreeItem(secId, folder, [], currentPath);
+            });
+        }
+
+        $('folderTreeList').innerHTML = html;
+
+        $('folderTreeList').querySelectorAll('.folder-tree-item').forEach(item => {
+            item.addEventListener('click', (e) => {
+                if (e.target.closest('.folder-actions')) return;
+                const path = item.dataset.folderPath;
+                if (path === '') {
+                    state.folderStack = [];
+                } else {
+                    state.folderStack = path.split('/');
+                }
+                state.sectionFolderStack[secId] = [...state.folderStack];
+                renderFolderTree();
+                renderSectionContent();
+            });
+        });
+
+        $('folderTreeList').querySelectorAll('.folder-actions .edit-btn').forEach(btn => {
+            btn.addEventListener('click', async (e) => {
+                e.stopPropagation();
+                if (!isAdmin()) return;
+                const path = btn.dataset.path;
+                const parts = path.split('/');
+                const folderName = parts[parts.length - 1];
+                const savedStack = [...state.folderStack];
+                state.folderStack = parts.slice(0, -1);
+                await editFolder(secId, folderName);
+                state.folderStack = savedStack;
+            });
+        });
+
+        $('folderTreeList').querySelectorAll('.folder-actions .del-btn').forEach(btn => {
+            btn.addEventListener('click', async (e) => {
+                e.stopPropagation();
+                if (!isAdmin()) return;
+                const path = btn.dataset.path;
+                const parts = path.split('/');
+                const folderName = parts[parts.length - 1];
+                if (!confirm(`"${folderName}" papkasini o'chirmoqchimisiz?\nIchidagi barcha papkalar va hisobotlar ham o'chadi!`)) return;
+                const savedStack = [...state.folderStack];
+                state.folderStack = parts.slice(0, -1);
+                await deleteFolderRecursive(secId, folderName);
+                state.folderStack = savedStack;
+                renderFolderTree();
+                renderSectionContent();
+            });
+        });
+    }
+
+    function renderFolderTreeItem(secId, folder, parentPath, currentPath) {
+        const fullPath = [...parentPath, folder.name].join('/');
+        const isActive = currentPath === fullPath;
+        const subFolders = getSubFolders(secId, fullPath);
+        const reportCount = getVisibleReports(secId).filter(r => (r.folder || '') === fullPath).length;
+
+        let html = `
+            <div class="folder-tree-item ${isActive ? 'active' : ''}" data-folder-path="${escapeHtml(fullPath)}" style="margin-left:${parentPath.length * 12}px;">
+                <span class="folder-ico"><i class="fas fa-folder"></i></span>
+                <span class="folder-name" title="${escapeHtml(folder.name)}">${escapeHtml(folder.name)}</span>
+                <span class="folder-cnt">${reportCount}</span>
+                ${isAdmin() ? `
+                    <span class="folder-actions">
+                        <button class="edit-btn" data-path="${escapeHtml(fullPath)}" title="Nomini o'zgartirish"><i class="fas fa-pen"></i></button>
+                        <button class="del-btn" data-path="${escapeHtml(fullPath)}" title="O'chirish"><i class="fas fa-times"></i></button>
+                    </span>
+                ` : ''}
+            </div>
+        `;
+
+        subFolders.forEach(sub => {
+            html += renderFolderTreeItem(secId, sub, [...parentPath, folder.name], currentPath);
+        });
+
+        return html;
+    }
+
+    function getRootFolders(sectionId) {
+        const all = state.folders.filter(f => f.section_id === sectionId);
+        const seen = new Set();
+        const result = [];
+        all.forEach(f => {
+            const parent = f.parent_path || null;
+            if (parent === null || parent === '') {
+                if (!seen.has(f.name)) {
+                    seen.add(f.name);
+                    result.push({ name: f.name, parent_path: null });
+                }
+            }
+        });
+        return result;
+    }
+
+    function getSubFolders(sectionId, parentPath) {
+        const all = state.folders.filter(f => f.section_id === sectionId);
+        const seen = new Set();
+        const result = [];
+        all.forEach(f => {
+            if ((f.parent_path || '') === parentPath) {
+                if (!seen.has(f.name)) {
+                    seen.add(f.name);
+                    result.push({ name: f.name, parent_path: parentPath });
+                }
+            }
+        });
+        return result;
+    }
+
     function getVisibleReports(sectionId) {
         const all = state.reports.filter(r => r.section_id === sectionId);
         if (isAdmin()) return all;
@@ -1560,183 +2226,217 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         return all.filter(r => r.uploaded_by === state.currentUser.id && !r.admin_only);
     }
 
-    // ====== PAPKALAR KO'RINISHI ======
-    // BARCHA xodimlar va admin barcha papkalarni ko'radi (struktura umumiy)
-    // Admin qaysi xodim nomidan yaratgan bo'lsa ham — hammaga ko'rinadi
-    function getVisibleFolders(sectionId) {
-        if (!state.currentUser) return [];
-        const parentPath = state.folderStack.join('/') || null;
-        const folders = state.folders.filter(f =>
-            f.section_id === sectionId &&
-            (f.parent_path || null) === parentPath
-        );
-        // Nom bo'yicha unique qilish
-        const seen = new Set();
-        const result = [];
-        folders.forEach(f => {
-            if (!seen.has(f.name)) {
-                seen.add(f.name);
-                result.push(f.name);
-            }
-        });
-        return result;
-    }
-
-    // Joriy papkadagi hisobotlar
     function getReportsInCurrentFolder(sectionId) {
-        const currentPath = state.folderStack.join('/');
+        const currentPath = state.folderStack.length > 0 ? state.folderStack.join('/') : '';
         let reports = getVisibleReports(sectionId);
         return reports.filter(r => (r.folder || '') === currentPath);
     }
 
-    function renderReports() {
+    function renderSectionContent() {
+        const main = $('sectionContentMain');
         const sec = state.sections.find(s => s.id === state.currentSectionId);
         if (!sec) {
-            $('currentSectionTitle').innerHTML = `<i class="fas fa-file-alt"></i> Hisobotlar`;
-            $('sectionBadge').textContent = '';
-            $('reportList').innerHTML = `<div class="empty-state"><i class="fas fa-folder-open"></i> Bo'lim tanlanmagan</div>`;
-            $('folderBar').style.display = 'none';
-            $('folderPath').style.display = 'none';
+            main.innerHTML = `
+                <div class="empty-state" style="padding:80px 20px;">
+                    <i class="fas fa-folder-open" style="font-size:4rem;"></i>
+                    <h3 style="margin-top:12px; font-weight:800; color:var(--text);">Bo'lim tanlanmagan</h3>
+                    <p style="color:var(--text-muted);">Chap paneldan bo'limni tanlang</p>
+                </div>`;
             return;
         }
-        $('currentSectionTitle').innerHTML = `<i class="fas ${sec.icon||'fa-file-alt'}"></i> ${escapeHtml(sec.name)}`;
 
         const canUpload = !!state.currentUser;
-        $('uploadArea').style.display = canUpload ? 'flex' : 'none';
-        document.querySelector('.upload-actions').style.display = canUpload ? 'grid' : 'none';
-        $('folderBar').style.display = state.currentUser ? 'flex' : 'none';
-        $('dateFilter').style.display = state.currentUser ? 'flex' : 'none';
+        const isRoot = state.folderStack.length === 0;
+        const currentPath = state.folderStack.join('/');
 
-        if (isAdmin()) {
-            $('adminUploadBanner').style.display = 'flex';
-        } else {
-            $('adminUploadBanner').style.display = 'none';
-        }
+        let html = '';
 
-        // ===== BREADCRUMB (har bir papka + orqaga tugma) =====
-        if (state.folderStack.length > 0) {
-            $('folderPath').style.display = 'flex';
-            $('breadcrumbSection').textContent = sec.name.length > 40 ? sec.name.substring(0, 40) + '...' : sec.name;
-
-            let chain = '';
-            state.folderStack.forEach((folderName, idx) => {
-                const isLast = idx === state.folderStack.length - 1;
-                // Har bir papkani bosib shu chuqurlikka o'tish
-                const onclick = isLast ? '' : `onclick="navigateToFolderDepth(${idx})"`;
-                const cls = isLast ? 'folder-name-display current' : 'folder-name-display';
-
-                // Har bir papka oldiga orqaga tugmasi (agar oxirgi bo'lmasa)
-                // va oxirgi papka uchun ham orqaga tugmasi
-                chain += `
-                    <i class="fas fa-chevron-right" style="opacity:0.4;"></i>
-                    <span class="${cls}" ${onclick} title="${escapeHtml(folderName)}">
-                        ${!isLast ? '<i class="fas fa-arrow-left" style="font-size:0.7rem; margin-right:2px;"></i>' : '<i class="fas fa-folder-open"></i>'}
-                        <span>${escapeHtml(folderName)}</span>
+        if (!isRoot) {
+            html += `
+                <div class="folder-path-bar">
+                    <button class="back-btn" onclick="goBackOneFolder()">
+                        <i class="fas fa-arrow-left"></i> Orqaga
+                    </button>
+                    <i class="fas fa-folder-open" style="color:#d97706;"></i>
+                    <span class="crumb" onclick="navigateToFolderDepth(-1)">
+                        <i class="fas fa-home"></i> ${escapeHtml(sec.name.length > 22 ? sec.name.substring(0,22)+'...' : sec.name)}
                     </span>
-                `;
-            });
-            $('breadcrumbChain').innerHTML = chain;
-            $('uploadAreaTitle').textContent = `"${state.folderStack.join(' / ')}" papkasiga hisobot yuklash`;
-        } else {
-            $('folderPath').style.display = 'none';
-            $('breadcrumbChain').innerHTML = '';
-            $('uploadAreaTitle').textContent = 'Hisobot yuklash';
+                    ${state.folderStack.map((f, idx) => {
+                        const isLast = idx === state.folderStack.length - 1;
+                        return `
+                            <i class="fas fa-chevron-right sep"></i>
+                            <span class="crumb ${isLast ? 'current' : ''}" ${!isLast ? `onclick="navigateToFolderDepth(${idx})"` : ''}>
+                                <i class="fas ${isLast ? 'fa-folder-open' : 'fa-folder'}"></i> ${escapeHtml(f)}
+                            </span>
+                        `;
+                    }).join('')}
+                </div>
+            `;
         }
 
-        // ===== PAPKALAR =====
-        const folders = getVisibleFolders(sec.id);
-        $('folderList').innerHTML = folders.map(f => `
-            <button class="folder-chip" data-folder="${escapeHtml(f)}" title="Ochish: ${escapeHtml(f)}">
-                <i class="fas fa-folder"></i> ${escapeHtml(f)}
-                ${isAdmin() ? `<span class="folder-delete" data-folder="${escapeHtml(f)}" title="Papkani o'chirish"><i class="fas fa-times"></i></span>` : ''}
-            </button>
-        `).join('');
+        html += `
+            <div class="panel-header">
+                <h2 id="currentSectionTitle">
+                    <i class="fas ${sec.icon||'fa-file-alt'}"></i>
+                    ${escapeHtml(sec.name)}
+                    ${!isRoot ? `<span style="font-size:0.8rem; color:var(--text-muted); font-weight:600; margin-left:6px;">/ ${escapeHtml(state.folderStack[state.folderStack.length-1])}</span>` : ''}
+                </h2>
+                <span id="sectionBadge" class="badge"></span>
+            </div>
+        `;
 
-        document.querySelectorAll('#folderList .folder-chip').forEach(chip => {
-            chip.addEventListener('click', (e) => {
-                if (e.target.closest('.folder-delete')) return;
-                state.folderStack.push(chip.dataset.folder);
-                renderReports();
-            });
-        });
+        // ============================================
+        // ISH REJALARI (s1) — jadval ochish kartasi
+        // ============================================
+        if (sec.id === 's1' && isRoot) {
+            const savedReja = localStorage.getItem('mizan_reja_s1');
+            let hasReja = false;
+            try {
+                const parsed = savedReja ? JSON.parse(savedReja) : null;
+                hasReja = parsed && parsed.rows && parsed.rows.length > 0;
+            } catch(e) { hasReja = false; }
+            html += `
+                <div class="reja-open-card" onclick="openRejaViewer()">
+                    <div class="roc-icon"><i class="fas fa-table"></i></div>
+                    <div class="roc-text">
+                        <h3>Иш режалари жадвали</h3>
+                        <p>${hasReja ? '✅ Saqlangan jadval mavjud — ochish uchun bosing' : 'Jadvalni ochish va to\'ldirish uchun bosing'}</p>
+                    </div>
+                    <i class="fas fa-chevron-right roc-arrow"></i>
+                </div>
+            `;
+        }
 
-        document.querySelectorAll('#folderList .folder-delete').forEach(del => {
-            del.addEventListener('click', async (e) => {
-                e.stopPropagation();
-                if (!isAdmin()) return;
-                const folderName = del.dataset.folder;
-                if (!confirm(`"${folderName}" papkasini o'chirmoqchimisiz?\nIchidagi barcha papkalar va hisobotlar ham o'chadi!`)) return;
-                await deleteFolderRecursive(sec.id, folderName);
-                renderReports();
-                renderSections();
-            });
-        });
+        if (canUpload && isAdmin()) {
+            html += `
+                <div class="admin-upload-banner" id="adminUploadBanner">
+                    <i class="fas fa-crown"></i>
+                    <span>Siz admin sifatida hisobot yuklayapsiz — bu hisobot faqat sizga ko'rinadi.</span>
+                </div>
+            `;
+        }
 
-        // ===== HISOBOTLAR =====
+        if (canUpload) {
+            html += `
+                <div class="upload-area" id="uploadArea">
+                    <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                    <h3 id="uploadAreaTitle">${isRoot ? 'Hisobot yuklash' : `"${escapeHtml(currentPath)}" papkasiga hisobot yuklash`}</h3>
+                    <p>Faylni bu yerga tashlang yoki bosing</p>
+                    <small>PDF, Word, Excel, Rasm — fayldan yoki kameradan</small>
+                </div>
+                <div class="upload-actions">
+                    <button class="btn-primary" id="uploadBtn"><i class="fas fa-folder-open"></i> Fayldan yuklash</button>
+                    <button class="btn-outline" id="cameraBtn"><i class="fas fa-camera"></i> Kameradan olish</button>
+                </div>
+                <input type="file" id="fileInput" multiple accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png,.gif,.webp" style="display:none;">
+                <input type="file" id="cameraInput" accept="image/*" capture="environment" style="display:none;">
+            `;
+        }
+
+        html += `
+            <div class="date-filter" id="dateFilter">
+                <div class="df-group"><label>Yil</label><select id="dfYear"></select></div>
+                <div class="df-group"><label>Oy</label><select id="dfMonth"></select></div>
+                <div class="df-group"><label>Kun</label><select id="dfDay"></select></div>
+                <div class="df-actions">
+                    <button class="btn-primary btn-sm" id="dfApplyBtn"><i class="fas fa-filter"></i> Filtrlash</button>
+                    <button class="btn-outline btn-sm" id="dfResetBtn"><i class="fas fa-redo"></i> Barchasi</button>
+                </div>
+            </div>
+        `;
+
         let reports = getReportsInCurrentFolder(sec.id);
         reports = reports.filter(r => matchDateFilter(r, state.filter));
         reports.sort((a,b) => new Date(b.uploaded_at||0) - new Date(a.uploaded_at||0));
-        $('sectionBadge').textContent = reports.length + ' ta';
 
-        // Xodim uchun: papka ichida hisobotlar ko'rinmasa, lekin papkalar bo'lsa
-        if (!reports.length && !folders.length) {
-            const folderText = state.folderStack.length ? `"${state.folderStack.join(' / ')}" papkasida` : 'bu bo\'limda';
-            $('reportList').innerHTML = `<div class="empty-state"><i class="fas fa-file-upload"></i> ${folderText} hisobotlar yo\'q</div>`;
-            return;
-        }
-
+        html += `<div class="report-list" id="reportList">`;
         if (!reports.length) {
-            // Xodimlarga maxsus xabar
-            if (!isAdmin() && state.folderStack.length > 0) {
-                $('reportList').innerHTML = `<div class="empty-state" style="padding:20px;"><i class="fas fa-lock" style="font-size:2.4rem; opacity:0.4;"></i><p style="margin-top:8px;">Bu papkada sizning hisobotlaringiz yo'q</p></div>`;
-            } else {
-                $('reportList').innerHTML = `<div class="empty-state" style="padding:20px;"><i class="fas fa-file" style="font-size:2.4rem;"></i> Bu papkada hisobotlar yo'q</div>`;
-            }
-            return;
-        }
-
-        $('reportList').innerHTML = reports.map(rep => {
-            const icon = getFileIcon(rep.file_type || rep.name);
-            const uploader = state.staff.find(s => s.id === rep.uploaded_by);
-            const upName = uploader ? `${uploader.first_name} ${uploader.last_name||''}`.trim() : 'Noma\'lum';
-            const canDelete = isAdmin() || rep.uploaded_by === state.currentUser?.id;
-            const isAdminItem = rep.admin_only;
-            return `
-                <div class="report-item ${isAdminItem ? 'admin-item' : ''}">
-                    <div class="report-info" onclick="openFileViewer('${rep.id}')">
-                        <i class="fas ${icon}"></i>
-                        <div style="min-width:0;">
-                            <div class="file-name">${escapeHtml(rep.name)}</div>
-                            <div class="meta">
-                                ${isAdminItem ? '👑 Admin · ' : ''}${escapeHtml(upName)} · ${rep.date ? fmtDate(rep.date) : ''}
-                                ${rep.folder ? ' · 📁 ' + escapeHtml(rep.folder.split('/').pop()) : ''}
+            const folderText = !isRoot ? `"${escapeHtml(currentPath)}" papkasida` : 'bu bo\'limda';
+            html += `<div class="empty-state"><i class="fas fa-file-upload"></i> ${folderText} hisobotlar yo\'q</div>`;
+        } else {
+            reports.forEach(rep => {
+                const icon = getFileIcon(rep.file_type || rep.name);
+                const uploader = state.staff.find(s => s.id === rep.uploaded_by);
+                const upName = uploader ? `${uploader.first_name} ${uploader.last_name||''}`.trim() : 'Noma\'lum';
+                const canDelete = isAdmin() || rep.uploaded_by === state.currentUser?.id;
+                const isAdminItem = rep.admin_only;
+                html += `
+                    <div class="report-item ${isAdminItem ? 'admin-item' : ''}">
+                        <div class="report-info" onclick="openFileViewer('${rep.id}')">
+                            <i class="fas ${icon}"></i>
+                            <div style="min-width:0;">
+                                <div class="file-name">${escapeHtml(rep.name)}</div>
+                                <div class="meta">
+                                    ${isAdminItem ? '👑 Admin · ' : ''}${escapeHtml(upName)} · ${rep.date ? fmtDate(rep.date) : ''}
+                                </div>
                             </div>
                         </div>
+                        <div class="report-actions">
+                            <button class="view-file" data-id="${rep.id}" title="Ko'rish"><i class="fas fa-eye"></i></button>
+                            <button class="download-file" data-id="${rep.id}" title="Yuklab olish"><i class="fas fa-download"></i></button>
+                            ${canDelete ? `<button class="delete-file del" data-id="${rep.id}" title="O'chirish"><i class="fas fa-trash-alt"></i></button>` : ''}
+                        </div>
                     </div>
-                    <div class="report-actions">
-                        <button class="view-file" data-id="${rep.id}" title="Ko'rish"><i class="fas fa-eye"></i></button>
-                        <button class="download-file" data-id="${rep.id}" title="Yuklab olish"><i class="fas fa-download"></i></button>
-                        ${canDelete ? `<button class="delete-file del" data-id="${rep.id}" title="O'chirish"><i class="fas fa-trash-alt"></i></button>` : ''}
-                    </div>
-                </div>
-            `;
-        }).join('');
+                `;
+            });
+        }
+        html += `</div>`;
 
-        document.querySelectorAll('.view-file').forEach(btn => {
+        main.innerHTML = html;
+
+        $('sectionBadge').textContent = reports.length + ' ta';
+        initDateFilters();
+        bindSectionEvents();
+    }
+
+    function bindSectionEvents() {
+        const uploadArea = $('uploadArea');
+        const uploadBtn = $('uploadBtn');
+        const cameraBtn = $('cameraBtn');
+        const fileInput = $('fileInput');
+        const cameraInput = $('cameraInput');
+
+        if (uploadArea) uploadArea.addEventListener('click', () => fileInput.click());
+        if (uploadBtn) uploadBtn.addEventListener('click', () => fileInput.click());
+        if (fileInput) fileInput.addEventListener('change', e => {
+            if (e.target.files.length) { handleFiles(e.target.files); e.target.value=''; }
+        });
+        if (cameraBtn) cameraBtn.addEventListener('click', () => cameraInput.click());
+        if (cameraInput) cameraInput.addEventListener('change', e => {
+            if (e.target.files.length) { handleFiles(e.target.files); e.target.value=''; }
+        });
+        if (uploadArea) {
+            uploadArea.addEventListener('dragover', e => { e.preventDefault(); uploadArea.style.borderColor='var(--primary)'; });
+            uploadArea.addEventListener('dragleave', () => { uploadArea.style.borderColor='#8aa8d9'; });
+            uploadArea.addEventListener('drop', e => {
+                e.preventDefault();
+                uploadArea.style.borderColor='#8aa8d9';
+                if (e.dataTransfer.files.length) handleFiles(e.dataTransfer.files);
+            });
+        }
+
+        $('dfApplyBtn')?.addEventListener('click', () => {
+            state.filter = { year: $('dfYear').value, month: $('dfMonth').value, day: $('dfDay').value };
+            renderSectionContent();
+        });
+        $('dfResetBtn')?.addEventListener('click', () => {
+            state.filter = { year:'', month:'', day:'' };
+            initDateFilters();
+            renderSectionContent();
+        });
+
+        document.querySelectorAll('#reportList .view-file').forEach(btn => {
             btn.addEventListener('click', e => { e.stopPropagation(); openFileViewer(btn.dataset.id); });
         });
-        document.querySelectorAll('.download-file').forEach(btn => {
+        document.querySelectorAll('#reportList .download-file').forEach(btn => {
             btn.addEventListener('click', e => {
                 e.stopPropagation();
                 const id = btn.dataset.id;
-                if (isAdmin()) {
-                    showDownloadMenu(e, id);
-                } else {
-                    downloadReport(id);
-                }
+                if (isAdmin()) showDownloadMenu(e, id);
+                else downloadReport(id);
             });
         });
-        document.querySelectorAll('.delete-file').forEach(btn => {
+        document.querySelectorAll('#reportList .delete-file').forEach(btn => {
             btn.addEventListener('click', async e => {
                 e.stopPropagation();
                 if (!confirm('Hisobotni o\'chirmoqchimisiz?')) return;
@@ -1745,13 +2445,101 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
                 if (rep?.file_path) await r2Delete(rep.file_path);
                 await supabase.from('reports').delete().eq('id', id);
                 state.reports = state.reports.filter(r => r.id !== id);
-                renderReports();
-                renderSections();
+                renderSectionContent();
+                if (state.currentSectionId) renderFolderTree();
+                renderSectionList();
             });
         });
     }
 
-    // ===== NESTED: papkani rekursiv o'chirish =====
+    window.navigateToFolderDepth = function(depth) {
+        if (depth < 0) {
+            state.folderStack = [];
+        } else {
+            state.folderStack = state.folderStack.slice(0, depth + 1);
+        }
+        if (state.currentSectionId) {
+            state.sectionFolderStack[state.currentSectionId] = [...state.folderStack];
+        }
+        renderFolderTree();
+        renderSectionContent();
+    };
+
+    window.goBackOneFolder = function() {
+        if (state.folderStack.length > 0) {
+            state.folderStack.pop();
+            if (state.currentSectionId) {
+                state.sectionFolderStack[state.currentSectionId] = [...state.folderStack];
+            }
+            renderFolderTree();
+            renderSectionContent();
+        }
+    };
+
+    async function editFolder(sectionId, folderName) {
+        const currentPath = state.folderStack.length > 0 ? state.folderStack.join('/') : null;
+        const newName = prompt(`"${folderName}" papkasining yangi nomini kiriting:`, folderName);
+        if (!newName || !newName.trim() || newName.trim() === folderName) return;
+        const trimmedNew = newName.trim();
+
+        if (state.folders.some(f =>
+            f.section_id === sectionId &&
+            (f.parent_path || null) === currentPath &&
+            f.name === trimmedNew
+        )) {
+            return alert('Bu nomdagi papka allaqachon mavjud!');
+        }
+
+        showLoading('O\'zgartirilmoqda...');
+        const oldFullPath = currentPath ? `${currentPath}/${folderName}` : folderName;
+        const newFullPath = currentPath ? `${currentPath}/${trimmedNew}` : trimmedNew;
+
+        const foldersToUpdate = state.folders.filter(f => {
+            if (f.section_id !== sectionId) return false;
+            if (f.name === folderName && (f.parent_path || null) === currentPath) return true;
+            if ((f.parent_path || '') === oldFullPath) return true;
+            if ((f.parent_path || '').startsWith(oldFullPath + '/')) return true;
+            return false;
+        });
+
+        for (const f of foldersToUpdate) {
+            let newParentPath = f.parent_path;
+            if (f.name === folderName && (f.parent_path || null) === currentPath) {
+                newParentPath = currentPath;
+            } else if ((f.parent_path || '') === oldFullPath) {
+                newParentPath = newFullPath;
+            } else if ((f.parent_path || '').startsWith(oldFullPath + '/')) {
+                newParentPath = newFullPath + f.parent_path.substring(oldFullPath.length);
+            }
+            const updateData = {
+                name: f.name === folderName && (f.parent_path || null) === currentPath ? trimmedNew : f.name,
+                parent_path: newParentPath
+            };
+            await supabase.from('folders').update(updateData).eq('id', f.id);
+            Object.assign(f, updateData);
+        }
+
+        const reportsToUpdate = state.reports.filter(r => {
+            if (r.section_id !== sectionId) return false;
+            const rFolder = r.folder || '';
+            return rFolder === oldFullPath || rFolder.startsWith(oldFullPath + '/');
+        });
+
+        for (const rep of reportsToUpdate) {
+            let newFolder = rep.folder || '';
+            if (newFolder === oldFullPath) newFolder = newFullPath;
+            else if (newFolder.startsWith(oldFullPath + '/')) {
+                newFolder = newFullPath + newFolder.substring(oldFullPath.length);
+            }
+            await supabase.from('reports').update({ folder: newFolder }).eq('id', rep.id);
+            rep.folder = newFolder;
+        }
+
+        hideLoading();
+        renderFolderTree();
+        renderSectionContent();
+    }
+
     async function deleteFolderRecursive(sectionId, folderName) {
         const fullPath = [...state.folderStack, folderName].join('/');
         const fullPathSlash = fullPath + '/';
@@ -1780,24 +2568,6 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         }
     }
 
-    // ===== ORQAGA QAYTISH: bitta-bitta =====
-    window.navigateToFolderDepth = function(depth) {
-        if (depth < 0) {
-            state.folderStack = [];
-        } else {
-            state.folderStack = state.folderStack.slice(0, depth + 1);
-        }
-        renderReports();
-    };
-
-    // Bir qadam orqaga (bitta papkadan chiqish)
-    window.goBackOneFolder = function() {
-        if (state.folderStack.length > 0) {
-            state.folderStack.pop();
-            renderReports();
-        }
-    };
-
     function showDownloadMenu(event, repId) {
         const menu = $('downloadMenu');
         const rect = event.target.getBoundingClientRect();
@@ -1814,9 +2584,7 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         }, 100);
     }
 
-    function closeDownloadMenu() {
-        $('downloadMenu').classList.remove('show');
-    }
+    function closeDownloadMenu() { $('downloadMenu').classList.remove('show'); }
 
     window.downloadAs = function(repId, format) {
         closeDownloadMenu();
@@ -1838,12 +2606,8 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         }
 
         const a = document.createElement('a');
-        a.href = rep.data_url;
-        a.download = rep.name;
-        a.target = '_blank';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
+        a.href = rep.data_url; a.download = rep.name; a.target = '_blank';
+        document.body.appendChild(a); a.click(); document.body.removeChild(a);
     };
 
     window.openFileViewer = function(repId) {
@@ -2214,8 +2978,9 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
             }
         }
         hideLoading();
-        renderReports();
-        renderSections();
+        renderSectionContent();
+        if (state.currentSectionId) renderFolderTree();
+        renderSectionList();
         renderDashboard();
     }
 
@@ -2298,7 +3063,9 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
 
     window.openFolderModal = function() {
         if (!state.currentUser) return;
+        if (!state.currentSectionId) return alert('Avval bo\'lim tanlang!');
         $('folderNameInput').value = '';
+        $('folderModalTitle').innerHTML = '<i class="fas fa-folder-plus"></i> Yangi papka';
         const locationText = state.folderStack.length
             ? state.folderStack.join(' / ')
             : 'Bo\'lim ildizi';
@@ -2314,7 +3081,6 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         const userId = state.currentUser.id;
         const parentPath = state.folderStack.length ? state.folderStack.join('/') : null;
 
-        // Tekshirish: shu joyda shu nomli papka bormi (barcha xodimlar uchun umumiy)
         if (state.folders.some(f =>
             f.section_id === secId &&
             (f.parent_path || null) === parentPath &&
@@ -2340,15 +3106,16 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         }
         state.folders.push(data);
         closeFolderModal();
-        renderReports();
+        renderFolderTree();
+        renderSectionContent();
     }
 
     function renderAll() {
         renderUserArea();
         renderDashboard();
         initDateFilters();
-        renderSections();
-        renderReports();
+        renderSectionsPanel();
+        renderSectionContent();
         if (isAdmin()) { renderMasjidlar(); renderStaff(); renderAdmin(); }
     }
 
@@ -2361,25 +3128,6 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
             tab.addEventListener('click', () => switchView(tab.dataset.view));
         });
 
-        $('uploadArea').addEventListener('click', () => $('fileInput').click());
-        $('uploadBtn').addEventListener('click', () => $('fileInput').click());
-        $('fileInput').addEventListener('change', e => {
-            if (e.target.files.length) { handleFiles(e.target.files); e.target.value=''; }
-        });
-
-        $('cameraBtn').addEventListener('click', () => $('cameraInput').click());
-        $('cameraInput').addEventListener('change', e => {
-            if (e.target.files.length) { handleFiles(e.target.files); e.target.value=''; }
-        });
-
-        $('uploadArea').addEventListener('dragover', e => { e.preventDefault(); $('uploadArea').style.borderColor='var(--primary)'; });
-        $('uploadArea').addEventListener('dragleave', () => { $('uploadArea').style.borderColor='#8aa8d9'; });
-        $('uploadArea').addEventListener('drop', e => {
-            e.preventDefault();
-            $('uploadArea').style.borderColor='#8aa8d9';
-            if (e.dataTransfer.files.length) handleFiles(e.dataTransfer.files);
-        });
-
         $('addSectionBtn').addEventListener('click', async () => {
             if (!isAdmin()) return alert('Faqat admin bo\'lim qo\'sha oladi');
             const name = prompt('Yangi bo\'lim nomini kiriting:');
@@ -2390,33 +3138,27 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
                 state.sections.push(data);
                 state.currentSectionId = data.id;
                 state.folderStack = [];
-                renderSections();
-                renderReports();
+                state.sectionFolderStack[data.id] = [];
+                renderSectionsPanel();
+                renderSectionContent();
             }
         });
+
+        $('closeSectionBtn').addEventListener('click', () => {
+            state.currentSectionId = null;
+            state.folderStack = [];
+            renderSectionsPanel();
+            renderSectionContent();
+        });
+
+        $('addFolderBtn').addEventListener('click', () => window.openFolderModal());
 
         $('addMasjidBtn').addEventListener('click', () => window.openMasjidModal());
         $('saveMasjidBtn').addEventListener('click', saveMasjid);
         $('addStaffBtn').addEventListener('click', () => window.openStaffModal());
         $('saveStaffBtn').addEventListener('click', saveStaff);
 
-        document.querySelectorAll('#folderBar > .folder-chip').forEach(chip => {
-            chip.addEventListener('click', () => {
-                if (chip.dataset.folder === 'new') window.openFolderModal();
-                else renderReports();
-            });
-        });
         $('saveFolderBtn').addEventListener('click', saveFolder);
-
-        $('dfApplyBtn').addEventListener('click', () => {
-            state.filter = { year: $('dfYear').value, month: $('dfMonth').value, day: $('dfDay').value };
-            renderReports();
-        });
-        $('dfResetBtn').addEventListener('click', () => {
-            state.filter = { year:'', month:'', day:'' };
-            initDateFilters();
-            renderReports();
-        });
 
         $('dfApplyBtn2').addEventListener('click', () => {
             state.masjidFilter = { year: $('dfYear2').value, month: $('dfMonth2').value, day: $('dfDay2').value };
@@ -2445,8 +3187,9 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
                 closeFolderModal();
                 closeMasjidSectionModal();
                 closeDownloadMenu();
+                const rjm = document.getElementById('rejaViewerModal');
+                if (rjm && rjm.classList.contains('show')) closeRejaViewer();
             }
-            // Backspace — bitta papkadan orqaga
             if (e.key === 'Backspace' && state.folderStack.length > 0 && state.activeView === 'sections') {
                 const tag = (e.target.tagName || '').toLowerCase();
                 if (tag !== 'input' && tag !== 'textarea' && tag !== 'select') {
@@ -2455,6 +3198,298 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
                 }
             }
         });
+
+        // Reja modal tashqarisiga bosilsa yopish
+        const rjm = $('rejaViewerModal');
+        if (rjm) rjm.addEventListener('click', e => { if (e.target === rjm) closeRejaViewer(); });
+    }
+
+    // ============================================
+    // ISH REJALARI JADVALI (s1 bo'limi)
+    // ============================================
+    const REJA_STORAGE_KEY = 'mizan_reja_s1';
+    const REJA_DEFAULT_ROWS = 4;
+
+    function rejaLoad() {
+        try {
+            const raw = localStorage.getItem(REJA_STORAGE_KEY);
+            if (!raw) return null;
+            return JSON.parse(raw);
+        } catch(e) {
+            console.error('Reja yuklash xato:', e);
+            return null;
+        }
+    }
+
+    function rejaSaveToStorage() {
+        try {
+            const data = {
+                tasdiqName: $('rejaTasdiqName')?.value || '',
+                tasdiqDate: $('rejaTasdiqDate')?.value || '',
+                rows: rejaCollectRows(),
+                savedAt: new Date().toISOString()
+            };
+            localStorage.setItem(REJA_STORAGE_KEY, JSON.stringify(data));
+            return true;
+        } catch(e) {
+            console.error('Reja saqlash xato:', e);
+            return false;
+        }
+    }
+
+    function rejaCollectRows() {
+        const rows = [];
+        document.querySelectorAll('#rejaTableBody tr').forEach((tr, idx) => {
+            const tadbir = tr.querySelector('.reja-cell[data-field="tadbir"]')?.value || '';
+            const mexanizm = tr.querySelector('.reja-cell[data-field="mexanizm"]')?.value || '';
+            const muddat = tr.querySelector('.reja-date-input')?.value || '';
+            const masul = tr.querySelector('.reja-cell[data-field="masul"]')?.value || '';
+            const hisobot = tr.querySelector('.reja-cell[data-field="hisobot"]')?.value || '';
+            rows.push({ num: idx + 1, tadbir, mexanizm, muddat, masul, hisobot });
+        });
+        return rows;
+    }
+
+    function rejaRenderRows(rows) {
+        const tbody = $('rejaTableBody');
+        if (!tbody) return;
+        tbody.innerHTML = '';
+
+        const data = (rows && rows.length) ? rows : Array.from({ length: REJA_DEFAULT_ROWS }, (_, i) => ({
+            num: i + 1, tadbir: '', mexanizm: '', muddat: '', masul: '', hisobot: ''
+        }));
+
+        data.forEach((row, idx) => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td class="col-num">
+                    <span class="reja-num-label">${idx + 1}.</span>
+                    <button class="reja-row-del" onclick="rejaDeleteRow(this)" title="Qatorni o'chirish">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </td>
+                <td class="col-tadbir">
+                    <textarea class="reja-cell" data-field="tadbir" rows="2"
+                        placeholder="Тадбир номи...">${escapeHtml(row.tadbir || '')}</textarea>
+                </td>
+                <td class="col-mexanizm">
+                    <textarea class="reja-cell" data-field="mexanizm" rows="2"
+                        placeholder="Ижро механизми...">${escapeHtml(row.mexanizm || '')}</textarea>
+                </td>
+                <td class="col-muddat">
+                    <input type="date" class="reja-date-input" value="${escapeHtml(row.muddat || '')}">
+                </td>
+                <td class="col-masul">
+                    <textarea class="reja-cell" data-field="masul" rows="2"
+                        placeholder="Масъуллар...">${escapeHtml(row.masul || '')}</textarea>
+                </td>
+                <td class="col-hisobot">
+                    <textarea class="reja-cell" data-field="hisobot" rows="2"
+                        placeholder="Ижро ҳисоботи...">${escapeHtml(row.hisobot || '')}</textarea>
+                </td>
+            `;
+            tbody.appendChild(tr);
+        });
+
+        tbody.querySelectorAll('.reja-cell').forEach(ta => {
+            rejaAutoResize(ta);
+            ta.addEventListener('input', () => rejaAutoResize(ta));
+        });
+
+        rejaUpdateRowCount();
+    }
+
+    function rejaAutoResize(ta) {
+        ta.style.height = 'auto';
+        const minH = 38;
+        ta.style.height = Math.max(minH, ta.scrollHeight) + 'px';
+    }
+
+    function rejaUpdateRowCount() {
+        const cnt = document.querySelectorAll('#rejaTableBody tr').length;
+        const el = $('rejaRowCount');
+        if (el) el.textContent = cnt + ' qator';
+    }
+
+    window.openRejaViewer = function() {
+        const saved = rejaLoad();
+
+        if (saved) {
+            $('rejaTasdiqName').value = saved.tasdiqName || '';
+            $('rejaTasdiqDate').value = saved.tasdiqDate || '';
+        } else {
+            $('rejaTasdiqName').value = '';
+            $('rejaTasdiqDate').value = todayStr();
+        }
+
+        rejaRenderRows(saved?.rows || null);
+        $('rejaViewerModal').classList.add('show');
+    };
+
+    window.closeRejaViewer = function() {
+        try { rejaSaveToStorage(); } catch(e) {}
+        $('rejaViewerModal').classList.remove('show');
+    };
+
+    window.rejaAddRow = function() {
+        const tbody = $('rejaTableBody');
+        if (!tbody) return;
+        const idx = tbody.querySelectorAll('tr').length;
+
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td class="col-num">
+                <span class="reja-num-label">${idx + 1}.</span>
+                <button class="reja-row-del" onclick="rejaDeleteRow(this)" title="Qatorni o'chirish">
+                    <i class="fas fa-times"></i>
+                </button>
+            </td>
+            <td class="col-tadbir">
+                <textarea class="reja-cell" data-field="tadbir" rows="2"
+                    placeholder="Тадбир номи..."></textarea>
+            </td>
+            <td class="col-mexanizm">
+                <textarea class="reja-cell" data-field="mexanizm" rows="2"
+                    placeholder="Ижро механизми..."></textarea>
+            </td>
+            <td class="col-muddat">
+                <input type="date" class="reja-date-input" value="">
+            </td>
+            <td class="col-masul">
+                <textarea class="reja-cell" data-field="masul" rows="2"
+                    placeholder="Масъуллар..."></textarea>
+            </td>
+            <td class="col-hisobot">
+                <textarea class="reja-cell" data-field="hisobot" rows="2"
+                    placeholder="Ижро ҳисоботи..."></textarea>
+            </td>
+        `;
+        tbody.appendChild(tr);
+
+        tr.querySelectorAll('.reja-cell').forEach(ta => {
+            rejaAutoResize(ta);
+            ta.addEventListener('input', () => rejaAutoResize(ta));
+        });
+        tr.querySelector('.reja-cell[data-field="tadbir"]')?.focus();
+
+        rejaUpdateRowCount();
+    };
+
+    window.rejaDeleteRow = function(btn) {
+        const tr = btn.closest('tr');
+        if (!tr) return;
+        const total = document.querySelectorAll('#rejaTableBody tr').length;
+        if (total <= 1) {
+            if (!confirm('Oxirgi qatorni o\'chirmoqchimisiz? Jadval bo\'sh qoladi.')) return;
+        }
+        tr.remove();
+        rejaRenumber();
+        rejaUpdateRowCount();
+    };
+
+    function rejaRenumber() {
+        document.querySelectorAll('#rejaTableBody tr').forEach((tr, idx) => {
+            const lbl = tr.querySelector('.reja-num-label');
+            if (lbl) lbl.textContent = (idx + 1) + '.';
+        });
+    }
+
+    window.rejaSave = function() {
+        const ok = rejaSaveToStorage();
+        if (ok) {
+            showRejaToast('✅ Jadval saqlandi', 'success');
+        } else {
+            showRejaToast('❌ Saqlashda xato', 'error');
+        }
+    };
+
+    window.rejaClearAll = function() {
+        if (!confirm('Butun jadvalni tozalab, yangidan boshlaysizmi?\n\nTasdiqlayman va barcha qatorlar o\'chiriladi.')) return;
+        localStorage.removeItem(REJA_STORAGE_KEY);
+        $('rejaTasdiqName').value = '';
+        $('rejaTasdiqDate').value = todayStr();
+        rejaRenderRows(null);
+        showRejaToast('🗑️ Jadval tozalandi', 'success');
+    };
+
+    window.rejaPrint = function() {
+        const doc = $('rejaDoc');
+        if (!doc) return;
+
+        const win = window.open('', '_blank', 'width=1000,height=800');
+        win.document.write(`
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <meta charset="UTF-8">
+                <title>Иш режалари</title>
+                <style>
+                    * { box-sizing: border-box; }
+                    body { font-family: 'Times New Roman', serif; padding: 20px; color: #000; background: #fff; }
+                    h2 { text-align: center; margin-bottom: 20px; font-size: 1.15rem; font-family: 'Times New Roman', serif; }
+                    .reja-tasdiq { display: flex; justify-content: flex-end; margin-bottom: 14px; }
+                    .reja-tasdiq-box { width: 260px; text-align: center; border: 1px solid #000; padding: 8px 10px; }
+                    .reja-tasdiq-box .t-title { font-weight: 800; font-size: 0.95rem; margin-bottom: 6px; }
+                    .reja-tasdiq-box .t-input { width: 100%; border: none; border-bottom: 1.5px solid #000; background: transparent; font-family: inherit; font-size: 0.88rem; text-align: center; padding: 4px 2px; }
+                    .reja-tasdiq-box .t-date-label { font-size: 0.78rem; font-weight: 700; margin-top: 6px; text-align: right; }
+                    .reja-tasdiq-box .t-date-input { width: 100%; border: none; border-bottom: 1.5px solid #000; background: transparent; font-family: inherit; font-size: 0.85rem; text-align: center; padding: 3px 2px; margin-top: 2px; }
+                    table { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 0.85rem; }
+                    th, td { border: 1.2px solid #000; padding: 6px 5px; vertical-align: top; word-wrap: break-word; overflow-wrap: break-word; white-space: pre-wrap; }
+                    thead th { background: #d9ead3; font-weight: 800; text-align: center; font-size: 0.84rem; vertical-align: middle; }
+                    thead th.red-line { text-decoration: underline; text-decoration-color: #c00000; text-decoration-thickness: 2px; }
+                    .col-num { width: 42px; text-align: center; font-weight: 700; vertical-align: middle; }
+                    .col-tadbir { width: 30%; }
+                    .col-mexanizm { width: 20%; }
+                    .col-muddat { width: 12%; text-align: center; }
+                    .col-masul { width: 18%; }
+                    .col-hisobot { width: 20%; }
+                    textarea { border: none; background: transparent; width: 100%; font-family: inherit; font-size: inherit; resize: none; overflow: hidden; }
+                    input { border: none; background: transparent; font-family: inherit; font-size: inherit; }
+                    input[type="date"] { text-align: center; }
+                    @media print {
+                        body { padding: 10px; }
+                        @page { size: A4 landscape; margin: 10mm; }
+                    }
+                </style>
+            </head>
+            <body>
+                <h2>Иш режалари ва унинг бажарилиши ҳақида маълумотлар</h2>
+                ${doc.innerHTML}
+            </body>
+            </html>
+        `);
+        win.document.close();
+
+        win.document.querySelectorAll('textarea').forEach(ta => {
+            ta.style.height = 'auto';
+            ta.style.height = Math.max(38, ta.scrollHeight) + 'px';
+        });
+
+        setTimeout(() => {
+            win.focus();
+            win.print();
+        }, 400);
+    };
+
+    function showRejaToast(msg, type) {
+        let t = document.getElementById('rejaToast');
+        if (!t) {
+            t = document.createElement('div');
+            t.id = 'rejaToast';
+            t.style.cssText = `
+                position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+                background: #1f2937; color: #fff; padding: 13px 22px;
+                border-radius: 12px; font-size: 0.9rem; font-weight: 600;
+                box-shadow: 0 8px 24px rgba(0,0,0,.3); z-index: 3000;
+                animation: fadeUp 0.3s ease; max-width: 90%; text-align: center;
+            `;
+            document.body.appendChild(t);
+        }
+        t.textContent = msg;
+        t.style.background = type === 'success' ? '#0f9d58' : (type === 'error' ? '#dc2626' : '#1f2937');
+        t.style.display = 'block';
+        clearTimeout(t._timer);
+        t._timer = setTimeout(() => { t.style.display = 'none'; }, 2200);
     }
 
     function init() {
