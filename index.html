@@ -312,33 +312,35 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
 .section-list {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 12px;
     padding-right: 4px;
 }
 .section-item {
     background: var(--surface); border-radius: var(--radius-md);
-    padding: 13px 16px; display: flex; align-items: center;
+    padding: 18px 20px; display: flex; align-items: center;
     justify-content: space-between; transition: var(--transition);
-    border: 1.5px solid var(--border-light); cursor: pointer;
+    border: 2px solid var(--border-light); cursor: pointer;
     flex-shrink: 0;
+    min-height: 68px;
 }
-.section-item:hover { background: var(--surface-2); border-color: var(--primary-light); transform: translateX(4px); box-shadow: var(--shadow-sm); }
+.section-item:hover { background: var(--surface-2); border-color: var(--primary-light); transform: translateX(6px); box-shadow: var(--shadow-md); }
 .section-item.active { background: var(--primary-gradient); color: #fff; border-color: transparent; box-shadow: var(--shadow-glow); }
 .section-item.active .section-actions i { color: rgba(255,255,255,0.9); }
 .section-item.active .badge { background: rgba(255,255,255,0.25); color: #fff; border-color: rgba(255,255,255,0.3); }
-.section-info { display: flex; align-items: center; gap: 12px; flex: 1; min-width: 0; }
+.section-info { display: flex; align-items: center; gap: 14px; flex: 1; min-width: 0; }
 .section-info > i {
-    font-size: 0.95rem; width: 32px; height: 32px;
-    border-radius: 10px; background: var(--surface-2);
+    font-size: 1.15rem; width: 44px; height: 44px;
+    border-radius: 14px; background: var(--surface-2);
     color: var(--primary); display: inline-flex;
     align-items: center; justify-content: center; flex-shrink: 0;
+    box-shadow: var(--shadow-xs);
 }
-.section-item.active .section-info > i { background: rgba(255,255,255,0.2); color: #fff; }
-.section-info span { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 0.85rem; }
-.section-actions { display: flex; gap: 4px; align-items: center; flex-shrink: 0; }
+.section-item.active .section-info > i { background: rgba(255,255,255,0.22); color: #fff; }
+.section-info span { font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 1rem; line-height: 1.3; }
+.section-actions { display: flex; gap: 6px; align-items: center; flex-shrink: 0; }
 .section-actions button {
-    width: 30px; height: 30px; border-radius: 9px;
-    background: rgba(0, 0, 0, 0.04); color: var(--text-muted); font-size: 0.8rem;
+    width: 36px; height: 36px; border-radius: 11px;
+    background: rgba(0, 0, 0, 0.04); color: var(--text-muted); font-size: 0.9rem;
 }
 .section-actions button:hover { background: var(--danger); color: #fff; transform: scale(1.1); }
 .folder-tree-panel {
@@ -350,47 +352,51 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 10px;
-    margin-bottom: 14px;
-    padding-bottom: 14px;
-    border-bottom: 1.5px solid var(--border-light);
+    gap: 12px;
+    margin-bottom: 16px;
+    padding: 18px 18px;
+    border-radius: var(--radius-md);
+    background: var(--primary-gradient);
+    color: #fff;
+    box-shadow: var(--shadow-glow);
+    border: 2px solid transparent;
 }
 .folder-tree-header .sec-info {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     flex: 1;
     min-width: 0;
 }
 .folder-tree-header .sec-info i {
-    width: 38px; height: 38px;
-    border-radius: 12px;
-    background: var(--primary-gradient);
+    width: 44px; height: 44px;
+    border-radius: 14px;
+    background: rgba(255,255,255,0.22);
     color: #fff;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-size: 1rem;
+    font-size: 1.15rem;
     flex-shrink: 0;
-    box-shadow: var(--shadow-glow);
 }
 .folder-tree-header .sec-info .sec-name {
     font-weight: 800;
-    font-size: 0.92rem;
-    line-height: 1.25;
+    font-size: 1.05rem;
+    line-height: 1.3;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    color: #fff;
 }
 .folder-tree-header .close-sec-btn {
-    width: 38px; height: 38px;
+    width: 44px; height: 44px;
     padding: 0;
-    border-radius: 12px;
-    background: var(--surface-2);
-    color: var(--text-muted);
-    border: 1.5px solid var(--border-light);
+    border-radius: 14px;
+    background: rgba(255,255,255,0.2);
+    color: #fff;
+    border: 1.5px solid rgba(255,255,255,0.3);
     flex-shrink: 0;
 }
 .folder-tree-header .close-sec-btn:hover {
@@ -400,7 +406,7 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
     transform: scale(1.05);
 }
 .folder-tree-title {
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     font-weight: 800;
     color: var(--text-muted);
     text-transform: uppercase;
@@ -408,62 +414,64 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 10px;
-    padding: 0 4px;
+    margin-bottom: 12px;
+    padding: 0 6px;
 }
-.folder-tree-title span { display: flex; align-items: center; gap: 6px; }
+.folder-tree-title span { display: flex; align-items: center; gap: 8px; }
 .folder-tree-title button {
-    width: 28px; height: 28px; padding: 0; border-radius: 8px;
+    width: 34px; height: 34px; padding: 0; border-radius: 10px;
     background: var(--primary-gradient); color: #fff;
-    font-size: 0.72rem; box-shadow: var(--shadow-glow);
+    font-size: 0.82rem; box-shadow: var(--shadow-glow);
 }
-.folder-tree-title button:hover { transform: scale(1.1); }
+.folder-tree-title button:hover { transform: scale(1.08); }
 .folder-tree-list {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 8px;
     padding-right: 4px;
 }
 .folder-tree-item {
     display: flex;
     align-items: center;
-    gap: 8px;
-    padding: 9px 12px;
-    border-radius: 12px;
-    background: var(--surface);
-    border: 1.5px solid var(--border-light);
+    gap: 10px;
+    padding: 14px 16px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #fef9e7 0%, #fdf1d6 100%);
+    border: 2px solid #f5d78e;
     cursor: pointer;
     transition: var(--transition);
-    font-size: 0.84rem;
-    font-weight: 600;
-    color: var(--text);
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #92400e;
     position: relative;
     user-select: none;
+    min-height: 56px;
 }
 .folder-tree-item:hover {
-    background: var(--surface-2);
-    border-color: var(--primary-light);
-    transform: translateX(3px);
+    background: linear-gradient(135deg, #fdf1d6 0%, #fce4b3 100%);
+    border-color: #d97706;
+    transform: translateX(5px);
+    box-shadow: 0 6px 18px rgba(217,119,6,0.2);
 }
 .folder-tree-item.active {
-    background: var(--primary-gradient);
+    background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
     color: #fff;
     border-color: transparent;
-    box-shadow: var(--shadow-glow);
+    box-shadow: 0 8px 24px rgba(217,119,6,0.4);
 }
 .folder-tree-item .folder-ico {
-    width: 26px; height: 26px;
-    border-radius: 8px;
-    background: rgba(30,60,114,0.08);
-    color: var(--primary);
+    width: 32px; height: 32px;
+    border-radius: 10px;
+    background: rgba(217,119,6,0.18);
+    color: #d97706;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.8rem;
+    font-size: 1rem;
     flex-shrink: 0;
 }
 .folder-tree-item.active .folder-ico {
-    background: rgba(255,255,255,0.22);
+    background: rgba(255,255,255,0.25);
     color: #fff;
 }
 .folder-tree-item .folder-name {
@@ -471,31 +479,36 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    font-size: 0.95rem;
 }
 .folder-tree-item .folder-cnt {
-    background: rgba(15,23,42,0.07);
-    color: var(--text-muted);
-    font-size: 0.68rem;
-    padding: 2px 8px;
+    background: rgba(217,119,6,0.15);
+    color: #92400e;
+    font-size: 0.75rem;
+    padding: 4px 10px;
     border-radius: 40px;
-    font-weight: 700;
+    font-weight: 800;
 }
 .folder-tree-item.active .folder-cnt {
-    background: rgba(255,255,255,0.25);
+    background: rgba(255,255,255,0.28);
     color: #fff;
 }
 .folder-tree-item .folder-actions {
     display: none;
-    gap: 2px;
+    gap: 4px;
 }
 .folder-tree-item:hover .folder-actions { display: flex; }
 .folder-tree-item.active .folder-actions { display: flex; }
 .folder-tree-item .folder-actions button {
-    width: 22px; height: 22px; padding: 0;
-    border-radius: 6px;
-    background: rgba(0,0,0,0.08);
-    color: inherit;
-    font-size: 0.65rem;
+    width: 28px; height: 28px; padding: 0;
+    border-radius: 8px;
+    background: rgba(255,255,255,0.6);
+    color: #92400e;
+    font-size: 0.75rem;
+}
+.folder-tree-item.active .folder-actions button {
+    background: rgba(255,255,255,0.25);
+    color: #fff;
 }
 .folder-tree-item .folder-actions button:hover {
     background: var(--danger); color: #fff;
@@ -504,9 +517,9 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
     background: var(--warning); color: #fff;
 }
 .folder-tree-root {
-    background: linear-gradient(135deg, #fef5e7 0%, #fdebd0 100%);
-    border-color: #f5b942;
-    color: #92400e;
+    background: linear-gradient(135deg, #e8eefb 0%, #dde6f7 100%);
+    border-color: #8aa8d9;
+    color: #1e3c72;
 }
 .folder-tree-root.active {
     background: var(--primary-gradient);
@@ -514,52 +527,63 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
     border-color: transparent;
 }
 .folder-tree-root .folder-ico {
-    background: rgba(245,185,66,0.25);
-    color: #d97706;
+    background: rgba(30,60,114,0.15);
+    color: #1e3c72;
 }
 .folder-tree-root.active .folder-ico {
     background: rgba(255,255,255,0.22);
     color: #fff;
 }
+.folder-tree-root .folder-cnt {
+    background: rgba(30,60,114,0.12);
+    color: #1e3c72;
+}
+.folder-tree-root.active .folder-cnt {
+    background: rgba(255,255,255,0.25);
+    color: #fff;
+}
 .folder-tree-empty {
     text-align: center;
-    padding: 20px 12px;
+    padding: 24px 16px;
     color: var(--text-muted);
-    font-size: 0.82rem;
-    font-weight: 500;
+    font-size: 0.88rem;
+    font-weight: 600;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
+    background: var(--surface-2);
+    border-radius: 14px;
+    border: 2px dashed var(--border);
 }
 .folder-tree-empty i {
-    font-size: 1.8rem;
+    font-size: 2rem;
     opacity: 0.35;
 }
 .folder-path-bar {
     display: flex;
     align-items: center;
-    gap: 8px;
-    padding: 12px 16px;
+    gap: 10px;
+    padding: 14px 18px;
     background: linear-gradient(135deg, #fef5e7 0%, #fdebd0 100%);
     border-radius: var(--radius-md);
-    margin-bottom: 16px;
-    font-size: 0.88rem;
-    font-weight: 600;
+    margin-bottom: 18px;
+    font-size: 0.92rem;
+    font-weight: 700;
     color: #92400e;
-    border: 1.5px solid #f5b942;
+    border: 2px solid #f5b942;
     flex-wrap: wrap;
 }
 .folder-path-bar .back-btn {
     background: #1e3c72;
     color: #fff;
-    padding: 7px 14px;
-    border-radius: 10px;
-    font-size: 0.82rem;
+    padding: 9px 16px;
+    border-radius: 11px;
+    font-size: 0.86rem;
     font-weight: 700;
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
     box-shadow: 0 4px 12px rgba(30,60,114,0.3);
 }
 .folder-path-bar .back-btn:hover {
@@ -568,16 +592,16 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
 }
 .folder-path-bar .crumb {
     background: white;
-    padding: 4px 12px;
+    padding: 6px 14px;
     border-radius: 40px;
     color: #1e3c72;
     font-weight: 700;
-    font-size: 0.82rem;
+    font-size: 0.86rem;
     display: inline-flex;
     align-items: center;
-    gap: 5px;
+    gap: 6px;
     cursor: pointer;
-    border: 1.5px solid transparent;
+    border: 2px solid transparent;
     transition: var(--transition);
 }
 .folder-path-bar .crumb:hover {
@@ -587,7 +611,7 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
     background: #1e3c72; color: #fff; cursor: default;
 }
 .folder-path-bar .sep {
-    color: #d97706; opacity: 0.6; font-size: 0.7rem;
+    color: #d97706; opacity: 0.6; font-size: 0.75rem;
 }
 .date-filter {
     background: var(--surface-2); border-radius: var(--radius-md);
@@ -941,7 +965,7 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
 @media (min-width: 768px) {
     body { padding: 20px; align-items: flex-start; }
     #app { max-width: 100%; gap: 20px; }
-    .main-grid { grid-template-columns: 380px 1fr; align-items: start; }
+    .main-grid { grid-template-columns: 420px 1fr; align-items: start; }
     .panel.sticky {
         position: sticky;
         top: 20px;
@@ -962,7 +986,7 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
     .report-list { max-height: 520px; overflow-y: auto; }
 }
 @media (min-width: 1100px) {
-    .main-grid { grid-template-columns: 420px 1fr; }
+    .main-grid { grid-template-columns: 460px 1fr; }
 }
 @media (max-width: 767px) {
     body { padding: 10px; }
@@ -1015,20 +1039,594 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
     .modal-content { padding: 20px; }
     .modal-content.modal-lg, .modal-content.modal-xl { width: 100%; }
     .preview-container { height: 60vh; }
-    .folder-tree-item { padding: 8px 10px; font-size: 0.8rem; }
-    .folder-tree-item .folder-ico { width: 24px; height: 24px; font-size: 0.72rem; }
-    .folder-tree-header .sec-info .sec-name { font-size: 0.85rem; }
-    .folder-tree-header .sec-info i { width: 34px; height: 34px; font-size: 0.9rem; }
-    .folder-tree-header .close-sec-btn { width: 34px; height: 34px; }
-    .folder-path-bar { padding: 10px 12px; gap: 6px; font-size: 0.8rem; }
-    .folder-path-bar .back-btn { padding: 6px 10px; font-size: 0.75rem; }
-    .folder-path-bar .crumb { padding: 3px 9px; font-size: 0.75rem; }
+    .section-item { padding: 14px 16px; min-height: 60px; }
+    .section-info > i { width: 40px; height: 40px; font-size: 1rem; }
+    .section-info span { font-size: 0.9rem; }
+    .folder-tree-item { padding: 12px 14px; font-size: 0.88rem; min-height: 52px; }
+    .folder-tree-item .folder-ico { width: 30px; height: 30px; font-size: 0.92rem; }
+    .folder-tree-header .sec-info .sec-name { font-size: 0.95rem; }
+    .folder-tree-header .sec-info i { width: 40px; height: 40px; font-size: 1rem; }
+    .folder-tree-header .close-sec-btn { width: 40px; height: 40px; }
+    .folder-path-bar { padding: 12px 14px; gap: 8px; font-size: 0.85rem; }
+    .folder-path-bar .back-btn { padding: 7px 12px; font-size: 0.78rem; }
+    .folder-path-bar .crumb { padding: 5px 11px; font-size: 0.78rem; }
+    .table-editor-toolbar button { padding: 6px 10px; font-size: 0.72rem; }
+    .table-templates-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+    .table-template-card { padding: 12px 12px; }
+    .table-template-card .tt-icon { width: 36px; height: 36px; font-size: 1rem; }
+    .table-template-card .tt-name { font-size: 0.78rem; }
+    .table-created-card { padding: 10px 12px; gap: 10px; }
+    .table-created-card .tc-icon { width: 34px; height: 34px; font-size: 0.95rem; }
+    .table-created-card .tc-text h4 { font-size: 0.8rem; }
+    .table-created-card .tc-text p { font-size: 0.68rem; }
 }
 @media (max-width: 380px) {
     .stat-row { grid-template-columns: 1fr; }
     .user-badge .user-info { display: none; }
     .user-badge { padding: 6px; }
+    .table-templates-grid { grid-template-columns: 1fr; }
 }
+
+/* ============================================
+   JADVALLAR (TABLE BUILDER) STILLARI
+   ============================================ */
+.table-templates-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 14px;
+    margin-bottom: 20px;
+}
+.table-template-card {
+    background: var(--surface);
+    border: 2px solid var(--border-light);
+    border-radius: var(--radius-md);
+    padding: 18px 16px;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.table-template-card:hover {
+    border-color: var(--primary);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+}
+.table-template-card .tt-icon {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    background: var(--primary-gradient);
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem;
+    box-shadow: var(--shadow-glow);
+}
+.table-template-card .tt-name {
+    font-weight: 700;
+    font-size: 0.88rem;
+    line-height: 1.3;
+}
+.table-template-card .tt-desc {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+.table-viewer-modal .modal-content {
+    max-width: 1500px;
+    width: 97%;
+}
+.table-editor-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 14px;
+    padding: 10px 12px;
+    background: var(--surface-2);
+    border-radius: 12px;
+    border: 1.5px solid var(--border-light);
+    align-items: center;
+}
+.table-editor-toolbar .te-info {
+    flex: 1;
+    min-width: 140px;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.table-editor-toolbar button {
+    padding: 8px 14px;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+.table-editor-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    background: #fff;
+    border-radius: 12px;
+    border: 1.5px solid #1e3c72;
+    max-height: 70vh;
+    overflow-y: auto;
+}
+.table-editor-wrapper table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: auto;
+    min-width: 700px;
+    font-size: 0.84rem;
+    background: #fff;
+    border: 1.8px solid #1e3c72;
+}
+.table-editor-wrapper th,
+.table-editor-wrapper td {
+    border: 1.2px solid #1e3c72;
+    padding: 5px 4px;
+    vertical-align: top;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
+    position: relative;
+    min-height: 38px;
+}
+.table-editor-wrapper thead th {
+    background: #d9ead3;
+    color: #000;
+    font-weight: 800;
+    text-align: center;
+    font-size: 0.82rem;
+    line-height: 1.25;
+    vertical-align: middle;
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    padding: 7px 5px;
+}
+.table-editor-wrapper thead th.red-line {
+    text-decoration: underline;
+    text-decoration-color: #c00000;
+    text-decoration-thickness: 2px;
+}
+.table-editor-wrapper .table-cell-input {
+    width: 100%;
+    min-height: 34px;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-family: 'Times New Roman', serif;
+    font-size: 0.84rem;
+    line-height: 1.35;
+    color: #000;
+    padding: 2px 2px;
+    resize: vertical;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
+    box-sizing: border-box;
+}
+.table-editor-wrapper .table-cell-input:focus {
+    background: #fffbe6;
+    box-shadow: inset 0 0 0 2px #f5b942;
+    border-radius: 4px;
+}
+.table-editor-wrapper .table-cell-input::placeholder {
+    color: #999;
+    font-style: italic;
+    font-size: 0.75rem;
+}
+.table-editor-wrapper .table-cell-date {
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-family: 'Times New Roman', serif;
+    font-size: 0.8rem;
+    text-align: center;
+    color: #000;
+    padding: 2px 1px;
+    cursor: pointer;
+}
+.table-editor-wrapper .table-cell-date:focus {
+    background: #fffbe6;
+    box-shadow: inset 0 0 0 2px #f5b942;
+    border-radius: 4px;
+}
+.table-editor-wrapper .row-del {
+    width: 24px; height: 24px;
+    border-radius: 6px;
+    background: #fdecea;
+    color: #dc2626;
+    border: none;
+    font-size: 0.65rem;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+.table-editor-wrapper tbody tr:hover .row-del { display: inline-flex; }
+.table-editor-wrapper .row-del:hover { background: #dc2626; color: #fff; }
+.table-editor-wrapper .col-actions {
+    width: 36px;
+    text-align: center;
+    vertical-align: middle;
+}
+.table-editor-wrapper .col-num {
+    width: 38px;
+    text-align: center;
+    font-weight: 700;
+    vertical-align: middle;
+}
+.table-templates-section {
+    margin-bottom: 18px;
+}
+.table-templates-section h4 {
+    font-size: 0.95rem;
+    font-weight: 800;
+    margin-bottom: 12px;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.table-templates-section h4 i {
+    color: var(--primary);
+}
+.table-created-card {
+    background: linear-gradient(135deg, #e8f5e9 0%, #d9ead3 100%);
+    border: 2px solid #0f9d58;
+    border-radius: var(--radius-md);
+    padding: 14px 16px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+.table-created-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    border-color: #0c8048;
+}
+.table-created-card .tc-icon {
+    width: 40px; height: 40px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #0f9d58 0%, #0c8048 100%);
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+    box-shadow: 0 6px 18px rgba(15,157,88,0.3);
+    flex-shrink: 0;
+}
+.table-created-card .tc-text {
+    flex: 1;
+    min-width: 0;
+}
+.table-created-card .tc-text h4 {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #0c8048;
+    margin-bottom: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.table-created-card .tc-text p {
+    font-size: 0.72rem;
+    color: #4b5563;
+    font-weight: 500;
+}
+.table-created-card .tc-actions {
+    display: flex;
+    gap: 4px;
+    flex-shrink: 0;
+}
+.table-created-card .tc-actions button {
+    width: 30px; height: 30px;
+    border-radius: 8px;
+    background: rgba(0,0,0,0.06);
+    color: #4b5563;
+    font-size: 0.72rem;
+}
+.table-created-card .tc-actions button:hover {
+    background: var(--primary);
+    color: #fff;
+}
+.table-created-card .tc-actions button.del:hover {
+    background: var(--danger);
+}
+.table-created-empty {
+    text-align: center;
+    padding: 24px 16px;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    font-weight: 500;
+    background: var(--surface-2);
+    border-radius: var(--radius-md);
+    border: 1.5px dashed var(--border);
+}
+.table-created-empty i {
+    font-size: 2rem;
+    opacity: 0.3;
+    display: block;
+    margin-bottom: 8px;
+}
+.table-created-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+.table-share-bar {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 10px 14px;
+    background: var(--surface-2);
+    border-radius: 12px;
+    border: 1.5px solid var(--border-light);
+    margin-bottom: 14px;
+}
+.table-share-bar .ts-label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.table-share-bar input {
+    flex: 1;
+    min-width: 200px;
+    padding: 9px 12px;
+    border-radius: 8px;
+    border: 1.5px solid var(--border);
+    background: #fff;
+    font-size: 0.82rem;
+    font-family: inherit;
+    font-weight: 500;
+    outline: none;
+}
+.table-share-bar input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(30,60,114,0.1);
+}
+
+/* ============================================
+   SARLAVHA VA TASDIQLASH BLOKI (TASDIQLASH PASTIDA, KEYIN JADVAL)
+   ============================================ */
+.table-title-editor {
+    margin-bottom: 14px;
+    padding: 16px 20px;
+    background: linear-gradient(135deg, #f8fafc 0%, #eef2f7 100%);
+    border-radius: 14px;
+    border: 1.5px solid var(--border-light);
+}
+.table-title-input {
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-family: 'Times New Roman', serif;
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: #000;
+    text-align: center;
+    padding: 8px 4px;
+    border-bottom: 2px solid transparent;
+    transition: var(--transition);
+}
+.table-title-input:focus {
+    border-bottom-color: var(--primary);
+    background: #fffbe6;
+    border-radius: 6px;
+}
+.table-title-input::placeholder {
+    color: #94a3b8;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.table-editor-wrapper thead th.editable-col {
+    position: relative;
+    cursor: pointer;
+}
+.table-editor-wrapper thead th .col-edit-icon {
+    position: absolute;
+    top: 3px;
+    right: 3px;
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+    background: rgba(30,60,114,0.15);
+    color: var(--primary);
+    font-size: 0.6rem;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: none;
+    padding: 0;
+}
+.table-editor-wrapper thead th:hover .col-edit-icon {
+    display: inline-flex;
+}
+.table-editor-wrapper thead th .col-edit-icon:hover {
+    background: var(--primary);
+    color: #fff;
+}
+.table-editor-wrapper thead th .col-header-text {
+    display: block;
+    padding: 2px 14px 2px 2px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
+    line-height: 1.25;
+    font-family: 'Times New Roman', serif;
+    font-weight: 800;
+}
+
+.col-edit-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(15,23,42,0.6);
+    backdrop-filter: blur(8px);
+    z-index: 4000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.col-edit-modal-overlay.show { display: flex; }
+.col-edit-modal-box {
+    background: #fff;
+    border-radius: 18px;
+    padding: 24px;
+    max-width: 420px;
+    width: 100%;
+    box-shadow: var(--shadow-lg);
+}
+.col-edit-modal-box h4 {
+    font-size: 1.05rem;
+    font-weight: 800;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.col-edit-modal-box h4 i { color: var(--primary); }
+.col-edit-modal-box .form-group { margin-bottom: 14px; }
+.col-edit-modal-box .form-group label {
+    display: block;
+    font-weight: 700;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+.col-edit-modal-box .form-group input,
+.col-edit-modal-box .form-group select {
+    width: 100%;
+    padding: 11px 14px;
+    border-radius: 10px;
+    border: 1.5px solid var(--border);
+    background: #fff;
+    font-size: 0.9rem;
+    font-family: inherit;
+    font-weight: 500;
+    outline: none;
+    transition: var(--transition);
+}
+.col-edit-modal-box .form-group input:focus,
+.col-edit-modal-box .form-group select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(30,60,114,0.1);
+}
+.col-edit-modal-box .form-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 18px;
+    flex-wrap: wrap;
+}
+.col-edit-modal-box .form-actions button {
+    padding: 10px 18px;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+.col-edit-modal-box .checkbox-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text);
+    cursor: pointer;
+    user-select: none;
+}
+.col-edit-modal-box .checkbox-row input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: var(--primary);
+}
+
+/* TASDIQLAYMAN BLOKI */
+.table-preview-tasdiq {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 14px;
+    padding: 8px 4px;
+}
+.table-preview-tasdiq-box {
+    width: 280px;
+    text-align: center;
+    border: 1.5px solid #1e3c72;
+    padding: 10px 12px;
+    background: #fff;
+    border-radius: 8px;
+}
+.table-preview-tasdiq-box .t-title {
+    font-weight: 800;
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+    font-family: 'Times New Roman', serif;
+}
+.table-preview-tasdiq-box .t-input {
+    width: 100%;
+    border: none;
+    border-bottom: 1.5px solid #000;
+    background: transparent;
+    font-family: inherit;
+    font-size: 0.9rem;
+    text-align: center;
+    padding: 4px 2px;
+    outline: none;
+    color: #000;
+}
+.table-preview-tasdiq-box .t-date-label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin-top: 8px;
+    text-align: right;
+    font-family: 'Times New Roman', serif;
+}
+.table-preview-tasdiq-box .t-date-input {
+    width: 100%;
+    border: none;
+    border-bottom: 1.5px solid #000;
+    background: transparent;
+    font-family: inherit;
+    font-size: 0.88rem;
+    text-align: center;
+    padding: 3px 2px;
+    outline: none;
+    color: #000;
+    margin-top: 4px;
+}
+
+/* SARLAVHA (JADVAL USTIDA EMAS, TASDIQLASH PASTIDA) */
+.table-title-display {
+    text-align: center;
+    font-family: 'Times New Roman', serif;
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: #000;
+    padding: 12px 4px 16px 4px;
+    margin-bottom: 8px;
+    line-height: 1.4;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    border-bottom: 2px dashed #cbd5e1;
+}
+.table-title-display:empty { display: none; }
 
 /* ============================================
    ISH REJALARI JADVALI (s1 bo'limi uchun)
@@ -1270,19 +1868,6 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
     transition: var(--transition);
 }
 .reja-open-card:hover .roc-arrow { transform: translateX(4px); }
-.reja-viewer { animation: fadeUp 0.3s ease; }
-@media (max-width: 767px) {
-    .reja-doc { min-width: 640px; }
-    .reja-main-table { font-size: 0.78rem; }
-    .reja-main-table thead th { font-size: 0.76rem; padding: 5px 3px; }
-    .reja-cell { font-size: 0.78rem; }
-    .reja-tasdiq-box { width: 220px; }
-    .reja-toolbar button { padding: 8px 12px; font-size: 0.78rem; }
-    .reja-open-card { padding: 16px 14px; gap: 12px; }
-    .reja-open-card .roc-icon { width: 46px; height: 46px; font-size: 1.3rem; }
-    .reja-open-card .roc-text h3 { font-size: 0.95rem; }
-    .reja-open-card .roc-text p { font-size: 0.75rem; }
-}
 </style>
 </head>
 <body>
@@ -1352,8 +1937,8 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
             <aside class="panel sticky" id="sectionsSidePanel">
                 <div id="sectionsListView">
                     <div class="panel-header" style="margin-bottom:14px;">
-                        <h2 style="font-size:1.05rem;"><i class="fas fa-layer-group"></i> Bo'limlar</h2>
-                        <button class="btn-icon" id="addSectionBtn" title="Yangi bo'lim" style="width:38px;height:38px;"><i class="fas fa-plus" style="font-size:0.85rem;"></i></button>
+                        <h2 style="font-size:1.1rem;"><i class="fas fa-layer-group"></i> Bo'limlar</h2>
+                        <button class="btn-icon" id="addSectionBtn" title="Yangi bo'lim" style="width:42px;height:42px;"><i class="fas fa-plus" style="font-size:0.9rem;"></i></button>
                     </div>
                     <div class="section-list" id="sectionList"></div>
                 </div>
@@ -1412,7 +1997,7 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
             </div>
 
             <div class="panel-header" style="margin-bottom:16px;">
-                <h2 style="font-size:1.05rem;"><i class="fas fa-folder-tree"></i> Bo'limlar (17 ta)</h2>
+                <h2 style="font-size:1.05rem;"><i class="fas fa-folder-tree"></i> Bo'limlar</h2>
                 <span class="badge" id="masjidDetailBadge">0 ta hisobot</span>
             </div>
 
@@ -1541,74 +2126,80 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
 <div class="download-menu" id="downloadMenu"></div>
 
 <!-- ============================================ -->
-<!-- ISH REJALARI MODALI (faqat s1 uchun) -->
+<!-- JADVAL YARATISH MODALI -->
 <!-- ============================================ -->
-<div class="modal" id="rejaViewerModal">
+<div class="modal table-viewer-modal" id="tableTemplateModal">
     <div class="modal-content modal-xl">
         <div class="modal-header">
-            <h3 id="rejaViewerTitle">
-                <i class="fas fa-table"></i>
-                Иш режалари ва унинг бажарилиши ҳақида маълумотлар
-            </h3>
-            <button class="modal-close-btn" onclick="closeRejaViewer()">
-                <i class="fas fa-times"></i>
-            </button>
+            <h3><i class="fas fa-table"></i> Jadval shablonini tanlang</h3>
+            <button class="modal-close-btn" onclick="closeTableTemplateModal()"><i class="fas fa-times"></i></button>
         </div>
         <div class="modal-body">
-            <div class="reja-toolbar">
-                <div class="rt-info">
+            <div class="table-templates-grid" id="tableTemplatesGrid"></div>
+        </div>
+    </div>
+</div>
+
+<div class="modal table-viewer-modal" id="tableEditorModal">
+    <div class="modal-content modal-xl">
+        <div class="modal-header">
+            <h3 id="tableEditorTitle"><i class="fas fa-table"></i> Jadval</h3>
+            <button class="modal-close-btn" onclick="closeTableEditor()"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="modal-body">
+            <div class="table-editor-toolbar">
+                <div class="te-info">
                     <i class="fas fa-info-circle"></i>
-                    <span id="rejaRowCount">0 qator</span>
+                    <span id="tableEditorRowCount">0 qator</span>
                 </div>
-                <button class="btn-outline" onclick="rejaAddRow()">
-                    <i class="fas fa-plus"></i> Qator qo'shish
+                <button class="btn-outline" onclick="tableEditorAddRow()">
+                    <i class="fas fa-plus"></i> Qator
                 </button>
-                <button class="btn-primary" onclick="rejaSave()">
+                <button class="btn-outline" onclick="tableEditorAddCol()">
+                    <i class="fas fa-plus"></i> Ustun
+                </button>
+                <button class="btn-primary" onclick="tableEditorSave()">
                     <i class="fas fa-save"></i> Saqlash
                 </button>
-                <button class="btn-accent" onclick="rejaPrint()">
+                <button class="btn-accent" onclick="tableEditorPrint()">
                     <i class="fas fa-print"></i> Chop etish
                 </button>
-                <button class="btn-danger" onclick="rejaClearAll()">
-                    <i class="fas fa-trash-alt"></i> Tozalash
+                <button class="btn-outline" onclick="tableEditorShare()">
+                    <i class="fas fa-share-alt"></i> Ulashish
+                </button>
+                <button class="btn-danger" onclick="tableEditorDelete()">
+                    <i class="fas fa-trash-alt"></i> O'chirish
                 </button>
             </div>
-
-            <div class="reja-table-wrapper">
-                <div class="reja-doc" id="rejaDoc">
-                    <div class="reja-tasdiq">
-                        <div class="reja-tasdiq-box">
-                            <div class="t-title">"TASDIQLAYMAN"</div>
-                            <input type="text" class="t-input" id="rejaTasdiqName"
-                                   placeholder="_________________"
-                                   value="">
-                            <div class="t-date-label">Sana qo'yish</div>
-                            <input type="date" class="t-date-input" id="rejaTasdiqDate" value="">
-                        </div>
-                    </div>
-
-                    <table class="reja-main-table" id="rejaMainTable">
-                        <thead>
-                            <tr>
-                                <th class="col-num">№</th>
-                                <th class="col-tadbir">Тадбир номи</th>
-                                <th class="col-mexanizm">Ижро механизми</th>
-                                <th class="col-muddat red-line">Муддати</th>
-                                <th class="col-masul">Ижро учун<br>масъуллар</th>
-                                <th class="col-hisobot">Ижро ҳисоботи</th>
-                            </tr>
-                        </thead>
-                        <tbody id="rejaTableBody"></tbody>
-                    </table>
-                </div>
+            <div class="table-share-bar" id="tableShareBar" style="display:none;">
+                <span class="ts-label"><i class="fas fa-link"></i> Ulashish havolasi:</span>
+                <input type="text" id="tableShareUrl" readonly>
+                <button class="btn-primary btn-sm" onclick="copyTableShareUrl()"><i class="fas fa-copy"></i> Nusxalash</button>
             </div>
+            <div class="table-editor-wrapper" id="tableEditorWrapper"></div>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================ -->
+<!-- YARATILGAN JADVALLAR RO'YXATI (papka ichida) -->
+<!-- ============================================ -->
+<div class="modal table-viewer-modal" id="tableListModal">
+    <div class="modal-content modal-lg">
+        <div class="modal-header">
+            <h3><i class="fas fa-list"></i> Papkadagi jadvallar</h3>
+            <button class="modal-close-btn" onclick="closeTableListModal()"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="modal-body">
+            <div id="tableListContainer"></div>
         </div>
     </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://cdn.jsdelivr.net/npm/aws4fetch@1.0.19/dist/aws4fetch.umd.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script><script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
 (function() {
     'use strict';
 
@@ -1748,35 +2339,16 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
 
     const MONTHS = ['Yanvar','Fevral','Mart','Aprel','May','Iyun','Iyul','Avgust','Sentabr','Oktabr','Noyabr','Dekabr'];
 
-    const DEFAULT_SECTIONS = [
-        { id:'s1',  name:'Иш режалари ва унинг бажарилиши ҳақида маълумотлар', icon:'fa-tasks' },
-        { id:'s2',  name:'Кирув хатлари', icon:'fa-envelope-open-text' },
-        { id:'s3',  name:'Чиқув хатлари', icon:'fa-envelope' },
-        { id:'s4',  name:'Масжид умумий йиғилиши ва тафтиш комиссияси йиғилиши қарорлари', icon:'fa-gavel' },
-        { id:'s5',  name:'Ҳайъат йиғилиши баёни ва қарорлари', icon:'fa-users' },
-        { id:'s6',  name:'Молиявий хужжатлар ва турли ҳисоботлар', icon:'fa-coins' },
-        { id:'s7',  name:'Шартномалар', icon:'fa-file-signature' },
-        { id:'s8',  name:'Далолатномалар', icon:'fa-file-contract' },
-        { id:'s9',  name:'Жума тезислари', icon:'fa-book-open' },
-        { id:'s10', name:'Ходимларнинг шахсий хужжатлари тўплами', icon:'fa-id-card' },
-        { id:'s11', name:'Низом, гувоҳнома ва масжид низомини давлат рўйхатига олиш тўғрисидаги хужжатлар тўплами', icon:'fa-file-alt' },
-        { id:'s12', name:'Китоблар фонди ҳақида маълумотлар', icon:'fa-book' },
-        { id:'s13', name:'Никоҳномани қайд қилиш ҳақида маълумотлар', icon:'fa-heart' },
-        { id:'s14', name:'Буйруқлар ва буйруқлар журнали', icon:'fa-clipboard-list' },
-        { id:'s15', name:'Инвентарлар ҳақида маълумотлар', icon:'fa-boxes' },
-        { id:'s16', name:'Худудлар ҳақида маълумотлар', icon:'fa-map-marked-alt' },
-        { id:'s17', name:'Обуна маълумотлари', icon:'fa-newspaper' }
-    ];
-
     let state = {
-        sections: [], masjidlar: [], staff: [], reports: [], folders: [],
+        sections: [], masjidlar: [], staff: [], reports: [], folders: [], customTables: [],
         currentUser: null, currentSectionId: null,
         folderStack: [],
         activeView: 'dashboard', adminMasjidFilter: 'all', adminSectionFilter: 'all',
         selectedMasjidId: null,
         filter: { year: '', month: '', day: '' },
         masjidFilter: { year: '', month: '', day: '' },
-        sectionFolderStack: {}
+        sectionFolderStack: {},
+        currentTableId: null
     };
 
     const $ = id => document.getElementById(id);
@@ -1813,11 +2385,17 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
                 supabase.from('reports').select('*').order('uploaded_at', { ascending: false }),
                 supabase.from('folders').select('*')
             ]);
-            state.sections = sections.data?.length ? sections.data : [...DEFAULT_SECTIONS];
+            state.sections = sections.data?.length ? sections.data : [];
             state.masjidlar = masjidlar.data || [];
             state.staff = staff.data || [];
             state.reports = reports.data || [];
             state.folders = folders.data || [];
+
+            try {
+                const saved = localStorage.getItem('mizan_custom_tables');
+                state.customTables = saved ? JSON.parse(saved) : [];
+            } catch(e) { state.customTables = []; }
+
             hideLoading();
         } catch(e) { hideLoading(); alert('Yuklashda xatolik: ' + e.message); }
     }
@@ -1854,7 +2432,7 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         state.selectedMasjidId = null;
         state.folderStack = [];
         state.currentSectionId = null;
-        state.reports = []; state.masjidlar = []; state.staff = []; state.folders = [];
+        state.reports = []; state.masjidlar = []; state.staff = []; state.folders = []; state.customTables = [];
         $('loginScreen').classList.remove('hidden');
         $('app').style.display = 'none';
         $('loginInput').value = ''; $('passwordInput').value = '';
@@ -2032,7 +2610,7 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
 
     function renderSectionList() {
         if (!state.sections.length) {
-            $('sectionList').innerHTML = `<div class="empty-state" style="padding:20px;"><i class="fas fa-folder-open"></i> Bo'limlar yo'q</div>`;
+            $('sectionList').innerHTML = `<div class="empty-state" style="padding:20px;"><i class="fas fa-folder-open"></i> Bo'limlar yo'q<br><small style="font-size:0.75rem;">"+ Bo'lim qo'shish" tugmasini bosing</small></div>`;
             return;
         }
         $('sectionList').innerHTML = state.sections.map(sec => {
@@ -2150,7 +2728,7 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
                 const path = btn.dataset.path;
                 const parts = path.split('/');
                 const folderName = parts[parts.length - 1];
-                if (!confirm(`"${folderName}" papkasini o'chirmoqchimisiz?\nIchidagi barcha papkalar va hisobotlar ham o'chadi!`)) return;
+                if (!confirm(`"${folderName}" papkasini o'chirmoqchimisiz?\nIchidagi barcha papkalar, hisobotlar va jadvallar ham o'chadi!`)) return;
                 const savedStack = [...state.folderStack];
                 state.folderStack = parts.slice(0, -1);
                 await deleteFolderRecursive(secId, folderName);
@@ -2168,7 +2746,7 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         const reportCount = getVisibleReports(secId).filter(r => (r.folder || '') === fullPath).length;
 
         let html = `
-            <div class="folder-tree-item ${isActive ? 'active' : ''}" data-folder-path="${escapeHtml(fullPath)}" style="margin-left:${parentPath.length * 12}px;">
+            <div class="folder-tree-item ${isActive ? 'active' : ''}" data-folder-path="${escapeHtml(fullPath)}" style="margin-left:${parentPath.length * 14}px;">
                 <span class="folder-ico"><i class="fas fa-folder"></i></span>
                 <span class="folder-name" title="${escapeHtml(folder.name)}">${escapeHtml(folder.name)}</span>
                 <span class="folder-cnt">${reportCount}</span>
@@ -2232,6 +2810,11 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         return reports.filter(r => (r.folder || '') === currentPath);
     }
 
+    function getTablesInCurrentFolder(sectionId) {
+        const currentPath = state.folderStack.length > 0 ? state.folderStack.join('/') : '';
+        return state.customTables.filter(t => t.section_id === sectionId && (t.folder || '') === currentPath);
+    }
+
     function renderSectionContent() {
         const main = $('sectionContentMain');
         const sec = state.sections.find(s => s.id === state.currentSectionId);
@@ -2240,7 +2823,7 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
                 <div class="empty-state" style="padding:80px 20px;">
                     <i class="fas fa-folder-open" style="font-size:4rem;"></i>
                     <h3 style="margin-top:12px; font-weight:800; color:var(--text);">Bo'lim tanlanmagan</h3>
-                    <p style="color:var(--text-muted);">Chap paneldan bo'limni tanlang</p>
+                    <p style="color:var(--text-muted);">Chap paneldan bo'limni tanlang yoki yangi bo'lim yarating</p>
                 </div>`;
             return;
         }
@@ -2286,26 +2869,40 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         `;
 
         // ============================================
-        // ISH REJALARI (s1) — jadval ochish kartasi
+        // JADVALLAR BO'LIMI (har qanday papkada)
         // ============================================
-        if (sec.id === 's1' && isRoot) {
-            const savedReja = localStorage.getItem('mizan_reja_s1');
-            let hasReja = false;
-            try {
-                const parsed = savedReja ? JSON.parse(savedReja) : null;
-                hasReja = parsed && parsed.rows && parsed.rows.length > 0;
-            } catch(e) { hasReja = false; }
-            html += `
-                <div class="reja-open-card" onclick="openRejaViewer()">
-                    <div class="roc-icon"><i class="fas fa-table"></i></div>
-                    <div class="roc-text">
-                        <h3>Иш режалари жадвали</h3>
-                        <p>${hasReja ? '✅ Saqlangan jadval mavjud — ochish uchun bosing' : 'Jadvalni ochish va to\'ldirish uchun bosing'}</p>
-                    </div>
-                    <i class="fas fa-chevron-right roc-arrow"></i>
+        const folderTables = getTablesInCurrentFolder(sec.id);
+        html += `
+            <div class="table-templates-section">
+                <h4><i class="fas fa-table"></i> Jadvallar ${!isRoot ? `("${escapeHtml(currentPath)}" papkasida)` : ''}</h4>
+                <div class="table-created-list" id="tableCreatedList">
+                    ${folderTables.length ? folderTables.map(t => `
+                        <div class="table-created-card" data-table-id="${t.id}">
+                            <div class="tc-icon"><i class="fas fa-table"></i></div>
+                            <div class="tc-text">
+                                <h4>${escapeHtml(t.title || t.name)}</h4>
+                                <p>${t.cols ? t.cols.length : 0} ustun · ${t.rows ? t.rows.length : 0} qator · ${t.created_at ? new Date(t.created_at).toLocaleDateString('uz-UZ') : ''}</p>
+                            </div>
+                            <div class="tc-actions">
+                                <button class="edit-table" data-id="${t.id}" title="Tahrirlash"><i class="fas fa-edit"></i></button>
+                                <button class="share-table" data-id="${t.id}" title="Ulashish"><i class="fas fa-share-alt"></i></button>
+                                <button class="del-table del" data-id="${t.id}" title="O'chirish"><i class="fas fa-trash-alt"></i></button>
+                            </div>
+                        </div>
+                    `).join('') : `
+                        <div class="table-created-empty">
+                            <i class="fas fa-table"></i>
+                            Hozircha jadval yo'q. Quyidagi tugma orqali jadval yarating.
+                        </div>
+                    `}
                 </div>
-            `;
-        }
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:10px;">
+                    <button class="btn-primary" id="addTableBtn" style="padding:10px 18px; font-size:0.85rem; border-radius:12px;">
+                        <i class="fas fa-plus"></i> Jadval yaratish
+                    </button>
+                </div>
+            </div>
+        `;
 
         if (canUpload && isAdmin()) {
             html += `
@@ -2384,7 +2981,7 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
 
         main.innerHTML = html;
 
-        $('sectionBadge').textContent = reports.length + ' ta';
+        $('sectionBadge').textContent = reports.length + ' ta hisobot';
         initDateFilters();
         bindSectionEvents();
     }
@@ -2448,6 +3045,34 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
                 renderSectionContent();
                 if (state.currentSectionId) renderFolderTree();
                 renderSectionList();
+            });
+        });
+
+        // Jadval tugmalari
+        $('addTableBtn')?.addEventListener('click', openTableTemplateModal);
+        document.querySelectorAll('#tableCreatedList .edit-table').forEach(btn => {
+            btn.addEventListener('click', e => {
+                e.stopPropagation();
+                openTableEditor(btn.dataset.id);
+            });
+        });
+        document.querySelectorAll('#tableCreatedList .share-table').forEach(btn => {
+            btn.addEventListener('click', e => {
+                e.stopPropagation();
+                shareTable(btn.dataset.id);
+            });
+        });
+        document.querySelectorAll('#tableCreatedList .del-table').forEach(btn => {
+            btn.addEventListener('click', async e => {
+                e.stopPropagation();
+                if (!confirm('Jadvalni o\'chirmoqchimisiz?')) return;
+                deleteCustomTable(btn.dataset.id);
+            });
+        });
+        document.querySelectorAll('#tableCreatedList .table-created-card').forEach(card => {
+            card.addEventListener('click', e => {
+                if (e.target.closest('.tc-actions')) return;
+                openTableEditor(card.dataset.tableId);
             });
         });
     }
@@ -2519,6 +3144,16 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
             Object.assign(f, updateData);
         }
 
+        state.customTables.forEach(t => {
+            if (t.section_id !== sectionId) return;
+            const tFolder = t.folder || '';
+            if (tFolder === oldFullPath) t.folder = newFullPath;
+            else if (tFolder.startsWith(oldFullPath + '/')) {
+                t.folder = newFullPath + tFolder.substring(oldFullPath.length);
+            }
+        });
+        saveCustomTables();
+
         const reportsToUpdate = state.reports.filter(r => {
             if (r.section_id !== sectionId) return false;
             const rFolder = r.folder || '';
@@ -2543,6 +3178,14 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
     async function deleteFolderRecursive(sectionId, folderName) {
         const fullPath = [...state.folderStack, folderName].join('/');
         const fullPathSlash = fullPath + '/';
+
+        state.customTables = state.customTables.filter(t => {
+            if (t.section_id !== sectionId) return true;
+            const tFolder = t.folder || '';
+            if (tFolder === fullPath || tFolder.startsWith(fullPathSlash)) return false;
+            return true;
+        });
+        saveCustomTables();
 
         const reportsToDelete = state.reports.filter(r =>
             r.section_id === sectionId &&
@@ -3110,6 +3753,686 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         renderSectionContent();
     }
 
+    // ============================================
+    // CUSTOM JADVALLAR (TABLE BUILDER)
+    // ============================================
+    function saveCustomTables() {
+        try {
+            localStorage.setItem('mizan_custom_tables', JSON.stringify(state.customTables));
+        } catch(e) { console.warn('Custom tables saqlash xatosi:', e); }
+    }
+
+    // Predefined table templates
+    const TABLE_TEMPLATES = [
+        {
+            id: 'work_plan',
+            name: 'Иш режалари ва бажарилиши',
+            title: 'Иш режалари ва унинг бажарилиши ҳақида маълумотлар',
+            desc: 'Тадбир, механизм, муддат, масъул, ҳисобот',
+            icon: 'fa-tasks',
+            headerBg: '#d9ead3',
+            cols: [
+                { key: 'num', label: '№', type: 'num', width: 42 },
+                { key: 'tadbir', label: 'Тадбир номи', type: 'text', width: '30%' },
+                { key: 'mexanizm', label: 'Ижро механизми', type: 'text', width: '20%' },
+                { key: 'muddat', label: 'Муддати', type: 'date', width: '12%', redLine: true },
+                { key: 'masul', label: 'Ижро учун масъуллар', type: 'text', width: '18%' },
+                { key: 'hisobot', label: 'Ижро ҳисоботи', type: 'text', width: '20%' }
+            ],
+            defaultRows: 5,
+            hasTasdiq: true
+        },
+        {
+            id: 'haj_2026',
+            name: 'Ҳаж сафарига борган ҳожилар',
+            title: '2026 йилда Янги Наманган туманидан ҳаж сафарига борган ҳожиларни маҳаллалардаги фуқароларга бириктириш',
+            desc: 'Ҳожиларни маҳаллаларга бириктириш жадвали',
+            icon: 'fa-kaaba',
+            headerBg: '#dbe5f1',
+            cols: [
+                { key: 'num', label: '№', type: 'num', width: 42 },
+                { key: 'familiya', label: 'Ҳожнинг фамилияси, исми, шарифи', type: 'text' },
+                { key: 'mahalla', label: 'Ҳожнинг яшаш маҳалласи', type: 'text' },
+                { key: 'toifa', label: 'Ҳожнинг ажратилган тоифаси', type: 'text' },
+                { key: 'biriktirilgan', label: 'Бириктирилган шахс', type: 'text' },
+                { key: 'manzil', label: 'Бириктирилган шахснинг яшаш манзили', type: 'text' },
+                { key: 'muammo', label: 'Бириктирилган шахснинг асосий муаммоси', type: 'text' },
+                { key: 'amalga', label: 'Ҳож томонидан амалга оширилган ишлар', type: 'text' }
+            ],
+            defaultRows: 4,
+            hasTasdiq: false
+        },
+        {
+            id: 'tadbir_info',
+            name: 'Тадбир ўтказиш маълумоти',
+            title: '«Ҳаж – 2025» мавсуми зиёратчиларининг Арофат водийсида эълон қилинган «Янги Ўзбекистоннинг тинчлик ва маънавият тарғиботчилари» номли ташаббусини амалга ошириш бўйича ўтказилган маънавий-маърифий тадбирлар ҳақида МАЪЛУМОТ',
+            desc: 'Тадбир сана, масъул, худуд, хоҳимлар сони',
+            icon: 'fa-calendar-check',
+            headerBg: '#fce4d6',
+            cols: [
+                { key: 'label', label: 'Кўрсаткич', type: 'text', width: '40%' },
+                { key: 'value', label: 'Маълумот', type: 'text', width: '60%' }
+            ],
+            defaultRows: 10,
+            hasTasdiq: false
+        },
+        {
+            id: 'targibot',
+            name: 'Таърғибот тадбирлари',
+            title: 'Хожилар иштирокида ўтказилган маънавий-маърифий тарғибот тадбирлари ҳақида КУНЛИК МАЪЛУМОТ',
+            desc: 'Ҳудуд, хоҳимлар сони, ёрдам, тарғибот',
+            icon: 'fa-bullhorn',
+            headerBg: '#e2efda',
+            cols: [
+                { key: 'num', label: '№', type: 'num', width: 42 },
+                { key: 'hudud', label: 'Ҳудуд номи', type: 'text' },
+                { key: 'jami', label: 'Жами бириктирилган ҳожилар сони', type: 'text' },
+                { key: 'ishtirok', label: 'Шундан, тадбирларда иштирок этган ҳожилар', type: 'text' },
+                { key: 'otkazilgan', label: 'Ўтказилган тадбирлар сони', type: 'text' },
+                { key: 'karvon', label: 'Карвон саломатлиги', type: 'text' },
+                { key: 'moddiy', label: 'Моддий ёрдам (сўм)', type: 'text' },
+                { key: 'sovgat', label: 'Совғатларни тақдим этиш', type: 'text' },
+                { key: 'kiyim', label: 'Кийим-кечаклар тақдим этиш', type: 'text' },
+                { key: 'diniy', label: 'Диний-маърифий тарғибот', type: 'text' },
+                { key: 'kitob', label: 'Китобларни тарқатиш', type: 'text' },
+                { key: 'yosh', label: 'Ёшлар ўртасида тарғибот', type: 'text' }
+            ],
+            defaultRows: 5,
+            hasTasdiq: false
+        },
+        {
+            id: 'blank',
+            name: 'Bo\'sh jadval',
+            title: 'Янги жадвал',
+            desc: 'O\'zingiz ustun va qatorlarni yaratasiz',
+            icon: 'fa-table',
+            headerBg: '#f2f2f2',
+            cols: [
+                { key: 'col1', label: '1-устун', type: 'text' },
+                { key: 'col2', label: '2-устун', type: 'text' },
+                { key: 'col3', label: '3-устун', type: 'text' }
+            ],
+            defaultRows: 5,
+            hasTasdiq: false
+        }
+    ];
+
+    window.openTableTemplateModal = function() {
+        const grid = $('tableTemplatesGrid');
+        grid.innerHTML = TABLE_TEMPLATES.map(t => `
+            <div class="table-template-card" data-template-id="${t.id}">
+                <div class="tt-icon"><i class="fas ${t.icon}"></i></div>
+                <div class="tt-name">${escapeHtml(t.name)}</div>
+                <div class="tt-desc">${escapeHtml(t.desc)}</div>
+                <div style="margin-top:auto; padding-top:10px; border-top:1px dashed var(--border); font-size:0.72rem; color:var(--text-muted); font-weight:600;">
+                    <i class="fas fa-columns"></i> ${t.cols.length} ustun
+                </div>
+            </div>
+        `).join('');
+
+        grid.querySelectorAll('.table-template-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const tplId = card.dataset.templateId;
+                createTableFromTemplate(tplId);
+            });
+        });
+
+        $('tableTemplateModal').classList.add('show');
+    };
+
+    window.closeTableTemplateModal = function() {
+        $('tableTemplateModal').classList.remove('show');
+    };
+
+    function createTableFromTemplate(templateId) {
+        const tpl = TABLE_TEMPLATES.find(t => t.id === templateId);
+        if (!tpl) return;
+
+        const cols = tpl.cols.map(c => ({ ...c }));
+        const rows = Array.from({ length: tpl.defaultRows || 4 }, (_, i) => {
+            const row = {};
+            cols.forEach(c => { row[c.key] = c.type === 'num' ? (i + 1) : ''; });
+            return row;
+        });
+
+        const newTable = {
+            id: 'tbl_' + genId(),
+            name: tpl.name,
+            title: tpl.title || tpl.name,
+            icon: tpl.icon,
+            headerBg: tpl.headerBg || '#d9ead3',
+            hasTasdiq: tpl.hasTasdiq || false,
+            tasdiqName: '',
+            tasdiqDate: '',
+            cols: cols,
+            rows: rows,
+            section_id: state.currentSectionId,
+            folder: state.folderStack.length ? state.folderStack.join('/') : null,
+            created_at: new Date().toISOString(),
+            created_by: state.currentUser?.id
+        };
+
+        state.customTables.push(newTable);
+        saveCustomTables();
+        closeTableTemplateModal();
+        renderSectionContent();
+        openTableEditor(newTable.id);
+    }
+
+    window.openTableEditor = function(tableId) {
+        const t = state.customTables.find(x => x.id === tableId);
+        if (!t) return;
+        state.currentTableId = tableId;
+        $('tableEditorTitle').innerHTML = `<i class="fas ${t.icon || 'fa-table'}"></i> ${escapeHtml(t.title || t.name)}`;
+        $('tableEditorRowCount').textContent = (t.rows ? t.rows.length : 0) + ' qator';
+        renderTableEditor(t);
+        $('tableEditorModal').classList.add('show');
+    };
+
+    window.closeTableEditor = function() {
+        $('tableEditorModal').classList.remove('show');
+        state.currentTableId = null;
+        if (state.activeView === 'sections' && state.currentSectionId) {
+            renderSectionContent();
+        }
+    };
+
+    function renderTableEditor(t) {
+        const wrapper = $('tableEditorWrapper');
+        const cols = t.cols || [];
+        const rows = t.rows || [];
+
+        let html = '';
+
+        // ===== TASDIQLAYMAN BLOKI (yuqorida) =====
+        if (t.hasTasdiq) {
+            html += `
+                <div class="table-preview-tasdiq">
+                    <div class="table-preview-tasdiq-box">
+                        <div class="t-title">"TASDIQLAYMAN"</div>
+                        <input type="text" class="t-input" placeholder="_________________" value="${escapeHtml(t.tasdiqName || '')}" data-field="tasdiqName">
+                        <div class="t-date-label">Sana qo'yish</div>
+                        <input type="date" class="t-date-input" value="${escapeHtml(t.tasdiqDate || '')}" data-field="tasdiqDate">
+                    </div>
+                </div>
+            `;
+        }
+
+        // ===== SARLAVHA (TASDIQLAYMANDAN KEYIN, JADVAL USTIDA) =====
+        html += `
+            <div class="table-title-editor">
+                <input type="text" class="table-title-input" 
+                       placeholder="Jadval sarlavhasini kiriting..." 
+                       value="${escapeHtml(t.title || t.name || '')}" 
+                       data-field="title">
+            </div>
+        `;
+
+        // ===== JADVAL =====
+        html += `<table><thead><tr>`;
+        cols.forEach((c, cIdx) => {
+            const redClass = c.redLine ? ' red-line' : '';
+            const styleW = c.width ? ` style="width:${c.width}"` : '';
+            const labelSafe = escapeHtml(c.label);
+            const isNumCol = c.type === 'num';
+            html += `<th class="${redClass} editable-col"${styleW} data-col-index="${cIdx}" data-col-key="${c.key}">
+                <span class="col-header-text">${labelSafe.replace(/\n/g,'<br>')}</span>
+                ${!isNumCol ? `<button class="col-edit-icon" onclick="event.stopPropagation(); openColEditModal(${cIdx})" title="Ustunni tahrirlash"><i class="fas fa-pen"></i></button>` : ''}
+            </th>`;
+        });
+        html += `<th class="col-actions"></th></tr></thead><tbody>`;
+
+        rows.forEach((row, rIdx) => {
+            html += `<tr data-row-index="${rIdx}">`;
+            cols.forEach(c => {
+                if (c.type === 'num') {
+                    html += `<td class="col-num">${rIdx + 1}.</td>`;
+                } else if (c.type === 'date') {
+                    html += `<td><input type="date" class="table-cell-date" data-col-key="${c.key}" data-row-index="${rIdx}" value="${escapeHtml(row[c.key] || '')}"></td>`;
+                } else {
+                    html += `<td><textarea class="table-cell-input" data-col-key="${c.key}" data-row-index="${rIdx}" rows="2" placeholder="${escapeHtml(c.label)}...">${escapeHtml(row[c.key] || '')}</textarea></td>`;
+                }
+            });
+            html += `<td class="col-actions"><button class="row-del" onclick="tableEditorDeleteRow(${rIdx})" title="Qatorni o'chirish"><i class="fas fa-times"></i></button></td>`;
+            html += `</tr>`;
+        });
+
+        html += `</tbody></table>`;
+        wrapper.innerHTML = html;
+
+        // ===== EVENT BINDING =====
+        wrapper.querySelectorAll('.table-cell-input, .table-cell-date').forEach(inp => {
+            inp.addEventListener('input', () => {
+                const key = inp.dataset.colKey;
+                const rIdx = Number(inp.dataset.rowIndex);
+                if (!isNaN(rIdx)) {
+                    const t2 = state.customTables.find(x => x.id === state.currentTableId);
+                    if (t2 && t2.rows[rIdx]) {
+                        t2.rows[rIdx][key] = inp.value;
+                    }
+                }
+            });
+            if (inp.classList.contains('table-cell-input')) {
+                autoResizeTextarea(inp);
+                inp.addEventListener('input', () => autoResizeTextarea(inp));
+            }
+        });
+
+        // Sarlavha input
+        const titleInput = wrapper.querySelector('[data-field="title"]');
+        if (titleInput) {
+            titleInput.addEventListener('input', () => {
+                const t2 = state.customTables.find(x => x.id === state.currentTableId);
+                if (t2) t2.title = titleInput.value;
+            });
+        }
+
+        // Tasdiqlash inputlari
+        wrapper.querySelectorAll('[data-field="tasdiqName"]').forEach(inp => {
+            inp.addEventListener('input', () => {
+                const t2 = state.customTables.find(x => x.id === state.currentTableId);
+                if (t2) t2.tasdiqName = inp.value;
+            });
+        });
+        wrapper.querySelectorAll('[data-field="tasdiqDate"]').forEach(inp => {
+            inp.addEventListener('input', () => {
+                const t2 = state.customTables.find(x => x.id === state.currentTableId);
+                if (t2) t2.tasdiqDate = inp.value;
+            });
+        });
+
+        $('tableEditorRowCount').textContent = rows.length + ' qator';
+    }
+
+    function autoResizeTextarea(ta) {
+        ta.style.height = 'auto';
+        ta.style.height = Math.max(34, ta.scrollHeight) + 'px';
+    }
+
+    window.tableEditorAddRow = function() {
+        const t = state.customTables.find(x => x.id === state.currentTableId);
+        if (!t) return;
+        const newRow = {};
+        t.cols.forEach(c => { newRow[c.key] = c.type === 'num' ? (t.rows.length + 1) : ''; });
+        t.rows.push(newRow);
+        saveCustomTables();
+        renderTableEditor(t);
+    };
+
+    window.tableEditorAddCol = function() {
+        const t = state.customTables.find(x => x.id === state.currentTableId);
+        if (!t) return;
+        const label = prompt('Yangi ustun nomini kiriting:', 'Янги устун');
+        if (!label || !label.trim()) return;
+        const key = 'col_' + genId();
+        t.cols.push({ key: key, label: label.trim(), type: 'text' });
+        t.rows.forEach(r => { r[key] = ''; });
+        saveCustomTables();
+        renderTableEditor(t);
+        showRejaToast('✅ Ustun qo\'shildi', 'success');
+    };
+
+    window.tableEditorDeleteRow = function(rIdx) {
+        const t = state.customTables.find(x => x.id === state.currentTableId);
+        if (!t) return;
+        if (t.rows.length <= 1) {
+            if (!confirm('Oxirgi qatorni o\'chirmoqchimisiz?')) return;
+        }
+        t.rows.splice(rIdx, 1);
+        saveCustomTables();
+        renderTableEditor(t);
+    };
+
+    window.tableEditorSave = function() {
+        const t = state.customTables.find(x => x.id === state.currentTableId);
+        if (!t) return;
+        saveCustomTables();
+        showRejaToast('✅ Jadval saqlandi', 'success');
+        if (state.activeView === 'sections' && state.currentSectionId) {
+            renderSectionContent();
+        }
+    };
+
+    window.tableEditorDelete = function() {
+        const t = state.customTables.find(x => x.id === state.currentTableId);
+        if (!t) return;
+        if (!confirm(`"${t.title || t.name}" jadvalini o'chirmoqchimisiz?`)) return;
+        state.customTables = state.customTables.filter(x => x.id !== t.id);
+        saveCustomTables();
+        closeTableEditor();
+    };
+
+    // ============================================
+    // USTUNNI TAHRIRLASH MODALI
+    // ============================================
+    window.openColEditModal = function(colIndex) {
+        const t = state.customTables.find(x => x.id === state.currentTableId);
+        if (!t) return;
+        const col = t.cols[colIndex];
+        if (!col) return;
+
+        let overlay = document.getElementById('colEditModalOverlay');
+        if (!overlay) {
+            overlay = document.createElement('div');
+            overlay.id = 'colEditModalOverlay';
+            overlay.className = 'col-edit-modal-overlay';
+            overlay.innerHTML = `
+                <div class="col-edit-modal-box">
+                    <h4><i class="fas fa-pen"></i> Ustunni tahrirlash</h4>
+                    <div class="form-group">
+                        <label>Ustun nomi (sarlavhasi)</label>
+                        <input type="text" id="colEditLabel" placeholder="Masalan: Тадбир номи">
+                    </div>
+                    <div class="form-group">
+                        <label>Ustun turi</label>
+                        <select id="colEditType">
+                            <option value="text">Matn (textarea)</option>
+                            <option value="date">Sana (date input)</option>
+                            <option value="num">Raqam (№)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Kenglik (ixtiyoriy)</label>
+                        <input type="text" id="colEditWidth" placeholder="Masalan: 20% yoki 120px">
+                    </div>
+                    <label class="checkbox-row">
+                        <input type="checkbox" id="colEditRedLine">
+                        <span>Qizil chiziqli sarlavha (Муддати kabi)</span>
+                    </label>
+                    <div class="form-actions">
+                        <button type="button" class="btn-outline" onclick="closeColEditModal()">Bekor qilish</button>
+                        <button type="button" class="btn-danger" onclick="deleteCol()"><i class="fas fa-trash"></i> O'chirish</button>
+                        <button type="button" class="btn-accent" onclick="saveColEdit()"><i class="fas fa-save"></i> Saqlash</button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(overlay);
+            overlay.addEventListener('click', e => {
+                if (e.target === overlay) closeColEditModal();
+            });
+        }
+
+        document.getElementById('colEditLabel').value = col.label || '';
+        document.getElementById('colEditType').value = col.type || 'text';
+        document.getElementById('colEditWidth').value = col.width || '';
+        document.getElementById('colEditRedLine').checked = !!col.redLine;
+        overlay.dataset.colIndex = colIndex;
+        overlay.classList.add('show');
+
+        setTimeout(() => document.getElementById('colEditLabel').focus(), 150);
+    };
+
+    window.closeColEditModal = function() {
+        const overlay = document.getElementById('colEditModalOverlay');
+        if (overlay) overlay.classList.remove('show');
+    };
+
+    window.saveColEdit = function() {
+        const overlay = document.getElementById('colEditModalOverlay');
+        if (!overlay) return;
+        const colIndex = Number(overlay.dataset.colIndex);
+        const t = state.customTables.find(x => x.id === state.currentTableId);
+        if (!t || !t.cols[colIndex]) return;
+
+        const newLabel = document.getElementById('colEditLabel').value.trim();
+        if (!newLabel) return alert('Ustun nomini kiriting!');
+
+        const newType = document.getElementById('colEditType').value;
+        const newWidth = document.getElementById('colEditWidth').value.trim();
+        const newRedLine = document.getElementById('colEditRedLine').checked;
+
+        t.cols[colIndex].label = newLabel;
+        t.cols[colIndex].type = newType;
+        t.cols[colIndex].width = newWidth || undefined;
+        t.cols[colIndex].redLine = newRedLine;
+
+        saveCustomTables();
+        closeColEditModal();
+        renderTableEditor(t);
+        showRejaToast('✅ Ustun yangilandi', 'success');
+    };
+
+    window.deleteCol = function() {
+        const overlay = document.getElementById('colEditModalOverlay');
+        if (!overlay) return;
+        const colIndex = Number(overlay.dataset.colIndex);
+        const t = state.customTables.find(x => x.id === state.currentTableId);
+        if (!t || !t.cols[colIndex]) return;
+
+        if (t.cols.length <= 1) return alert('Kamida bitta ustun qolishi kerak!');
+        if (!confirm(`"${t.cols[colIndex].label}" ustunini o'chirmoqchimisiz?`)) return;
+
+        const key = t.cols[colIndex].key;
+        t.cols.splice(colIndex, 1);
+        t.rows.forEach(r => { delete r[key]; });
+
+        saveCustomTables();
+        closeColEditModal();
+        renderTableEditor(t);
+        showRejaToast('🗑️ Ustun o\'chirildi', 'success');
+    };
+
+    window.tableEditorPrint = function() {
+        const t = state.customTables.find(x => x.id === state.currentTableId);
+        if (!t) return;
+
+        const win = window.open('', '_blank', 'width=1200,height=800');
+        const cols = t.cols || [];
+        const rows = t.rows || [];
+
+        let theadHtml = '<tr>';
+        cols.forEach(c => {
+            const redClass = c.redLine ? ' class="red-line"' : '';
+            const styleW = c.width ? ` style="width:${c.width}"` : '';
+            theadHtml += `<th${redClass}${styleW}>${escapeHtml(c.label).replace(/\n/g,'<br>')}</th>`;
+        });
+        theadHtml += '</tr>';
+
+        let tbodyHtml = '';
+        rows.forEach((row, rIdx) => {
+            tbodyHtml += '<tr>';
+            cols.forEach(c => {
+                if (c.type === 'num') {
+                    tbodyHtml += `<td style="text-align:center;font-weight:700;">${rIdx + 1}.</td>`;
+                } else if (c.type === 'date') {
+                    tbodyHtml += `<td style="text-align:center;">${escapeHtml(row[c.key] || '')}</td>`;
+                } else {
+                    tbodyHtml += `<td>${escapeHtml(row[c.key] || '').replace(/\n/g,'<br>')}</td>`;
+                }
+            });
+            tbodyHtml += '</tr>';
+        });
+
+        let tasdiqHtml = '';
+        if (t.hasTasdiq) {
+            tasdiqHtml = `
+                <div style="display:flex; justify-content:flex-end; margin-bottom:14px;">
+                    <div style="width:260px; text-align:center; border:1px solid #000; padding:8px 10px;">
+                        <div style="font-weight:800; font-size:0.95rem; margin-bottom:6px;">"TASDIQLAYMAN"</div>
+                        <div style="border-bottom:1.5px solid #000; padding:4px 2px; font-size:0.88rem;">${escapeHtml(t.tasdiqName || '_________________')}</div>
+                        <div style="font-size:0.78rem; font-weight:700; margin-top:6px; text-align:right;">Sana qo'yish</div>
+                        <div style="border-bottom:1.5px solid #000; padding:3px 2px; font-size:0.85rem;">${escapeHtml(t.tasdiqDate || '')}</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        let titleHtml = '';
+        if (t.title && t.title.trim()) {
+            titleHtml = `<h2 style="text-align:center; font-family:'Times New Roman',serif; font-size:1.1rem; font-weight:800; margin:0 0 18px 0; line-height:1.35;">${escapeHtml(t.title)}</h2>`;
+        }
+
+        win.document.write(`
+            <!DOCTYPE html>
+            <html><head><meta charset="UTF-8"><title>${escapeHtml(t.title || t.name)}</title>
+            <style>
+                body { font-family: 'Times New Roman', serif; padding: 20px; color: #000; background: #fff; }
+                table { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 0.85rem; }
+                th, td { border: 1.2px solid #1e3c72; padding: 6px 5px; vertical-align: top; word-wrap: break-word; white-space: pre-wrap; }
+                thead th { background: ${t.headerBg || '#d9ead3'}; font-weight: 800; text-align: center; font-size: 0.84rem; vertical-align: middle; }
+                thead th.red-line { text-decoration: underline; text-decoration-color: #c00000; text-decoration-thickness: 2px; }
+                @media print { body { padding: 10px; } @page { size: A4 landscape; margin: 10mm; } }
+            </style></head><body>
+            ${tasdiqHtml}
+            ${titleHtml}
+            <table><thead>${theadHtml}</thead><tbody>${tbodyHtml}</tbody></table>
+            </body></html>
+        `);
+        win.document.close();
+        setTimeout(() => { win.focus(); win.print(); }, 400);
+    };
+
+    window.tableEditorShare = function() {
+        const t = state.customTables.find(x => x.id === state.currentTableId);
+        if (!t) return;
+
+        try {
+            const data = encodeURIComponent(JSON.stringify({
+                name: t.name,
+                title: t.title,
+                cols: t.cols,
+                rows: t.rows,
+                hasTasdiq: t.hasTasdiq,
+                tasdiqName: t.tasdiqName,
+                tasdiqDate: t.tasdiqDate,
+                headerBg: t.headerBg,
+                icon: t.icon
+            }));
+            const url = window.location.origin + window.location.pathname + '#table=' + data;
+
+            $('tableShareUrl').value = url;
+            $('tableShareBar').style.display = 'flex';
+
+            if (navigator.share) {
+                navigator.share({
+                    title: t.title || t.name,
+                    text: 'Mizan Pro jadvali: ' + (t.title || t.name),
+                    url: url
+                }).catch(() => {});
+            }
+        } catch(e) {
+            alert('Ulashishda xatolik: ' + e.message);
+        }
+    };
+
+    window.copyTableShareUrl = function() {
+        const inp = $('tableShareUrl');
+        if (!inp) return;
+        inp.select();
+        inp.setSelectionRange(0, 99999);
+        try {
+            document.execCommand('copy');
+            showRejaToast('📋 Havola nusxalandi', 'success');
+        } catch(e) {
+            navigator.clipboard.writeText(inp.value).then(() => {
+                showRejaToast('📋 Havola nusxalandi', 'success');
+            }).catch(() => {
+                alert('Havolani qo\'lda nusxalang: ' + inp.value);
+            });
+        }
+    };
+
+    function shareTable(tableId) {
+        const t = state.customTables.find(x => x.id === tableId);
+        if (!t) return;
+        try {
+            const data = encodeURIComponent(JSON.stringify({
+                name: t.name, title: t.title, cols: t.cols, rows: t.rows,
+                hasTasdiq: t.hasTasdiq, tasdiqName: t.tasdiqName,
+                tasdiqDate: t.tasdiqDate, headerBg: t.headerBg, icon: t.icon
+            }));
+            const url = window.location.origin + window.location.pathname + '#table=' + data;
+            if (navigator.share) {
+                navigator.share({ title: t.title || t.name, url: url }).catch(() => {});
+            } else {
+                prompt('Ulashish havolasi (nusxalash uchun Ctrl+C):', url);
+            }
+        } catch(e) { alert('Xatolik: ' + e.message); }
+    }
+
+    function deleteCustomTable(tableId) {
+        const t = state.customTables.find(x => x.id === tableId);
+        if (!t) return;
+        state.customTables = state.customTables.filter(x => x.id !== tableId);
+        saveCustomTables();
+        renderSectionContent();
+    }
+
+    // Check URL hash for shared table
+    function checkSharedTable() {
+        const hash = window.location.hash;
+        if (!hash || !hash.startsWith('#table=')) return;
+        try {
+            const data = JSON.parse(decodeURIComponent(hash.substring(7)));
+            if (!data || !data.cols || !data.rows) return;
+
+            const newTable = {
+                id: 'tbl_' + genId(),
+                name: data.name || 'Ulashilgan jadval',
+                title: data.title || data.name || 'Ulashilgan jadval',
+                icon: data.icon || 'fa-table',
+                headerBg: data.headerBg || '#d9ead3',
+                hasTasdiq: data.hasTasdiq || false,
+                tasdiqName: data.tasdiqName || '',
+                tasdiqDate: data.tasdiqDate || '',
+                cols: data.cols,
+                rows: data.rows,
+                section_id: null,
+                folder: null,
+                created_at: new Date().toISOString(),
+                created_by: null
+            };
+
+            if (confirm(`"${newTable.title}" jadvali ulashildi. Saqlaysizmi?`)) {
+                if (state.currentSectionId) {
+                    newTable.section_id = state.currentSectionId;
+                    newTable.folder = state.folderStack.length ? state.folderStack.join('/') : null;
+                } else {
+                    if (state.sections.length > 0) {
+                        newTable.section_id = state.sections[0].id;
+                    } else {
+                        alert('Avval bo\'lim yarating!');
+                        window.location.hash = '';
+                        return;
+                    }
+                }
+                state.customTables.push(newTable);
+                saveCustomTables();
+                window.location.hash = '';
+                if (state.activeView === 'sections') {
+                    renderSectionContent();
+                }
+                showRejaToast('✅ Ulashilgan jadval saqlandi', 'success');
+            } else {
+                window.location.hash = '';
+            }
+        } catch(e) {
+            console.warn('Shared table parse error:', e);
+            window.location.hash = '';
+        }
+    }
+
+    function showRejaToast(msg, type) {
+        let t = document.getElementById('rejaToast');
+        if (!t) {
+            t = document.createElement('div');
+            t.id = 'rejaToast';
+            t.style.cssText = `
+                position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+                background: #1f2937; color: #fff; padding: 13px 22px;
+                border-radius: 12px; font-size: 0.9rem; font-weight: 600;
+                box-shadow: 0 8px 24px rgba(0,0,0,.3); z-index: 3000;
+                animation: fadeUp 0.3s ease; max-width: 90%; text-align: center;
+            `;
+            document.body.appendChild(t);
+        }
+        t.textContent = msg;
+        t.style.background = type === 'success' ? '#0f9d58' : (type === 'error' ? '#dc2626' : '#1f2937');
+        t.style.display = 'block';
+        clearTimeout(t._timer);
+        t._timer = setTimeout(() => { t.style.display = 'none'; }, 2200);
+    }
+
     function renderAll() {
         renderUserArea();
         renderDashboard();
@@ -3178,6 +4501,9 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
         $('masjidModal').addEventListener('click', e => { if (e.target === $('masjidModal')) closeMasjidModal(); });
         $('folderModal').addEventListener('click', e => { if (e.target === $('folderModal')) closeFolderModal(); });
         $('masjidSectionModal').addEventListener('click', e => { if (e.target === $('masjidSectionModal')) closeMasjidSectionModal(); });
+        $('tableTemplateModal').addEventListener('click', e => { if (e.target === $('tableTemplateModal')) closeTableTemplateModal(); });
+        $('tableEditorModal').addEventListener('click', e => { if (e.target === $('tableEditorModal')) closeTableEditor(); });
+        $('tableListModal').addEventListener('click', e => { if (e.target === $('tableListModal')) closeTableListModal(); });
 
         document.addEventListener('keydown', e => {
             if (e.key === 'Escape') {
@@ -3187,8 +4513,10 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
                 closeFolderModal();
                 closeMasjidSectionModal();
                 closeDownloadMenu();
-                const rjm = document.getElementById('rejaViewerModal');
-                if (rjm && rjm.classList.contains('show')) closeRejaViewer();
+                closeTableTemplateModal();
+                closeTableEditor();
+                closeTableListModal();
+                closeColEditModal();
             }
             if (e.key === 'Backspace' && state.folderStack.length > 0 && state.activeView === 'sections') {
                 const tag = (e.target.tagName || '').toLowerCase();
@@ -3199,297 +4527,8 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
             }
         });
 
-        // Reja modal tashqarisiga bosilsa yopish
-        const rjm = $('rejaViewerModal');
-        if (rjm) rjm.addEventListener('click', e => { if (e.target === rjm) closeRejaViewer(); });
-    }
-
-    // ============================================
-    // ISH REJALARI JADVALI (s1 bo'limi)
-    // ============================================
-    const REJA_STORAGE_KEY = 'mizan_reja_s1';
-    const REJA_DEFAULT_ROWS = 4;
-
-    function rejaLoad() {
-        try {
-            const raw = localStorage.getItem(REJA_STORAGE_KEY);
-            if (!raw) return null;
-            return JSON.parse(raw);
-        } catch(e) {
-            console.error('Reja yuklash xato:', e);
-            return null;
-        }
-    }
-
-    function rejaSaveToStorage() {
-        try {
-            const data = {
-                tasdiqName: $('rejaTasdiqName')?.value || '',
-                tasdiqDate: $('rejaTasdiqDate')?.value || '',
-                rows: rejaCollectRows(),
-                savedAt: new Date().toISOString()
-            };
-            localStorage.setItem(REJA_STORAGE_KEY, JSON.stringify(data));
-            return true;
-        } catch(e) {
-            console.error('Reja saqlash xato:', e);
-            return false;
-        }
-    }
-
-    function rejaCollectRows() {
-        const rows = [];
-        document.querySelectorAll('#rejaTableBody tr').forEach((tr, idx) => {
-            const tadbir = tr.querySelector('.reja-cell[data-field="tadbir"]')?.value || '';
-            const mexanizm = tr.querySelector('.reja-cell[data-field="mexanizm"]')?.value || '';
-            const muddat = tr.querySelector('.reja-date-input')?.value || '';
-            const masul = tr.querySelector('.reja-cell[data-field="masul"]')?.value || '';
-            const hisobot = tr.querySelector('.reja-cell[data-field="hisobot"]')?.value || '';
-            rows.push({ num: idx + 1, tadbir, mexanizm, muddat, masul, hisobot });
-        });
-        return rows;
-    }
-
-    function rejaRenderRows(rows) {
-        const tbody = $('rejaTableBody');
-        if (!tbody) return;
-        tbody.innerHTML = '';
-
-        const data = (rows && rows.length) ? rows : Array.from({ length: REJA_DEFAULT_ROWS }, (_, i) => ({
-            num: i + 1, tadbir: '', mexanizm: '', muddat: '', masul: '', hisobot: ''
-        }));
-
-        data.forEach((row, idx) => {
-            const tr = document.createElement('tr');
-            tr.innerHTML = `
-                <td class="col-num">
-                    <span class="reja-num-label">${idx + 1}.</span>
-                    <button class="reja-row-del" onclick="rejaDeleteRow(this)" title="Qatorni o'chirish">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </td>
-                <td class="col-tadbir">
-                    <textarea class="reja-cell" data-field="tadbir" rows="2"
-                        placeholder="Тадбир номи...">${escapeHtml(row.tadbir || '')}</textarea>
-                </td>
-                <td class="col-mexanizm">
-                    <textarea class="reja-cell" data-field="mexanizm" rows="2"
-                        placeholder="Ижро механизми...">${escapeHtml(row.mexanizm || '')}</textarea>
-                </td>
-                <td class="col-muddat">
-                    <input type="date" class="reja-date-input" value="${escapeHtml(row.muddat || '')}">
-                </td>
-                <td class="col-masul">
-                    <textarea class="reja-cell" data-field="masul" rows="2"
-                        placeholder="Масъуллар...">${escapeHtml(row.masul || '')}</textarea>
-                </td>
-                <td class="col-hisobot">
-                    <textarea class="reja-cell" data-field="hisobot" rows="2"
-                        placeholder="Ижро ҳисоботи...">${escapeHtml(row.hisobot || '')}</textarea>
-                </td>
-            `;
-            tbody.appendChild(tr);
-        });
-
-        tbody.querySelectorAll('.reja-cell').forEach(ta => {
-            rejaAutoResize(ta);
-            ta.addEventListener('input', () => rejaAutoResize(ta));
-        });
-
-        rejaUpdateRowCount();
-    }
-
-    function rejaAutoResize(ta) {
-        ta.style.height = 'auto';
-        const minH = 38;
-        ta.style.height = Math.max(minH, ta.scrollHeight) + 'px';
-    }
-
-    function rejaUpdateRowCount() {
-        const cnt = document.querySelectorAll('#rejaTableBody tr').length;
-        const el = $('rejaRowCount');
-        if (el) el.textContent = cnt + ' qator';
-    }
-
-    window.openRejaViewer = function() {
-        const saved = rejaLoad();
-
-        if (saved) {
-            $('rejaTasdiqName').value = saved.tasdiqName || '';
-            $('rejaTasdiqDate').value = saved.tasdiqDate || '';
-        } else {
-            $('rejaTasdiqName').value = '';
-            $('rejaTasdiqDate').value = todayStr();
-        }
-
-        rejaRenderRows(saved?.rows || null);
-        $('rejaViewerModal').classList.add('show');
-    };
-
-    window.closeRejaViewer = function() {
-        try { rejaSaveToStorage(); } catch(e) {}
-        $('rejaViewerModal').classList.remove('show');
-    };
-
-    window.rejaAddRow = function() {
-        const tbody = $('rejaTableBody');
-        if (!tbody) return;
-        const idx = tbody.querySelectorAll('tr').length;
-
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-            <td class="col-num">
-                <span class="reja-num-label">${idx + 1}.</span>
-                <button class="reja-row-del" onclick="rejaDeleteRow(this)" title="Qatorni o'chirish">
-                    <i class="fas fa-times"></i>
-                </button>
-            </td>
-            <td class="col-tadbir">
-                <textarea class="reja-cell" data-field="tadbir" rows="2"
-                    placeholder="Тадбир номи..."></textarea>
-            </td>
-            <td class="col-mexanizm">
-                <textarea class="reja-cell" data-field="mexanizm" rows="2"
-                    placeholder="Ижро механизми..."></textarea>
-            </td>
-            <td class="col-muddat">
-                <input type="date" class="reja-date-input" value="">
-            </td>
-            <td class="col-masul">
-                <textarea class="reja-cell" data-field="masul" rows="2"
-                    placeholder="Масъуллар..."></textarea>
-            </td>
-            <td class="col-hisobot">
-                <textarea class="reja-cell" data-field="hisobot" rows="2"
-                    placeholder="Ижро ҳисоботи..."></textarea>
-            </td>
-        `;
-        tbody.appendChild(tr);
-
-        tr.querySelectorAll('.reja-cell').forEach(ta => {
-            rejaAutoResize(ta);
-            ta.addEventListener('input', () => rejaAutoResize(ta));
-        });
-        tr.querySelector('.reja-cell[data-field="tadbir"]')?.focus();
-
-        rejaUpdateRowCount();
-    };
-
-    window.rejaDeleteRow = function(btn) {
-        const tr = btn.closest('tr');
-        if (!tr) return;
-        const total = document.querySelectorAll('#rejaTableBody tr').length;
-        if (total <= 1) {
-            if (!confirm('Oxirgi qatorni o\'chirmoqchimisiz? Jadval bo\'sh qoladi.')) return;
-        }
-        tr.remove();
-        rejaRenumber();
-        rejaUpdateRowCount();
-    };
-
-    function rejaRenumber() {
-        document.querySelectorAll('#rejaTableBody tr').forEach((tr, idx) => {
-            const lbl = tr.querySelector('.reja-num-label');
-            if (lbl) lbl.textContent = (idx + 1) + '.';
-        });
-    }
-
-    window.rejaSave = function() {
-        const ok = rejaSaveToStorage();
-        if (ok) {
-            showRejaToast('✅ Jadval saqlandi', 'success');
-        } else {
-            showRejaToast('❌ Saqlashda xato', 'error');
-        }
-    };
-
-    window.rejaClearAll = function() {
-        if (!confirm('Butun jadvalni tozalab, yangidan boshlaysizmi?\n\nTasdiqlayman va barcha qatorlar o\'chiriladi.')) return;
-        localStorage.removeItem(REJA_STORAGE_KEY);
-        $('rejaTasdiqName').value = '';
-        $('rejaTasdiqDate').value = todayStr();
-        rejaRenderRows(null);
-        showRejaToast('🗑️ Jadval tozalandi', 'success');
-    };
-
-    window.rejaPrint = function() {
-        const doc = $('rejaDoc');
-        if (!doc) return;
-
-        const win = window.open('', '_blank', 'width=1000,height=800');
-        win.document.write(`
-            <!DOCTYPE html>
-            <html>
-            <head>
-                <meta charset="UTF-8">
-                <title>Иш режалари</title>
-                <style>
-                    * { box-sizing: border-box; }
-                    body { font-family: 'Times New Roman', serif; padding: 20px; color: #000; background: #fff; }
-                    h2 { text-align: center; margin-bottom: 20px; font-size: 1.15rem; font-family: 'Times New Roman', serif; }
-                    .reja-tasdiq { display: flex; justify-content: flex-end; margin-bottom: 14px; }
-                    .reja-tasdiq-box { width: 260px; text-align: center; border: 1px solid #000; padding: 8px 10px; }
-                    .reja-tasdiq-box .t-title { font-weight: 800; font-size: 0.95rem; margin-bottom: 6px; }
-                    .reja-tasdiq-box .t-input { width: 100%; border: none; border-bottom: 1.5px solid #000; background: transparent; font-family: inherit; font-size: 0.88rem; text-align: center; padding: 4px 2px; }
-                    .reja-tasdiq-box .t-date-label { font-size: 0.78rem; font-weight: 700; margin-top: 6px; text-align: right; }
-                    .reja-tasdiq-box .t-date-input { width: 100%; border: none; border-bottom: 1.5px solid #000; background: transparent; font-family: inherit; font-size: 0.85rem; text-align: center; padding: 3px 2px; margin-top: 2px; }
-                    table { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 0.85rem; }
-                    th, td { border: 1.2px solid #000; padding: 6px 5px; vertical-align: top; word-wrap: break-word; overflow-wrap: break-word; white-space: pre-wrap; }
-                    thead th { background: #d9ead3; font-weight: 800; text-align: center; font-size: 0.84rem; vertical-align: middle; }
-                    thead th.red-line { text-decoration: underline; text-decoration-color: #c00000; text-decoration-thickness: 2px; }
-                    .col-num { width: 42px; text-align: center; font-weight: 700; vertical-align: middle; }
-                    .col-tadbir { width: 30%; }
-                    .col-mexanizm { width: 20%; }
-                    .col-muddat { width: 12%; text-align: center; }
-                    .col-masul { width: 18%; }
-                    .col-hisobot { width: 20%; }
-                    textarea { border: none; background: transparent; width: 100%; font-family: inherit; font-size: inherit; resize: none; overflow: hidden; }
-                    input { border: none; background: transparent; font-family: inherit; font-size: inherit; }
-                    input[type="date"] { text-align: center; }
-                    @media print {
-                        body { padding: 10px; }
-                        @page { size: A4 landscape; margin: 10mm; }
-                    }
-                </style>
-            </head>
-            <body>
-                <h2>Иш режалари ва унинг бажарилиши ҳақида маълумотлар</h2>
-                ${doc.innerHTML}
-            </body>
-            </html>
-        `);
-        win.document.close();
-
-        win.document.querySelectorAll('textarea').forEach(ta => {
-            ta.style.height = 'auto';
-            ta.style.height = Math.max(38, ta.scrollHeight) + 'px';
-        });
-
-        setTimeout(() => {
-            win.focus();
-            win.print();
-        }, 400);
-    };
-
-    function showRejaToast(msg, type) {
-        let t = document.getElementById('rejaToast');
-        if (!t) {
-            t = document.createElement('div');
-            t.id = 'rejaToast';
-            t.style.cssText = `
-                position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
-                background: #1f2937; color: #fff; padding: 13px 22px;
-                border-radius: 12px; font-size: 0.9rem; font-weight: 600;
-                box-shadow: 0 8px 24px rgba(0,0,0,.3); z-index: 3000;
-                animation: fadeUp 0.3s ease; max-width: 90%; text-align: center;
-            `;
-            document.body.appendChild(t);
-        }
-        t.textContent = msg;
-        t.style.background = type === 'success' ? '#0f9d58' : (type === 'error' ? '#dc2626' : '#1f2937');
-        t.style.display = 'block';
-        clearTimeout(t._timer);
-        t._timer = setTimeout(() => { t.style.display = 'none'; }, 2200);
+        window.addEventListener('hashchange', checkSharedTable);
+        setTimeout(checkSharedTable, 1000);
     }
 
     function init() {
